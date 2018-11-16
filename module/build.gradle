@@ -8,11 +8,11 @@ model {
             sources {
                 cpp {
                     source {
-                        srcDir "module"
+                        srcDir "src"
                         include "**/*.cpp"
                     }
                     exportedHeaders {
-                        srcDir "module"
+                        srcDir "src"
                         srcDir "altv-capi/include"
                     }
                     

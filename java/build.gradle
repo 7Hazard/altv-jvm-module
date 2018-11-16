@@ -1,0 +1,17 @@
+apply plugin: "java"
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+repositories {
+    mavenCentral()
+    jcenter()
+}
+jar {
+    baseName = 'altv-jvm-module'
+    //version =  '0.1.0'
+}

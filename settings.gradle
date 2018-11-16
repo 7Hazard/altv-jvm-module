@@ -1,1 +1,1 @@
-include "altv-capi", "module"
+include "altv-capi", "module", "java"
