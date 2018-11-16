@@ -35,7 +35,7 @@ class VM
             return false;
         }
 
-        jclass cls = env->FindClass("alt/v/kotlin/MainKt");
+        jclass cls = env->FindClass("alt/v/jvm/Main");
         jmethodID mid = env->GetStaticMethodID(cls, "main", "()V");
         env->CallStaticVoidMethod(cls, mid, 100);
 

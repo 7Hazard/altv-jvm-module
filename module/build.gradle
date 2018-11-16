@@ -1,4 +1,4 @@
-apply plugin : "cpp" 
+apply plugin: "cpp"
 
 model { 
     components {
@@ -8,11 +8,11 @@ model {
             sources {
                 cpp {
                     source {
-                        srcDir "src"
+                        srcDir "module"
                         include "**/*.cpp"
                     }
                     exportedHeaders {
-                        srcDir "src"
+                        srcDir "module"
                         srcDir "altv-capi/include"
                     }
                     
