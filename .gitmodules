@@ -1,0 +1,3 @@
+[submodule "altv-capi"]
+	path = altv-capi
+	url = https://gitlab.com/fivenet/fivenet/capi.git
