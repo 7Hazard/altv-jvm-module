@@ -1,0 +1,59 @@
+apply plugin : "cpp" 
+
+model { 
+    components {
+        module(NativeLibrarySpec) {
+            baseName "altv-jvm-module"
+            targetPlatform "x64"
+            sources {
+                cpp {
+                    source {
+                        srcDir "src"
+                        include "**/*.cpp"
+                    }
+                    exportedHeaders {
+                        srcDir "src"
+                        srcDir "altv-capi/include"
+                    }
+                    
+                    lib project: ":altv-capi", library: "capi", linkage: 'shared'
+                    lib library: "jvm", linkage: "shared"
+                }
+            }
+        }
+    }
+
+    repositories {
+        libs(PrebuiltLibraries) {
+            jvm {
+                binaries.withType(SharedLibraryBinary) {
+                    if(targetPlatform.operatingSystem.windows){
+                        headers.srcDir "C:/Program Files/Java/jdk-11.0.1/include"
+                        headers.srcDir "C:/Program Files/Java/jdk-11.0.1/include/win32"
+                        sharedLibraryFile = file("C:/Program Files/Java/jdk-11.0.1/bin/server/jvm.dll")
+                        sharedLibraryLinkFile = file("C:/Program Files/Java/jdk-11.0.1/lib/jvm.lib")
+                    }
+                    else {
+                        //throw "JVM linkage for Linux and Mac unspecified"
+                    }
+                }
+            }
+        }
+    }
+
+    binaries {
+        all {
+            cppCompiler.define "NDEBUG"
+
+            if(toolChain in VisualCpp) {
+                cppCompiler.args "/std:c++17", "/EHsc"
+            }
+        }
+    }
+
+    platforms {
+        x64 {
+            architecture "x86_64"
+        }
+    }
+}
