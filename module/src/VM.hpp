@@ -35,7 +35,7 @@ class VM
             return false;
         }
 
-        jclass cls = env->FindClass("Main");
+        jclass cls = env->FindClass("alt/v/jvm/Main");
         if(cls == nullptr)
         {
             alt_server_log_error("[JVM] File 'altv-jvm-module.jvm' is corrupt");
@@ -48,6 +48,12 @@ class VM
             return false;
         }
         env->CallStaticVoidMethod(cls, mid, 100);
+        jboolean flag = env->ExceptionCheck();
+        if (flag) {
+            alt_server_log_error("Exception occurred while executing Java entry point");
+            env->ExceptionDescribe();
+            env->ExceptionClear();
+        }
 
         return true;
     }

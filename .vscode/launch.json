@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceRoot}/../../altv-server.exe",
             "args": [],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}/../../",
             "preLaunchTask": "Build to Server",
             "environment": [],
