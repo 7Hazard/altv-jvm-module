@@ -43,10 +43,9 @@ model {
 
     binaries {
         all {
-            cppCompiler.define "NDEBUG"
-
             if(toolChain in VisualCpp) {
-                cppCompiler.args "/std:c++17", "/EHsc"
+                cppCompiler.args "/std:c++17", "/EHsc", "/Z7"
+                linker.args "/DEBUG"
             }
         }
     }
@@ -57,3 +56,10 @@ model {
         }
     }
 }
+
+task copyToOutput(type: Copy) {
+    from "build/libs/module/shared/altv-jvm-module.dll", "${rootDir}/altv-capi/build/libs/capi/shared/altv-capi.dll"
+    into "${rootDir}/build/altv-jvm-module/"
+}
+
+build.finalizedBy copyToOutput

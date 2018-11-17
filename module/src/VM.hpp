@@ -11,7 +11,7 @@ class VM
 
     static bool Start()
     {
-        alt_server_log_info("[Kotlin] Starting Java VM");
+        alt_server_log_info("[JVM] Starting Java VM");
 
         JNIEnv *env; /* pointer to native method interface */
         JavaVMInitArgs vm_args; /* JDK/JRE 6 VM initialization arguments */
@@ -31,12 +31,22 @@ class VM
         jint vmres = JNI_CreateJavaVM(&jvm(), (void**)&env, &vm_args);
         if(vmres < 0)
         {
-            alt_server_log_error(("[Kotlin] Could not start JVM\n\t\t Error code: "+std::to_string(vmres)).c_str());
+            alt_server_log_error(("[JVM] Could not start JVM\n\t\t Error code: "+std::to_string(vmres)).c_str());
             return false;
         }
 
-        jclass cls = env->FindClass("alt/v/jvm/Main");
+        jclass cls = env->FindClass("Main");
+        if(cls == nullptr)
+        {
+            alt_server_log_error("[JVM] File 'altv-jvm-module.jvm' is corrupt");
+            return false;
+        }
         jmethodID mid = env->GetStaticMethodID(cls, "main", "()V");
+        if(mid == nullptr)
+        {
+            alt_server_log_error("[JVM] File 'altv-jvm-module.jvm' is corrupt");
+            return false;
+        }
         env->CallStaticVoidMethod(cls, mid, 100);
 
         return true;

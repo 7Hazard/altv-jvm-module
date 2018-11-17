@@ -15,7 +15,5 @@ EXPORT bool altvMain()
     if(!VM::Start())
         return false;
 
-    alt_server_log_info("[Kotlin] Module loaded");
-
     return true;
 }

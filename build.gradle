@@ -1,0 +1,10 @@
+
+task prepareServer(dependsOn: [":module:build", ":java:build"], type: Exec) {
+    //commandLine "ln -s ../altv-jvm-module build/altv-jvm-module"
+    //commandLine "cmd", "mklink /D ../altv-jvm-module build/altv-jvm-module"
+
+    //FileSystem.symlinkBlocking("build/altv-jvm-module", "../altv-jvm-module")
+    
+    //from "build/altv-jvm-module"
+    //into "${rootDir}/../altv-jvm-module"
+}
