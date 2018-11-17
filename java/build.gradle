@@ -15,3 +15,10 @@ jar {
     baseName = 'altv-jvm-module'
     //version =  '0.1.0'
 }
+
+task copyToOutput(type: Copy) {
+    from jar.destinationDir
+    into "${rootDir}/build/altv-jvm-module"
+}
+
+build.finalizedBy copyToOutput
