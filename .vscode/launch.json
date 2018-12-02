@@ -12,7 +12,7 @@
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/../../",
-            "preLaunchTask": "Build to Server",
+            "preLaunchTask": "Build (Gradle)",
             "environment": [],
             "externalConsole": true
         }
