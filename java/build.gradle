@@ -27,6 +27,12 @@ jar {
     )
 }
 
+task wrap(type: Exec) {
+    workingDir '..'
+    commandLine "node", "wrap"
+}
+compileJava.dependsOn wrap
+
 task copyToOutput(type: Copy) {
     from jar.destinationDir
     into "${rootDir}/build/altv-jvm-module"

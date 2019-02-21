@@ -9,9 +9,9 @@ class VM
         return jvm;
     }
 
-    static bool Start()
+    static bool Start(alt_server_t* server)
     {
-        alt_server_log_info("[JVM] Starting Java VM");
+        alt_server_log_info(server, "[JVM] Starting Java VM");
 
         JNIEnv *env; /* pointer to native method interface */
         JavaVMInitArgs vm_args; /* JDK/JRE 6 VM initialization arguments */
@@ -31,26 +31,26 @@ class VM
         jint vmres = JNI_CreateJavaVM(&jvm(), (void**)&env, &vm_args);
         if(vmres < 0)
         {
-            alt_server_log_error(("[JVM] Could not start JVM\n\t\t Error code: "+std::to_string(vmres)).c_str());
+            alt_server_log_error(server, ("[JVM] Could not start JVM\n\t\t Error code: "+std::to_string(vmres)).c_str());
             return false;
         }
 
         jclass cls = env->FindClass("alt/v/jvm/Main");
         if(cls == nullptr)
         {
-            alt_server_log_error("[JVM] File 'altv-jvm-module.jvm' is corrupt");
+            alt_server_log_error(server, "[JVM] File 'altv-jvm-module.jvm' is corrupt");
             return false;
         }
-        jmethodID mid = env->GetStaticMethodID(cls, "main", "()V");
+        jmethodID mid = env->GetStaticMethodID(cls, "main", "(J)V");
         if(mid == nullptr)
         {
-            alt_server_log_error("[JVM] File 'altv-jvm-module.jvm' is corrupt");
+            alt_server_log_error(server, "[JVM] File 'altv-jvm-module.jar' is corrupt");
             return false;
         }
-        env->CallStaticVoidMethod(cls, mid, 100);
+        env->CallStaticVoidMethod(cls, mid, server);
         jboolean flag = env->ExceptionCheck();
         if (flag) {
-            alt_server_log_error("Exception occurred while executing Java entry point");
+            alt_server_log_error(server, "Exception occurred while executing Java entry point");
             env->ExceptionDescribe();
             env->ExceptionClear();
         }

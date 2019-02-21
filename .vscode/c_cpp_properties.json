@@ -5,8 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/src/capi/include/*",
                 "${workspaceFolder}/src/*",
-                "C:/Program Files/Java/jdk-11.0.1/include",
-                "C:/Program Files/Java/jdk-11.0.1/include/win32",
+                "C:/Program Files/RedHat/java-11-openjdk-11.0.1-1/include",
+                "C:/Program Files/RedHat/java-11-openjdk-11.0.1-1/include/win32",
                 "${workspaceFolder}/altv-capi/include"
             ],
             "defines": [

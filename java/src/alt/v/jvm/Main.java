@@ -1,31 +1,44 @@
 package alt.v.jvm;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+
 import alt.v.jvm.CAPI;
 import alt.v.jvm.CAPI.alt_event_type_t;
 import jnr.ffi.Pointer;
+import jnr.ffi.Struct;
+import jnr.ffi.types.uintptr_t;
 
 public class Main {
-    public static void main() {
-        CAPI.func.alt_server_log_info("[JVM] Module successfully loaded");
+    public static Pointer server;
+    public static void main(@uintptr_t long serverptr)
+    {
+        server = Pointer.wrap(CAPI.runtime, serverptr);
+        CAPI.func.alt_server_log_info(server, "[JVM] Module successfully loaded");
         
-        CAPI.func.alt_server_subscribe_event(alt_event_type_t.EVENT_PLAYER_CONNECT, OnConnect);
+        CAPI.func.alt_server_subscribe_event(server, alt_event_type_t.PLAYER_CONNECT, OnConnect);
     }
 
-    static CAPI.alt_event_callback_t OnConnect = new CAPI.alt_event_callback_t() {
+    static CAPI.alt_event_callback_t OnConnect = new CAPI.alt_event_callback_t()
+    {
         public boolean callback(Pointer event) {
             Pointer ply = CAPI.func.alt_player_connect_event_get_target(event);
-            String plyname = CAPI.func.alt_player_get_name(ply);
-            CAPI.func.alt_server_log_info(plyname+" CONNECTED");
+            ByteBuffer buffer = ByteBuffer.allocate(50);
+            Pointer bufferptr = Pointer.wrap(CAPI.runtime, buffer);
+            CAPI.func.alt_player_get_name(ply, bufferptr);
+            String plyname = new String(buffer.array(), StandardCharsets.UTF_8).trim();
+            CAPI.func.alt_server_log_info(server, "PLAYER "+plyname+" CONNECTED");
 
             // Set pos
-            CAPI.func.alt_server_log_info("SETTING POS");
-            CAPI.alt_position_t pos = new CAPI.alt_position_t(1500, 3200, 40);
-            CAPI.func.alt_player_set_position(ply, pos);
+            CAPI.func.alt_server_log_info(server, "SETTING POS");
+            CAPI.alt_position_t pos = new CAPI.alt_position_t();
+            pos.x.set(1500); pos.y.set(3200); pos.z.set(40);
+            CAPI.func.alt_player_set_position(ply, Struct.getMemory(pos));
 
             // create veh
-            CAPI.func.alt_server_log_info("CREATING VEH");
-            int vehhash = CAPI.func.alt_server_hash("deluxo");
-            CAPI.func.alt_server_create_vehicle(vehhash, pos, 0);
+            CAPI.func.alt_server_log_info(server, "CREATING VEH");
+            int vehhash = CAPI.func.alt_server_hash(server, "deluxo");
+            CAPI.func.alt_server_create_vehicle(server, vehhash, Struct.getMemory(pos), 0);
 
             return true;
         }

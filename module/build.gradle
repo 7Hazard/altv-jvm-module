@@ -28,10 +28,10 @@ model {
             jvm {
                 binaries.withType(SharedLibraryBinary) {
                     if(targetPlatform.operatingSystem.windows){
-                        headers.srcDir "C:/Program Files/Java/jdk-11.0.1/include"
-                        headers.srcDir "C:/Program Files/Java/jdk-11.0.1/include/win32"
-                        sharedLibraryFile = file("C:/Program Files/Java/jdk-11.0.1/bin/server/jvm.dll")
-                        sharedLibraryLinkFile = file("C:/Program Files/Java/jdk-11.0.1/lib/jvm.lib")
+                        headers.srcDir "C:/Program Files/RedHat/java-11-openjdk-11.0.1-1/include"
+                        headers.srcDir "C:/Program Files/RedHat/java-11-openjdk-11.0.1-1/include/win32"
+                        sharedLibraryFile = file("C:/Program Files/RedHat/java-11-openjdk-11.0.1-1/bin/server/jvm.dll")
+                        sharedLibraryLinkFile = file("C:/Program Files/RedHat/java-11-openjdk-11.0.1-1/lib/jvm.lib")
                     }
                     else {
                         //throw "JVM linkage for Linux and Mac unspecified"

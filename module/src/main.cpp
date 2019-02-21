@@ -10,9 +10,9 @@
 #include "Utils.hpp"
 #include "VM.hpp"
 
-EXPORT bool altvMain()
+EXPORT bool altMain(alt_server_t* server)
 {
-    if(!VM::Start())
+    if(!VM::Start(server))
         return false;
 
     return true;

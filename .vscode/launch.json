@@ -8,13 +8,19 @@
             "name": "(Windows) Launch",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/../../altv-server.exe",
+            "program": "D:/src/altv190127/BUILD/CLANG/x64_win32/Debug/BIN/Debug/server/altv-server.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/../../",
+            "cwd": "D:/src/altv190127/BUILD/CLANG/x64_win32/Debug/BIN/Debug/server/",
             "preLaunchTask": "Build (Gradle)",
             "environment": [],
             "externalConsole": true
-        }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Wrap to Java",
+            "program": "${workspaceFolder}/wrap.js",
+        },
     ]
 }
