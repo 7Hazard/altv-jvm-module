@@ -10,3 +10,5 @@ build/
 java/\.classpath
 
 java/bin/
+
+\.vscode/launch\.json
