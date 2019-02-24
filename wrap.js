@@ -232,7 +232,9 @@ let javasrc =
 public class CAPI
 {
     public static final CAPIFunctions func = jnr.ffi.LibraryLoader.create(CAPIFunctions.class).load("altv-capi");
-    static jnr.ffi.Runtime runtime = jnr.ffi.Runtime.getRuntime(func);
+    public static jnr.ffi.Runtime runtime = jnr.ffi.Runtime.getRuntime(func);
+    public static jnr.ffi.Pointer server;
+    
 
     ${javatypes.join("")}
 

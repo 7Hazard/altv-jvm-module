@@ -13,8 +13,11 @@ public class Main {
     public static Pointer server;
     public static void main(@uintptr_t long serverptr)
     {
-        server = Pointer.wrap(CAPI.runtime, serverptr);
+        CAPI.server = Pointer.wrap(CAPI.runtime, serverptr);
+        server = CAPI.server;
         CAPI.func.alt_server_log_info(server, "[JVM] Module successfully loaded");
+
+        Plugins.Load();
         
         CAPI.func.alt_server_subscribe_event(server, alt_event_type_t.PLAYER_CONNECT, OnConnect);
     }
