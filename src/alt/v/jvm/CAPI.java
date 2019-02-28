@@ -398,6 +398,21 @@ public class CAPI
         @jnr.ffi.annotations.Delegate public void callback(@jnr.ffi.annotations.Encoding("UTF-8") String a1, jnr.ffi.Pointer a2);
     }
 
+    public interface alt_script_runtime_create_resource_callback_t
+    {
+        @jnr.ffi.annotations.Delegate public jnr.ffi.Pointer callback(jnr.ffi.Pointer a1);
+    }
+
+    public interface alt_script_runtime_delete_resource_callback_t
+    {
+        @jnr.ffi.annotations.Delegate public void callback(jnr.ffi.Pointer a1);
+    }
+
+    public interface alt_script_runtime_on_tick_callback_t
+    {
+        @jnr.ffi.annotations.Delegate public void callback();
+    }
+
 
     public static interface CAPIFunctions
     {
@@ -674,5 +689,6 @@ public class CAPI
         jnr.ffi.Pointer alt_mvalue_dict_create();
         void alt_mvalue_dict_set(jnr.ffi.Pointer instance, @jnr.ffi.annotations.Encoding("UTF-8") String key, jnr.ffi.Pointer value);
         jnr.ffi.Pointer alt_mvalue_dict_get(jnr.ffi.Pointer instance, @jnr.ffi.annotations.Encoding("UTF-8") String key);
+        jnr.ffi.Pointer alt_script_runtime_create(alt_script_runtime_create_resource_callback_t create_resource, alt_script_runtime_delete_resource_callback_t delete_resource, alt_script_runtime_on_tick_callback_t on_tick);
     }
 }

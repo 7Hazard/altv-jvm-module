@@ -79,6 +79,10 @@ function getJavaStructType(type)
     {
         return "jnr.ffi.Struct.u_int64_t"
     }
+    else if (type.isFuncPtr)
+    {
+        return type.cname
+    }
     else if(type.isPtr || type.isArray)
     {
         return "jnr.ffi.Struct.Pointer"
@@ -244,6 +248,6 @@ public class CAPI
     }
 }
 `
-fs.writeFileSync(__dirname+"/java/src/alt/v/jvm/CAPI.java", javasrc)
+fs.writeFileSync(__dirname+"/src/alt/v/jvm/CAPI.java", javasrc)
 
 console.log("Done wrapping to Java")

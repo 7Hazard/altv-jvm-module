@@ -1,1 +1,44 @@
+apply plugin: "java"
+apply plugin: "eclipse"
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/com.github.jnr/jnr-ffi
+    compile group: 'com.github.jnr', name: 'jnr-ffi', version: '2.1.9'
+}
+
+jar {
+    baseName = 'altv-jvm-module'
+    //version =  '0.1.0'
+    manifest.attributes(
+        'Class-Path': configurations.runtime.files.collect { it.name }.join(' ')
+    )
+}
+
+task wrap(type: Exec) {
+    commandLine "node", "wrap"
+    dependsOn "altv-capi:build"
+}
+compileJava.dependsOn wrap
+
+task copyToOutput(type: Copy) {
+    from jar.destinationDir
+    into "${rootDir}/build/altv-jvm-module"
+
+    from configurations.runtime
+    into "${rootDir}/build/altv-jvm-module"
+}
+
+build.finalizedBy copyToOutput
