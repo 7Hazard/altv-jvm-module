@@ -1,5 +1,6 @@
 package alt.v.jvm;
 
+import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
@@ -16,13 +17,17 @@ public class Main {
     {
         CAPI.server = Pointer.wrap(CAPI.runtime, serverptr);
         server = CAPI.server;
-        CAPI.func.alt_server_log_info(server, "[JVM] Module successfully loaded");
+
+        // Prepare env
+        Log.init();
+
+        Log.info("[JVM] Module loaded");
 
         Plugins.Load();
         
-        CAPI.func.alt_server_subscribe_event(server, alt_event_type_t.PLAYER_CONNECT, OnConnect);
+        //CAPI.func.alt_server_subscribe_event(server, alt_event_type_t.PLAYER_CONNECT, OnConnect);
 
-        var ptr = CAPI.func.alt_script_runtime_create(create_resource, delete_resource, on_tick);
+        //var ptr = CAPI.func.alt_script_runtime_create(create_resource, delete_resource, on_tick);
         
     }
 

@@ -1,1 +1,3 @@
-include "altv-capi", "module"
+rootProject.name = "altv-jvm-module"
+
+include "module", "altv-capi"

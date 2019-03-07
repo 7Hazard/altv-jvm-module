@@ -146,6 +146,7 @@ public class CAPI
     {
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.UTF8StringRef reason = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.u_int64_t reason_size = new jnr.ffi.Struct.u_int64_t();
         
         public alt_player_connect_event_t()
         {
@@ -161,6 +162,7 @@ public class CAPI
     {
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.UTF8StringRef reason = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.u_int64_t reason_size = new jnr.ffi.Struct.u_int64_t();
         
         public alt_player_disconnect_event_t()
         {
@@ -175,6 +177,7 @@ public class CAPI
     public static class alt_server_script_event_t extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.UTF8StringRef name = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.u_int64_t name_size = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Pointer args = new jnr.ffi.Struct.Pointer();
         
         public alt_server_script_event_t()
@@ -190,6 +193,7 @@ public class CAPI
     public static class alt_client_script_event_t extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.UTF8StringRef name = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.u_int64_t name_size = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Pointer args = new jnr.ffi.Struct.Pointer();
         
         public alt_client_script_event_t()
@@ -350,8 +354,11 @@ public class CAPI
     public static class alt_resource_t extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.UTF8StringRef type = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.u_int64_t type_size = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.UTF8StringRef name = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.u_int64_t name_size = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.UTF8StringRef main = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.u_int64_t main_size = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Pointer pkg = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum32<alt_resource_state_t> state = new jnr.ffi.Struct.Enum32<alt_resource_state_t>(alt_resource_state_t.class);
         public final jnr.ffi.Struct.Pointer exports = new jnr.ffi.Struct.Pointer();
@@ -369,8 +376,11 @@ public class CAPI
     public static class alt_resource_creation_info_t extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.UTF8StringRef type = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.u_int64_t type_size = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.UTF8StringRef name = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.u_int64_t name_size = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.UTF8StringRef main = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.u_int64_t main_size = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Pointer pkg = new jnr.ffi.Struct.Pointer();
         
         public alt_resource_creation_info_t()
@@ -413,6 +423,16 @@ public class CAPI
         @jnr.ffi.annotations.Delegate public void callback();
     }
 
+    public interface alt_resource_on_event_callback_t
+    {
+        @jnr.ffi.annotations.Delegate public boolean callback(jnr.ffi.Pointer a1);
+    }
+
+    public interface alt_resource_on_tick_callback_t
+    {
+        @jnr.ffi.annotations.Delegate public void callback();
+    }
+
 
     public static interface CAPIFunctions
     {
@@ -425,20 +445,24 @@ public class CAPI
         void alt_player_connect_event_cancel(jnr.ffi.Pointer instance);
         void alt_player_connect_event_cancel2(jnr.ffi.Pointer instance, @jnr.ffi.annotations.Encoding("UTF-8") String _reason);
         jnr.ffi.Pointer alt_player_connect_event_get_target(jnr.ffi.Pointer instance);
+        @jnr.ffi.types.u_int64_t long alt_player_connect_event_get_reason_size(jnr.ffi.Pointer instance);
         void alt_player_connect_event_get_reason(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
         alt_event_type_t alt_player_disconnect_event_get_type(jnr.ffi.Pointer instance);
         boolean alt_player_disconnect_event_was_cancelled(jnr.ffi.Pointer instance);
         void alt_player_disconnect_event_cancel(jnr.ffi.Pointer instance);
         jnr.ffi.Pointer alt_player_disconnect_event_get_target(jnr.ffi.Pointer instance);
+        @jnr.ffi.types.u_int64_t long alt_player_disconnect_event_get_reason_size(jnr.ffi.Pointer instance);
         void alt_player_disconnect_event_get_reason(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
         alt_event_type_t alt_server_script_event_get_type(jnr.ffi.Pointer instance);
         boolean alt_server_script_event_was_cancelled(jnr.ffi.Pointer instance);
         void alt_server_script_event_cancel(jnr.ffi.Pointer instance);
+        @jnr.ffi.types.u_int64_t long alt_server_script_event_get_name_size(jnr.ffi.Pointer instance);
         void alt_server_script_event_get_name(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
         jnr.ffi.Pointer alt_server_script_event_get_args(jnr.ffi.Pointer instance);
         alt_event_type_t alt_client_script_event_get_type(jnr.ffi.Pointer instance);
         boolean alt_client_script_event_was_cancelled(jnr.ffi.Pointer instance);
         void alt_client_script_event_cancel(jnr.ffi.Pointer instance);
+        @jnr.ffi.types.u_int64_t long alt_client_script_event_get_name_size(jnr.ffi.Pointer instance);
         void alt_client_script_event_get_name(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
         jnr.ffi.Pointer alt_client_script_event_get_args(jnr.ffi.Pointer instance);
         alt_event_type_t alt_player_damage_event_get_type(jnr.ffi.Pointer instance);
@@ -544,6 +568,7 @@ public class CAPI
         boolean alt_player_is_connected(jnr.ffi.Pointer instance);
         void alt_player_spawn(jnr.ffi.Pointer instance, jnr.ffi.Pointer pos);
         void alt_player_despawn(jnr.ffi.Pointer instance);
+        @jnr.ffi.types.u_int64_t long alt_player_get_name_size(jnr.ffi.Pointer instance);
         void alt_player_get_name(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
         void alt_player_set_name(jnr.ffi.Pointer instance, @jnr.ffi.annotations.Encoding("UTF-8") String name);
         @jnr.ffi.types.u_int16_t short alt_player_get_health(jnr.ffi.Pointer instance);
@@ -615,6 +640,7 @@ public class CAPI
         void alt_vehicle_set_special_darkness(jnr.ffi.Pointer instance, @jnr.ffi.types.u_int8_t byte value);
         @jnr.ffi.types.u_int32_t int alt_vehicle_get_number_plate_index(jnr.ffi.Pointer instance);
         void alt_vehicle_set_number_plate_index(jnr.ffi.Pointer instance, @jnr.ffi.types.u_int32_t int index);
+        @jnr.ffi.types.u_int64_t long alt_vehicle_get_number_plate_text_size(jnr.ffi.Pointer instance);
         void alt_vehicle_get_number_plate_text(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
         void alt_vehicle_set_number_plate_text(jnr.ffi.Pointer instance, @jnr.ffi.annotations.Encoding("UTF-8") String text);
         @jnr.ffi.types.u_int8_t byte alt_vehicle_get_window_tint(jnr.ffi.Pointer instance);
@@ -638,8 +664,11 @@ public class CAPI
         @jnr.ffi.types.u_int64_t long alt_package_write_file(jnr.ffi.Pointer instance, jnr.ffi.Pointer file, jnr.ffi.Pointer buffer, @jnr.ffi.types.u_int64_t long size);
         alt_resource_state_t alt_resource_get_state(jnr.ffi.Pointer instance);
         boolean alt_resource_is_started(jnr.ffi.Pointer instance);
+        @jnr.ffi.types.u_int64_t long alt_resource_get_type_size(jnr.ffi.Pointer instance);
         void alt_resource_get_type(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
+        @jnr.ffi.types.u_int64_t long alt_resource_get_name_size(jnr.ffi.Pointer instance);
         void alt_resource_get_name(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
+        @jnr.ffi.types.u_int64_t long alt_resource_get_main_size(jnr.ffi.Pointer instance);
         void alt_resource_get_main(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
         jnr.ffi.Pointer alt_resource_get_package(jnr.ffi.Pointer instance);
         jnr.ffi.Pointer alt_resource_get_exports(jnr.ffi.Pointer instance);
@@ -679,8 +708,8 @@ public class CAPI
         void alt_mvalue_dispose(jnr.ffi.Pointer instance);
         boolean alt_mvalue_get_bool(jnr.ffi.Pointer instance);
         @jnr.ffi.types.int64_t long alt_mvalue_get_int(jnr.ffi.Pointer instance);
-        void alt_mvalue_get_string(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
         @jnr.ffi.types.u_int64_t long alt_mvalue_get_string_size(jnr.ffi.Pointer instance);
+        void alt_mvalue_get_string(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
         alt_mvalue_type_t alt_mvalue_get_type(jnr.ffi.Pointer instance);
         jnr.ffi.Pointer alt_mvalue_list_create();
         void alt_mvalue_list_push(jnr.ffi.Pointer instance, jnr.ffi.Pointer value);
@@ -690,5 +719,7 @@ public class CAPI
         void alt_mvalue_dict_set(jnr.ffi.Pointer instance, @jnr.ffi.annotations.Encoding("UTF-8") String key, jnr.ffi.Pointer value);
         jnr.ffi.Pointer alt_mvalue_dict_get(jnr.ffi.Pointer instance, @jnr.ffi.annotations.Encoding("UTF-8") String key);
         jnr.ffi.Pointer alt_script_runtime_create(alt_script_runtime_create_resource_callback_t create_resource, alt_script_runtime_delete_resource_callback_t delete_resource, alt_script_runtime_on_tick_callback_t on_tick);
+        jnr.ffi.Pointer alt_script_runtime_create_resource(jnr.ffi.Pointer info, alt_resource_on_event_callback_t on_event, alt_resource_on_tick_callback_t on_tick);
+        void alt_script_runtime_dispose_resource(jnr.ffi.Pointer instance);
     }
 }

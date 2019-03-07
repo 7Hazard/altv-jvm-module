@@ -58,8 +58,7 @@ model {
 }
 
 task copyToOutput(type: Copy) {
-    from "build/libs/module/shared/altv-jvm-module.dll", "${rootDir}/altv-capi/build/libs/capi/shared/altv-capi.dll"
-    into "${rootDir}/build/altv-jvm-module/"
+    from "build/libs/module/shared/altv-jvm-module.dll", "../altv-capi/build/libs/capi/shared/altv-capi.dll"
+    into "../build/altv-jvm-module/"
 }
-
 build.finalizedBy copyToOutput

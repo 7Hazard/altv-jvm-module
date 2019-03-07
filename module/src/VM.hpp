@@ -17,13 +17,15 @@ class VM
         JavaVMInitArgs vm_args; /* JDK/JRE 6 VM initialization arguments */
 
         // Options
-        JavaVMOption options[4];
+        JavaVMOption options[5];
+        vm_args.nOptions = 5;
+        vm_args.options = options;
         options[0].optionString = "-Djava.class.path=modules/altv-jvm-module;modules/altv-jvm-module/altv-jvm-module.jar";
         options[1].optionString = "-Djava.library.path=modules/altv-jvm-module";
-        options[2].optionString = "-verbose:jni";
-        options[3].optionString = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9009";
-        vm_args.nOptions = 4;
-        vm_args.options = options;
+        options[2].optionString = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005";
+        options[3].optionString = "-XX:+ShowMessageBoxOnError";
+        options[4].optionString = "-XX:ErrorFile=logs/jvm/fatal-error.log";
+        //options[5].optionString = "-verbose:jni";
 
         vm_args.version = JNI_VERSION_1_6;
         vm_args.ignoreUnrecognized = false;
