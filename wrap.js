@@ -39,9 +39,17 @@ function getJavaType(type, name)
     {
         return '@jnr.ffi.types.u_int8_t byte'
     }
+    else if(type.cname == "int16_t")
+    {
+        return '@jnr.ffi.types.int16_t short'
+    }
     else if(type.cname == "uint16_t")
     {
         return '@jnr.ffi.types.u_int16_t short'
+    }
+    else if(type.cname == "int32_t")
+    {
+        return '@jnr.ffi.types.int32_t int'
     }
     else if(type.cname == "uint32_t")
     {
@@ -99,9 +107,17 @@ function getJavaStructType(type)
     {
         return "jnr.ffi.Struct.u_int8_t"
     }
+    else if(type.cname == "int16_t")
+    {
+        return "jnr.ffi.Struct.int16_t"
+    }
     else if(type.cname == "uint16_t")
     {
         return "jnr.ffi.Struct.u_int16_t"
+    }
+    else if(type.cname == "int32_t")
+    {
+        return "jnr.ffi.Struct.int32_t"
     }
     else if(type.cname == "uint32_t")
     {

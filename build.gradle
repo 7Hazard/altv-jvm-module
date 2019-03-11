@@ -59,6 +59,8 @@ task copyToOutput(type: Copy) {
 
     //from configurations.runtime
     //into "build/altv-jvm-module"
+
+    outputs.upToDateWhen { false }
 }
 jar.finalizedBy copyToOutput
 
@@ -98,7 +100,7 @@ def siteUrl = 'https://gitlab.com/7Hazard/altv-jvm-module'
 def gitUrl = 'https://gitlab.com/7Hazard/altv-jvm-module.git'
 
 if (System.hasProperty("version")) version = System.getProperty("version") 
-else version = "DEV-"+new Date().format('dd-MMM-yyyy', TimeZone.getTimeZone('GMT'))
+else version = ""//"DEV-"+new Date().format('dd-MMM-yyyy', TimeZone.getTimeZone('GMT'))
 group = "7hazard"
 
 install {

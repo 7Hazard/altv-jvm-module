@@ -23,19 +23,23 @@ public class Plugins {
 
         for (File file : pluginsFolder.listFiles()) {
             if(!file.isDirectory()) continue;
-
             var name = file.getName();
-            File jarfile = new File("modules/altv-jvm-module/plugins/"+name+"/"+name+".jar");
-            if(!jarfile.isFile()) continue;
-
             Log.info("[JVM] Loading plugin '"+name+"'");
 
-            String mainclass;
+            // Get plugin config
+            String jarfilename = "", mainclass = "";
             try {
-                mainclass = Files.readAllLines(new File("modules/altv-jvm-module/plugins/"+name+"/main.cfg").toPath()).get(0);
+                var cfglines = Files.readAllLines(new File("modules/altv-jvm-module/plugins/"+name+"/plugin.cfg").toPath());
+                jarfilename = cfglines.get(0);
+                mainclass = cfglines.get(1);
             } catch (Exception e) {
-                Log.error("[JVM] Could not get main class from 'main.cfg' for plugin '"+name+"'");
-                return;
+                Log.error("[JVM] Could not read 'plugin.cfg' of '"+name+"'\n\t"+e.getCause());
+            }
+
+            File jarfile = new File("modules/altv-jvm-module/plugins/"+name+"/"+jarfilename);
+            if(!jarfile.isFile()) {
+                Log.error("Could not open jar file '"+jarfilename+"'");
+                continue;
             }
 
             try {

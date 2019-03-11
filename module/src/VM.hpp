@@ -11,7 +11,7 @@ class VM
 
     static bool Start(alt_server_t* server)
     {
-        alt_server_log_info(server, "[JVM] Starting Java VM");
+        alt_server_log_info(server, "[JVM] Starting Java VM (Module Version '" JVM_MODULE_VERSION "')");
 
         JNIEnv *env; /* pointer to native method interface */
         JavaVMInitArgs vm_args; /* JDK/JRE 6 VM initialization arguments */
@@ -20,7 +20,7 @@ class VM
         JavaVMOption options[5];
         vm_args.nOptions = 5;
         vm_args.options = options;
-        options[0].optionString = "-Djava.class.path=modules/altv-jvm-module;modules/altv-jvm-module/altv-jvm-module.jar";
+        options[0].optionString = "-Djava.class.path=modules/altv-jvm-module;modules/altv-jvm-module/" JVM_JAR_NAME;
         options[1].optionString = "-Djava.library.path=modules/altv-jvm-module";
         options[2].optionString = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005";
         options[3].optionString = "-XX:+ShowMessageBoxOnError";
@@ -40,13 +40,13 @@ class VM
         jclass cls = env->FindClass("alt/v/jvm/Main");
         if(cls == nullptr)
         {
-            alt_server_log_error(server, "[JVM] File 'altv-jvm-module.jvm' is corrupt");
+            alt_server_log_error(server, "[JVM] Module JAR is corrupt or '" JVM_JAR_NAME "' doesn't exist");
             return false;
         }
         jmethodID mid = env->GetStaticMethodID(cls, "main", "(J)V");
         if(mid == nullptr)
         {
-            alt_server_log_error(server, "[JVM] File 'altv-jvm-module.jar' is corrupt");
+            alt_server_log_error(server, "[JVM] Module JAR is corrupt");
             return false;
         }
         env->CallStaticVoidMethod(cls, mid, server);

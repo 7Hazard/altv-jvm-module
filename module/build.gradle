@@ -1,5 +1,8 @@
 apply plugin: "cpp"
 
+if (System.hasProperty("version")) version = System.getProperty("version") 
+else version = ""//"DEV-"+new Date().format('dd-MMM-yyyy', TimeZone.getTimeZone('GMT'))
+
 model { 
     components {
         module(NativeLibrarySpec) {
@@ -43,6 +46,9 @@ model {
 
     binaries {
         all {
+            cppCompiler.define "JVM_MODULE_VERSION=\"${version}\""
+            cppCompiler.define "JVM_JAR_NAME=\"altv-jvm-module${version == "" ? "" : "-${version}"}.jar\""
+
             if(toolChain in VisualCpp) {
                 cppCompiler.args "/std:c++17", "/EHsc", "/Z7"
                 linker.args "/DEBUG"
@@ -60,5 +66,7 @@ model {
 task copyToOutput(type: Copy) {
     from "build/libs/module/shared/altv-jvm-module.dll", "../altv-capi/build/libs/capi/shared/altv-capi.dll"
     into "../build/altv-jvm-module/"
+
+    outputs.upToDateWhen { false }
 }
 build.finalizedBy copyToOutput

@@ -26,9 +26,7 @@ public class Main {
         Plugins.Load();
         
         //CAPI.func.alt_server_subscribe_event(server, alt_event_type_t.PLAYER_CONNECT, OnConnect);
-
         //var ptr = CAPI.func.alt_script_runtime_create(create_resource, delete_resource, on_tick);
-        
     }
 
     static CAPI.alt_script_runtime_create_resource_callback_t create_resource = new CAPI.alt_script_runtime_create_resource_callback_t()
@@ -39,8 +37,8 @@ public class Main {
         }
     };
 
-    static CAPI.alt_script_runtime_delete_resource_callback_t delete_resource = new CAPI.alt_script_runtime_delete_resource_callback_t(){
-    
+    static CAPI.alt_script_runtime_remove_resource_callback_t remove_resource = new CAPI.alt_script_runtime_remove_resource_callback_t()
+    {
         @Override
         public void callback(Pointer a1) {
             

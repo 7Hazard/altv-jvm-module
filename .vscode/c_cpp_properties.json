@@ -12,7 +12,9 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "JVM_MODULE_VERSION=\"\"",
+                "JVM_JAR_NAME=\"\""
             ],
             "windowsSdkVersion": "10.0.17134.0",
             "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/VC/Tools/MSVC/14.15.26726/bin/Hostx64/x64/cl.exe",
