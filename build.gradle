@@ -99,8 +99,8 @@ artifacts {
 def siteUrl = 'https://gitlab.com/7Hazard/altv-jvm-module'
 def gitUrl = 'https://gitlab.com/7Hazard/altv-jvm-module.git'
 
-if (System.hasProperty("version")) version = System.getProperty("version") 
-else version = ""//"DEV-"+new Date().format('dd-MMM-yyyy', TimeZone.getTimeZone('GMT'))
+def version = "" //"DEV-"+new Date().format('dd-MMM-yyyy', TimeZone.getTimeZone('GMT'))
+if (System.hasProperty("version")) version = System.getProperty("version")
 group = "7hazard"
 
 install {
