@@ -1,7 +1,7 @@
 apply plugin: "cpp"
 
-if (System.hasProperty("version")) version = System.getProperty("version") 
-else version = ""//"DEV-"+new Date().format('dd-MMM-yyyy', TimeZone.getTimeZone('GMT'))
+version = "" //"DEV-"+new Date().format('dd-MMM-yyyy', TimeZone.getTimeZone('GMT'))
+if (System.properties.containsKey("version")) version = System.getProperty("version")
 
 model { 
     components {
