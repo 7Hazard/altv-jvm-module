@@ -532,7 +532,7 @@ public class CAPI
         jnr.ffi.Pointer alt_player_get_synced_meta_data(jnr.ffi.Pointer instance, @jnr.ffi.annotations.Encoding("UTF-8") String key);
         boolean alt_player_is_connected(jnr.ffi.Pointer instance);
         @jnr.ffi.types.u_int32_t int alt_player_get_ping(jnr.ffi.Pointer instance);
-        void alt_player_spawn(jnr.ffi.Pointer instance, jnr.ffi.Pointer pos);
+        void alt_player_spawn(jnr.ffi.Pointer instance, jnr.ffi.Pointer pos, @jnr.ffi.types.u_int32_t int delayMs);
         void alt_player_despawn(jnr.ffi.Pointer instance);
         @jnr.ffi.types.u_int64_t long alt_player_get_name_size(jnr.ffi.Pointer instance);
         void alt_player_get_name(jnr.ffi.Pointer instance, jnr.ffi.Pointer retbuffer);
