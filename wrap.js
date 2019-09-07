@@ -1,154 +1,229 @@
+/**
+ * Script for auto-wrapping CAPI to Java
+ * using JNR FFI
+ */
+
 const execSync = require('child_process').execSync;
 const fs = require("fs")
 
-function getJavaType(type, name)
+let TypeKind = {
+    "fundamental": 0,
+    "enumeral": 1,
+    "reference": 2,
+    "pointer": 3,
+    "array": 4,
+    "function_pointer": 5,
+    "struct": 6,
+}
+
+let javacallbacks = []
+
+function getJavaType(type, callbackName = "unnamedCallback"+javacallbacks.length)
 {
-    if(type.cname == "void")
+    switch (type.kind) {
+        case TypeKind.enumeral:
+        {
+            return type.name;
+        }
+
+        case TypeKind.array:
+        case TypeKind.reference:
+        case TypeKind.pointer:
+        {
+            if(type.name == "char*" || type.name == "const char*")
+            {
+                return `@jnr.ffi.annotations.Encoding("UTF-8") String`
+            }
+
+            return "jnr.ffi.Pointer";
+        }
+        
+        case TypeKind.struct:
+        {
+            return type.name;
+        }
+        
+        case TypeKind.function_pointer:
+        {
+            let interface = 
+`
+    public interface ${callbackName}
     {
-        return 'void'
+        @jnr.ffi.annotations.Delegate public ${getJavaType(type.returns)} callback(${getJavaParams(type.params, callbackName)});
     }
-    else if(type.cname == "bool")
-    {
-        return 'boolean'
-    }
-    else if(type.cname == "float")
-    {
-        return 'float'
-    }
-    else if(type.cname == "size_t")
-    {
-        return '@jnr.ffi.types.u_int64_t long'
-    }
-    else if(type.isFuncPtr)
-    {
-        return type.cname
-    }
-    else if(type.isPtr || type.isParamPtr || type.isArray)
-    {
-        return `jnr.ffi.Pointer`
-    }
-    else if(type.cname == "const char *")
-    {
-        return `@jnr.ffi.annotations.Encoding("UTF-8") String`
-    }
-    else if(type.cname == "int8_t")
-    {
-        return `@jnr.ffi.types.int8_t byte`
-    }
-    else if(type.cname == "uint8_t")
-    {
-        return '@jnr.ffi.types.u_int8_t byte'
-    }
-    else if(type.cname == "int16_t")
-    {
-        return '@jnr.ffi.types.int16_t short'
-    }
-    else if(type.cname == "uint16_t")
-    {
-        return '@jnr.ffi.types.u_int16_t short'
-    }
-    else if(type.cname == "int32_t")
-    {
-        return '@jnr.ffi.types.int32_t int'
-    }
-    else if(type.cname == "uint32_t")
-    {
-        return '@jnr.ffi.types.u_int32_t int'
-    }
-    else if(type.cname == "int64_t")
-    {
-        return '@jnr.ffi.types.int64_t long'
-    }
-    else if(type.cname == "uint64_t")
-    {
-        return '@jnr.ffi.types.u_int64_t long'
-    }
-    else {
-        console.warn(`Unrecognized type "${type.cname}", returning ${type.cname}`)
-        return type.cname
+`
+            javacallbacks.push(interface)
+
+            return callbackName
+        }
+
+        case TypeKind.fundamental:
+        {
+            switch (type.name) {
+                case "void":
+                    return "void"
+
+                case "bool":
+                case "_Bool":
+                    return "boolean"
+
+                case "float":
+                    return "float"
+
+                case "double":
+                    return "double"
+
+                case "char":
+                    return "@jnr.ffi.types.int8_t byte"
+
+                case "unsigned char":
+                    return "@jnr.ffi.types.u_int8_t byte"
+
+                case "short":
+                    return "@jnr.ffi.types.int32_t int"
+
+                case "unsigned short":
+                    return "@jnr.ffi.types.u_int16_t short"
+
+                case "int":
+                        return "@jnr.ffi.types.int32_t int"
+
+                case "unsigned int":
+                    return "@jnr.ffi.types.u_int32_t int"
+
+                case "long long":
+                    return "@jnr.ffi.types.int64_t long"
+
+                case "unsigned long long":
+                    return "@jnr.ffi.types.u_int64_t long"
+                
+            
+                default:
+                    throw "UNHANDLED FUNDAMENTAL TYPE"
+                    break;
+            }
+        }
+    
+        default:
+            throw "UNHANDLED TYPE KIND"
+            break;
     }
 }
 
-function getJavaStructType(type)
+function getJavaStructField(field)
 {
-    if(type.cname == "void")
-    {
-        return 'void'
+    let stype = "";
+
+    switch (field.type.kind) {
+        case TypeKind.enumeral:
+        {
+            stype = `jnr.ffi.Struct.Enum32<${field.type.name}>`;
+            break;
+        }
+
+        case TypeKind.array:
+        case TypeKind.pointer:
+        {
+            
+            if (field.type.name == "char*" || field.type.name == "const char*")
+            {
+                stype = "jnr.ffi.Struct.UTF8StringRef"
+            }
+            else {
+                stype = "jnr.ffi.Struct.Pointer"
+            }
+
+            break;
+        }
+
+        case TypeKind.fundamental:
+        {
+            switch (field.type.name) {
+                case "void":
+                {        
+                    stype = "void";
+                    break;
+                }
+                case "bool":
+                case "_Bool":
+                {
+                    stype = "jnr.ffi.Struct.Boolean";
+                    break;
+                }
+                case "float":
+                {
+                    stype = "jnr.ffi.Struct.Float"
+                    break;
+                }
+                case "double":
+                {
+                    stype = "jnr.ffi.Struct.Double"
+                    break;
+                }
+                case "unsigned char":
+                {
+                    stype = "jnr.ffi.Struct.u_int8_t"
+                    break;
+                }
+                case "unsigned short":
+                {
+                    stype = "jnr.ffi.Struct.u_int16_t"
+                    break;
+                }
+                case "unsigned int":
+                {
+                    stype = "jnr.ffi.Struct.u_int32_t"
+                    break;
+                }
+                case "long long":
+                {
+                    stype = "jnr.ffi.Struct.int64_t"
+                    break;
+                }
+                case "unsigned long long":
+                {
+                    stype = "jnr.ffi.Struct.u_int64_t";
+                    break;
+                }
+            
+                default:
+                    throw "Unrecognized fundamental type for Struct Type"
+                    break;
+            }
+            
+            break;
+        }
+
+        // just the type itself
+        case TypeKind.struct:
+        case TypeKind.function_pointer:
+        {
+            stype = field.type.name;
+            break;
+        }
+    
+        default:
+        {
+            throw "Unhandled struct type kind";
+            break;
+        }
     }
-    else if(type.cname == "bool")
-    {
-        return "jnr.ffi.Struct.Boolean"
-    }
-    else if(type.cname == "float")
-    {
-        return "jnr.ffi.Struct.Float"
-    }
-    else if(type.cname == "size_t")
-    {
-        return "jnr.ffi.Struct.u_int64_t"
-    }
-    else if (type.isFuncPtr)
-    {
-        return type.cname
-    }
-    else if(type.isPtr || type.isArray)
-    {
-        return "jnr.ffi.Struct.Pointer"
-    }
-    else if(type.cname == "const char *")
-    {
-        return "jnr.ffi.Struct.UTF8StringRef"
-    }
-    else if(type.cname == "int8_t")
-    {
-        return "jnr.ffi.Struct.int8_t"
-    }
-    else if(type.cname == "uint8_t")
-    {
-        return "jnr.ffi.Struct.u_int8_t"
-    }
-    else if(type.cname == "int16_t")
-    {
-        return "jnr.ffi.Struct.int16_t"
-    }
-    else if(type.cname == "uint16_t")
-    {
-        return "jnr.ffi.Struct.u_int16_t"
-    }
-    else if(type.cname == "int32_t")
-    {
-        return "jnr.ffi.Struct.int32_t"
-    }
-    else if(type.cname == "uint32_t")
-    {
-        return "jnr.ffi.Struct.u_int32_t"
-    }
-    else if(type.cname == "int64_t")
-    {
-        return "jnr.ffi.Struct.int64_t"
-    }
-    else if(type.cname == "uint64_t")
-    {
-        return "jnr.ffi.Struct.u_int64_t"
-    }
-    else if(type.isEnum)
-    {
-        return `jnr.ffi.Struct.Enum32<${type.cname}>`
-    }
-    else {
-        throw "Unrecognized type for Struct Type"
-    }
+    
+    return `public final ${stype} ${field.name} = new ${stype}(${field.type.kind == TypeKind.enumeral ? field.type.name+".class" : ""});`
 }
 
-function getJavaParams(params)
+
+function getJavaParams(params, funcname)
 {
+    if(params == undefined || params == null) return ""
     let jparams = []
-    for (const param of params.params) {
-        let jparam = `${getJavaType(param.type)} ${param.name}`
+    for (const param of params) {
+        let jparam = `${getJavaType(param.type, funcname+"_"+param.name+"_Callback")} ${param.name}`
         jparams.push(jparam)
     }
     return jparams.join(", ")
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
@@ -157,92 +232,78 @@ function getJavaParams(params)
 console.log("Wrapping CAPI to Java")
 
 // Read the capi.json
-let capiinfo = JSON.parse(fs.readFileSync(__dirname + "/altv-capi/build/capi.json"))
-
-// Process all functions
-let javafuncs = []
-for (let [cppname, funcs] of Object.entries(capiinfo.funcs)) {
-    // Loop all overloads of the function
-    funcs.forEach(func => {
-        // Skip instance getters
-        if(func.isInstanceGetter) return
-
-        // Add jfunc
-        javafuncs.push(`${getJavaType(func.returnType)} ${func.cname}(${getJavaParams(func.params)});`)
-    });
-}
+let capiinfo = JSON.parse(fs.readFileSync(__dirname + "/build/altv-capi.json"))
 
 let javatypes = []
-for (let [cppname, type] of Object.entries(capiinfo.types)) {
-    if(type.isFieldStruct)
-    {
-        let fields = []
-        let ctorparams = []
-        let ctorassigns = []
+let javafuncs = []
 
-        type.fields.forEach(field => {
-            let stype = getJavaStructType(field.type)
-            fields.push(`public final ${stype} ${field.name} = new ${stype}(${stype.startsWith("jnr.ffi.Struct.Enum") ? field.type.cname+".class" : ""});`)
+// Process all enums
+for(let [enumname, enumcontent] of Object.entries(capiinfo.enums))
+{
+    let values = []
+    enumcontent.enumerators.forEach(e => {
+        values.push(`${e.name}(${e.value})`)
+    });
 
-            let jtype = getJavaType(field.type, false, "@jnr.ffi.types.int32_t int")
-            ctorparams.push(`${jtype} ${field.name}`)
-            ctorassigns.push(`this.${field.name}.set(${field.name});`)
-        });
-
-        let javatype = 
+    let javatype = 
 `
-    public static class ${type.unqualifiedCName} extends jnr.ffi.Struct
-    {
-        ${fields.join("\n        ")}
-        
-        public ${type.unqualifiedCName}()
-        {
-            super(runtime);
-        }
-        public ${type.unqualifiedCName}(jnr.ffi.Runtime runtime)
-        {
-            super(runtime);
-        }
-    }
-`
-        javatypes.push(javatype)
-    }
-    if(type.isEnum)
-    {
-        let values = []
-        type.values.forEach(value => {
-            values.push(`${value.name}(${value.value})`)
-        });
-
-        let javatype = 
-`
-    public static enum ${type.unqualifiedCName} implements jnr.ffi.util.EnumMapper.IntegerEnum
+    public static enum ${enumname} implements jnr.ffi.util.EnumMapper.IntegerEnum
     {
         ${values.join(",\n        ")};
-    
-        ${type.unqualifiedCName}(int value) {
+
+        ${enumname}(int value) {
             this.value = value;
         }
-    
+
         public int intValue() {
             return value;
         }
         private final int value;
     }
 `
-        javatypes.push(javatype)
-    }
-    else if(type.isFuncPtr)
-    {
-        let javatype = 
+    javatypes.push(javatype)
+}
+
+// Process all structs
+for(let [structname, struct] of Object.entries(capiinfo.structs))
+{
+    let fields = []
+    // let ctorparams = []
+    // let ctorassigns = []
+
+    struct.fields.forEach(field => {
+        fields.push(getJavaStructField(field))
+        
+        // let jtype = getJavaType(field.type, false, "@jnr.ffi.types.int32_t int")
+        // ctorparams.push(`${jtype} ${field.name}`)
+        // ctorassigns.push(`this.${field.name}.set(${field.name});`)
+    });
+
+    let javatype = 
 `
-    public interface ${type.unqualifiedCName}
+    public static class ${structname} extends jnr.ffi.Struct
     {
-        @jnr.ffi.annotations.Delegate public ${getJavaType(type.returnType)} callback(${getJavaParams(type.params)});
+        ${fields.join("\n        ")}
+        
+        public ${structname}()
+        {
+            super(runtime);
+        }
+        public ${structname}(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
     }
 `
-        javatypes.push(javatype)
-    }
+    javatypes.push(javatype)
+}
+
+// Process all functions
+for(let [funcname, func] of Object.entries(capiinfo.functions))
+{
+    let params = getJavaParams(func.params, funcname)
+    let ret = getJavaType(func.returns);
+    javafuncs.push(`${func.comment != "" ? func.comment+"        " : ""}${ret} ${funcname}(${params});\n`)
 }
 
 // Write the java source
@@ -254,9 +315,8 @@ public class CAPI
     public static final CAPIFunctions func = jnr.ffi.LibraryLoader.create(CAPIFunctions.class).load("altv-capi");
     public static jnr.ffi.Runtime runtime = jnr.ffi.Runtime.getRuntime(func);
     public static jnr.ffi.Pointer server;
-    
-
     ${javatypes.join("")}
+    ${javacallbacks.join("")}
 
     public static interface CAPIFunctions
     {
@@ -264,6 +324,8 @@ public class CAPI
     }
 }
 `
+
+
 fs.writeFileSync(__dirname+"/src/alt/v/jvm/CAPI.java", javasrc)
 
 console.log("Done wrapping to Java")

@@ -68,7 +68,7 @@ distributions {
     main {
         baseName = 'altv-jvm-module'
         contents {
-            from "altv-capi/build/libs/capi/shared/altv-capi.dll", "module/build/libs/module/shared/altv-jvm-module.dll"
+            from "build/altv-capi.dll", "module/build/libs/module/shared/altv-jvm-module.dll"
         }
     }
 }
