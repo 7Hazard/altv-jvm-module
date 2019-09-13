@@ -1,4 +1,4 @@
-#include "altv/capi.h"
+#include "altv-capi.hpp"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -7,13 +7,15 @@
 
 #endif
 
-#include "Utils.hpp"
+#include "Util.hpp"
 #include "VM.hpp"
 
-EXPORT bool altMain(alt_server_t* server)
+CAPI_EXPORT bool altMain(alt_IServer* server)
 {
     if(!VM::Start(server))
         return false;
 
     return true;
 }
+
+CAPI_EXPORT_SDK_VERSION;

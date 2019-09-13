@@ -1,14 +1,14 @@
 package alt.v.jvm;
 
-import java.io.File;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 
 import alt.v.jvm.CAPI;
-import alt.v.jvm.CAPI.alt_event_type_t;
+import alt.v.jvm.CAPIExtra;
 import jnr.ffi.Memory;
 import jnr.ffi.Pointer;
 import jnr.ffi.Struct;
+import jnr.ffi.Struct.UTF8StringRef;
 import jnr.ffi.types.uintptr_t;
 
 public class Main {
@@ -24,57 +24,71 @@ public class Main {
         Log.info("[JVM] Module loaded");
 
         Plugins.Load();
+
+        Log.info("[JVM] Creating runtime");
+        Pointer script_runtime = CAPIExtra.func.alt_CAPIScriptRuntime_Create(
+            create_resource,
+            remove_resource,
+            on_tick
+        );
+        CAPI.func.alt_IServer_RegisterScriptRuntime(
+            server,
+            new AltStringView("jvm").ptr(),
+            script_runtime
+        );
         
         //CAPI.func.alt_server_subscribe_event(server, alt_event_type_t.PLAYER_CONNECT, OnConnect);
         //var ptr = CAPI.func.alt_script_runtime_create(create_resource, delete_resource, on_tick);
     }
 
-    static CAPI.alt_script_runtime_create_resource_callback_t create_resource = new CAPI.alt_script_runtime_create_resource_callback_t()
+    static CAPIExtra.CreateResourceFn create_resource = new CAPIExtra.CreateResourceFn()
     {
         @Override
-        public Pointer callback(Pointer a1) {
+        public Pointer callback(Pointer runtime, Pointer info) {
+            // TODO Auto-generated method stub
             return null;
         }
     };
-
-    static CAPI.alt_script_runtime_remove_resource_callback_t remove_resource = new CAPI.alt_script_runtime_remove_resource_callback_t()
-    {
-        @Override
-        public void callback(Pointer a1) {
-            
-        }
-    };
-
-    static CAPI.alt_script_runtime_on_tick_callback_t on_tick = new CAPI.alt_script_runtime_on_tick_callback_t(){
     
+    static CAPIExtra.RemoveResourceFn remove_resource = new CAPIExtra.RemoveResourceFn()
+    {
         @Override
-        public void callback() {
+        public void callback(Pointer runtime, Pointer resource) {
+            // TODO Auto-generated method stub
+
+        }
+    };
+
+    static CAPIExtra.OnRuntimeTickFn on_tick = new CAPIExtra.OnRuntimeTickFn()
+    {
+        @Override
+        public void callback(Pointer runtime) {
             
         }
     };
 
-    static CAPI.alt_event_callback_t OnConnect = new CAPI.alt_event_callback_t()
-    {
-        public boolean callback(Pointer event) {
-            Pointer ply = CAPI.func.alt_player_connect_event_get_target(event);
-            ByteBuffer buffer = ByteBuffer.allocate(50);
-            Pointer bufferptr = Pointer.wrap(CAPI.runtime, buffer);
-            CAPI.func.alt_player_get_name(ply, bufferptr);
-            String plyname = new String(buffer.array(), StandardCharsets.UTF_8).trim();
-            CAPI.func.alt_server_log_info(server, "PLAYER "+plyname+" CONNECTED");
+    // static CAPI.alt_event_callback_t OnConnect = new CAPI.alt_event_callback_t()
+    // {
+    //     public boolean callback(Pointer event) {
+    //         Pointer ply = CAPI.func.alt_player_connect_event_get_target(event);
+    //         ByteBuffer buffer = ByteBuffer.allocate(50);
+    //         Pointer bufferptr = Pointer.wrap(CAPI.runtime, buffer);
+    //         CAPI.func.alt_player_get_name(ply, bufferptr);
+    //         String plyname = new String(buffer.array(), StandardCharsets.UTF_8).trim();
+    //         CAPI.func.alt_server_log_info(server, "PLAYER "+plyname+" CONNECTED");
 
-            // Set pos
-            CAPI.func.alt_server_log_info(server, "SETTING POS");
-            CAPI.alt_position_t pos = new CAPI.alt_position_t();
-            pos.x.set(1500); pos.y.set(3200); pos.z.set(40);
-            CAPI.func.alt_player_set_position(ply, Struct.getMemory(pos));
+    //         // Set pos
+    //         CAPI.func.alt_server_log_info(server, "SETTING POS");
+    //         CAPI.alt_position_t pos = new CAPI.alt_position_t();
+    //         pos.x.set(1500); pos.y.set(3200); pos.z.set(40);
+    //         CAPI.func.alt_player_set_position(ply, Struct.getMemory(pos));
 
-            // create veh
-            CAPI.func.alt_server_log_info(server, "CREATING VEH");
-            int vehhash = CAPI.func.alt_server_hash(server, "deluxo");
-            CAPI.func.alt_server_create_vehicle(server, vehhash, Struct.getMemory(pos), 0);
+    //         // create veh
+    //         CAPI.func.alt_server_log_info(server, "CREATING VEH");
+    //         int vehhash = CAPI.func.alt_server_hash(server, "deluxo");
+    //         CAPI.func.alt_server_create_vehicle(server, vehhash, Struct.getMemory(pos), 0);
 
-            return true;
-        }
-    };
+    //         return true;
+    //     }
+    // };
 }

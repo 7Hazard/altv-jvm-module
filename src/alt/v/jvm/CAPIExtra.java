@@ -2,7 +2,7 @@ package alt.v.jvm;
 
 public class CAPIExtra
 {
-    public static final CAPIExtraFunctions func = jnr.ffi.LibraryLoader.create(CAPIExtraFunctions.class).load("altv-capi");
+    public static final CAPIExtraFunctions func = jnr.ffi.LibraryLoader.create(CAPIExtraFunctions.class).load("altv-capi-server");
 
     public interface CreateResourceFn
     {

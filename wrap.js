@@ -125,13 +125,13 @@ function getJavaStructField(field)
         case TypeKind.pointer:
         {
             
-            if (field.type.name == "char*" || field.type.name == "const char*")
-            {
-                stype = "jnr.ffi.Struct.UTF8StringRef"
-            }
-            else {
+            // if (field.type.name == "char*" || field.type.name == "const char*")
+            // {
+            //     stype = "jnr.ffi.Struct.UTF8StringRef"
+            // }
+            // else {
                 stype = "jnr.ffi.Struct.Pointer"
-            }
+            // }
 
             break;
         }
@@ -232,7 +232,7 @@ function getJavaParams(params, funcname)
 console.log("Wrapping CAPI to Java")
 
 // Read the capi.json
-let capiinfo = JSON.parse(fs.readFileSync(__dirname + "/build/altv-capi.json"))
+let capiinfo = JSON.parse(fs.readFileSync(__dirname + "/capi/server/altv-capi.json"))
 
 let javatypes = []
 let javafuncs = []
@@ -312,7 +312,7 @@ let javasrc =
 
 public class CAPI
 {
-    public static final CAPIFunctions func = jnr.ffi.LibraryLoader.create(CAPIFunctions.class).load("altv-capi");
+    public static final CAPIFunctions func = jnr.ffi.LibraryLoader.create(CAPIFunctions.class).load("altv-capi-server");
     public static jnr.ffi.Runtime runtime = jnr.ffi.Runtime.getRuntime(func);
     public static jnr.ffi.Pointer server;
     ${javatypes.join("")}

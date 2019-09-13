@@ -2,7 +2,7 @@ package alt.v.jvm;
 
 public class CAPI
 {
-    public static final CAPIFunctions func = jnr.ffi.LibraryLoader.create(CAPIFunctions.class).load("altv-capi");
+    public static final CAPIFunctions func = jnr.ffi.LibraryLoader.create(CAPIFunctions.class).load("altv-capi-server");
     public static jnr.ffi.Runtime runtime = jnr.ffi.Runtime.getRuntime(func);
     public static jnr.ffi.Pointer server;
     
@@ -819,7 +819,7 @@ public class CAPI
 
     public static class alt_String extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.UTF8StringRef data = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.Pointer data = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.u_int64_t size = new jnr.ffi.Struct.u_int64_t();
         
         public alt_String()
@@ -834,7 +834,7 @@ public class CAPI
 
     public static class alt_StringView extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.UTF8StringRef data = new jnr.ffi.Struct.UTF8StringRef();
+        public final jnr.ffi.Struct.Pointer data = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.u_int64_t size = new jnr.ffi.Struct.u_int64_t();
         
         public alt_StringView()
@@ -1045,6 +1045,8 @@ public class CAPI
 
         boolean alt_CCheckpointEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
+        void alt_CCheckpointEvent_free(jnr.ffi.Pointer ptr);
+
         void alt_CClientScriptEvent_Assign_CClientScriptEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CClientScriptEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1085,6 +1087,8 @@ public class CAPI
 
         boolean alt_CClientScriptEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
+        void alt_CClientScriptEvent_free(jnr.ffi.Pointer ptr);
+
         void alt_CColShapeEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CColShapeEvent_Assign_constCColShapeEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1117,6 +1121,8 @@ public class CAPI
         alt_CEvent_Type alt_CColShapeEvent_GetType(jnr.ffi.Pointer _instance);
 
         boolean alt_CColShapeEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CColShapeEvent_free(jnr.ffi.Pointer ptr);
 
         void alt_CConsoleCommandEvent_Assign_CConsoleCommandEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -1154,6 +1160,8 @@ public class CAPI
         alt_CEvent_Type alt_CConsoleCommandEvent_GetType(jnr.ffi.Pointer _instance);
 
         boolean alt_CConsoleCommandEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CConsoleCommandEvent_free(jnr.ffi.Pointer ptr);
 
         void alt_CDataNodeReceivedEvent_Assign_CDataNodeReceivedEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -1193,6 +1201,8 @@ public class CAPI
 
         boolean alt_CDataNodeReceivedEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
+        void alt_CDataNodeReceivedEvent_free(jnr.ffi.Pointer ptr);
+
         void alt_CEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1211,6 +1221,8 @@ public class CAPI
         alt_CEvent_Type alt_CEvent_GetType(jnr.ffi.Pointer _instance);
 
         boolean alt_CEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CEvent_free(jnr.ffi.Pointer ptr);
 
         void alt_CPlayerChangeVehicleSeatEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -1246,6 +1258,8 @@ public class CAPI
         alt_CEvent_Type alt_CPlayerChangeVehicleSeatEvent_GetType(jnr.ffi.Pointer _instance);
 
         boolean alt_CPlayerChangeVehicleSeatEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CPlayerChangeVehicleSeatEvent_free(jnr.ffi.Pointer ptr);
 
         void alt_CPlayerConnectEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -1286,6 +1300,8 @@ public class CAPI
 
         boolean alt_CPlayerConnectEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
+        void alt_CPlayerConnectEvent_free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerDamageEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDamageEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1321,6 +1337,8 @@ public class CAPI
 
         boolean alt_CPlayerDamageEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
+        void alt_CPlayerDamageEvent_free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerDeathEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDeathEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1353,6 +1371,8 @@ public class CAPI
         @jnr.ffi.types.u_int32_t int alt_CPlayerDeathEvent_GetWeapon(jnr.ffi.Pointer _instance);
 
         boolean alt_CPlayerDeathEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CPlayerDeathEvent_free(jnr.ffi.Pointer ptr);
 
         void alt_CPlayerDisconnectEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -1391,6 +1411,8 @@ public class CAPI
 
         boolean alt_CPlayerDisconnectEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
+        void alt_CPlayerDisconnectEvent_free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerEnterVehicleEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CPlayerEnterVehicleEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1423,6 +1445,8 @@ public class CAPI
         alt_CEvent_Type alt_CPlayerEnterVehicleEvent_GetType(jnr.ffi.Pointer _instance);
 
         boolean alt_CPlayerEnterVehicleEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CPlayerEnterVehicleEvent_free(jnr.ffi.Pointer ptr);
 
         void alt_CPlayerLeaveVehicleEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -1457,6 +1481,8 @@ public class CAPI
 
         boolean alt_CPlayerLeaveVehicleEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
+        void alt_CPlayerLeaveVehicleEvent_free(jnr.ffi.Pointer ptr);
+
         void alt_CRemoveEntityEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CRemoveEntityEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1485,6 +1511,8 @@ public class CAPI
         alt_CEvent_Type alt_CRemoveEntityEvent_GetType(jnr.ffi.Pointer _instance);
 
         boolean alt_CRemoveEntityEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CRemoveEntityEvent_free(jnr.ffi.Pointer ptr);
 
         void alt_CServerScriptEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -1523,6 +1551,8 @@ public class CAPI
         alt_CEvent_Type alt_CServerScriptEvent_GetType(jnr.ffi.Pointer _instance);
 
         boolean alt_CServerScriptEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CServerScriptEvent_free(jnr.ffi.Pointer ptr);
 
         void alt_IBaseObject_Assign_constIBaseObjectRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -1847,6 +1877,8 @@ public class CAPI
 
         // Return ptr must be manually freed with alt_IResource_CreationInfo_free()
         jnr.ffi.Pointer alt_IResource_CreationInfo_Create_1(jnr.ffi.Pointer _p0);
+
+        void alt_IResource_CreationInfo_free(jnr.ffi.Pointer ptr);
 
         // Return ptr must be manually freed with alt_MValueDict_free()
         jnr.ffi.Pointer alt_IResource_GetExports(jnr.ffi.Pointer _instance);
@@ -2373,6 +2405,8 @@ public class CAPI
 
         @jnr.ffi.types.u_int64_t long alt_MValueDict_ToUInt(jnr.ffi.Pointer _instance);
 
+        void alt_MValueDict_free(jnr.ffi.Pointer ptr);
+
         void alt_MValueFunction_Assign_MValueFunctionRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_MValueFunction_Assign_constMValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
@@ -2442,6 +2476,8 @@ public class CAPI
         // Return ptr must be manually freed with alt_MValue_free()
         jnr.ffi.Pointer alt_MValueFunction_Invoker_Invoke(jnr.ffi.Pointer _instance, jnr.ffi.Pointer args);
 
+        void alt_MValueFunction_Invoker_free(jnr.ffi.Pointer ptr);
+
         boolean alt_MValueFunction_ToBool(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.int64_t long alt_MValueFunction_ToInt(jnr.ffi.Pointer _instance);
@@ -2450,6 +2486,8 @@ public class CAPI
         jnr.ffi.Pointer alt_MValueFunction_ToString(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_MValueFunction_ToUInt(jnr.ffi.Pointer _instance);
+
+        void alt_MValueFunction_free(jnr.ffi.Pointer ptr);
 
         jnr.ffi.Pointer alt_MValueList_Access_uint64_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
@@ -2534,6 +2572,8 @@ public class CAPI
         // Return ptr must be manually freed with alt_Array_MValue_free()
         jnr.ffi.Pointer alt_MValueList_To_Array_MValue(jnr.ffi.Pointer _instance);
 
+        void alt_MValueList_free(jnr.ffi.Pointer ptr);
+
         void alt_MValue_Assign_constMValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
         // Return ptr must be manually freed with alt_MValue_free()
@@ -2588,6 +2628,8 @@ public class CAPI
         // Return ptr must be manually freed with alt_MValue_Function_free()
         jnr.ffi.Pointer alt_MValue_Function_Create_2(jnr.ffi.Pointer _p0);
 
+        void alt_MValue_Function_free(jnr.ffi.Pointer ptr);
+
         alt_MValue_Type alt_MValue_GetType(jnr.ffi.Pointer _instance);
 
         boolean alt_MValue_ToBool(jnr.ffi.Pointer _instance);
@@ -2612,6 +2654,8 @@ public class CAPI
         // Return ptr must be manually freed with alt_MValue_TypeMismatchException_free()
         jnr.ffi.Pointer alt_MValue_TypeMismatchException_Create_2();
 
+        void alt_MValue_TypeMismatchException_free(jnr.ffi.Pointer ptr);
+
         @jnr.ffi.annotations.Encoding("UTF-8") String alt_MValue_TypeMismatchException_what(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_PointLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
@@ -2632,6 +2676,8 @@ public class CAPI
 
         // Return ptr must be manually freed with alt_PointLayout_free()
         jnr.ffi.Pointer alt_PointLayout_Create_4(jnr.ffi.Pointer _p0);
+
+        void alt_PointLayout_free(jnr.ffi.Pointer ptr);
 
         jnr.ffi.Pointer alt_PointPaddedLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
@@ -2661,11 +2707,15 @@ public class CAPI
         // Return ptr must be manually freed with alt_PointPaddedLayout_free()
         jnr.ffi.Pointer alt_PointPaddedLayout_Create_7(jnr.ffi.Pointer elements);
 
+        void alt_PointPaddedLayout_free(jnr.ffi.Pointer ptr);
+
         // Return ptr must be manually freed with alt_RGBA_free()
         jnr.ffi.Pointer alt_RGBA_Create();
 
         // Return ptr must be manually freed with alt_RGBA_free()
         jnr.ffi.Pointer alt_RGBA_Create_1(@jnr.ffi.types.u_int8_t byte _r, @jnr.ffi.types.u_int8_t byte _g, @jnr.ffi.types.u_int8_t byte _b, @jnr.ffi.types.u_int8_t byte _a);
+
+        void alt_RGBA_free(jnr.ffi.Pointer ptr);
 
         jnr.ffi.Pointer alt_RotationLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
@@ -2687,6 +2737,8 @@ public class CAPI
         jnr.ffi.Pointer alt_RotationLayout_Create_4(jnr.ffi.Pointer _p0);
 
         void alt_RotationLayout_Normalize(jnr.ffi.Pointer _instance);
+
+        void alt_RotationLayout_free(jnr.ffi.Pointer ptr);
 
         jnr.ffi.Pointer alt_RotationPaddedLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
@@ -2717,6 +2769,8 @@ public class CAPI
         jnr.ffi.Pointer alt_RotationPaddedLayout_Create_7(jnr.ffi.Pointer elements);
 
         void alt_RotationPaddedLayout_Normalize(jnr.ffi.Pointer _instance);
+
+        void alt_RotationPaddedLayout_free(jnr.ffi.Pointer ptr);
 
         @jnr.ffi.types.int8_t byte alt_StringView_Access_uint64_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
@@ -2756,6 +2810,8 @@ public class CAPI
 
         // Return ptr must be manually freed with alt_String_free()
         jnr.ffi.Pointer alt_StringView_To_String(jnr.ffi.Pointer _instance);
+
+        void alt_StringView_free(jnr.ffi.Pointer ptr);
 
         @jnr.ffi.annotations.Encoding("UTF-8") String alt_String_Access_uint64_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
@@ -2820,6 +2876,8 @@ public class CAPI
         // Return ptr must be manually freed with alt_VectorLayout_float_4_free()
         jnr.ffi.Pointer alt_VectorLayout_float_4_Create_4(jnr.ffi.Pointer _p0);
 
+        void alt_VectorLayout_float_4_free(jnr.ffi.Pointer ptr);
+
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
@@ -2866,6 +2924,8 @@ public class CAPI
 
         float alt_Vector_float_4_VectorLayout_float_4_LengthSqr(jnr.ffi.Pointer _instance);
 
+        void alt_Vector_float_4_VectorLayout_float_4_free(jnr.ffi.Pointer ptr);
+
         jnr.ffi.Pointer alt_ViewMatrixLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         jnr.ffi.Pointer alt_ViewMatrixLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
@@ -2884,6 +2944,8 @@ public class CAPI
 
         // Return ptr must be manually freed with alt_ViewMatrixLayout_free()
         jnr.ffi.Pointer alt_ViewMatrixLayout_Create_4(jnr.ffi.Pointer _right, jnr.ffi.Pointer _up, jnr.ffi.Pointer _forward, jnr.ffi.Pointer _pos);
+
+        void alt_ViewMatrixLayout_free(jnr.ffi.Pointer ptr);
 
     }
 }

@@ -16,10 +16,10 @@ model {
                     }
                     exportedHeaders {
                         srcDir "src"
-                        srcDir "altv-capi/include"
+                        srcDir "../capi/server"
                     }
                     
-                    lib project: ":altv-capi", library: "capi", linkage: 'shared'
+                    lib library: "capi", linkage: "shared"
                     lib library: "jvm", linkage: "shared"
                 }
             }
@@ -41,6 +41,17 @@ model {
                     }
                 }
             }
+            capi {
+                binaries.withType(SharedLibraryBinary) {
+                    if(targetPlatform.operatingSystem.windows){
+                        sharedLibraryFile = file("../capi/altv-capi-server.dll")
+                        sharedLibraryLinkFile = file("../capi/altv-capi-server.lib")
+                    }
+                    else {
+                        //throw "JVM linkage for Linux and Mac unspecified"
+                    }
+                }
+            }
         }
     }
 
@@ -50,7 +61,7 @@ model {
             cppCompiler.define "JVM_JAR_NAME=\"altv-jvm-module${version == "" ? "" : "-${version}"}.jar\""
 
             if(toolChain in VisualCpp) {
-                cppCompiler.args "/std:c++17", "/EHsc", "/Z7"
+                cppCompiler.args "/std:c++17", "/EHsc", "/Z7", "/MD" // maybe MT instead of MD?
                 linker.args "/DEBUG"
             }
         }
@@ -64,7 +75,7 @@ model {
 }
 
 task copyToOutput(type: Copy) {
-    from "build/libs/module/shared/altv-jvm-module.dll", "../altv-capi/build/libs/capi/shared/altv-capi.dll"
+    from "build/libs/module/shared/altv-jvm-module.dll", "../capi/altv-capi-server.dll"
     into "../build/altv-jvm-module/"
 
     outputs.upToDateWhen { false }
