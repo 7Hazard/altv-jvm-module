@@ -1,11 +1,9 @@
 package alt.v.jvm;
 
 import java.io.File;
-import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 public class Plugins {

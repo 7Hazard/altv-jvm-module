@@ -1,22 +1,14 @@
 package alt.v.jvm;
 
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-
 import alt.v.jvm.CAPI;
 import alt.v.jvm.CAPIExtra;
-import jnr.ffi.Memory;
 import jnr.ffi.Pointer;
-import jnr.ffi.Struct;
-import jnr.ffi.Struct.UTF8StringRef;
 import jnr.ffi.types.uintptr_t;
 
 public class Main {
-    public static Pointer server;
-    public static void main(@uintptr_t long serverptr)
+    public static void main(@uintptr_t long coreptr)
     {
-        CAPI.server = Pointer.wrap(CAPI.runtime, serverptr);
-        server = CAPI.server;
+        CAPI.core = Pointer.wrap(CAPI.runtime, coreptr);
 
         // Prepare env
         Log.init();
@@ -25,47 +17,47 @@ public class Main {
 
         Plugins.Load();
 
-        Log.info("[JVM] Creating runtime");
-        Pointer script_runtime = CAPIExtra.func.alt_CAPIScriptRuntime_Create(
-            create_resource,
-            remove_resource,
-            on_tick
-        );
-        CAPI.func.alt_IServer_RegisterScriptRuntime(
-            server,
-            new AltStringView("jvm").ptr(),
-            script_runtime
-        );
+        // Log.info("[JVM] Creating runtime");
+        // Pointer script_runtime = CAPIExtra.func.alt_CAPIScriptRuntime_Create(
+        //     create_resource,
+        //     remove_resource,
+        //     on_tick
+        // );
+        // CAPI.func.alt_ICore_RegisterScriptRuntime(
+        //     CAPI.core,
+        //     new AltStringView("jvm").ptr(),
+        //     script_runtime
+        // );
         
         //CAPI.func.alt_server_subscribe_event(server, alt_event_type_t.PLAYER_CONNECT, OnConnect);
         //var ptr = CAPI.func.alt_script_runtime_create(create_resource, delete_resource, on_tick);
     }
 
-    static CAPIExtra.CreateResourceFn create_resource = new CAPIExtra.CreateResourceFn()
-    {
-        @Override
-        public Pointer callback(Pointer runtime, Pointer info) {
-            // TODO Auto-generated method stub
-            return null;
-        }
-    };
+    // static CAPIExtra.CreateImplFn create_resource = new CAPIExtra.CreateImplFn()
+    // {
+    //     @Override
+    //     public Pointer callback(Pointer runtime, Pointer info) {
+    //         // TODO Auto-generated method stub
+    //         return null;
+    //     }
+    // };
     
-    static CAPIExtra.RemoveResourceFn remove_resource = new CAPIExtra.RemoveResourceFn()
-    {
-        @Override
-        public void callback(Pointer runtime, Pointer resource) {
-            // TODO Auto-generated method stub
+    // static CAPIExtra.DestroyImplFn remove_resource = new CAPIExtra.DestroyImplFn()
+    // {
+    //     @Override
+    //     public void callback(Pointer runtime, Pointer resource) {
+    //         // TODO Auto-generated method stub
 
-        }
-    };
+    //     }
+    // };
 
-    static CAPIExtra.OnRuntimeTickFn on_tick = new CAPIExtra.OnRuntimeTickFn()
-    {
-        @Override
-        public void callback(Pointer runtime) {
+    // static CAPIExtra.OnRuntimeTickFn on_tick = new CAPIExtra.OnRuntimeTickFn()
+    // {
+    //     @Override
+    //     public void callback(Pointer runtime) {
             
-        }
-    };
+    //     }
+    // };
 
     // static CAPI.alt_event_callback_t OnConnect = new CAPI.alt_event_callback_t()
     // {

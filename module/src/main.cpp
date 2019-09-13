@@ -10,10 +10,13 @@
 #include "Util.hpp"
 #include "VM.hpp"
 
-CAPI_EXPORT bool altMain(alt_IServer* server)
+CAPI_EXPORT bool altMain(alt_ICore* core)
 {
-    if(!VM::Start(server))
+    if(!VM::Start(core))
+    {
+        util::loge(core, "[JVM] Could not start VM");
         return false;
+    }
 
     return true;
 }

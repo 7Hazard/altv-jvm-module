@@ -314,7 +314,7 @@ public class CAPI
 {
     public static final CAPIFunctions func = jnr.ffi.LibraryLoader.create(CAPIFunctions.class).load("altv-capi-server");
     public static jnr.ffi.Runtime runtime = jnr.ffi.Runtime.getRuntime(func);
-    public static jnr.ffi.Pointer server;
+    public static jnr.ffi.Pointer core;
     ${javatypes.join("")}
     ${javacallbacks.join("")}
 

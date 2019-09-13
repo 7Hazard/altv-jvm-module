@@ -4,20 +4,20 @@ public class CAPIExtra
 {
     public static final CAPIExtraFunctions func = jnr.ffi.LibraryLoader.create(CAPIExtraFunctions.class).load("altv-capi-server");
 
-    public interface CreateResourceFn
+    public interface CreateImplFn
     {
-        // Returns alt_IResource*
+        // Returns alt_IResource_Impl*
         @jnr.ffi.annotations.Delegate public jnr.ffi.Pointer callback(
             jnr.ffi.Pointer runtime, // alt_IScriptRuntime*
-            jnr.ffi.Pointer info // alt_IResource_CreationInfo*
+            jnr.ffi.Pointer info // alt_IResource*
         );
     }
 
-    public interface RemoveResourceFn
+    public interface DestroyImplFn
     {
         @jnr.ffi.annotations.Delegate public void callback(
             jnr.ffi.Pointer runtime, // alt_IScriptRuntime*
-            jnr.ffi.Pointer resource // alt_IResource*
+            jnr.ffi.Pointer resource // alt_IResource_Impl*
         );
     }
 
@@ -30,17 +30,10 @@ public class CAPIExtra
 
     public interface MakeClientFn
     {
-        @jnr.ffi.annotations.Delegate public void callback(
+        @jnr.ffi.annotations.Delegate public boolean callback(
             jnr.ffi.Pointer resource, // alt_IResource*
             jnr.ffi.Pointer info, // alt_IResource_CreationInfo*
             jnr.ffi.Pointer files // alt_Array_String*
-        );
-    }
-
-    public interface InstantiateFn
-    {
-        @jnr.ffi.annotations.Delegate public boolean callback(
-            jnr.ffi.Pointer resource // alt_IResource*
         );
     }
 
@@ -93,16 +86,15 @@ public class CAPIExtra
     {
         // Returns pointer to script runtime
         jnr.ffi.Pointer alt_CAPIScriptRuntime_Create(
-            CreateResourceFn create,
-            RemoveResourceFn remove,
+            CreateImplFn create,
+            DestroyImplFn remove,
             OnRuntimeTickFn tick
         );
 
         // Returns pointer to resource
-        jnr.ffi.Pointer alt_CAPIResource_Create(
+        jnr.ffi.Pointer alt_CAPIResource_Impl_Create(
             jnr.ffi.Pointer info,
             MakeClientFn onmakeclient,
-            InstantiateFn oninstantiate,
             StartFn onstart,
             StopFn onstop,
             OnEventFn onevent,
@@ -111,7 +103,7 @@ public class CAPIExtra
             OnRemoveBaseObjectFn onremovebaseobject
         );
 
-        void alt_CAPIResource_SetExtra(jnr.ffi.Pointer resource, jnr.ffi.Pointer extra);
-        jnr.ffi.Pointer alt_CAPIResource_GetExtra(jnr.ffi.Pointer resource);
+        void alt_CAPIResource_Impl_SetExtra(jnr.ffi.Pointer resource, jnr.ffi.Pointer extra);
+        jnr.ffi.Pointer alt_CAPIResource_Impl_GetExtra(jnr.ffi.Pointer resource);
     }
 }

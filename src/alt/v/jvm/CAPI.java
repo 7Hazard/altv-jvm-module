@@ -4,7 +4,7 @@ public class CAPI
 {
     public static final CAPIFunctions func = jnr.ffi.LibraryLoader.create(CAPIFunctions.class).load("altv-capi-server");
     public static jnr.ffi.Runtime runtime = jnr.ffi.Runtime.getRuntime(func);
-    public static jnr.ffi.Pointer server;
+    public static jnr.ffi.Pointer core;
     
     public static enum alt_CEvent_Type implements jnr.ffi.util.EnumMapper.IntegerEnum
     {
@@ -129,22 +129,6 @@ public class CAPI
         ALT_IPACKAGE_SEEKORIGIN_END(2);
 
         alt_IPackage_SeekOrigin(int value) {
-            this.value = value;
-        }
-
-        public int intValue() {
-            return value;
-        }
-        private final int value;
-    }
-
-    public static enum alt_IResource_State implements jnr.ffi.util.EnumMapper.IntegerEnum
-    {
-        ALT_IRESOURCE_STATE_STOPPED(0),
-        ALT_IRESOURCE_STATE_INSTANTIATING(1),
-        ALT_IRESOURCE_STATE_STARTED(2);
-
-        alt_IResource_State(int value) {
             this.value = value;
         }
 
@@ -482,26 +466,6 @@ public class CAPI
             super(runtime);
         }
         public alt_CServerScriptEvent(jnr.ffi.Runtime runtime)
-        {
-            super(runtime);
-        }
-    }
-
-    public static class alt_IResource extends jnr.ffi.Struct
-    {
-        public final alt_String type = new alt_String();
-        public final alt_String name = new alt_String();
-        public final alt_String path = new alt_String();
-        public final alt_String main = new alt_String();
-        public final jnr.ffi.Struct.Pointer pkg = new jnr.ffi.Struct.Pointer();
-        public final jnr.ffi.Struct.Enum32<alt_IResource_State> state = new jnr.ffi.Struct.Enum32<alt_IResource_State>(alt_IResource_State.class);
-        public final alt_MValueDict exports = new alt_MValueDict();
-        
-        public alt_IResource()
-        {
-            super(runtime);
-        }
-        public alt_IResource(jnr.ffi.Runtime runtime)
         {
             super(runtime);
         }
@@ -893,11 +857,6 @@ public class CAPI
     }
 
     
-    public interface alt_IServer_SubscribeTick_cb_Callback
-    {
-        @jnr.ffi.annotations.Delegate public void callback();
-    }
-
 
     public static interface CAPIFunctions
     {
@@ -1666,6 +1625,73 @@ public class CAPI
 
         void alt_IColShape_SetPosition(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos);
 
+        void alt_ICore_Assign_constICoreRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        jnr.ffi.Pointer alt_ICore_CreateBlip(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, alt_IBlip_Type type, jnr.ffi.Pointer pos);
+
+        jnr.ffi.Pointer alt_ICore_CreateBlip_1(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, alt_IBlip_Type type, jnr.ffi.Pointer attachTo);
+
+        jnr.ffi.Pointer alt_ICore_CreateCheckpoint(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, @jnr.ffi.types.u_int8_t byte type, jnr.ffi.Pointer pos, float radius, float height, jnr.ffi.Pointer color);
+
+        jnr.ffi.Pointer alt_ICore_CreateColShapeCircle(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius);
+
+        jnr.ffi.Pointer alt_ICore_CreateColShapeCube(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, jnr.ffi.Pointer pos2);
+
+        jnr.ffi.Pointer alt_ICore_CreateColShapeCylinder(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius, float height);
+
+        jnr.ffi.Pointer alt_ICore_CreateColShapeRectangle(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, jnr.ffi.Pointer pos2);
+
+        jnr.ffi.Pointer alt_ICore_CreateColShapeSphere(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius);
+
+        jnr.ffi.Pointer alt_ICore_CreateVehicle(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int32_t int model, jnr.ffi.Pointer pos, jnr.ffi.Pointer rot);
+
+        jnr.ffi.Pointer alt_ICore_CreateVoiceChannel(jnr.ffi.Pointer _instance, boolean spatial, float maxDistance);
+
+        void alt_ICore_DestroyBaseObject(jnr.ffi.Pointer _instance, jnr.ffi.Pointer handle);
+
+        // Return ptr must be manually freed with alt_Array_IEntityPtr_free()
+        jnr.ffi.Pointer alt_ICore_GetEntities(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_ICore_GetEntityByID(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int16_t short id);
+
+        @jnr.ffi.types.u_int32_t int alt_ICore_GetNetTime(jnr.ffi.Pointer _instance);
+
+        // Return ptr must be manually freed with alt_Array_IPlayerPtr_free()
+        jnr.ffi.Pointer alt_ICore_GetPlayers(jnr.ffi.Pointer _instance);
+
+        // Return ptr must be manually freed with alt_Array_IPlayerPtr_free()
+        jnr.ffi.Pointer alt_ICore_GetPlayersByName(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
+
+        jnr.ffi.Pointer alt_ICore_GetResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
+
+        // Return ptr must be manually freed with alt_StringView_free()
+        jnr.ffi.Pointer alt_ICore_GetRootDirectory(jnr.ffi.Pointer _instance);
+
+        // Return ptr must be manually freed with alt_Array_IVehiclePtr_free()
+        jnr.ffi.Pointer alt_ICore_GetVehicles(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.types.u_int32_t int alt_ICore_Hash(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
+
+        jnr.ffi.Pointer alt_ICore_Instance();
+
+        void alt_ICore_LogColored(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
+
+        void alt_ICore_LogDebug(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
+
+        void alt_ICore_LogError(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
+
+        void alt_ICore_LogInfo(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
+
+        void alt_ICore_LogWarning(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
+
+        boolean alt_ICore_RegisterScriptRuntime(jnr.ffi.Pointer _instance, jnr.ffi.Pointer resourceType, jnr.ffi.Pointer runtime);
+
+        void alt_ICore_SetInstance(jnr.ffi.Pointer server);
+
+        void alt_ICore_TriggerClientEvent(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, jnr.ffi.Pointer ev, jnr.ffi.Pointer args);
+
+        void alt_ICore_TriggerServerEvent(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ev, jnr.ffi.Pointer args);
+
         void alt_IEntity_Assign_constIBaseObjectRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_IEntity_Assign_constIEntityRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1867,9 +1893,6 @@ public class CAPI
 
         void alt_IResource_Assign_constIResourceRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_IResource_free()
-        jnr.ffi.Pointer alt_IResource_Create(jnr.ffi.Pointer _p0);
-
         void alt_IResource_CreationInfo_Assign_IResource_CreationInfoRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         // Return ptr must be manually freed with alt_IResource_CreationInfo_free()
@@ -1883,6 +1906,8 @@ public class CAPI
         // Return ptr must be manually freed with alt_MValueDict_free()
         jnr.ffi.Pointer alt_IResource_GetExports(jnr.ffi.Pointer _instance);
 
+        jnr.ffi.Pointer alt_IResource_GetImpl(jnr.ffi.Pointer _instance);
+
         // Return ptr must be manually freed with alt_StringView_free()
         jnr.ffi.Pointer alt_IResource_GetMain(jnr.ffi.Pointer _instance);
 
@@ -1894,107 +1919,38 @@ public class CAPI
         // Return ptr must be manually freed with alt_StringView_free()
         jnr.ffi.Pointer alt_IResource_GetPath(jnr.ffi.Pointer _instance);
 
-        alt_IResource_State alt_IResource_GetState(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IResource_GetRuntime(jnr.ffi.Pointer _instance);
 
         // Return ptr must be manually freed with alt_StringView_free()
         jnr.ffi.Pointer alt_IResource_GetType(jnr.ffi.Pointer _instance);
 
-        boolean alt_IResource_Instantiate(jnr.ffi.Pointer _instance);
+        void alt_IResource_Impl_Assign_constIResource_ImplRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        boolean alt_IResource_Impl_MakeClient(jnr.ffi.Pointer _instance, jnr.ffi.Pointer info, jnr.ffi.Pointer files);
+
+        void alt_IResource_Impl_OnCreateBaseObject(jnr.ffi.Pointer _instance, jnr.ffi.Pointer object);
+
+        boolean alt_IResource_Impl_OnEvent(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ev);
+
+        void alt_IResource_Impl_OnRemoveBaseObject(jnr.ffi.Pointer _instance, jnr.ffi.Pointer object);
+
+        void alt_IResource_Impl_OnTick(jnr.ffi.Pointer _instance);
+
+        boolean alt_IResource_Impl_Start(jnr.ffi.Pointer _instance);
+
+        boolean alt_IResource_Impl_Stop(jnr.ffi.Pointer _instance);
 
         boolean alt_IResource_IsStarted(jnr.ffi.Pointer _instance);
 
-        void alt_IResource_MakeClient(jnr.ffi.Pointer _instance, jnr.ffi.Pointer info, jnr.ffi.Pointer files);
-
-        void alt_IResource_OnCreateBaseObject(jnr.ffi.Pointer _instance, jnr.ffi.Pointer object);
-
-        boolean alt_IResource_OnEvent(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ev);
-
-        void alt_IResource_OnRemoveBaseObject(jnr.ffi.Pointer _instance, jnr.ffi.Pointer object);
-
-        void alt_IResource_OnTick(jnr.ffi.Pointer _instance);
-
-        boolean alt_IResource_Start(jnr.ffi.Pointer _instance);
-
-        boolean alt_IResource_Stop(jnr.ffi.Pointer _instance);
+        void alt_IResource_SetExports(jnr.ffi.Pointer _instance, jnr.ffi.Pointer exports);
 
         void alt_IScriptRuntime_Assign_constIScriptRuntimeRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        jnr.ffi.Pointer alt_IScriptRuntime_CreateResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer info);
+        jnr.ffi.Pointer alt_IScriptRuntime_CreateImpl(jnr.ffi.Pointer _instance, jnr.ffi.Pointer resource);
+
+        void alt_IScriptRuntime_DestroyImpl(jnr.ffi.Pointer _instance, jnr.ffi.Pointer impl);
 
         void alt_IScriptRuntime_OnTick(jnr.ffi.Pointer _instance);
-
-        void alt_IScriptRuntime_RemoveResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer resource);
-
-        void alt_IServer_Assign_constIServerRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
-        jnr.ffi.Pointer alt_IServer_CreateBlip(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, alt_IBlip_Type type, jnr.ffi.Pointer pos);
-
-        jnr.ffi.Pointer alt_IServer_CreateBlip_1(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, alt_IBlip_Type type, jnr.ffi.Pointer attachTo);
-
-        jnr.ffi.Pointer alt_IServer_CreateCheckpoint(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, @jnr.ffi.types.u_int8_t byte type, jnr.ffi.Pointer pos, float radius, float height, jnr.ffi.Pointer color);
-
-        jnr.ffi.Pointer alt_IServer_CreateColShapeCircle(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius);
-
-        jnr.ffi.Pointer alt_IServer_CreateColShapeCube(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, jnr.ffi.Pointer pos2);
-
-        jnr.ffi.Pointer alt_IServer_CreateColShapeCylinder(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius, float height);
-
-        jnr.ffi.Pointer alt_IServer_CreateColShapeRectangle(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, jnr.ffi.Pointer pos2);
-
-        jnr.ffi.Pointer alt_IServer_CreateColShapeSphere(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius);
-
-        jnr.ffi.Pointer alt_IServer_CreateVehicle(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int32_t int model, jnr.ffi.Pointer pos, jnr.ffi.Pointer rot);
-
-        jnr.ffi.Pointer alt_IServer_CreateVoiceChannel(jnr.ffi.Pointer _instance, boolean spatial, float maxDistance);
-
-        void alt_IServer_DestroyBaseObject(jnr.ffi.Pointer _instance, jnr.ffi.Pointer handle);
-
-        // Return ptr must be manually freed with alt_Array_IEntityPtr_free()
-        jnr.ffi.Pointer alt_IServer_GetEntities(jnr.ffi.Pointer _instance);
-
-        jnr.ffi.Pointer alt_IServer_GetEntityByID(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int16_t short id);
-
-        @jnr.ffi.types.u_int32_t int alt_IServer_GetNetTime(jnr.ffi.Pointer _instance);
-
-        // Return ptr must be manually freed with alt_Array_IPlayerPtr_free()
-        jnr.ffi.Pointer alt_IServer_GetPlayers(jnr.ffi.Pointer _instance);
-
-        // Return ptr must be manually freed with alt_Array_IPlayerPtr_free()
-        jnr.ffi.Pointer alt_IServer_GetPlayersByName(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
-
-        jnr.ffi.Pointer alt_IServer_GetResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
-
-        // Return ptr must be manually freed with alt_StringView_free()
-        jnr.ffi.Pointer alt_IServer_GetRootDirectory(jnr.ffi.Pointer _instance);
-
-        // Return ptr must be manually freed with alt_Array_IVehiclePtr_free()
-        jnr.ffi.Pointer alt_IServer_GetVehicles(jnr.ffi.Pointer _instance);
-
-        @jnr.ffi.types.u_int32_t int alt_IServer_Hash(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
-
-        jnr.ffi.Pointer alt_IServer_Instance();
-
-        void alt_IServer_LogColored(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
-
-        void alt_IServer_LogDebug(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
-
-        void alt_IServer_LogError(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
-
-        void alt_IServer_LogInfo(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
-
-        void alt_IServer_LogWarning(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
-
-        boolean alt_IServer_RegisterScriptRuntime(jnr.ffi.Pointer _instance, jnr.ffi.Pointer resourceType, jnr.ffi.Pointer runtime);
-
-        boolean alt_IServer_RequireResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer referrer, jnr.ffi.Pointer resource);
-
-        void alt_IServer_SetInstance(jnr.ffi.Pointer server);
-
-        void alt_IServer_SubscribeTick(jnr.ffi.Pointer _instance, alt_IServer_SubscribeTick_cb_Callback cb);
-
-        void alt_IServer_TriggerClientEvent(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, jnr.ffi.Pointer ev, jnr.ffi.Pointer args);
-
-        void alt_IServer_TriggerServerEvent(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ev, jnr.ffi.Pointer args);
 
         void alt_IVehicle_Assign_constIBaseObjectRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -2336,8 +2292,6 @@ public class CAPI
         jnr.ffi.Pointer alt_MValueDict_Access_constMValue_StringRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_MValueDict_Assign_MValueDictRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
-        void alt_MValueDict_Assign_constMValueDictRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_MValueDict_Assign_constMValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
