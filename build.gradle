@@ -1,4 +1,6 @@
 
+group = 'com.gitlab.7Hazard'
+
 buildscript {
     repositories {
         mavenLocal()
@@ -13,11 +15,12 @@ plugins {
     id 'java-library-distribution'
     
     // Publishing
-    id "com.jfrog.bintray" version "1.7.3"
+    // id "com.jfrog.bintray" version "1.7.3"
     id "maven"
 }
 
 repositories {
+    // maven { url "https://jitpack.io" }
     mavenLocal()
     mavenCentral()
     jcenter()
@@ -96,71 +99,71 @@ artifacts {
     archives javadocJar
 }
 
-def siteUrl = 'https://gitlab.com/7Hazard/altv-jvm-module'
-def gitUrl = 'https://gitlab.com/7Hazard/altv-jvm-module.git'
+// def siteUrl = 'https://gitlab.com/7Hazard/altv-jvm-module'
+// def gitUrl = 'https://gitlab.com/7Hazard/altv-jvm-module.git'
 
-version = "" //"DEV-"+new Date().format('dd-MMM-yyyy', TimeZone.getTimeZone('GMT'))
-if (System.properties.containsKey("version")) version = System.getProperty("version")
-println "Version is $version"
-group = "7hazard"
+// version = "" //"DEV-"+new Date().format('dd-MMM-yyyy', TimeZone.getTimeZone('GMT'))
+// if (System.properties.containsKey("version")) version = System.getProperty("version")
+// println "Version is $version"
+// group = "7hazard"
 
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging 'aar'
+// install {
+//     repositories.mavenInstaller {
+//         // This generates POM.xml with proper parameters
+//         pom {
+//             project {
+//                 packaging 'aar'
 
-                name 'alt:V JVM Module'
-                url siteUrl
+//                 name 'alt:V JVM Module'
+//                 url siteUrl
 
-                // Set your license
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id '7hazard'
-                        name 'Hazard'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
+//                 // Set your license
+//                 licenses {
+//                     license {
+//                         name 'The Apache Software License, Version 2.0'
+//                         url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                     }
+//                 }
+//                 developers {
+//                     developer {
+//                         id '7hazard'
+//                         name 'Hazard'
+//                     }
+//                 }
+//                 scm {
+//                     connection gitUrl
+//                     developerConnection gitUrl
+//                     url siteUrl
+//                 }
+//             }
+//         }
+//     }
+// }
 
-bintray {
-    user = System.getProperty('user')
-    key =  System.getProperty('apikey')
-    configurations = ['archives']
-    pkg {
-        repo = 'Maven'
-        name = 'alt.v.jvm'
-        userOrg = "hazard"
-        licenses = ['Apache-2.0']
-        vcsUrl = gitUrl
-        //publish = true
-    }
-}
+// bintray {
+//     user = System.getProperty('user')
+//     key =  System.getProperty('apikey')
+//     configurations = ['archives']
+//     pkg {
+//         repo = 'Maven'
+//         name = 'alt.v.jvm'
+//         userOrg = "hazard"
+//         licenses = ['Apache-2.0']
+//         vcsUrl = gitUrl
+//         //publish = true
+//     }
+// }
 
-bintrayUpload.doFirst {
-    if (!System.properties.containsKey("version")) {
-        throw new InvalidUserDataException("version not set (-Dversion)")
-    }
+// bintrayUpload.doFirst {
+//     if (!System.properties.containsKey("version")) {
+//         throw new InvalidUserDataException("version not set (-Dversion)")
+//     }
 
-    if (!System.properties.containsKey("user")) {
-        throw new InvalidUserDataException("user not set (-Duser)")
-    }
+//     if (!System.properties.containsKey("user")) {
+//         throw new InvalidUserDataException("user not set (-Duser)")
+//     }
 
-    if (!System.properties.containsKey("apikey")) {
-        throw new InvalidUserDataException("apikey not set (-Dapikey)")
-    }
-}
+//     if (!System.properties.containsKey("apikey")) {
+//         throw new InvalidUserDataException("apikey not set (-Dapikey)")
+//     }
+// }
