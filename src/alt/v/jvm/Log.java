@@ -12,7 +12,7 @@ import jnr.ffi.Struct;
  */
 public final class Log
 {
-    public static boolean init() {
+    static boolean init() {
         var logdir = new File("logs/jvm");
 
         if(!logdir.exists())
