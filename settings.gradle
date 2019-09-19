@@ -1,6 +1,6 @@
 rootProject.name = "altv-jvm-module"
 
-// if (System.properties.containsKey("JITPACK"))
-// {
+if (!System.properties.containsKey("JITPACK"))
+{
     include "module"
-// }
+}
