@@ -50,11 +50,15 @@ jar {
     }
 }
 
-task wrap(type: Exec) {
-    commandLine "node", "wrap"
-    dependsOn "module:build"
+
+if(System.env.JITPACK != true)
+{
+    task wrap(type: Exec) {
+        commandLine "node", "wrap"
+        dependsOn "module:build"
+    }
+    compileJava.dependsOn wrap
 }
-compileJava.dependsOn wrap
 
 task copyToOutput(type: Copy) {
     from jar.destinationDir
@@ -71,7 +75,10 @@ distributions {
     main {
         baseName = 'altv-jvm-module'
         contents {
-            from "build/altv-capi.dll", "module/build/libs/module/shared/altv-jvm-module.dll"
+            if(System.env.JITPACK != true)
+            {    
+                from "build/altv-capi.dll", "module/build/libs/module/shared/altv-jvm-module.dll"
+            }
         }
     }
 }
