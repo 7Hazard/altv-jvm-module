@@ -51,7 +51,7 @@ jar {
 }
 
 
-if(System.getenv('JITPACK') != null)
+if(System.env['JITPACK'] == null)
 {
     task wrap(type: Exec) {
         commandLine "node", "wrap"
@@ -75,7 +75,7 @@ distributions {
     main {
         baseName = 'altv-jvm-module'
         contents {
-            if(System.getenv('JITPACK') != null)
+            if(System.env['JITPACK'] == null)
             {    
                 from "build/altv-capi.dll", "module/build/libs/module/shared/altv-jvm-module.dll"
             }
@@ -86,8 +86,13 @@ distributions {
 
 
 ///
-/// Bintray
+/// Publishing
 ///
+
+if(System.env['JITPACK'] != null)
+{
+    println "JITPACK BUILD"
+}
 
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'

@@ -1,7 +1,6 @@
 rootProject.name = "altv-jvm-module"
 
-if (System.getenv('JITPACK') != null)
+if (System.env['JITPACK'] == null)
 {
-    println "JITPACK BUILD"
     include "module"
 }
