@@ -1,6 +1,4 @@
 
-group = 'com.gitlab.7Hazard'
-
 buildscript {
     repositories {
         mavenLocal()
@@ -25,6 +23,8 @@ repositories {
     mavenCentral()
     jcenter()
 }
+
+group = 'com.gitlab.7Hazard'
 
 sourceSets {
     main {
