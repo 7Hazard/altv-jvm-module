@@ -51,7 +51,7 @@ jar {
 }
 
 
-if(System.env.JITPACK != true)
+if(System.getenv('JITPACK') != null)
 {
     task wrap(type: Exec) {
         commandLine "node", "wrap"
@@ -75,7 +75,7 @@ distributions {
     main {
         baseName = 'altv-jvm-module'
         contents {
-            if(System.env.JITPACK != true)
+            if(System.getenv('JITPACK') != null)
             {    
                 from "build/altv-capi.dll", "module/build/libs/module/shared/altv-jvm-module.dll"
             }
