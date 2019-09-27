@@ -9,7 +9,7 @@ public class CAPIExtra
         // Returns alt_IResource_Impl*
         @jnr.ffi.annotations.Delegate public jnr.ffi.Pointer callback(
             jnr.ffi.Pointer runtime, // alt_IScriptRuntime*
-            jnr.ffi.Pointer info // alt_IResource*
+            jnr.ffi.Pointer resource // alt_IResource*
         );
     }
 
@@ -17,7 +17,7 @@ public class CAPIExtra
     {
         @jnr.ffi.annotations.Delegate public void callback(
             jnr.ffi.Pointer runtime, // alt_IScriptRuntime*
-            jnr.ffi.Pointer resource // alt_IResource_Impl*
+            jnr.ffi.Pointer resource_impl // alt_IResource_Impl*
         );
     }
 
@@ -93,8 +93,8 @@ public class CAPIExtra
 
         // Returns pointer to resource
         jnr.ffi.Pointer alt_CAPIResource_Impl_Create(
-            jnr.ffi.Pointer info,
-            MakeClientFn onmakeclient,
+            jnr.ffi.Pointer resource,
+            // MakeClientFn onmakeclient,
             StartFn onstart,
             StopFn onstop,
             OnEventFn onevent,
