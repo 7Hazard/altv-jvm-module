@@ -94,7 +94,7 @@ public class CAPIExtra
         // Returns pointer to resource
         jnr.ffi.Pointer alt_CAPIResource_Impl_Create(
             jnr.ffi.Pointer resource,
-            // MakeClientFn onmakeclient,
+            MakeClientFn onmakeclient,
             StartFn onstart,
             StopFn onstop,
             OnEventFn onevent,
