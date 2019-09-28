@@ -1,5 +1,7 @@
 package alt.v.jvm;
 
+import java.nio.ByteBuffer;
+
 import jnr.ffi.Memory;
 import jnr.ffi.Pointer;
 import jnr.ffi.Struct;
@@ -14,6 +16,16 @@ public final class AltStringView
         buf.putString(0, str, str.length(), StringUtil.UTF8);
         sw.data.set(buf);
         sw.size.set(str.length());
+    }
+    
+    public AltStringView(Pointer ptr)
+    {
+        sw.useMemory(ptr);
+    }
+
+    public String str()
+    {
+        return sw.data.get().getString(0, (int)sw.size.get(), StringUtil.UTF8);
     }
 
     public Pointer ptr()
