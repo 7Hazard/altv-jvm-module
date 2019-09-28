@@ -32,4 +32,9 @@ public final class AltStringView
     {
         return Struct.getMemory(sw);
     }
+    
+    public void free()
+    {
+        CAPI.func.alt_StringView_free(Struct.getMemory(sw));
+    }
 }
