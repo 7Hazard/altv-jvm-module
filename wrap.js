@@ -303,7 +303,12 @@ for(let [funcname, func] of Object.entries(capiinfo.functions))
 {
     let params = getJavaParams(func.params, funcname)
     let ret = getJavaType(func.returns);
-    javafuncs.push(`${func.comment != "" ? func.comment+"        " : ""}${ret} ${funcname}(${params});\n`)
+    let comment = ""
+    if(func.comment != "")
+    {
+        comment = func.comment.replace("//", "/**\n         *")+"         */\n        "
+    }
+    javafuncs.push(`${comment}${ret} ${funcname}(${params});\n`)
 }
 
 // Write the java source

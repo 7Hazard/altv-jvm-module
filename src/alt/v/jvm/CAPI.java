@@ -868,19 +868,29 @@ public class CAPI
 
         void alt_Array_MValue_Assign_constArray_MValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_Array_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_MValue_free()
+         */
         jnr.ffi.Pointer alt_Array_MValue_Create();
 
-        // Return ptr must be manually freed with alt_Array_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_MValue_free()
+         */
         jnr.ffi.Pointer alt_Array_MValue_Create_1(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size);
 
-        // Return ptr must be manually freed with alt_Array_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_MValue_free()
+         */
         jnr.ffi.Pointer alt_Array_MValue_Create_2(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill);
 
-        // Return ptr must be manually freed with alt_Array_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_MValue_free()
+         */
         jnr.ffi.Pointer alt_Array_MValue_Create_3(jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_Array_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_MValue_free()
+         */
         jnr.ffi.Pointer alt_Array_MValue_Create_4(jnr.ffi.Pointer that);
 
         @jnr.ffi.types.u_int64_t long alt_Array_MValue_GetCapacity(jnr.ffi.Pointer _instance);
@@ -905,19 +915,29 @@ public class CAPI
 
         void alt_Array_StringView_Assign_constArray_StringViewRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_Array_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_StringView_free()
+         */
         jnr.ffi.Pointer alt_Array_StringView_Create();
 
-        // Return ptr must be manually freed with alt_Array_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_StringView_free()
+         */
         jnr.ffi.Pointer alt_Array_StringView_Create_1(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size);
 
-        // Return ptr must be manually freed with alt_Array_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_StringView_free()
+         */
         jnr.ffi.Pointer alt_Array_StringView_Create_2(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill);
 
-        // Return ptr must be manually freed with alt_Array_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_StringView_free()
+         */
         jnr.ffi.Pointer alt_Array_StringView_Create_3(jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_Array_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_StringView_free()
+         */
         jnr.ffi.Pointer alt_Array_StringView_Create_4(jnr.ffi.Pointer that);
 
         @jnr.ffi.types.u_int64_t long alt_Array_StringView_GetCapacity(jnr.ffi.Pointer _instance);
@@ -942,19 +962,29 @@ public class CAPI
 
         void alt_Array_String_Assign_constArray_StringRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_Array_String_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_String_free()
+         */
         jnr.ffi.Pointer alt_Array_String_Create();
 
-        // Return ptr must be manually freed with alt_Array_String_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_String_free()
+         */
         jnr.ffi.Pointer alt_Array_String_Create_1(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size);
 
-        // Return ptr must be manually freed with alt_Array_String_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_String_free()
+         */
         jnr.ffi.Pointer alt_Array_String_Create_2(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill);
 
-        // Return ptr must be manually freed with alt_Array_String_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_String_free()
+         */
         jnr.ffi.Pointer alt_Array_String_Create_3(jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_Array_String_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_String_free()
+         */
         jnr.ffi.Pointer alt_Array_String_Create_4(jnr.ffi.Pointer that);
 
         @jnr.ffi.types.u_int64_t long alt_Array_String_GetCapacity(jnr.ffi.Pointer _instance);
@@ -979,19 +1009,29 @@ public class CAPI
 
         void alt_CCheckpointEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CCheckpointEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CCheckpointEvent_free()
+         */
         jnr.ffi.Pointer alt_CCheckpointEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CCheckpointEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CCheckpointEvent_free()
+         */
         jnr.ffi.Pointer alt_CCheckpointEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CCheckpointEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CCheckpointEvent_free()
+         */
         jnr.ffi.Pointer alt_CCheckpointEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CCheckpointEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CCheckpointEvent_free()
+         */
         jnr.ffi.Pointer alt_CCheckpointEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _entity, boolean _state);
 
-        // Return ptr must be manually freed with alt_CCheckpointEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CCheckpointEvent_free()
+         */
         jnr.ffi.Pointer alt_CCheckpointEvent_Create_4(jnr.ffi.Pointer _p0);
 
         jnr.ffi.Pointer alt_CCheckpointEvent_GetEntity(jnr.ffi.Pointer _instance);
@@ -1016,28 +1056,44 @@ public class CAPI
 
         void alt_CClientScriptEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CClientScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CClientScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CClientScriptEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CClientScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CClientScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CClientScriptEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CClientScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CClientScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CClientScriptEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CClientScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CClientScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CClientScriptEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
 
-        // Return ptr must be manually freed with alt_CClientScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CClientScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CClientScriptEvent_Create_4(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CClientScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CClientScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CClientScriptEvent_Create_5(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_CClientScriptEvent_GetArgs(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_CClientScriptEvent_GetName(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_CClientScriptEvent_GetTarget(jnr.ffi.Pointer _instance);
@@ -1056,19 +1112,29 @@ public class CAPI
 
         void alt_CColShapeEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CColShapeEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CColShapeEvent_free()
+         */
         jnr.ffi.Pointer alt_CColShapeEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CColShapeEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CColShapeEvent_free()
+         */
         jnr.ffi.Pointer alt_CColShapeEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CColShapeEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CColShapeEvent_free()
+         */
         jnr.ffi.Pointer alt_CColShapeEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CColShapeEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CColShapeEvent_free()
+         */
         jnr.ffi.Pointer alt_CColShapeEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _entity, boolean _state);
 
-        // Return ptr must be manually freed with alt_CColShapeEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CColShapeEvent_free()
+         */
         jnr.ffi.Pointer alt_CColShapeEvent_Create_4(jnr.ffi.Pointer _p0);
 
         jnr.ffi.Pointer alt_CColShapeEvent_GetEntity(jnr.ffi.Pointer _instance);
@@ -1093,27 +1159,41 @@ public class CAPI
 
         void alt_CConsoleCommandEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+         */
         jnr.ffi.Pointer alt_CConsoleCommandEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+         */
         jnr.ffi.Pointer alt_CConsoleCommandEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+         */
         jnr.ffi.Pointer alt_CConsoleCommandEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+         */
         jnr.ffi.Pointer alt_CConsoleCommandEvent_Create_3(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
 
-        // Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+         */
         jnr.ffi.Pointer alt_CConsoleCommandEvent_Create_4(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_free()
+         */
         jnr.ffi.Pointer alt_CConsoleCommandEvent_Create_5(jnr.ffi.Pointer _p0);
 
         jnr.ffi.Pointer alt_CConsoleCommandEvent_GetArgs(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_CConsoleCommandEvent_GetName(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CConsoleCommandEvent_GetType(jnr.ffi.Pointer _instance);
@@ -1132,28 +1212,44 @@ public class CAPI
 
         void alt_CDataNodeReceivedEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+         */
         jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+         */
         jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+         */
         jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+         */
         jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create_3(jnr.ffi.Pointer _name, jnr.ffi.Pointer _logJson);
 
-        // Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+         */
         jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create_4(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_free()
+         */
         jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create_5(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_CDataNodeReceivedEvent_GetJson(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_CDataNodeReceivedEvent_GetName(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CDataNodeReceivedEvent_GetType(jnr.ffi.Pointer _instance);
@@ -1168,13 +1264,19 @@ public class CAPI
 
         void alt_CEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CEvent_free()
+         */
         jnr.ffi.Pointer alt_CEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CEvent_free()
+         */
         jnr.ffi.Pointer alt_CEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CEvent_free()
+         */
         jnr.ffi.Pointer alt_CEvent_Create_2(jnr.ffi.Pointer _p0);
 
         alt_CEvent_Type alt_CEvent_GetType(jnr.ffi.Pointer _instance);
@@ -1191,19 +1293,29 @@ public class CAPI
 
         void alt_CPlayerChangeVehicleSeatEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _oldSeat, @jnr.ffi.types.u_int8_t byte _newSeat);
 
-        // Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_Create_4(jnr.ffi.Pointer _p0);
 
         @jnr.ffi.types.u_int8_t byte alt_CPlayerChangeVehicleSeatEvent_GetNewSeat(jnr.ffi.Pointer _instance);
@@ -1232,25 +1344,39 @@ public class CAPI
 
         void alt_CPlayerConnectEvent_Cancel_1(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _reason);
 
-        // Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerConnectEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerConnectEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerConnectEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerConnectEvent_Create_3(jnr.ffi.Pointer _target);
 
-        // Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerConnectEvent_Create_4(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerConnectEvent_Create_5(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_CPlayerConnectEvent_GetReason(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_CPlayerConnectEvent_GetTarget(jnr.ffi.Pointer _instance);
@@ -1269,19 +1395,29 @@ public class CAPI
 
         void alt_CPlayerDamageEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CPlayerDamageEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDamageEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDamageEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CPlayerDamageEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDamageEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDamageEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerDamageEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDamageEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDamageEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerDamageEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDamageEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDamageEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _attacker, @jnr.ffi.types.u_int16_t short _damage, @jnr.ffi.types.u_int32_t int _weapon);
 
-        // Return ptr must be manually freed with alt_CPlayerDamageEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDamageEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDamageEvent_Create_4(jnr.ffi.Pointer _p0);
 
         jnr.ffi.Pointer alt_CPlayerDamageEvent_GetAttacker(jnr.ffi.Pointer _instance);
@@ -1306,19 +1442,29 @@ public class CAPI
 
         void alt_CPlayerDeathEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CPlayerDeathEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDeathEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDeathEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CPlayerDeathEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDeathEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDeathEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerDeathEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDeathEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDeathEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerDeathEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDeathEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDeathEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _killer, @jnr.ffi.types.u_int32_t int _weapon);
 
-        // Return ptr must be manually freed with alt_CPlayerDeathEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDeathEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDeathEvent_Create_4(jnr.ffi.Pointer _p0);
 
         jnr.ffi.Pointer alt_CPlayerDeathEvent_GetKiller(jnr.ffi.Pointer _instance);
@@ -1343,25 +1489,39 @@ public class CAPI
 
         void alt_CPlayerDisconnectEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _reason);
 
-        // Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create_4(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create_5(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_CPlayerDisconnectEvent_GetReason(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_CPlayerDisconnectEvent_GetTarget(jnr.ffi.Pointer _instance);
@@ -1380,19 +1540,29 @@ public class CAPI
 
         void alt_CPlayerEnterVehicleEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat);
 
-        // Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_Create_4(jnr.ffi.Pointer _p0);
 
         jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_GetPlayer(jnr.ffi.Pointer _instance);
@@ -1415,19 +1585,29 @@ public class CAPI
 
         void alt_CPlayerLeaveVehicleEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat);
 
-        // Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_free()
+         */
         jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_Create_4(jnr.ffi.Pointer _p0);
 
         jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_GetPlayer(jnr.ffi.Pointer _instance);
@@ -1450,19 +1630,29 @@ public class CAPI
 
         void alt_CRemoveEntityEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CRemoveEntityEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CRemoveEntityEvent_free()
+         */
         jnr.ffi.Pointer alt_CRemoveEntityEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CRemoveEntityEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CRemoveEntityEvent_free()
+         */
         jnr.ffi.Pointer alt_CRemoveEntityEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CRemoveEntityEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CRemoveEntityEvent_free()
+         */
         jnr.ffi.Pointer alt_CRemoveEntityEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CRemoveEntityEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CRemoveEntityEvent_free()
+         */
         jnr.ffi.Pointer alt_CRemoveEntityEvent_Create_3(jnr.ffi.Pointer _target);
 
-        // Return ptr must be manually freed with alt_CRemoveEntityEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CRemoveEntityEvent_free()
+         */
         jnr.ffi.Pointer alt_CRemoveEntityEvent_Create_4(jnr.ffi.Pointer _p0);
 
         jnr.ffi.Pointer alt_CRemoveEntityEvent_GetEntity(jnr.ffi.Pointer _instance);
@@ -1483,28 +1673,44 @@ public class CAPI
 
         void alt_CServerScriptEvent_Cancel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_CServerScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CServerScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CServerScriptEvent_Create(alt_CEvent_Type _type);
 
-        // Return ptr must be manually freed with alt_CServerScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CServerScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CServerScriptEvent_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CServerScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CServerScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CServerScriptEvent_Create_2(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CServerScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CServerScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CServerScriptEvent_Create_3(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
 
-        // Return ptr must be manually freed with alt_CServerScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CServerScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CServerScriptEvent_Create_4(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_CServerScriptEvent_free()
+        /**
+         * Return ptr must be manually freed with alt_CServerScriptEvent_free()
+         */
         jnr.ffi.Pointer alt_CServerScriptEvent_Create_5(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_CServerScriptEvent_GetArgs(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_CServerScriptEvent_GetName(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CServerScriptEvent_GetType(jnr.ffi.Pointer _instance);
@@ -1515,7 +1721,9 @@ public class CAPI
 
         void alt_IBaseObject_Assign_constIBaseObjectRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IBaseObject_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         alt_IBaseObject_Type alt_IBaseObject_GetType(jnr.ffi.Pointer _instance);
@@ -1534,10 +1742,14 @@ public class CAPI
 
         @jnr.ffi.types.int32_t int alt_IBlip_GetDimension(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IBlip_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_IBlip_GetPosition(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IBlip_GetTarget(jnr.ffi.Pointer _instance);
@@ -1570,17 +1782,23 @@ public class CAPI
 
         @jnr.ffi.types.u_int8_t byte alt_ICheckpoint_GetCheckpointType(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_RGBA_free()
+        /**
+         * Return ptr must be manually freed with alt_RGBA_free()
+         */
         jnr.ffi.Pointer alt_ICheckpoint_GetColor(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.int32_t int alt_ICheckpoint_GetDimension(jnr.ffi.Pointer _instance);
 
         float alt_ICheckpoint_GetHeight(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_ICheckpoint_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_ICheckpoint_GetPosition(jnr.ffi.Pointer _instance);
 
         float alt_ICheckpoint_GetRadius(jnr.ffi.Pointer _instance);
@@ -1609,10 +1827,14 @@ public class CAPI
 
         @jnr.ffi.types.int32_t int alt_IColShape_GetDimension(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IColShape_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_IColShape_GetPosition(jnr.ffi.Pointer _instance);
 
         alt_IBaseObject_Type alt_IColShape_GetType(jnr.ffi.Pointer _instance);
@@ -1649,25 +1871,35 @@ public class CAPI
 
         void alt_ICore_DestroyBaseObject(jnr.ffi.Pointer _instance, jnr.ffi.Pointer handle);
 
-        // Return ptr must be manually freed with alt_Array_IEntityPtr_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_IEntityPtr_free()
+         */
         jnr.ffi.Pointer alt_ICore_GetEntities(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_ICore_GetEntityByID(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int16_t short id);
 
         @jnr.ffi.types.u_int32_t int alt_ICore_GetNetTime(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Array_IPlayerPtr_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_IPlayerPtr_free()
+         */
         jnr.ffi.Pointer alt_ICore_GetPlayers(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Array_IPlayerPtr_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_IPlayerPtr_free()
+         */
         jnr.ffi.Pointer alt_ICore_GetPlayersByName(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
 
         jnr.ffi.Pointer alt_ICore_GetResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_ICore_GetRootDirectory(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Array_IVehiclePtr_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_IVehiclePtr_free()
+         */
         jnr.ffi.Pointer alt_ICore_GetVehicles(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_ICore_Hash(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
@@ -1702,18 +1934,26 @@ public class CAPI
 
         @jnr.ffi.types.u_int16_t short alt_IEntity_GetID(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IEntity_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int32_t int alt_IEntity_GetModel(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_IEntity_GetPosition(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_free()
+         */
         jnr.ffi.Pointer alt_IEntity_GetRotation(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IEntity_GetSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         alt_IBaseObject_Type alt_IEntity_GetType(jnr.ffi.Pointer _instance);
@@ -1760,31 +2000,41 @@ public class CAPI
 
         void alt_IPlayer_Despawn(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetAimPos(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IPlayer_GetAmmo(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IPlayer_GetArmour(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetAuthToken(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IPlayer_GetCurrentWeapon(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Array_unsignedint_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_unsignedint_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetCurrentWeaponComponents(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IPlayer_GetCurrentWeaponTintIndex(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.int32_t int alt_IPlayer_GetDimension(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetEntityAimOffset(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IPlayer_GetEntityAimingAt(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetHeadRotation(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IPlayer_GetHealth(jnr.ffi.Pointer _instance);
@@ -1795,36 +2045,48 @@ public class CAPI
 
         @jnr.ffi.types.u_int16_t short alt_IPlayer_GetID(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetIP(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IPlayer_GetMaxArmour(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IPlayer_GetMaxHealth(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int32_t int alt_IPlayer_GetModel(jnr.ffi.Pointer _instance);
 
         float alt_IPlayer_GetMoveSpeed(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetName(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IPlayer_GetPing(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetPosition(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetRotation(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IPlayer_GetSeat(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IPlayer_GetSocialID(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IPlayer_GetSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         alt_IBaseObject_Type alt_IPlayer_GetType(jnr.ffi.Pointer _instance);
@@ -1895,33 +2157,47 @@ public class CAPI
 
         void alt_IResource_CreationInfo_Assign_IResource_CreationInfoRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_IResource_CreationInfo_free()
+        /**
+         * Return ptr must be manually freed with alt_IResource_CreationInfo_free()
+         */
         jnr.ffi.Pointer alt_IResource_CreationInfo_Create(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_IResource_CreationInfo_free()
+        /**
+         * Return ptr must be manually freed with alt_IResource_CreationInfo_free()
+         */
         jnr.ffi.Pointer alt_IResource_CreationInfo_Create_1(jnr.ffi.Pointer _p0);
 
         void alt_IResource_CreationInfo_free(jnr.ffi.Pointer ptr);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_IResource_GetExports(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IResource_GetImpl(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_IResource_GetMain(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_IResource_GetName(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IResource_GetPackage(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_IResource_GetPath(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IResource_GetRuntime(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_IResource_GetType(jnr.ffi.Pointer _instance);
 
         void alt_IResource_Impl_Assign_constIResource_ImplRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1962,7 +2238,9 @@ public class CAPI
 
         boolean alt_IVehicle_DoesWheelHasTire(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte wheelId);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetAppearanceDataBase64(jnr.ffi.Pointer _instance);
 
         float alt_IVehicle_GetArmoredWindowHealth(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte windowId);
@@ -1977,7 +2255,9 @@ public class CAPI
 
         boolean alt_IVehicle_GetCustomTires(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetDamageDataBase64(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetDashboardColor(jnr.ffi.Pointer _instance);
@@ -1992,12 +2272,16 @@ public class CAPI
 
         @jnr.ffi.types.int32_t int alt_IVehicle_GetEngineHealth(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetGameStateBase64(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetHeadlightColor(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetHealthDataBase64(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IVehicle_GetID(jnr.ffi.Pointer _instance);
@@ -2010,7 +2294,9 @@ public class CAPI
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetLockState(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetMod(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte category);
@@ -2025,12 +2311,16 @@ public class CAPI
 
         void alt_IVehicle_GetNeonActive(jnr.ffi.Pointer _instance, jnr.ffi.Pointer left, jnr.ffi.Pointer right, jnr.ffi.Pointer front, jnr.ffi.Pointer back);
 
-        // Return ptr must be manually freed with alt_RGBA_free()
+        /**
+         * Return ptr must be manually freed with alt_RGBA_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetNeonColor(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IVehicle_GetNumberplateIndex(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetNumberplateText(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetPartBulletHoles(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte partId);
@@ -2041,12 +2331,16 @@ public class CAPI
 
         @jnr.ffi.types.int32_t int alt_IVehicle_GetPetrolTankHealth(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetPosition(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetPrimaryColor(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_RGBA_free()
+        /**
+         * Return ptr must be manually freed with alt_RGBA_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetPrimaryColorRGB(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IVehicle_GetRadioStationIndex(jnr.ffi.Pointer _instance);
@@ -2055,23 +2349,33 @@ public class CAPI
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetRoofLivery(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetRotation(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetScriptDataBase64(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetSecondaryColor(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_RGBA_free()
+        /**
+         * Return ptr must be manually freed with alt_RGBA_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetSecondaryColorRGB(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetSpecialDarkness(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
-        // Return ptr must be manually freed with alt_RGBA_free()
+        /**
+         * Return ptr must be manually freed with alt_RGBA_free()
+         */
         jnr.ffi.Pointer alt_IVehicle_GetTireSmokeColor(jnr.ffi.Pointer _instance);
 
         alt_IBaseObject_Type alt_IVehicle_GetType(jnr.ffi.Pointer _instance);
@@ -2250,7 +2554,9 @@ public class CAPI
 
         float alt_IVoiceChannel_GetMaxDistance(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IVoiceChannel_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         alt_IBaseObject_Type alt_IVoiceChannel_GetType(jnr.ffi.Pointer _instance);
@@ -2275,10 +2581,14 @@ public class CAPI
 
         @jnr.ffi.types.int32_t int alt_IWorldObject_GetDimension(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_IWorldObject_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
-        // Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_IWorldObject_GetPosition(jnr.ffi.Pointer _instance);
 
         alt_IBaseObject_Type alt_IWorldObject_GetType(jnr.ffi.Pointer _instance);
@@ -2295,55 +2605,89 @@ public class CAPI
 
         void alt_MValueDict_Assign_constMValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create();
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_1(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_10(@jnr.ffi.types.int32_t int val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_11(@jnr.ffi.types.u_int32_t int val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_12(@jnr.ffi.annotations.Encoding("UTF-8") String val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_14(jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_15();
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_17(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_18(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_19(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_2(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_3(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_4(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_5(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_6(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_8(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueDict_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueDict_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_Create_9(jnr.ffi.Pointer val);
 
         void alt_MValueDict_Delete(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
@@ -2354,7 +2698,9 @@ public class CAPI
 
         @jnr.ffi.types.int64_t long alt_MValueDict_ToInt(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_MValueDict_ToString(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_MValueDict_ToUInt(jnr.ffi.Pointer _instance);
@@ -2365,58 +2711,94 @@ public class CAPI
 
         void alt_MValueFunction_Assign_constMValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create();
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_1(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_10(@jnr.ffi.types.int32_t int val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_11(@jnr.ffi.types.u_int32_t int val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_12(@jnr.ffi.annotations.Encoding("UTF-8") String val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_14(jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_15(jnr.ffi.Pointer func);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_16(jnr.ffi.Pointer invoker);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_17(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_18(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_19(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_2(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_3(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_4(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_5(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_6(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_8(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueFunction_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueFunction_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Create_9(jnr.ffi.Pointer val);
 
         jnr.ffi.Pointer alt_MValueFunction_GetInvoker(jnr.ffi.Pointer _instance);
@@ -2427,7 +2809,9 @@ public class CAPI
 
         void alt_MValueFunction_Invoker_Assign_constMValueFunction_InvokerRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_Invoker_Invoke(jnr.ffi.Pointer _instance, jnr.ffi.Pointer args);
 
         void alt_MValueFunction_Invoker_free(jnr.ffi.Pointer ptr);
@@ -2436,7 +2820,9 @@ public class CAPI
 
         @jnr.ffi.types.int64_t long alt_MValueFunction_ToInt(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_MValueFunction_ToString(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_MValueFunction_ToUInt(jnr.ffi.Pointer _instance);
@@ -2451,61 +2837,99 @@ public class CAPI
 
         void alt_MValueList_Assign_constMValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create();
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_1(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_10(@jnr.ffi.types.int32_t int val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_11(@jnr.ffi.types.u_int32_t int val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_12(@jnr.ffi.annotations.Encoding("UTF-8") String val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_14(jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_15();
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_16(@jnr.ffi.types.u_int64_t long size);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_17(jnr.ffi.Pointer list);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_18(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_19(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_2(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_20(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_3(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_4(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_5(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_6(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_8(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValueList_free()
+        /**
+         * Return ptr must be manually freed with alt_MValueList_free()
+         */
         jnr.ffi.Pointer alt_MValueList_Create_9(jnr.ffi.Pointer val);
 
         @jnr.ffi.types.u_int64_t long alt_MValueList_GetSize(jnr.ffi.Pointer _instance);
@@ -2518,68 +2942,104 @@ public class CAPI
 
         @jnr.ffi.types.int64_t long alt_MValueList_ToInt(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_MValueList_ToString(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_MValueList_ToUInt(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_Array_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_Array_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValueList_To_Array_MValue(jnr.ffi.Pointer _instance);
 
         void alt_MValueList_free(jnr.ffi.Pointer ptr);
 
         void alt_MValue_Assign_constMValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create();
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_1(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_10(@jnr.ffi.types.int32_t int val);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_11(@jnr.ffi.types.u_int32_t int val);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_12(@jnr.ffi.annotations.Encoding("UTF-8") String val);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_14(jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_2(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_3(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_4(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_5(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_6(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_8(jnr.ffi.Pointer val);
 
-        // Return ptr must be manually freed with alt_MValue_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_free()
+         */
         jnr.ffi.Pointer alt_MValue_Create_9(jnr.ffi.Pointer val);
 
         void alt_MValue_Function_Assign_MValue_FunctionRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_MValue_Function_Assign_constMValue_FunctionRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValue_Function_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_Function_free()
+         */
         jnr.ffi.Pointer alt_MValue_Function_Create();
 
-        // Return ptr must be manually freed with alt_MValue_Function_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_Function_free()
+         */
         jnr.ffi.Pointer alt_MValue_Function_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValue_Function_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_Function_free()
+         */
         jnr.ffi.Pointer alt_MValue_Function_Create_2(jnr.ffi.Pointer _p0);
 
         void alt_MValue_Function_free(jnr.ffi.Pointer ptr);
@@ -2590,7 +3050,9 @@ public class CAPI
 
         @jnr.ffi.types.int64_t long alt_MValue_ToInt(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_MValue_ToString(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_MValue_ToUInt(jnr.ffi.Pointer _instance);
@@ -2599,13 +3061,19 @@ public class CAPI
 
         void alt_MValue_TypeMismatchException_Assign_constMValue_TypeMismatchExceptionRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValue_TypeMismatchException_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_TypeMismatchException_free()
+         */
         jnr.ffi.Pointer alt_MValue_TypeMismatchException_Create(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValue_TypeMismatchException_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_TypeMismatchException_free()
+         */
         jnr.ffi.Pointer alt_MValue_TypeMismatchException_Create_1(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_MValue_TypeMismatchException_free()
+        /**
+         * Return ptr must be manually freed with alt_MValue_TypeMismatchException_free()
+         */
         jnr.ffi.Pointer alt_MValue_TypeMismatchException_Create_2();
 
         void alt_MValue_TypeMismatchException_free(jnr.ffi.Pointer ptr);
@@ -2616,19 +3084,29 @@ public class CAPI
 
         jnr.ffi.Pointer alt_PointLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        // Return ptr must be manually freed with alt_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_PointLayout_Create();
 
-        // Return ptr must be manually freed with alt_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_PointLayout_Create_1(float _x, float _y, float _z);
 
-        // Return ptr must be manually freed with alt_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_PointLayout_Create_2(jnr.ffi.Pointer elements);
 
-        // Return ptr must be manually freed with alt_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_PointLayout_Create_3(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_PointLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointLayout_free()
+         */
         jnr.ffi.Pointer alt_PointLayout_Create_4(jnr.ffi.Pointer _p0);
 
         void alt_PointLayout_free(jnr.ffi.Pointer ptr);
@@ -2637,36 +3115,56 @@ public class CAPI
 
         jnr.ffi.Pointer alt_PointPaddedLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        // Return ptr must be manually freed with alt_PointPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_PointPaddedLayout_Create();
 
-        // Return ptr must be manually freed with alt_PointPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_PointPaddedLayout_Create_1(float _x, float _y, float _z);
 
-        // Return ptr must be manually freed with alt_PointPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_PointPaddedLayout_Create_2(jnr.ffi.Pointer elements);
 
-        // Return ptr must be manually freed with alt_PointPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_PointPaddedLayout_Create_3(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_PointPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_PointPaddedLayout_Create_4(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_PointPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_PointPaddedLayout_Create_5();
 
-        // Return ptr must be manually freed with alt_PointPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_PointPaddedLayout_Create_6(float x, float y, float z);
 
-        // Return ptr must be manually freed with alt_PointPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_PointPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_PointPaddedLayout_Create_7(jnr.ffi.Pointer elements);
 
         void alt_PointPaddedLayout_free(jnr.ffi.Pointer ptr);
 
-        // Return ptr must be manually freed with alt_RGBA_free()
+        /**
+         * Return ptr must be manually freed with alt_RGBA_free()
+         */
         jnr.ffi.Pointer alt_RGBA_Create();
 
-        // Return ptr must be manually freed with alt_RGBA_free()
+        /**
+         * Return ptr must be manually freed with alt_RGBA_free()
+         */
         jnr.ffi.Pointer alt_RGBA_Create_1(@jnr.ffi.types.u_int8_t byte _r, @jnr.ffi.types.u_int8_t byte _g, @jnr.ffi.types.u_int8_t byte _b, @jnr.ffi.types.u_int8_t byte _a);
 
         void alt_RGBA_free(jnr.ffi.Pointer ptr);
@@ -2675,19 +3173,29 @@ public class CAPI
 
         jnr.ffi.Pointer alt_RotationLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        // Return ptr must be manually freed with alt_RotationLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationLayout_Create(float _roll, float _pitch, float _yaw);
 
-        // Return ptr must be manually freed with alt_RotationLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationLayout_Create_1();
 
-        // Return ptr must be manually freed with alt_RotationLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationLayout_Create_2(jnr.ffi.Pointer elements);
 
-        // Return ptr must be manually freed with alt_RotationLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationLayout_Create_3(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_RotationLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationLayout_Create_4(jnr.ffi.Pointer _p0);
 
         void alt_RotationLayout_Normalize(jnr.ffi.Pointer _instance);
@@ -2698,28 +3206,44 @@ public class CAPI
 
         jnr.ffi.Pointer alt_RotationPaddedLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        // Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationPaddedLayout_Create(float _roll, float _pitch, float _yaw);
 
-        // Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationPaddedLayout_Create_1();
 
-        // Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationPaddedLayout_Create_2(jnr.ffi.Pointer elements);
 
-        // Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationPaddedLayout_Create_3(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationPaddedLayout_Create_4(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationPaddedLayout_Create_5();
 
-        // Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationPaddedLayout_Create_6(float roll, float pitch, float yaw);
 
-        // Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_free()
+         */
         jnr.ffi.Pointer alt_RotationPaddedLayout_Create_7(jnr.ffi.Pointer elements);
 
         void alt_RotationPaddedLayout_Normalize(jnr.ffi.Pointer _instance);
@@ -2734,22 +3258,34 @@ public class CAPI
 
         @jnr.ffi.annotations.Encoding("UTF-8") String alt_StringView_CStr(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_StringView_Create(@jnr.ffi.annotations.Encoding("UTF-8") String _data, @jnr.ffi.types.u_int64_t long _size);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_StringView_Create_1();
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_StringView_Create_2(@jnr.ffi.annotations.Encoding("UTF-8") String _str);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_StringView_Create_4(jnr.ffi.Pointer _str);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_StringView_Create_6(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_StringView_free()
+        /**
+         * Return ptr must be manually freed with alt_StringView_free()
+         */
         jnr.ffi.Pointer alt_StringView_Create_7(jnr.ffi.Pointer _p0);
 
         boolean alt_StringView_Equals_StringView(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
@@ -2762,7 +3298,9 @@ public class CAPI
 
         boolean alt_StringView_NotEquals_StringView(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_StringView_To_String(jnr.ffi.Pointer _instance);
 
         void alt_StringView_free(jnr.ffi.Pointer ptr);
@@ -2777,22 +3315,34 @@ public class CAPI
 
         @jnr.ffi.annotations.Encoding("UTF-8") String alt_String_CStr(jnr.ffi.Pointer _instance);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_String_Create(@jnr.ffi.types.u_int64_t long _size, @jnr.ffi.types.int8_t byte fill);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_String_Create_1(@jnr.ffi.annotations.Encoding("UTF-8") String _data, @jnr.ffi.types.u_int64_t long size);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_String_Create_2();
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_String_Create_3(@jnr.ffi.annotations.Encoding("UTF-8") String _str);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_String_Create_5(jnr.ffi.Pointer that);
 
-        // Return ptr must be manually freed with alt_String_free()
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
         jnr.ffi.Pointer alt_String_Create_6(jnr.ffi.Pointer that);
 
         boolean alt_String_Equals_String(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
@@ -2815,19 +3365,29 @@ public class CAPI
 
         void alt_VectorLayout_float_4_Assign_constVectorLayout_float_4Ref(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_VectorLayout_float_4_Create();
 
-        // Return ptr must be manually freed with alt_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_VectorLayout_float_4_Create_1(jnr.ffi.Pointer _elements);
 
-        // Return ptr must be manually freed with alt_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_VectorLayout_float_4_Create_2(jnr.ffi.Pointer el);
 
-        // Return ptr must be manually freed with alt_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_VectorLayout_float_4_Create_3(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_VectorLayout_float_4_Create_4(jnr.ffi.Pointer _p0);
 
         void alt_VectorLayout_float_4_free(jnr.ffi.Pointer ptr);
@@ -2844,34 +3404,54 @@ public class CAPI
 
         void alt_Vector_float_4_VectorLayout_float_4_Assign_constVector_float_4_VectorLayout_float_4Ref(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create();
 
-        // Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_1(jnr.ffi.Pointer _elements);
 
-        // Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_2(jnr.ffi.Pointer el);
 
-        // Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_3(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_4(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_5();
 
-        // Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_6(jnr.ffi.Pointer _elements);
 
-        // Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_7(jnr.ffi.Pointer layout);
 
-        // Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_8(jnr.ffi.Pointer _p0);
 
-        // Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_free()
+         */
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_9(jnr.ffi.Pointer _p0);
 
         float alt_Vector_float_4_VectorLayout_float_4_Length(jnr.ffi.Pointer _instance);
@@ -2884,19 +3464,29 @@ public class CAPI
 
         jnr.ffi.Pointer alt_ViewMatrixLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        // Return ptr must be manually freed with alt_ViewMatrixLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_ViewMatrixLayout_free()
+         */
         jnr.ffi.Pointer alt_ViewMatrixLayout_Create();
 
-        // Return ptr must be manually freed with alt_ViewMatrixLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_ViewMatrixLayout_free()
+         */
         jnr.ffi.Pointer alt_ViewMatrixLayout_Create_1(jnr.ffi.Pointer _rows);
 
-        // Return ptr must be manually freed with alt_ViewMatrixLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_ViewMatrixLayout_free()
+         */
         jnr.ffi.Pointer alt_ViewMatrixLayout_Create_2(jnr.ffi.Pointer row);
 
-        // Return ptr must be manually freed with alt_ViewMatrixLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_ViewMatrixLayout_free()
+         */
         jnr.ffi.Pointer alt_ViewMatrixLayout_Create_3(jnr.ffi.Pointer elements);
 
-        // Return ptr must be manually freed with alt_ViewMatrixLayout_free()
+        /**
+         * Return ptr must be manually freed with alt_ViewMatrixLayout_free()
+         */
         jnr.ffi.Pointer alt_ViewMatrixLayout_Create_4(jnr.ffi.Pointer _right, jnr.ffi.Pointer _up, jnr.ffi.Pointer _forward, jnr.ffi.Pointer _pos);
 
         void alt_ViewMatrixLayout_free(jnr.ffi.Pointer ptr);
