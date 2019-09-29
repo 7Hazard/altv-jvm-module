@@ -117,7 +117,7 @@ function getJavaStructField(field)
     switch (field.type.kind) {
         case TypeKind.enumeral:
         {
-            stype = `jnr.ffi.Struct.Enum32<${field.type.name}>`;
+            stype = `jnr.ffi.Struct.Enum16<${field.type.name}>`;
             break;
         }
 

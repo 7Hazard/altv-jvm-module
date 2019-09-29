@@ -211,7 +211,7 @@ public class CAPI
 
     public static class alt_CCheckpointEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Pointer entity = new jnr.ffi.Struct.Pointer();
@@ -229,7 +229,7 @@ public class CAPI
 
     public static class alt_CClientScriptEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final alt_String name = new alt_String();
@@ -247,7 +247,7 @@ public class CAPI
 
     public static class alt_CColShapeEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Pointer entity = new jnr.ffi.Struct.Pointer();
@@ -265,7 +265,7 @@ public class CAPI
 
     public static class alt_CConsoleCommandEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_StringView name = new alt_StringView();
         public final alt_Array_StringView args = new alt_Array_StringView();
@@ -282,7 +282,7 @@ public class CAPI
 
     public static class alt_CDataNodeReceivedEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_String name = new alt_String();
         public final alt_String json = new alt_String();
@@ -299,7 +299,7 @@ public class CAPI
 
     public static class alt_CEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         
         public alt_CEvent()
@@ -314,7 +314,7 @@ public class CAPI
 
     public static class alt_CPlayerChangeVehicleSeatEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Pointer player = new jnr.ffi.Struct.Pointer();
@@ -333,7 +333,7 @@ public class CAPI
 
     public static class alt_CPlayerConnectEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final alt_String reason = new alt_String();
@@ -350,7 +350,7 @@ public class CAPI
 
     public static class alt_CPlayerDamageEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Pointer attacker = new jnr.ffi.Struct.Pointer();
@@ -369,7 +369,7 @@ public class CAPI
 
     public static class alt_CPlayerDeathEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Pointer killer = new jnr.ffi.Struct.Pointer();
@@ -387,7 +387,7 @@ public class CAPI
 
     public static class alt_CPlayerDisconnectEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final alt_String reason = new alt_String();
@@ -404,7 +404,7 @@ public class CAPI
 
     public static class alt_CPlayerEnterVehicleEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Pointer player = new jnr.ffi.Struct.Pointer();
@@ -422,7 +422,7 @@ public class CAPI
 
     public static class alt_CPlayerLeaveVehicleEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Pointer player = new jnr.ffi.Struct.Pointer();
@@ -440,7 +440,7 @@ public class CAPI
 
     public static class alt_CRemoveEntityEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         
@@ -456,7 +456,7 @@ public class CAPI
 
     public static class alt_CServerScriptEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum32<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_String name = new alt_String();
         public final alt_MValueList args = new alt_MValueList();
@@ -492,7 +492,7 @@ public class CAPI
 
     public static class alt_MValue extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_MValue_Type> type = new jnr.ffi.Struct.Enum32<alt_MValue_Type>(alt_MValue_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_MValue_Type> type = new jnr.ffi.Struct.Enum16<alt_MValue_Type>(alt_MValue_Type.class);
         public final jnr.ffi.Struct.Pointer storage = new jnr.ffi.Struct.Pointer();
         
         public alt_MValue()
@@ -507,7 +507,7 @@ public class CAPI
 
     public static class alt_MValueDict extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_MValue_Type> type = new jnr.ffi.Struct.Enum32<alt_MValue_Type>(alt_MValue_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_MValue_Type> type = new jnr.ffi.Struct.Enum16<alt_MValue_Type>(alt_MValue_Type.class);
         public final jnr.ffi.Struct.Pointer storage = new jnr.ffi.Struct.Pointer();
         
         public alt_MValueDict()
@@ -522,7 +522,7 @@ public class CAPI
 
     public static class alt_MValueFunction extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_MValue_Type> type = new jnr.ffi.Struct.Enum32<alt_MValue_Type>(alt_MValue_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_MValue_Type> type = new jnr.ffi.Struct.Enum16<alt_MValue_Type>(alt_MValue_Type.class);
         public final jnr.ffi.Struct.Pointer storage = new jnr.ffi.Struct.Pointer();
         
         public alt_MValueFunction()
@@ -537,7 +537,7 @@ public class CAPI
 
     public static class alt_MValueList extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.Enum32<alt_MValue_Type> type = new jnr.ffi.Struct.Enum32<alt_MValue_Type>(alt_MValue_Type.class);
+        public final jnr.ffi.Struct.Enum16<alt_MValue_Type> type = new jnr.ffi.Struct.Enum16<alt_MValue_Type>(alt_MValue_Type.class);
         public final jnr.ffi.Struct.Pointer storage = new jnr.ffi.Struct.Pointer();
         
         public alt_MValueList()
