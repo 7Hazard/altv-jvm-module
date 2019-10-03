@@ -7,6 +7,7 @@ import java.net.URLClassLoader;
 import java.nio.file.Files;
 
 public class Plugins {
+    @SuppressWarnings("unchecked")
     public static void Load() {
         // Try to open the plugins folder
         var pluginsFolder = new File("modules/altv-jvm-module/plugins/");

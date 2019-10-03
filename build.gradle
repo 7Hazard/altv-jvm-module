@@ -39,6 +39,10 @@ dependencies {
     compile group: 'com.github.jnr', name: 'jnr-ffi', version: '2.1.9'
 }
 
+tasks.withType(JavaCompile) {
+  options.compilerArgs << "-Xlint:all" << "-Xlint:-rawtypes" << "-Werror"
+}
+
 jar {
     manifest {
         attributes(

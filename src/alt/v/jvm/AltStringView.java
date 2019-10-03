@@ -1,15 +1,17 @@
 package alt.v.jvm;
 
-import java.nio.ByteBuffer;
-
 import jnr.ffi.Memory;
 import jnr.ffi.Pointer;
 import jnr.ffi.Struct;
 
-public final class AltStringView
+public class AltStringView implements AutoCloseable
 {
     private final CAPI.alt_StringView sw = new CAPI.alt_StringView();
 
+    /**
+     * CREATING StringView THIS WAY SHOULD NOT BE CLOSED
+     * @param str
+     */
     public AltStringView(String str)
     {
         var buf = Memory.allocateDirect(CAPI.runtime, str.length());
@@ -33,8 +35,13 @@ public final class AltStringView
         return Struct.getMemory(sw);
     }
     
-    public void free()
-    {
+    // public void free()
+    // {
+    //     CAPI.func.alt_StringView_free(Struct.getMemory(sw));
+    // }
+
+    @Override
+    public void close() /*throws Exception*/ {
         CAPI.func.alt_StringView_free(Struct.getMemory(sw));
     }
 }

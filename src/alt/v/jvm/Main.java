@@ -1,7 +1,6 @@
 package alt.v.jvm;
 
 import alt.v.jvm.CAPI;
-import alt.v.jvm.CAPIExtra;
 import jnr.ffi.Pointer;
 import jnr.ffi.types.uintptr_t;
 

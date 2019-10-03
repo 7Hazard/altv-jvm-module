@@ -1,11 +1,6 @@
 package alt.v.jvm;
 
 import java.io.File;
-import java.nio.charset.Charset;
-
-import jnr.ffi.Memory;
-import jnr.ffi.Pointer;
-import jnr.ffi.Struct;
 
 /**
  * Log
