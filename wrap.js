@@ -232,7 +232,7 @@ function getJavaParams(params, funcname)
 console.log("Wrapping CAPI to Java")
 
 // Read the capi.json
-let capiinfo = JSON.parse(fs.readFileSync(__dirname + "/capi/server/altv-capi.json"))
+let capiinfo = JSON.parse(fs.readFileSync(__dirname + "/build/altv-capi-server/altv-capi.json"))
 
 let javatypes = []
 let javafuncs = []

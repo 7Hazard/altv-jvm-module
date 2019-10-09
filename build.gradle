@@ -1,3 +1,4 @@
+import org.gradle.internal.os.OperatingSystem;
 
 buildscript {
     repositories {
@@ -54,7 +55,6 @@ jar {
     }
 }
 
-
 if(System.env['JITPACK'] == null)
 {
     task wrap(type: Exec) {
@@ -63,6 +63,42 @@ if(System.env['JITPACK'] == null)
     }
     compileJava.dependsOn wrap
 }
+
+// task called before build for preparing build
+task prep
+
+task getCAPI(type: Copy) {
+    def capi = file("${buildDir}/altv-capi-server")
+    if(!capi.exists())
+    {
+        def url = ""
+        if(OperatingSystem.current().isWindows()) {
+            url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/315336432/artifacts/raw/capi/BUILD-WIN32/altv-capi-server-win32.zip?inline=false"
+        }
+        else if(OperatingSystem.current().isLinux()) {
+            url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/315336432/artifacts/raw/capi/BUILD/altv-capi-server-linux.zip?inline=false"
+        }
+        else {
+            throw new GradleException('Unknown env to get CAPI for')
+        }
+
+        def zip = new File("${buildDir}/capi.zip")
+        if (!zip.exists()) {
+            zip.getParentFile().mkdirs()
+            zip.createNewFile()
+        }
+        new URL(url).withInputStream{ i -> zip.withOutputStream{ it << i }}
+    }
+
+    from zipTree(file("${buildDir}/capi.zip"))
+    into file("${buildDir}")
+}
+prep.dependsOn getCAPI
+
+// task cleanBuild() {
+//     new File("${buildDir}").delete()
+// }
+// clean.dependsOn cleanBuild
 
 task copyToOutput(type: Copy) {
     from jar.destinationDir
@@ -81,7 +117,7 @@ distributions {
         contents {
             if(System.env['JITPACK'] == null)
             {    
-                from "build/altv-capi.dll", "module/build/libs/module/shared/altv-jvm-module.dll"
+                from "../build/altv-capi-server/bin/altv-capi-server.dll", "module/build/libs/module/shared/altv-jvm-module.dll"
             }
         }
     }

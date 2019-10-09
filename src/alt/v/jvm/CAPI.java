@@ -11,30 +11,124 @@ public class CAPI
         ALT_CEVENT_TYPE_NONE(0),
         ALT_CEVENT_TYPE_PLAYER_CONNECT(1),
         ALT_CEVENT_TYPE_PLAYER_DISCONNECT(2),
-        ALT_CEVENT_TYPE_SERVER_SCRIPT_EVENT(3),
-        ALT_CEVENT_TYPE_CLIENT_SCRIPT_EVENT(4),
-        ALT_CEVENT_TYPE_META_CHANGE(5),
-        ALT_CEVENT_TYPE_SYNCED_META_CHANGE(6),
-        ALT_CEVENT_TYPE_PLAYER_DAMAGE(7),
-        ALT_CEVENT_TYPE_PLAYER_DEATH(8),
-        ALT_CEVENT_TYPE_CHECKPOINT_EVENT(9),
-        ALT_CEVENT_TYPE_COLSHAPE_EVENT(10),
-        ALT_CEVENT_TYPE_PLAYER_ENTER_VEHICLE(11),
-        ALT_CEVENT_TYPE_PLAYER_LEAVE_VEHICLE(12),
-        ALT_CEVENT_TYPE_PLAYER_CHANGE_VEHICLE_SEAT(13),
-        ALT_CEVENT_TYPE_REMOVE_ENTITY_EVENT(14),
-        ALT_CEVENT_TYPE_DATA_NODE_RECEIVED_EVENT(15),
-        ALT_CEVENT_TYPE_CONSOLE_COMMAND_EVENT(16),
-        ALT_CEVENT_TYPE_CONNECTION_COMPLETE(17),
-        ALT_CEVENT_TYPE_DISCONNECT_EVENT(18),
-        ALT_CEVENT_TYPE_WEB_VIEW_EVENT(19),
-        ALT_CEVENT_TYPE_KEYBOARD_EVENT(20),
-        ALT_CEVENT_TYPE_GAME_ENTITY_CREATE(21),
-        ALT_CEVENT_TYPE_GAME_ENTITY_DESTROY(22),
-        ALT_CEVENT_TYPE_ALL(23),
-        ALT_CEVENT_TYPE_SIZE(24);
+        ALT_CEVENT_TYPE_RESOURCE_START(3),
+        ALT_CEVENT_TYPE_RESOURCE_STOP(4),
+        ALT_CEVENT_TYPE_RESOURCE_ERROR(5),
+        ALT_CEVENT_TYPE_SERVER_SCRIPT_EVENT(6),
+        ALT_CEVENT_TYPE_CLIENT_SCRIPT_EVENT(7),
+        ALT_CEVENT_TYPE_META_CHANGE(8),
+        ALT_CEVENT_TYPE_SYNCED_META_CHANGE(9),
+        ALT_CEVENT_TYPE_PLAYER_DAMAGE(10),
+        ALT_CEVENT_TYPE_PLAYER_DEATH(11),
+        ALT_CEVENT_TYPE_FIRE_EVENT(12),
+        ALT_CEVENT_TYPE_EXPLOSION_EVENT(13),
+        ALT_CEVENT_TYPE_WEAPON_DAMAGE_EVENT(14),
+        ALT_CEVENT_TYPE_CHECKPOINT_EVENT(15),
+        ALT_CEVENT_TYPE_COLSHAPE_EVENT(16),
+        ALT_CEVENT_TYPE_PLAYER_ENTER_VEHICLE(17),
+        ALT_CEVENT_TYPE_PLAYER_LEAVE_VEHICLE(18),
+        ALT_CEVENT_TYPE_PLAYER_CHANGE_VEHICLE_SEAT(19),
+        ALT_CEVENT_TYPE_REMOVE_ENTITY_EVENT(20),
+        ALT_CEVENT_TYPE_DATA_NODE_RECEIVED_EVENT(21),
+        ALT_CEVENT_TYPE_CONSOLE_COMMAND_EVENT(22),
+        ALT_CEVENT_TYPE_CONNECTION_COMPLETE(23),
+        ALT_CEVENT_TYPE_DISCONNECT_EVENT(24),
+        ALT_CEVENT_TYPE_WEB_VIEW_EVENT(25),
+        ALT_CEVENT_TYPE_KEYBOARD_EVENT(26),
+        ALT_CEVENT_TYPE_GAME_ENTITY_CREATE(27),
+        ALT_CEVENT_TYPE_GAME_ENTITY_DESTROY(28),
+        ALT_CEVENT_TYPE_ALL(29),
+        ALT_CEVENT_TYPE_SIZE(30);
 
         alt_CEvent_Type(int value) {
+            this.value = value;
+        }
+
+        public int intValue() {
+            return value;
+        }
+        private final int value;
+    }
+
+    public static enum alt_CExplosionEvent_ExplosionType implements jnr.ffi.util.EnumMapper.IntegerEnum
+    {
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_GRENADE(0),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_GRENADELAUNCHER(1),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_STICKYBOMB(2),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_MOLOTOV(3),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_ROCKET(4),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_TANKSHELL(5),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_HI_OCTANE(6),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_CAR(7),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_PLANE(8),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_PETROL_PUMP(9),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_BIKE(10),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_DIR_STEAM(11),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_DIR_FLAME(12),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_DIR_WATER_HYDRANT(13),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_DIR_GAS_CANISTER(14),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_BOAT(15),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_SHIP_DESTROY(16),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_TRUCK(17),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_BULLET(18),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_SMOKEGRENADELAUNCHER(19),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_SMOKEGRENADE(20),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_BZGAS(21),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_FLARE(22),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_GAS_CANISTER(23),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_EXTINGUISHER(24),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_PROGRAMMABLEAR(25),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_TRAIN(26),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_BARREL(27),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_PROPANE(28),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_BLIMP(29),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_DIR_FLAME_EXPLODE(30),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_TANKER(31),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_PLANE_ROCKET(32),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_VEHICLE_BULLET(33),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_GAS_TANK(34),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_FIREWORK(35),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_SNOWBALL(36),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_PROXMINE(37),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_VALKYRIE_CANNON(38),
+        ALT_CEXPLOSIONEVENT_EXPLOSIONTYPE_UNKNOWN(255);
+
+        alt_CExplosionEvent_ExplosionType(int value) {
+            this.value = value;
+        }
+
+        public int intValue() {
+            return value;
+        }
+        private final int value;
+    }
+
+    public static enum alt_CWeaponDamageEvent_BodyPart implements jnr.ffi.util.EnumMapper.IntegerEnum
+    {
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_PELVIS(0),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_LEFT_HIP(1),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_LEFT_LEG(2),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_LEFT_FOOT(3),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_RIGHT_HIP(4),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_RIGHT_LEG(5),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_RIGHT_FOOT(6),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_LOWER_TORSO(7),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_UPPER_TORSO(8),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_CHEST(9),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_UNDER_NECK(10),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_LEFT_SHOULDER(11),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_LEFT_UPPER_ARM(12),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_LEFT_ELBROW(13),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_LEFT_WRIST(14),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_RIGHT_SHOULDER(15),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_RIGHT_UPPER_ARM(16),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_RIGHT_ELBROW(17),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_RIGHT_WRIST(18),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_NECK(19),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_HEAD(20),
+        ALT_CWEAPONDAMAGEEVENT_BODYPART_UNKNOWN(255);
+
+        alt_CWeaponDamageEvent_BodyPart(int value) {
             this.value = value;
         }
 
@@ -312,6 +406,25 @@ public class CAPI
         }
     }
 
+    public static class alt_CExplosionEvent extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
+        public final jnr.ffi.Struct.Pointer source = new jnr.ffi.Struct.Pointer();
+        public final jnr.ffi.Struct.Enum16<alt_CExplosionEvent_ExplosionType> explosionType = new jnr.ffi.Struct.Enum16<alt_CExplosionEvent_ExplosionType>(alt_CExplosionEvent_ExplosionType.class);
+        public final alt_Vector_float_3_PointLayout position = new alt_Vector_float_3_PointLayout();
+        public final jnr.ffi.Struct.u_int32_t explosionFX = new jnr.ffi.Struct.u_int32_t();
+        
+        public alt_CExplosionEvent()
+        {
+            super(runtime);
+        }
+        public alt_CExplosionEvent(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
     public static class alt_CPlayerChangeVehicleSeatEvent extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
@@ -454,6 +567,54 @@ public class CAPI
         }
     }
 
+    public static class alt_CResourceErrorEvent extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
+        public final jnr.ffi.Struct.Pointer resource = new jnr.ffi.Struct.Pointer();
+        
+        public alt_CResourceErrorEvent()
+        {
+            super(runtime);
+        }
+        public alt_CResourceErrorEvent(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_CResourceStartEvent extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
+        public final jnr.ffi.Struct.Pointer resource = new jnr.ffi.Struct.Pointer();
+        
+        public alt_CResourceStartEvent()
+        {
+            super(runtime);
+        }
+        public alt_CResourceStartEvent(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_CResourceStopEvent extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
+        public final jnr.ffi.Struct.Pointer resource = new jnr.ffi.Struct.Pointer();
+        
+        public alt_CResourceStopEvent()
+        {
+            super(runtime);
+        }
+        public alt_CResourceStopEvent(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
     public static class alt_CServerScriptEvent extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
@@ -471,13 +632,32 @@ public class CAPI
         }
     }
 
+    public static class alt_CWeaponDamageEvent extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
+        public final jnr.ffi.Struct.Pointer source = new jnr.ffi.Struct.Pointer();
+        public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
+        public final jnr.ffi.Struct.u_int32_t weaponHash = new jnr.ffi.Struct.u_int32_t();
+        public final jnr.ffi.Struct.u_int16_t damageValue = new jnr.ffi.Struct.u_int16_t();
+        public final alt_Vector_float_3_VectorLayout_float_3 shotOffset = new alt_Vector_float_3_VectorLayout_float_3();
+        public final jnr.ffi.Struct.Enum16<alt_CWeaponDamageEvent_BodyPart> bodyPart = new jnr.ffi.Struct.Enum16<alt_CWeaponDamageEvent_BodyPart>(alt_CWeaponDamageEvent_BodyPart.class);
+        
+        public alt_CWeaponDamageEvent()
+        {
+            super(runtime);
+        }
+        public alt_CWeaponDamageEvent(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
     public static class alt_IResource_CreationInfo extends jnr.ffi.Struct
     {
         public final alt_String type = new alt_String();
         public final alt_String name = new alt_String();
-        public final alt_String path = new alt_String();
         public final alt_String main = new alt_String();
-        public final alt_Array_String deps = new alt_Array_String();
         public final jnr.ffi.Struct.Pointer pkg = new jnr.ffi.Struct.Pointer();
         
         public alt_IResource_CreationInfo()
@@ -811,6 +991,20 @@ public class CAPI
         }
     }
 
+    public static class alt_VectorLayout_float_3 extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Pointer elements = new jnr.ffi.Struct.Pointer();
+        
+        public alt_VectorLayout_float_3()
+        {
+            super(runtime);
+        }
+        public alt_VectorLayout_float_3(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
     public static class alt_VectorLayout_float_4 extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.Pointer elements = new jnr.ffi.Struct.Pointer();
@@ -820,6 +1014,36 @@ public class CAPI
             super(runtime);
         }
         public alt_VectorLayout_float_4(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_Vector_float_3_PointLayout extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Float x = new jnr.ffi.Struct.Float();
+        public final jnr.ffi.Struct.Float y = new jnr.ffi.Struct.Float();
+        public final jnr.ffi.Struct.Float z = new jnr.ffi.Struct.Float();
+        
+        public alt_Vector_float_3_PointLayout()
+        {
+            super(runtime);
+        }
+        public alt_Vector_float_3_PointLayout(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_Vector_float_3_VectorLayout_float_3 extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Pointer elements = new jnr.ffi.Struct.Pointer();
+        
+        public alt_Vector_float_3_VectorLayout_float_3()
+        {
+            super(runtime);
+        }
+        public alt_Vector_float_3_VectorLayout_float_3(jnr.ffi.Runtime runtime)
         {
             super(runtime);
         }
@@ -1285,6 +1509,56 @@ public class CAPI
 
         void alt_CEvent_free(jnr.ffi.Pointer ptr);
 
+        void alt_CExplosionEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CExplosionEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CExplosionEvent_Assign_constCExplosionEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CExplosionEvent_Cancel(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_CExplosionEvent_free()
+         */
+        jnr.ffi.Pointer alt_CExplosionEvent_Create(alt_CEvent_Type _type);
+
+        /**
+         * Return ptr must be manually freed with alt_CExplosionEvent_free()
+         */
+        jnr.ffi.Pointer alt_CExplosionEvent_Create_1(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CExplosionEvent_free()
+         */
+        jnr.ffi.Pointer alt_CExplosionEvent_Create_2(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CExplosionEvent_free()
+         */
+        jnr.ffi.Pointer alt_CExplosionEvent_Create_3(jnr.ffi.Pointer _source, alt_CExplosionEvent_ExplosionType _explosionType, jnr.ffi.Pointer _position, @jnr.ffi.types.u_int32_t int _explosionFX);
+
+        /**
+         * Return ptr must be manually freed with alt_CExplosionEvent_free()
+         */
+        jnr.ffi.Pointer alt_CExplosionEvent_Create_4(jnr.ffi.Pointer _p0);
+
+        @jnr.ffi.types.u_int32_t int alt_CExplosionEvent_GetExplosionFX(jnr.ffi.Pointer _instance);
+
+        alt_CExplosionEvent_ExplosionType alt_CExplosionEvent_GetExplosionType(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_CExplosionEvent_GetPosition(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_CExplosionEvent_GetSource(jnr.ffi.Pointer _instance);
+
+        alt_CEvent_Type alt_CExplosionEvent_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_CExplosionEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CExplosionEvent_free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerChangeVehicleSeatEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CPlayerChangeVehicleSeatEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1663,6 +1937,129 @@ public class CAPI
 
         void alt_CRemoveEntityEvent_free(jnr.ffi.Pointer ptr);
 
+        void alt_CResourceErrorEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CResourceErrorEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CResourceErrorEvent_Assign_constCResourceErrorEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CResourceErrorEvent_Cancel(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceErrorEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceErrorEvent_Create(alt_CEvent_Type _type);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceErrorEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceErrorEvent_Create_1(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceErrorEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceErrorEvent_Create_2(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceErrorEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceErrorEvent_Create_3(jnr.ffi.Pointer _resource);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceErrorEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceErrorEvent_Create_4(jnr.ffi.Pointer _p0);
+
+        jnr.ffi.Pointer alt_CResourceErrorEvent_GetResource(jnr.ffi.Pointer _instance);
+
+        alt_CEvent_Type alt_CResourceErrorEvent_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_CResourceErrorEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CResourceErrorEvent_free(jnr.ffi.Pointer ptr);
+
+        void alt_CResourceStartEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CResourceStartEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CResourceStartEvent_Assign_constCResourceStartEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CResourceStartEvent_Cancel(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceStartEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceStartEvent_Create(alt_CEvent_Type _type);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceStartEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceStartEvent_Create_1(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceStartEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceStartEvent_Create_2(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceStartEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceStartEvent_Create_3(jnr.ffi.Pointer _resource);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceStartEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceStartEvent_Create_4(jnr.ffi.Pointer _p0);
+
+        jnr.ffi.Pointer alt_CResourceStartEvent_GetResource(jnr.ffi.Pointer _instance);
+
+        alt_CEvent_Type alt_CResourceStartEvent_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_CResourceStartEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CResourceStartEvent_free(jnr.ffi.Pointer ptr);
+
+        void alt_CResourceStopEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CResourceStopEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CResourceStopEvent_Assign_constCResourceStopEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CResourceStopEvent_Cancel(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceStopEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceStopEvent_Create(alt_CEvent_Type _type);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceStopEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceStopEvent_Create_1(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceStopEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceStopEvent_Create_2(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceStopEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceStopEvent_Create_3(jnr.ffi.Pointer _resource);
+
+        /**
+         * Return ptr must be manually freed with alt_CResourceStopEvent_free()
+         */
+        jnr.ffi.Pointer alt_CResourceStopEvent_Create_4(jnr.ffi.Pointer _p0);
+
+        jnr.ffi.Pointer alt_CResourceStopEvent_GetResource(jnr.ffi.Pointer _instance);
+
+        alt_CEvent_Type alt_CResourceStopEvent_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_CResourceStopEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CResourceStopEvent_free(jnr.ffi.Pointer ptr);
+
         void alt_CServerScriptEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CServerScriptEvent_Assign_CServerScriptEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1718,6 +2115,60 @@ public class CAPI
         boolean alt_CServerScriptEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
         void alt_CServerScriptEvent_free(jnr.ffi.Pointer ptr);
+
+        void alt_CWeaponDamageEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CWeaponDamageEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CWeaponDamageEvent_Assign_constCWeaponDamageEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CWeaponDamageEvent_Cancel(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_CWeaponDamageEvent_free()
+         */
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_Create(alt_CEvent_Type _type);
+
+        /**
+         * Return ptr must be manually freed with alt_CWeaponDamageEvent_free()
+         */
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_Create_1(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CWeaponDamageEvent_free()
+         */
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_Create_2(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CWeaponDamageEvent_free()
+         */
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_Create_3(jnr.ffi.Pointer _source, jnr.ffi.Pointer _target, @jnr.ffi.types.u_int32_t int _weaponHash, @jnr.ffi.types.u_int16_t short _damageValue, jnr.ffi.Pointer _shotOffset, alt_CWeaponDamageEvent_BodyPart _bodyPart);
+
+        /**
+         * Return ptr must be manually freed with alt_CWeaponDamageEvent_free()
+         */
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_Create_4(jnr.ffi.Pointer _p0);
+
+        alt_CWeaponDamageEvent_BodyPart alt_CWeaponDamageEvent_GetBodyPart(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.types.u_int16_t short alt_CWeaponDamageEvent_GetDamageValue(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_GetShotOffset(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_GetSource(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_GetTarget(jnr.ffi.Pointer _instance);
+
+        alt_CEvent_Type alt_CWeaponDamageEvent_GetType(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.types.u_int32_t int alt_CWeaponDamageEvent_GetWeaponHash(jnr.ffi.Pointer _instance);
+
+        boolean alt_CWeaponDamageEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        void alt_CWeaponDamageEvent_free(jnr.ffi.Pointer ptr);
 
         void alt_IBaseObject_Assign_constIBaseObjectRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -1918,7 +2369,13 @@ public class CAPI
 
         boolean alt_ICore_RegisterScriptRuntime(jnr.ffi.Pointer _instance, jnr.ffi.Pointer resourceType, jnr.ffi.Pointer runtime);
 
+        jnr.ffi.Pointer alt_ICore_RestartResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
+
         void alt_ICore_SetInstance(jnr.ffi.Pointer server);
+
+        jnr.ffi.Pointer alt_ICore_StartResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
+
+        void alt_ICore_StopResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
 
         void alt_ICore_TriggerClientEvent(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, jnr.ffi.Pointer ev, jnr.ffi.Pointer args);
 
@@ -1940,6 +2397,8 @@ public class CAPI
         jnr.ffi.Pointer alt_IEntity_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int32_t int alt_IEntity_GetModel(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_IEntity_GetNetworkOwner(jnr.ffi.Pointer _instance);
 
         /**
          * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
@@ -2067,6 +2526,8 @@ public class CAPI
          * Return ptr must be manually freed with alt_StringView_free()
          */
         jnr.ffi.Pointer alt_IPlayer_GetName(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_IPlayer_GetNetworkOwner(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IPlayer_GetPing(jnr.ffi.Pointer _instance);
 
@@ -2315,6 +2776,8 @@ public class CAPI
          * Return ptr must be manually freed with alt_RGBA_free()
          */
         jnr.ffi.Pointer alt_IVehicle_GetNeonColor(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_IVehicle_GetNetworkOwner(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IVehicle_GetNumberplateIndex(jnr.ffi.Pointer _instance);
 
@@ -3084,6 +3547,10 @@ public class CAPI
 
         jnr.ffi.Pointer alt_PointLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
+        void alt_PointLayout_Assign_PointLayoutRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_PointLayout_Assign_constPointLayoutRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
         /**
          * Return ptr must be manually freed with alt_PointLayout_free()
          */
@@ -3114,6 +3581,10 @@ public class CAPI
         jnr.ffi.Pointer alt_PointPaddedLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         jnr.ffi.Pointer alt_PointPaddedLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+
+        void alt_PointPaddedLayout_Assign_PointLayoutRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_PointPaddedLayout_Assign_constPointLayoutRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_PointPaddedLayout_free()
@@ -3357,6 +3828,41 @@ public class CAPI
 
         boolean alt_String_NotEquals_String(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+
+        void alt_VectorLayout_float_3_Assign_VectorLayout_float_3RefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_VectorLayout_float_3_Assign_constVectorLayout_float_3Ref(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Create();
+
+        /**
+         * Return ptr must be manually freed with alt_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Create_1(jnr.ffi.Pointer _elements);
+
+        /**
+         * Return ptr must be manually freed with alt_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Create_2(jnr.ffi.Pointer el);
+
+        /**
+         * Return ptr must be manually freed with alt_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Create_3(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Create_4(jnr.ffi.Pointer _p0);
+
+        void alt_VectorLayout_float_3_free(jnr.ffi.Pointer ptr);
+
         jnr.ffi.Pointer alt_VectorLayout_float_4_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         jnr.ffi.Pointer alt_VectorLayout_float_4_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
@@ -3391,6 +3897,142 @@ public class CAPI
         jnr.ffi.Pointer alt_VectorLayout_float_4_Create_4(jnr.ffi.Pointer _p0);
 
         void alt_VectorLayout_float_4_free(jnr.ffi.Pointer ptr);
+
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+
+        void alt_Vector_float_3_PointLayout_Assign_PointLayoutRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_Vector_float_3_PointLayout_Assign_Vector_float_3_PointLayoutRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_Vector_float_3_PointLayout_Assign_constPointLayoutRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_Vector_float_3_PointLayout_Assign_constVector_float_3_PointLayoutRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create();
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_1(float _x, float _y, float _z);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_2(jnr.ffi.Pointer elements);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_3(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_4(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_5();
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_6(jnr.ffi.Pointer _elements);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_7(jnr.ffi.Pointer layout);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_8(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_9(jnr.ffi.Pointer _p0);
+
+        float alt_Vector_float_3_PointLayout_Length(jnr.ffi.Pointer _instance);
+
+        float alt_Vector_float_3_PointLayout_LengthSqr(jnr.ffi.Pointer _instance);
+
+        void alt_Vector_float_3_PointLayout_free(jnr.ffi.Pointer ptr);
+
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+
+        void alt_Vector_float_3_VectorLayout_float_3_Assign_VectorLayout_float_3RefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_Vector_float_3_VectorLayout_float_3_Assign_Vector_float_3_VectorLayout_float_3RefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_Vector_float_3_VectorLayout_float_3_Assign_constVectorLayout_float_3Ref(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_Vector_float_3_VectorLayout_float_3_Assign_constVector_float_3_VectorLayout_float_3Ref(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create();
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_1(jnr.ffi.Pointer _elements);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_2(jnr.ffi.Pointer el);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_3(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_4(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_5();
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_6(jnr.ffi.Pointer _elements);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_7(jnr.ffi.Pointer layout);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_8(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_9(jnr.ffi.Pointer _p0);
+
+        float alt_Vector_float_3_VectorLayout_float_3_Length(jnr.ffi.Pointer _instance);
+
+        float alt_Vector_float_3_VectorLayout_float_3_LengthSqr(jnr.ffi.Pointer _instance);
+
+        void alt_Vector_float_3_VectorLayout_float_3_free(jnr.ffi.Pointer ptr);
 
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 

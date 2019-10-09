@@ -16,7 +16,6 @@ model {
                     }
                     exportedHeaders {
                         srcDir "src"
-                        srcDir "../capi/server"
                     }
                     
                     lib library: "capi", linkage: "shared"
@@ -31,10 +30,10 @@ model {
             jvm {
                 binaries.withType(SharedLibraryBinary) {
                     if(targetPlatform.operatingSystem.windows){
-                        headers.srcDir "C:/Program Files/RedHat/java-11-openjdk-11.0.1-1/include"
-                        headers.srcDir "C:/Program Files/RedHat/java-11-openjdk-11.0.1-1/include/win32"
-                        sharedLibraryFile = file("C:/Program Files/RedHat/java-11-openjdk-11.0.1-1/bin/server/jvm.dll")
-                        sharedLibraryLinkFile = file("C:/Program Files/RedHat/java-11-openjdk-11.0.1-1/lib/jvm.lib")
+                        headers.srcDir "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/include"
+                        headers.srcDir "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/include/win32"
+                        sharedLibraryFile = file("C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/bin/server/jvm.dll")
+                        sharedLibraryLinkFile = file("C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/lib/jvm.lib")
                     }
                     else {
                         //throw "JVM linkage for Linux and Mac unspecified"
@@ -44,8 +43,9 @@ model {
             capi {
                 binaries.withType(SharedLibraryBinary) {
                     if(targetPlatform.operatingSystem.windows){
-                        sharedLibraryFile = file("../capi/altv-capi-server.dll")
-                        sharedLibraryLinkFile = file("../capi/altv-capi-server.lib")
+                        headers.srcDir file("../build/altv-capi-server/include/server")
+                        sharedLibraryFile = file("../build/altv-capi-server/bin/altv-capi-server.dll")
+                        sharedLibraryLinkFile = file("../build/altv-capi-server/lib/altv-capi-server.lib")
                     }
                     else {
                         //throw "JVM linkage for Linux and Mac unspecified"
@@ -75,7 +75,7 @@ model {
 }
 
 task copyToOutput(type: Copy) {
-    from "build/libs/module/shared/altv-jvm-module.dll", "../capi/altv-capi-server.dll"
+    from "build/libs/module/shared/altv-jvm-module.dll", "../build/altv-capi-server/bin/altv-capi-server.dll"
     into "../build/altv-jvm-module/"
 
     outputs.upToDateWhen { false }
