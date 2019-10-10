@@ -73,10 +73,10 @@ task getCAPI(type: Copy) {
     {
         def url = ""
         if(OperatingSystem.current().isWindows()) {
-            url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/315336432/artifacts/raw/capi/BUILD-WIN32/altv-capi-server-win32.zip?inline=false"
+            url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD-WIN32/altv-capi-server-win32.zip?job=publish&inline=false"
         }
         else if(OperatingSystem.current().isLinux()) {
-            url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/315336432/artifacts/raw/capi/BUILD/altv-capi-server-linux.zip?inline=false"
+            url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD/altv-capi-server-linux.zip?job=publish&inline=false"
         }
         else {
             throw new GradleException('Unknown env to get CAPI for')

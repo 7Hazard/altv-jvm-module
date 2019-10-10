@@ -2322,6 +2322,13 @@ public class CAPI
 
         void alt_ICore_DestroyBaseObject(jnr.ffi.Pointer _instance, jnr.ffi.Pointer handle);
 
+        boolean alt_ICore_FileExists(jnr.ffi.Pointer _instance, jnr.ffi.Pointer path);
+
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
+        jnr.ffi.Pointer alt_ICore_FileRead(jnr.ffi.Pointer _instance, jnr.ffi.Pointer path);
+
         /**
          * Return ptr must be manually freed with alt_Array_IEntityPtr_free()
          */
