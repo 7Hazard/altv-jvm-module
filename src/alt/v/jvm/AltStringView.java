@@ -27,6 +27,11 @@ public class AltStringView implements AutoCloseable
 
     public String str()
     {
+        var p = ptr();
+        if(p == null || p.address() == 0)
+        {
+            return "null";
+        }
         return sw.data.get().getString(0, (int)sw.size.get(), StringUtil.UTF8);
     }
 
@@ -34,11 +39,6 @@ public class AltStringView implements AutoCloseable
     {
         return Struct.getMemory(sw);
     }
-    
-    // public void free()
-    // {
-    //     CAPI.func.alt_StringView_free(Struct.getMemory(sw));
-    // }
 
     @Override
     public void close() /*throws Exception*/ {
