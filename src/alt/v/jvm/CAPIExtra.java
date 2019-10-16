@@ -105,5 +105,7 @@ public class CAPIExtra
 
         void alt_CAPIResource_Impl_SetExtra(jnr.ffi.Pointer resource, jnr.ffi.Pointer extra);
         jnr.ffi.Pointer alt_CAPIResource_Impl_GetExtra(jnr.ffi.Pointer resource);
+
+        void Test_Delete(jnr.ffi.Pointer ptr);
     }
 }

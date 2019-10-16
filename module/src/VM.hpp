@@ -50,13 +50,18 @@ class VM
             util::loge(core, "[JVM] Module JAR is corrupt or '" JVM_JAR_NAME "' doesn't exist");
             return false;
         }
-        jmethodID mid = env->GetStaticMethodID(cls, "main", "(J)V");
+        jmethodID mid = env->GetStaticMethodID(cls, "main", "(JZ)V");
         if(mid == nullptr)
         {
-            util::loge(core, "[JVM] Module JAR is corrupt");
+            util::loge(core, "[JVM] Could not find 'void Main::main(long, boolean)'");
             return false;
         }
-        env->CallStaticVoidMethod(cls, mid, core);
+#ifdef _DEBUG
+        util::logi(core, "[JVM] Debug Build");
+        env->CallStaticVoidMethod(cls, mid, core, true);
+#else
+        env->CallStaticVoidMethod(cls, mid, core, false);
+#endif
         jboolean flag = env->ExceptionCheck();
         if (flag) {
             util::loge(core, "Exception occurred while executing Java entry point");

@@ -113,6 +113,7 @@ function getJavaType(type, callbackName = "unnamedCallback"+javacallbacks.length
 function getJavaStructField(field)
 {
     let stype = "";
+    let relation = ""
 
     switch (field.type.kind) {
         case TypeKind.enumeral:
@@ -196,6 +197,11 @@ function getJavaStructField(field)
 
         // just the type itself
         case TypeKind.struct:
+        {
+            stype = field.type.name;
+            relation = "inner";
+            break;
+        }
         case TypeKind.function_pointer:
         {
             stype = field.type.name;
@@ -208,8 +214,15 @@ function getJavaStructField(field)
             break;
         }
     }
+
+    if(relation == "")
+    {
+        return `public final ${stype} ${field.name} = new ${stype}(${field.type.kind == TypeKind.enumeral ? field.type.name+".class" : ""});`
+    }
+    else {
+        return `public final ${stype} ${field.name} = ${relation}(new ${stype}(${field.type.kind == TypeKind.enumeral ? field.type.name+".class" : ""}));`
+    }
     
-    return `public final ${stype} ${field.name} = new ${stype}(${field.type.kind == TypeKind.enumeral ? field.type.name+".class" : ""});`
 }
 
 
@@ -288,6 +301,11 @@ for(let [structname, struct] of Object.entries(capiinfo.structs))
         public ${structname}()
         {
             super(runtime);
+        }
+        public ${structname}(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public ${structname}(jnr.ffi.Runtime runtime)
         {

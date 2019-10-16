@@ -61,7 +61,9 @@ model {
             cppCompiler.define "JVM_JAR_NAME=\"altv-jvm-module${version == "" ? "" : "-${version}"}.jar\""
 
             if(toolChain in VisualCpp) {
-                cppCompiler.args "/std:c++17", "/EHsc", "/Z7", "/MD" // maybe MT instead of MD?
+                if(project.debug)
+                    cppCompiler.args "/std:c++17", "/EHsc", "/Z7", "/MDd"
+                else cppCompiler.args "/std:c++17", "/EHsc", "/Z7", "/MD"
                 linker.args "/DEBUG"
             }
         }

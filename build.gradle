@@ -64,6 +64,11 @@ if(System.env['JITPACK'] == null)
     compileJava.dependsOn wrap
 }
 
+project.ext.set("debug", false)
+task debug() {
+    project.debug = true
+}
+
 // task called before build for preparing build
 task prep
 

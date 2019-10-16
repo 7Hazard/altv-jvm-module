@@ -32,7 +32,8 @@ public class AltStringView implements AutoCloseable
         {
             return "null";
         }
-        return sw.data.get().getString(0, (int)sw.size.get(), StringUtil.UTF8);
+        return CAPI.func.alt_StringView_CStr(Struct.getMemory(sw));
+        // return sw.data.get().getString(0, (int)sw.size.get(), StringUtil.UTF8);
     }
 
     public Pointer ptr()

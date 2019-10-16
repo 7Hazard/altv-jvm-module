@@ -265,6 +265,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_Array_MValue(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_Array_MValue(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -281,6 +286,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_Array_String(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_Array_String(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -296,6 +306,11 @@ public class CAPI
         public alt_Array_StringView()
         {
             super(runtime);
+        }
+        public alt_Array_StringView(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_Array_StringView(jnr.ffi.Runtime runtime)
         {
@@ -315,6 +330,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_CCheckpointEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_CCheckpointEvent(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -326,12 +346,17 @@ public class CAPI
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
-        public final alt_String name = new alt_String();
-        public final alt_MValueList args = new alt_MValueList();
+        public final alt_String name = inner(new alt_String());
+        public final alt_MValueList args = inner(new alt_MValueList());
         
         public alt_CClientScriptEvent()
         {
             super(runtime);
+        }
+        public alt_CClientScriptEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_CClientScriptEvent(jnr.ffi.Runtime runtime)
         {
@@ -351,6 +376,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_CColShapeEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_CColShapeEvent(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -361,12 +391,17 @@ public class CAPI
     {
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
-        public final alt_StringView name = new alt_StringView();
-        public final alt_Array_StringView args = new alt_Array_StringView();
+        public final alt_StringView name = inner(new alt_StringView());
+        public final alt_Array_StringView args = inner(new alt_Array_StringView());
         
         public alt_CConsoleCommandEvent()
         {
             super(runtime);
+        }
+        public alt_CConsoleCommandEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_CConsoleCommandEvent(jnr.ffi.Runtime runtime)
         {
@@ -378,12 +413,17 @@ public class CAPI
     {
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
-        public final alt_String name = new alt_String();
-        public final alt_String json = new alt_String();
+        public final alt_String name = inner(new alt_String());
+        public final alt_String json = inner(new alt_String());
         
         public alt_CDataNodeReceivedEvent()
         {
             super(runtime);
+        }
+        public alt_CDataNodeReceivedEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_CDataNodeReceivedEvent(jnr.ffi.Runtime runtime)
         {
@@ -400,6 +440,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_CEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_CEvent(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -412,12 +457,17 @@ public class CAPI
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer source = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CExplosionEvent_ExplosionType> explosionType = new jnr.ffi.Struct.Enum16<alt_CExplosionEvent_ExplosionType>(alt_CExplosionEvent_ExplosionType.class);
-        public final alt_Vector_float_3_PointLayout position = new alt_Vector_float_3_PointLayout();
+        public final alt_Vector_float_3_PointLayout position = inner(new alt_Vector_float_3_PointLayout());
         public final jnr.ffi.Struct.u_int32_t explosionFX = new jnr.ffi.Struct.u_int32_t();
         
         public alt_CExplosionEvent()
         {
             super(runtime);
+        }
+        public alt_CExplosionEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_CExplosionEvent(jnr.ffi.Runtime runtime)
         {
@@ -438,6 +488,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_CPlayerChangeVehicleSeatEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_CPlayerChangeVehicleSeatEvent(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -449,11 +504,16 @@ public class CAPI
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
-        public final alt_String reason = new alt_String();
+        public final alt_String reason = inner(new alt_String());
         
         public alt_CPlayerConnectEvent()
         {
             super(runtime);
+        }
+        public alt_CPlayerConnectEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_CPlayerConnectEvent(jnr.ffi.Runtime runtime)
         {
@@ -474,6 +534,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_CPlayerDamageEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_CPlayerDamageEvent(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -492,6 +557,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_CPlayerDeathEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_CPlayerDeathEvent(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -503,11 +573,16 @@ public class CAPI
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
-        public final alt_String reason = new alt_String();
+        public final alt_String reason = inner(new alt_String());
         
         public alt_CPlayerDisconnectEvent()
         {
             super(runtime);
+        }
+        public alt_CPlayerDisconnectEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_CPlayerDisconnectEvent(jnr.ffi.Runtime runtime)
         {
@@ -527,6 +602,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_CPlayerEnterVehicleEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_CPlayerEnterVehicleEvent(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -545,6 +625,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_CPlayerLeaveVehicleEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_CPlayerLeaveVehicleEvent(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -560,6 +645,11 @@ public class CAPI
         public alt_CRemoveEntityEvent()
         {
             super(runtime);
+        }
+        public alt_CRemoveEntityEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_CRemoveEntityEvent(jnr.ffi.Runtime runtime)
         {
@@ -577,6 +667,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_CResourceErrorEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_CResourceErrorEvent(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -592,6 +687,11 @@ public class CAPI
         public alt_CResourceStartEvent()
         {
             super(runtime);
+        }
+        public alt_CResourceStartEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_CResourceStartEvent(jnr.ffi.Runtime runtime)
         {
@@ -609,6 +709,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_CResourceStopEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_CResourceStopEvent(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -619,12 +724,17 @@ public class CAPI
     {
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
-        public final alt_String name = new alt_String();
-        public final alt_MValueList args = new alt_MValueList();
+        public final alt_String name = inner(new alt_String());
+        public final alt_MValueList args = inner(new alt_MValueList());
         
         public alt_CServerScriptEvent()
         {
             super(runtime);
+        }
+        public alt_CServerScriptEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_CServerScriptEvent(jnr.ffi.Runtime runtime)
         {
@@ -640,12 +750,17 @@ public class CAPI
         public final jnr.ffi.Struct.Pointer target = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.u_int32_t weaponHash = new jnr.ffi.Struct.u_int32_t();
         public final jnr.ffi.Struct.u_int16_t damageValue = new jnr.ffi.Struct.u_int16_t();
-        public final alt_Vector_float_3_VectorLayout_float_3 shotOffset = new alt_Vector_float_3_VectorLayout_float_3();
+        public final alt_Vector_float_3_VectorLayout_float_3 shotOffset = inner(new alt_Vector_float_3_VectorLayout_float_3());
         public final jnr.ffi.Struct.Enum16<alt_CWeaponDamageEvent_BodyPart> bodyPart = new jnr.ffi.Struct.Enum16<alt_CWeaponDamageEvent_BodyPart>(alt_CWeaponDamageEvent_BodyPart.class);
         
         public alt_CWeaponDamageEvent()
         {
             super(runtime);
+        }
+        public alt_CWeaponDamageEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_CWeaponDamageEvent(jnr.ffi.Runtime runtime)
         {
@@ -655,14 +770,19 @@ public class CAPI
 
     public static class alt_IResource_CreationInfo extends jnr.ffi.Struct
     {
-        public final alt_String type = new alt_String();
-        public final alt_String name = new alt_String();
-        public final alt_String main = new alt_String();
+        public final alt_String type = inner(new alt_String());
+        public final alt_String name = inner(new alt_String());
+        public final alt_String main = inner(new alt_String());
         public final jnr.ffi.Struct.Pointer pkg = new jnr.ffi.Struct.Pointer();
         
         public alt_IResource_CreationInfo()
         {
             super(runtime);
+        }
+        public alt_IResource_CreationInfo(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_IResource_CreationInfo(jnr.ffi.Runtime runtime)
         {
@@ -679,6 +799,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_MValue(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_MValue(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -693,6 +818,11 @@ public class CAPI
         public alt_MValueDict()
         {
             super(runtime);
+        }
+        public alt_MValueDict(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_MValueDict(jnr.ffi.Runtime runtime)
         {
@@ -709,6 +839,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_MValueFunction(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_MValueFunction(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -724,6 +859,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_MValueList(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_MValueList(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -738,6 +878,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_MValue_Function(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_MValue_Function(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -747,11 +892,16 @@ public class CAPI
     public static class alt_MValue_Storage_Array_MValue extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.u_int64_t refCount = new jnr.ffi.Struct.u_int64_t();
-        public final alt_Array_MValue value = new alt_Array_MValue();
+        public final alt_Array_MValue value = inner(new alt_Array_MValue());
         
         public alt_MValue_Storage_Array_MValue()
         {
             super(runtime);
+        }
+        public alt_MValue_Storage_Array_MValue(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_MValue_Storage_Array_MValue(jnr.ffi.Runtime runtime)
         {
@@ -768,6 +918,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_MValue_Storage_IBaseObjectPtr(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_MValue_Storage_IBaseObjectPtr(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -777,11 +932,16 @@ public class CAPI
     public static class alt_MValue_Storage_MValue_Function extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.u_int64_t refCount = new jnr.ffi.Struct.u_int64_t();
-        public final alt_MValue_Function value = new alt_MValue_Function();
+        public final alt_MValue_Function value = inner(new alt_MValue_Function());
         
         public alt_MValue_Storage_MValue_Function()
         {
             super(runtime);
+        }
+        public alt_MValue_Storage_MValue_Function(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_MValue_Storage_MValue_Function(jnr.ffi.Runtime runtime)
         {
@@ -792,11 +952,16 @@ public class CAPI
     public static class alt_MValue_Storage_String extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.u_int64_t refCount = new jnr.ffi.Struct.u_int64_t();
-        public final alt_String value = new alt_String();
+        public final alt_String value = inner(new alt_String());
         
         public alt_MValue_Storage_String()
         {
             super(runtime);
+        }
+        public alt_MValue_Storage_String(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_MValue_Storage_String(jnr.ffi.Runtime runtime)
         {
@@ -813,6 +978,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_MValue_Storage__Bool(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_MValue_Storage__Bool(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -827,6 +997,11 @@ public class CAPI
         public alt_MValue_Storage_double()
         {
             super(runtime);
+        }
+        public alt_MValue_Storage_double(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_MValue_Storage_double(jnr.ffi.Runtime runtime)
         {
@@ -843,6 +1018,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_MValue_Storage_longlong(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_MValue_Storage_longlong(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -858,6 +1038,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_MValue_Storage_unsignedlonglong(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_MValue_Storage_unsignedlonglong(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -871,6 +1056,11 @@ public class CAPI
         public alt_MValue__Storage()
         {
             super(runtime);
+        }
+        public alt_MValue__Storage(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_MValue__Storage(jnr.ffi.Runtime runtime)
         {
@@ -887,6 +1077,11 @@ public class CAPI
         public alt_PointLayout()
         {
             super(runtime);
+        }
+        public alt_PointLayout(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_PointLayout(jnr.ffi.Runtime runtime)
         {
@@ -905,6 +1100,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_PointPaddedLayout(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_PointPaddedLayout(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -922,6 +1122,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_RGBA(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_RGBA(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -937,6 +1142,11 @@ public class CAPI
         public alt_RotationLayout()
         {
             super(runtime);
+        }
+        public alt_RotationLayout(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_RotationLayout(jnr.ffi.Runtime runtime)
         {
@@ -955,6 +1165,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_RotationPaddedLayout(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_RotationPaddedLayout(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -969,6 +1184,11 @@ public class CAPI
         public alt_String()
         {
             super(runtime);
+        }
+        public alt_String(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_String(jnr.ffi.Runtime runtime)
         {
@@ -985,6 +1205,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_StringView(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_StringView(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -999,6 +1224,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_VectorLayout_float_3(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_VectorLayout_float_3(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -1012,6 +1242,11 @@ public class CAPI
         public alt_VectorLayout_float_4()
         {
             super(runtime);
+        }
+        public alt_VectorLayout_float_4(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_VectorLayout_float_4(jnr.ffi.Runtime runtime)
         {
@@ -1029,6 +1264,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_Vector_float_3_PointLayout(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_Vector_float_3_PointLayout(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -1042,6 +1282,11 @@ public class CAPI
         public alt_Vector_float_3_VectorLayout_float_3()
         {
             super(runtime);
+        }
+        public alt_Vector_float_3_VectorLayout_float_3(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_Vector_float_3_VectorLayout_float_3(jnr.ffi.Runtime runtime)
         {
@@ -1057,6 +1302,11 @@ public class CAPI
         {
             super(runtime);
         }
+        public alt_Vector_float_4_VectorLayout_float_4(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
         public alt_Vector_float_4_VectorLayout_float_4(jnr.ffi.Runtime runtime)
         {
             super(runtime);
@@ -1065,14 +1315,19 @@ public class CAPI
 
     public static class alt_ViewMatrixLayout extends jnr.ffi.Struct
     {
-        public final alt_Vector_float_4_VectorLayout_float_4 right = new alt_Vector_float_4_VectorLayout_float_4();
-        public final alt_Vector_float_4_VectorLayout_float_4 up = new alt_Vector_float_4_VectorLayout_float_4();
-        public final alt_Vector_float_4_VectorLayout_float_4 forward = new alt_Vector_float_4_VectorLayout_float_4();
-        public final alt_Vector_float_4_VectorLayout_float_4 pos = new alt_Vector_float_4_VectorLayout_float_4();
+        public final alt_Vector_float_4_VectorLayout_float_4 right = inner(new alt_Vector_float_4_VectorLayout_float_4());
+        public final alt_Vector_float_4_VectorLayout_float_4 up = inner(new alt_Vector_float_4_VectorLayout_float_4());
+        public final alt_Vector_float_4_VectorLayout_float_4 forward = inner(new alt_Vector_float_4_VectorLayout_float_4());
+        public final alt_Vector_float_4_VectorLayout_float_4 pos = inner(new alt_Vector_float_4_VectorLayout_float_4());
         
         public alt_ViewMatrixLayout()
         {
             super(runtime);
+        }
+        public alt_ViewMatrixLayout(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
         }
         public alt_ViewMatrixLayout(jnr.ffi.Runtime runtime)
         {
@@ -1131,6 +1386,8 @@ public class CAPI
 
         jnr.ffi.Pointer alt_Array_MValue_end_1(jnr.ffi.Pointer _instance);
 
+        void alt_Array_MValue_free(jnr.ffi.Pointer ptr);
+
         jnr.ffi.Pointer alt_Array_StringView_Access_uint64_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         jnr.ffi.Pointer alt_Array_StringView_Access_uint64_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
@@ -1178,6 +1435,8 @@ public class CAPI
 
         jnr.ffi.Pointer alt_Array_StringView_end_1(jnr.ffi.Pointer _instance);
 
+        void alt_Array_StringView_free(jnr.ffi.Pointer ptr);
+
         jnr.ffi.Pointer alt_Array_String_Access_uint64_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         jnr.ffi.Pointer alt_Array_String_Access_uint64_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
@@ -1224,6 +1483,8 @@ public class CAPI
         jnr.ffi.Pointer alt_Array_String_end(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_Array_String_end_1(jnr.ffi.Pointer _instance);
+
+        void alt_Array_String_free(jnr.ffi.Pointer ptr);
 
         void alt_CCheckpointEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -2552,6 +2813,8 @@ public class CAPI
 
         void alt_IPackage_File_Assign_constIPackage_FileRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_IPackage_File_free(jnr.ffi.Pointer ptr);
+
         @jnr.ffi.types.u_int64_t long alt_IPackage_GetFileSize(jnr.ffi.Pointer _instance, jnr.ffi.Pointer file);
 
         alt_IPackage_Mode alt_IPackage_GetMode(jnr.ffi.Pointer _instance);
@@ -2565,6 +2828,8 @@ public class CAPI
         @jnr.ffi.types.u_int64_t long alt_IPackage_TellFile(jnr.ffi.Pointer _instance, jnr.ffi.Pointer file);
 
         @jnr.ffi.types.u_int64_t long alt_IPackage_WriteFile(jnr.ffi.Pointer _instance, jnr.ffi.Pointer file, jnr.ffi.Pointer buffer, @jnr.ffi.types.u_int64_t long size);
+
+        void alt_IPackage_free(jnr.ffi.Pointer ptr);
 
         void alt_IPlayer_AddWeaponComponent(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int32_t int weapon, @jnr.ffi.types.u_int32_t int component);
 
@@ -2802,6 +3067,8 @@ public class CAPI
 
         boolean alt_IResource_Impl_Stop(jnr.ffi.Pointer _instance);
 
+        void alt_IResource_Impl_free(jnr.ffi.Pointer ptr);
+
         boolean alt_IResource_IsStarted(jnr.ffi.Pointer _instance);
 
         void alt_IResource_SetExports(jnr.ffi.Pointer _instance, jnr.ffi.Pointer exports);
@@ -2813,6 +3080,8 @@ public class CAPI
         void alt_IScriptRuntime_DestroyImpl(jnr.ffi.Pointer _instance, jnr.ffi.Pointer impl);
 
         void alt_IScriptRuntime_OnTick(jnr.ffi.Pointer _instance);
+
+        void alt_IScriptRuntime_free(jnr.ffi.Pointer ptr);
 
         void alt_IVehicle_Assign_constIBaseObjectRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -3696,6 +3965,8 @@ public class CAPI
 
         @jnr.ffi.annotations.Encoding("UTF-8") String alt_MValue_TypeMismatchException_what(jnr.ffi.Pointer _instance);
 
+        void alt_MValue_free(jnr.ffi.Pointer ptr);
+
         jnr.ffi.Pointer alt_MValue_to_alt_MValueDict(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_MValue_to_alt_MValueFunction(jnr.ffi.Pointer from);
@@ -3996,6 +4267,10 @@ public class CAPI
         boolean alt_String_IsEmpty(jnr.ffi.Pointer _instance);
 
         boolean alt_String_NotEquals_String(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
+
+        void alt_String_Resize(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long new_size);
+
+        void alt_String_free(jnr.ffi.Pointer ptr);
 
         jnr.ffi.Pointer alt_VectorLayout_float_3_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 

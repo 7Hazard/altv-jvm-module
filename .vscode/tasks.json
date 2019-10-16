@@ -15,6 +15,32 @@
                 "$msCompile",
                 "$gcc",
             ]
+        },
+        {
+            "label": "Build Debug (Gradle)",
+            "type": "shell",
+            "command": "./gradlew prep debug build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$msCompile",
+                "$gcc",
+            ]
+        },
+        {
+            "label": "Clean (Gradle)",
+            "type": "shell",
+            "command": "./gradlew clean",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$msCompile",
+                "$gcc",
+            ]
         }
     ]
 }
