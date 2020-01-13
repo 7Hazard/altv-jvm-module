@@ -3,12 +3,35 @@
 #include <filesystem>
 #include "altv-capi.hpp"
 
-namespace util {
-
-inline auto AbsolutePath(std::string relativePath)
+namespace util
 {
-    return std::filesystem::absolute(relativePath).string();
-}
+
+
+// inline auto AbsolutePath(std::string relativePath)
+// {
+//     return std::filesystem::absolute(relativePath).string();
+// }
+
+// // Adds shared library path
+// inline bool AddPath(std::string path)
+// {
+// #ifdef _WIN32
+//     AddDllDirectoryA(path.c_str());
+// #else
+//     static_assert(false, "NOT IMPLEMENTED");
+// #endif
+// }
+
+// inline std::string GetEnvironmentVariable(std::string name)
+// {
+// #ifdef _WIN32
+//     char buf[1024];
+//     GetEnvironmentVariableA(name.c_str(), buf, sizeof(buf));
+//     return buf;
+// #else
+//     static_assert(false, "NOT IMPLEMENTED");
+// #endif
+// }
 
 inline auto GetTimestamp()
 {
@@ -50,5 +73,6 @@ inline void loge(alt_ICore* core, const std::string& str)
     alt_StringView sw {(char*)str.c_str(), str.length()+1};
     alt_ICore_LogError(core, &sw);
 }
+
 
 }
