@@ -72,33 +72,36 @@ task debug() {
 // task called before build for preparing build
 task prep
 
-task getCAPI(type: Copy) {
-    def capi = file("${buildDir}/altv-capi-server")
-    if(!capi.exists())
-    {
-        def url = ""
-        if(OperatingSystem.current().isWindows()) {
-            url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD-WIN32/altv-capi-server-win32.zip?job=publish&inline=false"
-        }
-        else if(OperatingSystem.current().isLinux()) {
-            url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD/altv-capi-server-linux.zip?job=publish&inline=false"
-        }
-        else {
-            throw new GradleException('Unknown env to get CAPI for')
+if(System.env['JITPACK'] == null)
+{
+    task getCAPI(type: Copy) {
+        def capi = file("${buildDir}/altv-capi-server")
+        if(!capi.exists())
+        {
+            def url = ""
+            if(OperatingSystem.current().isWindows()) {
+                url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD-WIN32/altv-capi-server-win32.zip?job=publish&inline=false"
+            }
+            else if(OperatingSystem.current().isLinux()) {
+                url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD/altv-capi-server-linux.zip?job=publish&inline=false"
+            }
+            else {
+                throw new GradleException('Unknown env to get CAPI for')
+            }
+
+            def zip = new File("${buildDir}/capi.zip")
+            if (!zip.exists()) {
+                zip.getParentFile().mkdirs()
+                zip.createNewFile()
+            }
+            new URL(url).withInputStream{ i -> zip.withOutputStream{ it << i }}
         }
 
-        def zip = new File("${buildDir}/capi.zip")
-        if (!zip.exists()) {
-            zip.getParentFile().mkdirs()
-            zip.createNewFile()
-        }
-        new URL(url).withInputStream{ i -> zip.withOutputStream{ it << i }}
+        from zipTree(file("${buildDir}/capi.zip"))
+        into file("${buildDir}")
     }
-
-    from zipTree(file("${buildDir}/capi.zip"))
-    into file("${buildDir}")
+    prep.dependsOn getCAPI
 }
-prep.dependsOn getCAPI
 
 // task cleanBuild() {
 //     new File("${buildDir}").delete()
