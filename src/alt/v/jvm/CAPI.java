@@ -204,16 +204,20 @@ public class CAPI
 
     public static enum alt_IMValue_Type implements jnr.ffi.util.EnumMapper.IntegerEnum
     {
-        ALT_IMVALUE_TYPE_NIL(0),
-        ALT_IMVALUE_TYPE_BOOL(1),
-        ALT_IMVALUE_TYPE_INT(2),
-        ALT_IMVALUE_TYPE_UINT(3),
-        ALT_IMVALUE_TYPE_DOUBLE(4),
-        ALT_IMVALUE_TYPE_STRING(5),
-        ALT_IMVALUE_TYPE_LIST(6),
-        ALT_IMVALUE_TYPE_DICT(7),
-        ALT_IMVALUE_TYPE_BASE_OBJECT(8),
-        ALT_IMVALUE_TYPE_FUNCTION(9);
+        ALT_IMVALUE_TYPE_NONE(0),
+        ALT_IMVALUE_TYPE_NIL(1),
+        ALT_IMVALUE_TYPE_BOOL(2),
+        ALT_IMVALUE_TYPE_INT(3),
+        ALT_IMVALUE_TYPE_UINT(4),
+        ALT_IMVALUE_TYPE_DOUBLE(5),
+        ALT_IMVALUE_TYPE_STRING(6),
+        ALT_IMVALUE_TYPE_LIST(7),
+        ALT_IMVALUE_TYPE_DICT(8),
+        ALT_IMVALUE_TYPE_BASE_OBJECT(9),
+        ALT_IMVALUE_TYPE_FUNCTION(10),
+        ALT_IMVALUE_TYPE_VECTOR3(11),
+        ALT_IMVALUE_TYPE_RGBA(12),
+        ALT_IMVALUE_TYPE_BYTE_ARRAY(13);
 
         alt_IMValue_Type(int value) {
             this.value = value;
@@ -2323,6 +2327,8 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CRefCountable_to_alt_IMValueBool(jnr.ffi.Pointer from);
 
+        jnr.ffi.Pointer alt_CRefCountable_to_alt_IMValueByteArray(jnr.ffi.Pointer from);
+
         jnr.ffi.Pointer alt_CRefCountable_to_alt_IMValueDict(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_CRefCountable_to_alt_IMValueDouble(jnr.ffi.Pointer from);
@@ -2335,9 +2341,15 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CRefCountable_to_alt_IMValueNil(jnr.ffi.Pointer from);
 
+        jnr.ffi.Pointer alt_CRefCountable_to_alt_IMValueNone(jnr.ffi.Pointer from);
+
+        jnr.ffi.Pointer alt_CRefCountable_to_alt_IMValueRGBA(jnr.ffi.Pointer from);
+
         jnr.ffi.Pointer alt_CRefCountable_to_alt_IMValueString(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_CRefCountable_to_alt_IMValueUInt(jnr.ffi.Pointer from);
+
+        jnr.ffi.Pointer alt_CRefCountable_to_alt_IMValueVector3(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_CRefCountable_to_alt_IPlayer(jnr.ffi.Pointer from);
 
@@ -2734,6 +2746,8 @@ public class CAPI
 
         void alt_IBaseObject_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IBaseObject_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
         /**
          * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_free()
          */
@@ -2742,6 +2756,8 @@ public class CAPI
         @jnr.ffi.types.u_int64_t long alt_IBaseObject_GetRefCount(jnr.ffi.Pointer _instance);
 
         alt_IBaseObject_Type alt_IBaseObject_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_IBaseObject_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IBaseObject_RemoveRef(jnr.ffi.Pointer _instance);
 
@@ -2776,6 +2792,8 @@ public class CAPI
          */
         jnr.ffi.Pointer alt_IBlip_AttachedTo(jnr.ffi.Pointer _instance);
 
+        void alt_IBlip_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
         alt_IBlip_BlipType alt_IBlip_GetBlipType(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.int32_t int alt_IBlip_GetDimension(jnr.ffi.Pointer _instance);
@@ -2798,6 +2816,8 @@ public class CAPI
         jnr.ffi.Pointer alt_IBlip_GetTarget(jnr.ffi.Pointer _instance);
 
         alt_IBaseObject_Type alt_IBlip_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_IBlip_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         boolean alt_IBlip_IsAttached(jnr.ffi.Pointer _instance);
 
@@ -2831,6 +2851,8 @@ public class CAPI
 
         void alt_ICheckpoint_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_ICheckpoint_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
         @jnr.ffi.types.u_int8_t byte alt_ICheckpoint_GetCheckpointType(jnr.ffi.Pointer _instance);
 
         /**
@@ -2860,6 +2882,8 @@ public class CAPI
 
         alt_IBaseObject_Type alt_ICheckpoint_GetType(jnr.ffi.Pointer _instance);
 
+        boolean alt_ICheckpoint_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
         boolean alt_ICheckpoint_IsEntityIn(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ent);
 
         boolean alt_ICheckpoint_IsPointIn(jnr.ffi.Pointer _instance, jnr.ffi.Pointer p);
@@ -2886,6 +2910,8 @@ public class CAPI
 
         void alt_IColShape_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IColShape_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
         alt_IColShape_ColShapeType alt_IColShape_GetColshapeType(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.int32_t int alt_IColShape_GetDimension(jnr.ffi.Pointer _instance);
@@ -2903,6 +2929,8 @@ public class CAPI
         @jnr.ffi.types.u_int64_t long alt_IColShape_GetRefCount(jnr.ffi.Pointer _instance);
 
         alt_IBaseObject_Type alt_IColShape_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_IColShape_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         boolean alt_IColShape_IsEntityIn(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ent);
 
@@ -2979,6 +3007,16 @@ public class CAPI
         jnr.ffi.Pointer alt_ICore_CreateMValueBool(jnr.ffi.Pointer _instance, boolean val);
 
         /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueByteArray_free()
+         */
+        jnr.ffi.Pointer alt_ICore_CreateMValueByteArray(jnr.ffi.Pointer _instance, jnr.ffi.Pointer data, @jnr.ffi.types.u_int64_t long size);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueByteArray_free()
+         */
+        jnr.ffi.Pointer alt_ICore_CreateMValueByteArray_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long size);
+
+        /**
          * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueDict_free()
          */
         jnr.ffi.Pointer alt_ICore_CreateMValueDict(jnr.ffi.Pointer _instance);
@@ -3009,6 +3047,16 @@ public class CAPI
         jnr.ffi.Pointer alt_ICore_CreateMValueNil(jnr.ffi.Pointer _instance);
 
         /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueNone_free()
+         */
+        jnr.ffi.Pointer alt_ICore_CreateMValueNone(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueRGBA_free()
+         */
+        jnr.ffi.Pointer alt_ICore_CreateMValueRGBA(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
+
+        /**
          * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueString_free()
          */
         jnr.ffi.Pointer alt_ICore_CreateMValueString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
@@ -3017,6 +3065,11 @@ public class CAPI
          * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueUInt_free()
          */
         jnr.ffi.Pointer alt_ICore_CreateMValueUInt(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long val);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueVector3_free()
+         */
+        jnr.ffi.Pointer alt_ICore_CreateMValueVector3(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
 
         /**
          * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_free()
@@ -3103,6 +3156,12 @@ public class CAPI
 
         void alt_IEntity_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IEntity_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        void alt_IEntity_DeleteStreamSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        void alt_IEntity_DeleteSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
         @jnr.ffi.types.int32_t int alt_IEntity_GetDimension(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IEntity_GetID(jnr.ffi.Pointer _instance);
@@ -3142,6 +3201,12 @@ public class CAPI
         jnr.ffi.Pointer alt_IEntity_GetSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         alt_IBaseObject_Type alt_IEntity_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_IEntity_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        boolean alt_IEntity_HasStreamSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        boolean alt_IEntity_HasSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IEntity_RemoveRef(jnr.ffi.Pointer _instance);
 
@@ -3235,6 +3300,42 @@ public class CAPI
         jnr.ffi.Pointer alt_IMValueBool_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_IMValueBool_to_alt_IMValue(jnr.ffi.Pointer from);
+
+        void alt_IMValueByteArray_AddRef(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueByteArray_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_free()
+         */
+        jnr.ffi.Pointer alt_IMValueByteArray_Clone(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_IMValueByteArray_GetData(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_IMValueByteArray_GetData_1(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.types.u_int64_t long alt_IMValueByteArray_GetRefCount(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.types.u_int64_t long alt_IMValueByteArray_GetSize(jnr.ffi.Pointer _instance);
+
+        alt_IMValue_Type alt_IMValueByteArray_GetType(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueByteArray_RemoveRef(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueByteArray_RemoveWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
+
+        double alt_IMValueByteArray_ToNumber(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
+        jnr.ffi.Pointer alt_IMValueByteArray_ToString(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueByteArray_free(jnr.ffi.Pointer ptr);
+
+        jnr.ffi.Pointer alt_IMValueByteArray_to_alt_CRefCountable(jnr.ffi.Pointer from);
+
+        jnr.ffi.Pointer alt_IMValueByteArray_to_alt_IMValue(jnr.ffi.Pointer from);
 
         void alt_IMValueDict_AddRef(jnr.ffi.Pointer _instance);
 
@@ -3494,6 +3595,71 @@ public class CAPI
 
         jnr.ffi.Pointer alt_IMValueNil_to_alt_IMValue(jnr.ffi.Pointer from);
 
+        void alt_IMValueNone_AddRef(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueNone_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_free()
+         */
+        jnr.ffi.Pointer alt_IMValueNone_Clone(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.types.u_int64_t long alt_IMValueNone_GetRefCount(jnr.ffi.Pointer _instance);
+
+        alt_IMValue_Type alt_IMValueNone_GetType(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueNone_RemoveRef(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueNone_RemoveWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
+
+        double alt_IMValueNone_ToNumber(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
+        jnr.ffi.Pointer alt_IMValueNone_ToString(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueNone_free(jnr.ffi.Pointer ptr);
+
+        jnr.ffi.Pointer alt_IMValueNone_to_alt_CRefCountable(jnr.ffi.Pointer from);
+
+        jnr.ffi.Pointer alt_IMValueNone_to_alt_IMValue(jnr.ffi.Pointer from);
+
+        void alt_IMValueRGBA_AddRef(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueRGBA_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_free()
+         */
+        jnr.ffi.Pointer alt_IMValueRGBA_Clone(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.types.u_int64_t long alt_IMValueRGBA_GetRefCount(jnr.ffi.Pointer _instance);
+
+        alt_IMValue_Type alt_IMValueRGBA_GetType(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueRGBA_RemoveRef(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueRGBA_RemoveWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
+
+        double alt_IMValueRGBA_ToNumber(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
+        jnr.ffi.Pointer alt_IMValueRGBA_ToString(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_RGBA_free()
+         */
+        jnr.ffi.Pointer alt_IMValueRGBA_Value(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueRGBA_free(jnr.ffi.Pointer ptr);
+
+        jnr.ffi.Pointer alt_IMValueRGBA_to_alt_CRefCountable(jnr.ffi.Pointer from);
+
+        jnr.ffi.Pointer alt_IMValueRGBA_to_alt_IMValue(jnr.ffi.Pointer from);
+
         void alt_IMValueString_AddRef(jnr.ffi.Pointer _instance);
 
         void alt_IMValueString_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
@@ -3561,6 +3727,41 @@ public class CAPI
 
         jnr.ffi.Pointer alt_IMValueUInt_to_alt_IMValue(jnr.ffi.Pointer from);
 
+        void alt_IMValueVector3_AddRef(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueVector3_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_free()
+         */
+        jnr.ffi.Pointer alt_IMValueVector3_Clone(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.types.u_int64_t long alt_IMValueVector3_GetRefCount(jnr.ffi.Pointer _instance);
+
+        alt_IMValue_Type alt_IMValueVector3_GetType(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueVector3_RemoveRef(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueVector3_RemoveWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
+
+        double alt_IMValueVector3_ToNumber(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_String_free()
+         */
+        jnr.ffi.Pointer alt_IMValueVector3_ToString(jnr.ffi.Pointer _instance);
+
+        /**
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_free()
+         */
+        jnr.ffi.Pointer alt_IMValueVector3_Value(jnr.ffi.Pointer _instance);
+
+        void alt_IMValueVector3_free(jnr.ffi.Pointer ptr);
+
+        jnr.ffi.Pointer alt_IMValueVector3_to_alt_CRefCountable(jnr.ffi.Pointer from);
+
+        jnr.ffi.Pointer alt_IMValueVector3_to_alt_IMValue(jnr.ffi.Pointer from);
+
         void alt_IMValue_AddRef(jnr.ffi.Pointer _instance);
 
         void alt_IMValue_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
@@ -3591,6 +3792,8 @@ public class CAPI
 
         jnr.ffi.Pointer alt_IMValue_to_alt_IMValueBool(jnr.ffi.Pointer from);
 
+        jnr.ffi.Pointer alt_IMValue_to_alt_IMValueByteArray(jnr.ffi.Pointer from);
+
         jnr.ffi.Pointer alt_IMValue_to_alt_IMValueDict(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_IMValue_to_alt_IMValueDouble(jnr.ffi.Pointer from);
@@ -3603,9 +3806,15 @@ public class CAPI
 
         jnr.ffi.Pointer alt_IMValue_to_alt_IMValueNil(jnr.ffi.Pointer from);
 
+        jnr.ffi.Pointer alt_IMValue_to_alt_IMValueNone(jnr.ffi.Pointer from);
+
+        jnr.ffi.Pointer alt_IMValue_to_alt_IMValueRGBA(jnr.ffi.Pointer from);
+
         jnr.ffi.Pointer alt_IMValue_to_alt_IMValueString(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_IMValue_to_alt_IMValueUInt(jnr.ffi.Pointer from);
+
+        jnr.ffi.Pointer alt_IMValue_to_alt_IMValueVector3(jnr.ffi.Pointer from);
 
         void alt_IPackage_CloseFile(jnr.ffi.Pointer _instance, jnr.ffi.Pointer file);
 
@@ -3636,6 +3845,12 @@ public class CAPI
         void alt_IPlayer_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
         void alt_IPlayer_AddWeaponComponent(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int32_t int weapon, @jnr.ffi.types.u_int32_t int component);
+
+        void alt_IPlayer_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        void alt_IPlayer_DeleteStreamSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        void alt_IPlayer_DeleteSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IPlayer_Despawn(jnr.ffi.Pointer _instance);
 
@@ -3753,6 +3968,12 @@ public class CAPI
         @jnr.ffi.types.u_int32_t int alt_IPlayer_GetWeapon(jnr.ffi.Pointer _instance);
 
         void alt_IPlayer_GiveWeapon(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int32_t int weapon, @jnr.ffi.types.int32_t int ammo, boolean selectWeapon);
+
+        boolean alt_IPlayer_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        boolean alt_IPlayer_HasStreamSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        boolean alt_IPlayer_HasSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         boolean alt_IPlayer_IsAiming(jnr.ffi.Pointer _instance);
 
@@ -3908,6 +4129,12 @@ public class CAPI
         void alt_IVehicle_AddRef(jnr.ffi.Pointer _instance);
 
         void alt_IVehicle_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
+
+        void alt_IVehicle_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        void alt_IVehicle_DeleteStreamSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        void alt_IVehicle_DeleteSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         boolean alt_IVehicle_DoesWheelHasTire(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte wheelId);
 
@@ -4083,6 +4310,12 @@ public class CAPI
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetWindowTint(jnr.ffi.Pointer _instance);
 
         boolean alt_IVehicle_HasArmoredWindows(jnr.ffi.Pointer _instance);
+
+        boolean alt_IVehicle_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        boolean alt_IVehicle_HasStreamSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        boolean alt_IVehicle_HasSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         boolean alt_IVehicle_IsDaylightOn(jnr.ffi.Pointer _instance);
 
@@ -4266,6 +4499,8 @@ public class CAPI
 
         void alt_IVoiceChannel_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IVoiceChannel_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
         float alt_IVoiceChannel_GetMaxDistance(jnr.ffi.Pointer _instance);
 
         /**
@@ -4276,6 +4511,8 @@ public class CAPI
         @jnr.ffi.types.u_int64_t long alt_IVoiceChannel_GetRefCount(jnr.ffi.Pointer _instance);
 
         alt_IBaseObject_Type alt_IVoiceChannel_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_IVoiceChannel_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         boolean alt_IVoiceChannel_HasPlayer(jnr.ffi.Pointer _instance, jnr.ffi.Pointer player);
 
@@ -4311,6 +4548,8 @@ public class CAPI
 
         void alt_IWorldObject_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IWorldObject_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
         @jnr.ffi.types.int32_t int alt_IWorldObject_GetDimension(jnr.ffi.Pointer _instance);
 
         /**
@@ -4326,6 +4565,8 @@ public class CAPI
         @jnr.ffi.types.u_int64_t long alt_IWorldObject_GetRefCount(jnr.ffi.Pointer _instance);
 
         alt_IBaseObject_Type alt_IWorldObject_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_IWorldObject_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IWorldObject_RemoveRef(jnr.ffi.Pointer _instance);
 
