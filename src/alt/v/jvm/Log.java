@@ -24,16 +24,13 @@ public final class Log
 
     public static void info(String msg)
     {
-        try(var sw = new AltStringView(msg))
-        {
-            CAPI.func.alt_ICore_LogInfo(CAPI.core, sw.ptr());
-        }
+        var sw = new AltStringView(msg);
+        CAPI.func.alt_ICore_LogInfo(CAPI.core, sw.ptr());
     }
 
-    public static void error(String msg) {
-        try(var sw = new AltStringView(msg))
-        {
-            CAPI.func.alt_ICore_LogError(CAPI.core, sw.ptr());
-        }
+    public static void error(String msg)
+    {
+        var sw = new AltStringView(msg);
+        CAPI.func.alt_ICore_LogError(CAPI.core, sw.ptr());
     }
 }

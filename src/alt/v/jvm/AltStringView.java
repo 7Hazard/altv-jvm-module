@@ -4,12 +4,15 @@ import jnr.ffi.Memory;
 import jnr.ffi.Pointer;
 import jnr.ffi.Struct;
 
-public class AltStringView implements AutoCloseable
+/**
+ * Garbage collected alt_StringView
+ */
+public class AltStringView
 {
     private final CAPI.alt_StringView sw = new CAPI.alt_StringView();
 
     /**
-     * CREATING StringView THIS WAY SHOULD NOT BE CLOSED
+     * Garbage collected alt_StringView
      * @param str
      */
     public AltStringView(String str)
@@ -25,6 +28,10 @@ public class AltStringView implements AutoCloseable
         sw.useMemory(ptr);
     }
 
+    /**
+     * Equivilent of getting the char*
+     * @return String (no explicit freeing should be done)
+     */
     public String str()
     {
         var p = ptr();
@@ -39,10 +46,5 @@ public class AltStringView implements AutoCloseable
     public Pointer ptr()
     {
         return Struct.getMemory(sw);
-    }
-
-    @Override
-    public void close() /*throws Exception*/ {
-        CAPI.func.alt_StringView_free(Struct.getMemory(sw));
     }
 }
