@@ -19,7 +19,7 @@
         {
             "label": "Build Debug (Gradle)",
             "type": "shell",
-            "command": "./gradlew prep debug build",
+            "command": "./gradlew debug prep build",
             "group": {
                 "kind": "build",
                 "isDefault": true

@@ -47,7 +47,7 @@ class VM
         jclass cls = env->FindClass("alt/v/jvm/Main");
         if(cls == nullptr)
         {
-            util::loge(core, "[JVM] Module JAR is corrupt or '" JVM_JAR_NAME "' doesn't exist");
+            util::loge(core, "[JVM] " JVM_JAR_NAME " is corrupt or doesn't exist");
             return false;
         }
         jmethodID mid = env->GetStaticMethodID(cls, "main", "(JZ)V");

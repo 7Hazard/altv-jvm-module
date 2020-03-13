@@ -1,43 +1,43 @@
 import org.gradle.internal.os.OperatingSystem;
 
 buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        jcenter()
-    }
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		jcenter()
+	}
 }
 
 plugins {
-    id "java"
-    id "eclipse"
-    id 'java-library-distribution'
-    
-    // Publishing
-    // id "com.jfrog.bintray" version "1.7.3"
-    id "maven"
+	id "java"
+	id "eclipse"
+	id 'java-library-distribution'
+	
+	// Publishing
+	// id "com.jfrog.bintray" version "1.7.3"
+	id "maven"
 }
 
 repositories {
-    // maven { url "https://jitpack.io" }
-    mavenLocal()
-    mavenCentral()
-    jcenter()
+	// maven { url "https://jitpack.io" }
+	mavenLocal()
+	mavenCentral()
+	jcenter()
 }
 
 group = 'com.gitlab.7Hazard'
 
 sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
+	main {
+		java {
+			srcDirs = ['src']
+		}
+	}
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/com.github.jnr/jnr-ffi
-    compile group: 'com.github.jnr', name: 'jnr-ffi', version: '2.1.9'
+	// https://mvnrepository.com/artifact/com.github.jnr/jnr-ffi
+	compile group: 'com.github.jnr', name: 'jnr-ffi', version: '2.1.9'
 }
 
 tasks.withType(JavaCompile) {
@@ -45,28 +45,28 @@ tasks.withType(JavaCompile) {
 }
 
 jar {
-    manifest {
-        attributes(
-            'Main-Class': 'alt.v.jvm.Main',
-        )
-    }
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+	manifest {
+		attributes(
+			'Main-Class': 'alt.v.jvm.Main',
+		)
+	}
+	from {
+		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+	}
 }
 
 if(System.env['JITPACK'] == null)
 {
-    task wrap(type: Exec) {
-        commandLine "node", "wrap"
-        dependsOn "module:build"
-    }
-    compileJava.dependsOn wrap
+	task wrap(type: Exec) {
+		commandLine "node", "wrap"
+		dependsOn "buildModule"
+	}
+	compileJava.dependsOn wrap
 }
 
 project.ext.set("debug", false)
 task debug() {
-    project.debug = true
+	project.debug = true
 }
 
 // task called before build for preparing build
@@ -74,33 +74,63 @@ task prep
 
 if(System.env['JITPACK'] == null)
 {
-    task getCAPI(type: Copy) {
-        def capi = file("${buildDir}/altv-capi-server")
-        if(!capi.exists())
-        {
-            def url = ""
-            if(OperatingSystem.current().isWindows()) {
-                url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD-WIN32/altv-capi-server-win32.zip?job=publish&inline=false"
-            }
-            else if(OperatingSystem.current().isLinux()) {
-                url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD/altv-capi-server-linux.zip?job=publish&inline=false"
-            }
-            else {
-                throw new GradleException('Unknown env to get CAPI for')
-            }
+	task getCAPI(type: Copy) {
+		def capi = file("${buildDir}/altv-capi-server")
+		if(!capi.exists())
+		{
+			def url = ""
+			if(OperatingSystem.current().isWindows()) {
+				url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD-WIN32/altv-capi-server-win32.zip?job=publish&inline=false"
+			}
+			else if(OperatingSystem.current().isLinux()) {
+				url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD/altv-capi-server-linux.zip?job=publish&inline=false"
+			}
+			else {
+				throw new GradleException('Unknown env to get CAPI for')
+			}
 
-            def zip = new File("${buildDir}/capi.zip")
-            if (!zip.exists()) {
-                zip.getParentFile().mkdirs()
-                zip.createNewFile()
-            }
-            new URL(url).withInputStream{ i -> zip.withOutputStream{ it << i }}
-        }
+			def zip = new File("${buildDir}/capi.zip")
+			if (!zip.exists()) {
+				zip.getParentFile().mkdirs()
+				zip.createNewFile()
+			}
+			new URL(url).withInputStream{ i -> zip.withOutputStream{ it << i }}
+		}
 
-        from zipTree(file("${buildDir}/capi.zip"))
-        into file("${buildDir}")
+		from zipTree(file("${buildDir}/capi.zip"))
+		into file("${buildDir}")
+	}
+	prep.dependsOn getCAPI
+
+	task buildModule(type: Exec) {
+		workingDir "module"
+
+    def version = "${System.env['CI_PIPELINE_IID']}-${System.env['CI_COMMIT_REF_SLUG']}"
+    
+    if(project.debug)
+    {
+      if(OperatingSystem.current().isWindows())
+        commandLine "cmd", "/c", "build-debug.bat", version // windows
+      else
+        commandLine "./build-debug.sh", version // linux/mac
     }
-    prep.dependsOn getCAPI
+    else
+    {
+      if(OperatingSystem.current().isWindows())
+        commandLine "cmd", "/c", "build.bat", version // windows
+      else
+        commandLine "./build.sh", version // linux/mac
+    }
+
+		//store the output instead of printing to the console:
+		standardOutput = new ByteArrayOutputStream()
+
+		//extension method stopTomcat.output() can be used to obtain the output:
+		ext.output = {
+			return standardOutput.toString()
+		}
+	}
+	prep.dependsOn buildModule
 }
 
 // task cleanBuild() {
@@ -109,26 +139,26 @@ if(System.env['JITPACK'] == null)
 // clean.dependsOn cleanBuild
 
 task copyToOutput(type: Copy) {
-    from jar.destinationDir
-    into "build/altv-jvm-module"
+	from jar.destinationDir
+	into "build/altv-jvm-module"
 
-    //from configurations.runtime
-    //into "build/altv-jvm-module"
+	//from configurations.runtime
+	//into "build/altv-jvm-module"
 
-    outputs.upToDateWhen { false }
+	outputs.upToDateWhen { false }
 }
 jar.finalizedBy copyToOutput
 
 distributions {
-    main {
-        baseName = 'altv-jvm-module'
-        contents {
-            if(System.env['JITPACK'] == null)
-            {    
-                from "../build/altv-capi-server/bin/altv-capi-server.dll", "module/build/libs/module/shared/altv-jvm-module.dll"
-            }
-        }
-    }
+	main {
+		baseName = 'altv-jvm-module'
+		contents {
+			if(System.env['JITPACK'] == null)
+			{    
+				from "../build/altv-capi-server/bin/altv-capi-server.dll", "module/build/libs/module/shared/altv-jvm-module.dll"
+			}
+		}
+	}
 }
 
 
@@ -139,24 +169,24 @@ distributions {
 
 if(System.env['JITPACK'] != null)
 {
-    println "JITPACK BUILD"
+	println "JITPACK BUILD"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allJava
+	classifier = 'sources'
+	from sourceSets.main.allJava
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    javadoc.failOnError(false);
-    javadoc.source = sourceSets.main.allJava
-    from javadoc.destinationDir
+	classifier = 'javadoc'
+	javadoc.failOnError(false);
+	javadoc.source = sourceSets.main.allJava
+	from javadoc.destinationDir
 }
 
 artifacts {
-    archives sourcesJar
-    archives javadocJar
+	archives sourcesJar
+	archives javadocJar
 }
 
 // def siteUrl = 'https://gitlab.com/7Hazard/altv-jvm-module'

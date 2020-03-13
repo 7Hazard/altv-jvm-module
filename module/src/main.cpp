@@ -1,3 +1,5 @@
+#define JVM_JAR_NAME "altv-jvm-module.jar"
+
 #include "altv-capi.hpp"
 
 #ifdef _WIN32
