@@ -58,6 +58,7 @@ jar {
 if(System.env['JITPACK'] == null)
 {
 	task wrap(type: Exec) {
+		standardOutput = out
 		commandLine "node", "wrap"
 		dependsOn "buildModule"
 	}
@@ -103,6 +104,7 @@ if(System.env['JITPACK'] == null)
 	prep.dependsOn getCAPI
 
 	task buildModule(type: Exec) {
+		standardOutput = out
 		workingDir "module"
 
     def version = "${System.env['CI_PIPELINE_IID']}-${System.env['CI_COMMIT_REF_SLUG']}"
@@ -130,6 +132,7 @@ if(System.env['JITPACK'] == null)
 			return standardOutput.toString()
 		}
 	}
+	buildModule.dependsOn getCAPI
 	prep.dependsOn buildModule
 }
 

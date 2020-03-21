@@ -96,10 +96,13 @@ function getJavaType(type, callbackName = "unnamedCallback"+javacallbacks.length
 
                 case "unsigned long long":
                     return "@jnr.ffi.types.u_int64_t long"
+
+                case "nullptr_t":
+                    return "jnr.ffi.Pointer"
                 
             
                 default:
-                    throw "UNHANDLED FUNDAMENTAL TYPE"
+                    throw "UNHANDLED FUNDAMENTAL TYPE "+type.name
                     break;
             }
         }
