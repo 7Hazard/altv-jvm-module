@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 project(altv-jvm-module)
 
+# find_package(Java REQUIRED COMPONENTS Development)
+find_package(JNI REQUIRED)
+# message(FATAL_ERROR "Location: ${JAVA_JVM_LIBRARY}")
+
 set(JVM_MODULE_VERSION "debug" CACHE BOOL "Module Version")
 
 add_definitions(
@@ -20,9 +24,11 @@ target_compile_definitions(altv-jvm-module PRIVATE
 target_include_directories(altv-jvm-module PRIVATE
     src
     ${PROJECT_SOURCE_DIR}/../build/altv-capi-server/include/server
+    ${JNI_INCLUDE_DIRS}
 )
 target_link_libraries(altv-jvm-module PRIVATE
     ${PROJECT_SOURCE_DIR}/../build/altv-capi-server/lib/altv-capi-server.lib
+    ${JAVA_JVM_LIBRARY}
 )
 set_target_properties(altv-jvm-module PROPERTIES
     # ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/altv-jvm-module/lib
@@ -37,13 +43,13 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
 
-    target_include_directories(altv-jvm-module PRIVATE
-        "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/include"
-        "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/include/win32"
-    )
-    target_link_libraries(altv-jvm-module PRIVATE
-        "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/lib/jvm.lib"
-    )
+    # target_include_directories(altv-jvm-module PRIVATE
+    #     "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/include"
+    #     "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/include/win32"
+    # )
+    # target_link_libraries(altv-jvm-module PRIVATE
+    #     "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/lib/jvm.lib"
+    # )
 else()
     # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++17 -fms-extensions -fdelayed-template-parsing -fexceptions")
     message(FATAL_ERROR "LINUX NOT SUPPORTED")

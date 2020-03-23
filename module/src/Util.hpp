@@ -1,6 +1,8 @@
 #pragma once
 
 #include <filesystem>
+#include <time.h>
+#include <string>
 #include "altv-capi.hpp"
 
 namespace util
@@ -49,9 +51,9 @@ inline auto GetTimestamp()
 }
 
 template<std::size_t N>
-inline void logi(alt_ICore* core, char (&str)[N])
+inline void logi(alt_ICore* core, const char (&str)[N])
 {
-    alt_StringView sw{str, n+1};
+    alt_StringView sw{(char*)str, N+1};
     alt_ICore_LogInfo(core, &sw);
 }
 
@@ -62,9 +64,9 @@ inline void logi(alt_ICore* core, const std::string& str)
 }
 
 template<std::size_t N>
-inline void loge(alt_ICore* core, char (&str)[N])
+inline void loge(alt_ICore* core, const char (&str)[N])
 {
-    alt_StringView sw{str, n+1};
+    alt_StringView sw{(char*)str, N+1};
     alt_ICore_LogError(core, &sw);
 }
 
