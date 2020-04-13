@@ -6,7 +6,8 @@
 
 class VM
 {
-    public:
+public:
+
     static JavaVM*& jvm()
     {
         static JavaVM* jvm;
@@ -56,14 +57,17 @@ class VM
             util::loge(core, "[JVM] Could not find 'void Main::main(long, boolean)'");
             return false;
         }
+
 #ifdef _DEBUG
         util::logi(core, "[JVM] Debug Build");
         env->CallStaticVoidMethod(cls, mid, core, true);
 #else
         env->CallStaticVoidMethod(cls, mid, core, false);
 #endif
+
         jboolean flag = env->ExceptionCheck();
-        if (flag) {
+        if (flag)
+        {
             util::loge(core, "Exception occurred while executing Java entry point");
             env->ExceptionDescribe();
             env->ExceptionClear();

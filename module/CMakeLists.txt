@@ -23,12 +23,12 @@ target_compile_definitions(altv-jvm-module PRIVATE
 )
 target_include_directories(altv-jvm-module PRIVATE
     src
-    ${PROJECT_SOURCE_DIR}/../build/altv-capi-server/include/server
+    ${PROJECT_SOURCE_DIR}/../build/altv-capi/server
     ${JNI_INCLUDE_DIRS}
 )
 target_link_libraries(altv-jvm-module PRIVATE
-    ${PROJECT_SOURCE_DIR}/../build/altv-capi-server/lib/altv-capi-server.lib
     ${JAVA_JVM_LIBRARY}
+    ${PROJECT_SOURCE_DIR}/../build/altv-capi/altv-server.lib
 )
 set_target_properties(altv-jvm-module PROPERTIES
     # ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/altv-jvm-module/lib

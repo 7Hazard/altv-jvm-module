@@ -1,8 +1,20 @@
 package alt.v.jvm;
 
+import jnr.ffi.Platform;
+import jnr.ffi.Platform.OS;
+
 public class CAPIExtra
 {
-    public static final CAPIExtraFunctions func = jnr.ffi.LibraryLoader.create(CAPIExtraFunctions.class).load("altv-capi-server");
+    static CAPIExtraFunctions Load()
+    {
+        var lib = jnr.ffi.LibraryLoader.create(CAPIExtraFunctions.class);
+        if(Platform.getNativePlatform().getOS() == OS.WINDOWS)
+            return lib.load("altv-server.exe");
+        else
+            return lib.load("altv-server");
+    }
+
+    public static final CAPIExtraFunctions func = Load();
 
     public interface CreateImplFn
     {

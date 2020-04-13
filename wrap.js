@@ -336,9 +336,21 @@ for(let [funcname, func] of Object.entries(capiinfo.functions))
 let javasrc =
 `package alt.v.jvm;
 
+import jnr.ffi.Platform;
+import jnr.ffi.Platform.OS;
+
 public class CAPI
 {
-    public static final CAPIFunctions func = jnr.ffi.LibraryLoader.create(CAPIFunctions.class).load("altv-capi-server");
+    static CAPIFunctions Load()
+    {
+        var lib = jnr.ffi.LibraryLoader.create(CAPIFunctions.class);
+        if(Platform.getNativePlatform().getOS() == OS.WINDOWS)
+            return lib.load("altv-server.exe");
+        else
+            return lib.load("altv-server");
+    }
+
+    public static final CAPIFunctions func = Load();
     public static jnr.ffi.Runtime runtime = jnr.ffi.Runtime.getRuntime(func);
     public static jnr.ffi.Pointer core;
     ${javatypes.join("")}
@@ -350,7 +362,6 @@ public class CAPI
     }
 }
 `
-
 
 fs.writeFileSync(__dirname+"/src/alt/v/jvm/CAPI.java", javasrc)
 
