@@ -23,7 +23,7 @@ target_compile_definitions(altv-jvm-module PRIVATE
 )
 target_include_directories(altv-jvm-module PRIVATE
     src
-    ${PROJECT_SOURCE_DIR}/../build/altv-capi/server
+    ${PROJECT_SOURCE_DIR}/../build/altv-capi
     ${JNI_INCLUDE_DIRS}
 )
 target_link_libraries(altv-jvm-module PRIVATE

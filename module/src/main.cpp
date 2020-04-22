@@ -1,6 +1,6 @@
 #define JVM_JAR_NAME "altv-jvm-module.jar"
 
-#include "altv-capi.hpp"
+#include "altv-capi-server.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -23,4 +23,4 @@ CAPI_EXPORT bool altMain(alt_ICore* core)
     return true;
 }
 
-CAPI_EXPORT_SDK_VERSION;
+CAPI_SKIP_VERSION_CHECK;

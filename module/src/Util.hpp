@@ -3,7 +3,7 @@
 #include <filesystem>
 #include <time.h>
 #include <string>
-#include "altv-capi.hpp"
+#include "altv-capi-server.h"
 
 namespace util
 {
