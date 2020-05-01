@@ -73,36 +73,28 @@ task debug() {
 // task called before build for preparing build
 task prep
 
+def downloadFile(url, dest)
+{
+	def f = new File(dest)
+	if (!f.exists()) {
+			new URL(url).withInputStream{ i -> f.withOutputStream{ it << i }}
+	}
+}
+
+task getCAPI(type: Copy) {
+	mkdir "build/altv-capi/server"
+
+	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/server/altv-capi.json", "build/altv-capi/altv-capi-server.json")
+	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/altv-capi-server.h", "build/altv-capi/altv-capi-server.h")
+	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/altv-capi-predefines.h", "build/altv-capi/altv-capi-predefines.h")
+	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/altv-capi-extra.h", "build/altv-capi/altv-capi-extra.h")
+	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/server/altv-capi.h", "build/altv-capi/server/altv-capi.h")
+	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/altv-server.lib", "build/altv-capi/altv-server.lib")
+}
+prep.dependsOn getCAPI
+
 if(System.env['JITPACK'] == null)
 {
-	task getCAPI(type: Copy) {
-		def capi = file("${buildDir}/altv-capi-server")
-		if(!capi.exists())
-		{
-			def url = ""
-			if(OperatingSystem.current().isWindows()) {
-				url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD-WIN32/altv-capi-server-win32.zip?job=publish&inline=false"
-			}
-			else if(OperatingSystem.current().isLinux()) {
-				url = "https://gitlab.com/7Hazard/altv-capi/-/jobs/artifacts/master/raw/capi/BUILD/altv-capi-server-linux.zip?job=publish&inline=false"
-			}
-			else {
-				throw new GradleException('Unknown env to get CAPI for')
-			}
-
-			def zip = new File("${buildDir}/capi.zip")
-			if (!zip.exists()) {
-				zip.getParentFile().mkdirs()
-				zip.createNewFile()
-			}
-			new URL(url).withInputStream{ i -> zip.withOutputStream{ it << i }}
-		}
-
-		from zipTree(file("${buildDir}/capi.zip"))
-		into file("${buildDir}")
-	}
-	prep.dependsOn getCAPI
-
 	task buildModule(type: Exec) {
 		standardOutput = out
 		workingDir "module"
