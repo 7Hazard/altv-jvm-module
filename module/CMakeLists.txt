@@ -7,6 +7,16 @@ find_package(JNI REQUIRED)
 
 set(JVM_MODULE_VERSION "debug" CACHE BOOL "Module Version")
 
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(ALTV_JVM_MODULE_PLATFORM "win32")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(ALTV_JVM_MODULE_PLATFORM "linux")
+    message(FATAL_ERROR "UNSUPPORTED PLATFORM")
+else()
+    message(FATAL_ERROR "UNSUPPORTED PLATFORM")
+endif()
+
 add_definitions(
     -D_UNICODE
     -DUNICODE
@@ -33,7 +43,7 @@ target_link_libraries(altv-jvm-module PRIVATE
 set_target_properties(altv-jvm-module PROPERTIES
     # ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/altv-jvm-module/lib
     # LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/altv-jvm-module/lib
-    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build/altv-jvm-module
+    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build/${ALTV_JVM_MODULE_PLATFORM}/altv-jvm-module
 )
 
 # Platform specific stuff

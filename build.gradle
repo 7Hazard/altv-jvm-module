@@ -40,6 +40,15 @@ dependencies {
 	compile group: 'com.github.jnr', name: 'jnr-ffi', version: '2.1.9'
 }
 
+def platform = "unknown"
+if(OperatingSystem.current().isWindows())
+{
+	platform = "win32"
+}
+else if(OperatingSystem.current().isLinux()) {
+	platform = "linux"
+}
+
 tasks.withType(JavaCompile) {
   options.compilerArgs << "-Xlint:all" << "-Xlint:-rawtypes" << "-Werror"
 }
@@ -136,7 +145,7 @@ if(System.env['JITPACK'] == null)
 
 task copyToOutput(type: Copy) {
 	from jar.destinationDir
-	into "build/altv-jvm-module"
+	into "build/$platform/altv-jvm-module"
 
 	//from configurations.runtime
 	//into "build/altv-jvm-module"
@@ -144,19 +153,6 @@ task copyToOutput(type: Copy) {
 	outputs.upToDateWhen { false }
 }
 jar.finalizedBy copyToOutput
-
-distributions {
-	main {
-		baseName = 'altv-jvm-module'
-		contents {
-			if(System.env['JITPACK'] == null)
-			{    
-				from "module/build/libs/module/shared/altv-jvm-module.dll"
-			}
-		}
-	}
-}
-
 
 
 ///
