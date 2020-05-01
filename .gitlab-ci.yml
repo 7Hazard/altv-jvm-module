@@ -9,6 +9,7 @@ build:win32:
     image: 7hazard/node-clang-win32-cross
 
     script:
+        - "chmod -R 777 ./"
         - "./gradlew build"
 
     artifacts:
@@ -29,6 +30,7 @@ build:linux:
     image: 7hazard/node-clang-7
 
     script:
+        - "chmod -R 777 ./"
         - "./gradlew build"
 
     artifacts:
