@@ -6,7 +6,7 @@
         {
             "label": "Build (Gradle)",
             "type": "shell",
-            "command": "./gradlew prep build",
+            "command": "./gradlew build",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -19,7 +19,7 @@
         {
             "label": "Build Debug (Gradle)",
             "type": "shell",
-            "command": "./gradlew debug prep build",
+            "command": "./gradlew debug build",
             "group": {
                 "kind": "build",
                 "isDefault": true
