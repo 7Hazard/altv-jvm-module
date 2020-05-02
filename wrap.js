@@ -334,7 +334,7 @@ for(let [funcname, func] of Object.entries(capiinfo.functions))
 
 // Write the java source
 let javasrc =
-`package alt.v.jvm;
+`package hazard7.altv.jvm;
 
 import jnr.ffi.Platform;
 import jnr.ffi.Platform.OS;
@@ -363,6 +363,6 @@ public class CAPI
 }
 `
 
-fs.writeFileSync(__dirname+"/src/alt/v/jvm/CAPI.java", javasrc)
+fs.writeFileSync(__dirname+"/src/hazard7/altv/jvm/CAPI.java", javasrc)
 
 console.log("Done wrapping to Java")

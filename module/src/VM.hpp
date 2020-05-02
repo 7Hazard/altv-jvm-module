@@ -45,7 +45,7 @@ public:
             return false;
         }
 
-        jclass cls = env->FindClass("alt/v/jvm/Main");
+        jclass cls = env->FindClass("hazard7/altv/jvm/Main");
         if(cls == nullptr)
         {
             util::loge(core, "[JVM] " JVM_JAR_NAME " is corrupt or doesn't exist");

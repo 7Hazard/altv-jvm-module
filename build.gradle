@@ -10,11 +10,6 @@ buildscript {
 
 plugins {
 	id "java"
-	id "eclipse"
-	id 'java-library-distribution'
-	
-	// Publishing
-	// id "com.jfrog.bintray" version "1.7.3"
 	id "maven"
 }
 
@@ -37,7 +32,7 @@ sourceSets {
 
 dependencies {
 	// https://mvnrepository.com/artifact/com.github.jnr/jnr-ffi
-	compile group: 'com.github.jnr', name: 'jnr-ffi', version: '2.1.9'
+	implementation 'com.github.jnr:jnr-ffi:2.1.9'
 }
 
 def platform = "unknown"
@@ -56,12 +51,16 @@ tasks.withType(JavaCompile) {
 jar {
 	manifest {
 		attributes(
-			'Main-Class': 'alt.v.jvm.Main',
+			'Main-Class': 'hazard7.altv.jvm.Main',
 		)
 	}
-	from {
-		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-	}
+	
+	// javadoc.failOnError(false);
+	// javadoc.source = sourceSets.main.allSource
+
+	from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+	from sourceSets.main.allSource
+	// from javadoc.destinationDir
 }
 
 if(System.env['JITPACK'] == null)
@@ -78,9 +77,6 @@ project.ext.set("debug", false)
 task debug() {
 	project.debug = true
 }
-
-// task called before build for preparing build
-// task prep
 
 def downloadFile(url, dest)
 {
@@ -129,31 +125,21 @@ if(System.env['JITPACK'] == null)
 		//store the output instead of printing to the console:
 		standardOutput = new ByteArrayOutputStream()
 
-		//extension method stopTomcat.output() can be used to obtain the output:
 		ext.output = {
 			return standardOutput.toString()
 		}
 	}
 	buildModule.dependsOn getCAPI
-	// prep.dependsOn buildModule
 }
 
-// task cleanBuild() {
-//     new File("${buildDir}").delete()
-// }
-// clean.dependsOn cleanBuild
-
 task copyToOutput(type: Copy) {
-	from jar.destinationDir
+	// from jar.destinationDir
+	from "build/libs/altv-jvm-module.jar"
 	into "build/$platform/altv-jvm-module"
-
-	//from configurations.runtime
-	//into "build/altv-jvm-module"
 
 	outputs.upToDateWhen { false }
 }
 jar.finalizedBy copyToOutput
-
 
 ///
 /// Publishing
@@ -162,21 +148,4 @@ jar.finalizedBy copyToOutput
 if(System.env['JITPACK'] != null)
 {
 	println "JITPACK BUILD"
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = 'sources'
-	from sourceSets.main.allJava
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-	classifier = 'javadoc'
-	javadoc.failOnError(false);
-	javadoc.source = sourceSets.main.allJava
-	from javadoc.destinationDir
-}
-
-artifacts {
-	archives sourcesJar
-	archives javadocJar
 }

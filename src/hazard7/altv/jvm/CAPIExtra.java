@@ -1,4 +1,4 @@
-package alt.v.jvm;
+package hazard7.altv.jvm;
 
 import jnr.ffi.Platform;
 import jnr.ffi.Platform.OS;
