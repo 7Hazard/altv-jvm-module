@@ -63,21 +63,6 @@ jar {
 	// from javadoc.destinationDir
 }
 
-if(System.env['JITPACK'] == null)
-{
-	task wrap(type: Exec) {
-		standardOutput = out
-		commandLine "node", "wrap"
-		dependsOn "buildModule"
-	}
-	compileJava.dependsOn wrap
-}
-
-project.ext.set("debug", false)
-task debug() {
-	project.debug = true
-}
-
 def downloadFile(url, dest)
 {
 	def f = new File(dest)
@@ -94,42 +79,62 @@ task getCAPI(type: Copy) {
 	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/altv-capi-predefines.h", "build/altv-capi/altv-capi-predefines.h")
 	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/altv-capi-extra.h", "build/altv-capi/altv-capi-extra.h")
 	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/server/altv-capi.h", "build/altv-capi/server/altv-capi.h")
-	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/altv-server.lib", "build/altv-capi/altv-server.lib")
+	
+	if(OperatingSystem.current().isWindows())
+	{
+		downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/altv-server.lib", "build/altv-capi/altv-server.lib")
+	}
 }
 // prep.dependsOn getCAPI
 jar.dependsOn getCAPI
 
 if(System.env['JITPACK'] == null)
 {
+	task wrap(type: Exec) {
+		standardOutput = out
+		commandLine "node", "wrap"
+		dependsOn "getCAPI"
+	}
+	compileJava.dependsOn wrap
+
 	task buildModule(type: Exec) {
 		standardOutput = out
 		workingDir "module"
 
-    def version = "${System.env['CI_PIPELINE_IID']}-${System.env['CI_COMMIT_REF_SLUG']}"
-    
-    if(project.debug)
-    {
-      if(OperatingSystem.current().isWindows())
-        commandLine "cmd", "/c", "build-debug.bat", version // windows
-      else
-        commandLine "./build-debug.sh", version // linux/mac
-    }
-    else
-    {
-      if(OperatingSystem.current().isWindows())
-        commandLine "cmd", "/c", "build.bat", version // windows
-      else
-        commandLine "./build.sh", version // linux/mac
-    }
+		def version = "${System.env['CI_PIPELINE_IID']}-${System.env['CI_COMMIT_REF_SLUG']}"
+		
+		if(OperatingSystem.current().isWindows())
+			commandLine "cmd", "/c", "build.bat", version // windows
+		else
+			commandLine "./build.sh", version // linux/mac
 
-		//store the output instead of printing to the console:
-		standardOutput = new ByteArrayOutputStream()
-
-		ext.output = {
-			return standardOutput.toString()
-		}
+		//store the output instead of printing to the console
+		standardOutput = out
 	}
 	buildModule.dependsOn getCAPI
+
+	task buildModuleDebug(type: Exec) {
+		standardOutput = out
+		workingDir "module"
+
+		def version = "${System.env['CI_PIPELINE_IID']}-${System.env['CI_COMMIT_REF_SLUG']}"
+		
+		if(OperatingSystem.current().isWindows())
+			commandLine "cmd", "/c", "build-debug.bat", version // windows
+		else
+		{
+			doFirst {
+				throw new GradleException("DEBUG MODULE BUILD ONLY SUPPORTED ON NON-WINDOWS")
+			}
+			doLast {
+				commandLine "./build-debug.sh", version // linux/mac
+			}
+		}
+
+		//store the output instead of printing to the console
+		standardOutput = out
+	}
+	buildModuleDebug.dependsOn getCAPI
 }
 
 task copyToOutput(type: Copy) {

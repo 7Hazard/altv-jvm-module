@@ -9,10 +9,9 @@ set(JVM_MODULE_VERSION "debug" CACHE BOOL "Module Version")
 
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    set(ALTV_JVM_MODULE_PLATFORM "win32")
+    set(JVM_MODULE_PLATFORM "win32")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    set(ALTV_JVM_MODULE_PLATFORM "linux")
-    message(FATAL_ERROR "UNSUPPORTED PLATFORM")
+    set(JVM_MODULE_PLATFORM "linux")
 else()
     message(FATAL_ERROR "UNSUPPORTED PLATFORM")
 endif()
@@ -30,6 +29,7 @@ target_compile_definitions(altv-jvm-module PRIVATE
     ALT_SERVER_API
     JVM_MODULE_DLL
     JVM_MODULE_VERSION="${JVM_MODULE_VERSION}"
+    CAPI_DLL
 )
 target_include_directories(altv-jvm-module PRIVATE
     src
@@ -38,12 +38,11 @@ target_include_directories(altv-jvm-module PRIVATE
 )
 target_link_libraries(altv-jvm-module PRIVATE
     ${JAVA_JVM_LIBRARY}
-    ${PROJECT_SOURCE_DIR}/../build/altv-capi/altv-server.lib
 )
 set_target_properties(altv-jvm-module PROPERTIES
     # ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/altv-jvm-module/lib
-    # LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/altv-jvm-module/lib
-    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build/${ALTV_JVM_MODULE_PLATFORM}/altv-jvm-module
+    LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build/${JVM_MODULE_PLATFORM}/altv-jvm-module
+    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build/${JVM_MODULE_PLATFORM}/altv-jvm-module
 )
 
 # Platform specific stuff
@@ -53,15 +52,10 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
 
-    # target_include_directories(altv-jvm-module PRIVATE
-    #     "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/include"
-    #     "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/include/win32"
-    # )
-    # target_link_libraries(altv-jvm-module PRIVATE
-    #     "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/lib/jvm.lib"
-    # )
+    target_link_libraries(altv-jvm-module PRIVATE
+        ${PROJECT_SOURCE_DIR}/../build/altv-capi/altv-server.lib
+    )
 else()
-    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++17 -fms-extensions -fdelayed-template-parsing -fexceptions")
-    message(FATAL_ERROR "LINUX NOT SUPPORTED")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++17 -fms-extensions -fdelayed-template-parsing -fexceptions")
 endif()
 

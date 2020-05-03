@@ -21,3 +21,4 @@ bin/
 
 capi/**
 /src/alt/v/jvm/CAPI.java
+/module/BUILD-LINUX/

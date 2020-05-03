@@ -6,27 +6,27 @@
         {
             "label": "Build (Gradle)",
             "type": "shell",
-            "command": "./gradlew build",
+            "command": "./gradlew build buildModule",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "problemMatcher": [
                 "$msCompile",
-                "$gcc",
+                "$gcc"
             ]
         },
         {
             "label": "Build Debug (Gradle)",
             "type": "shell",
-            "command": "./gradlew debug build",
+            "command": "./gradlew build buildModuleDebug",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "problemMatcher": [
                 "$msCompile",
-                "$gcc",
+                "$gcc"
             ]
         },
         {
@@ -39,7 +39,7 @@
             },
             "problemMatcher": [
                 "$msCompile",
-                "$gcc",
+                "$gcc"
             ]
         }
     ]
