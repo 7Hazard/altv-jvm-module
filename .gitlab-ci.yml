@@ -72,13 +72,10 @@ publish:
         # - "echo PUBLISHING"
         - "echo Build ${CI_COMMIT_REF_SLUG}-${CI_PIPELINE_IID} '|' Project ID ${CI_PROJECT_ID} '|' Job ID ${CI_JOB_ID} '|' API Key ${CI_GITLAB_API_PRIVATE_KEY}" 
         
-        # linux client builds, if there ever is a chance for that to be needed
-        # { \\\"name\\\": \\\"client-linux\\\", \\\"url\\\": \\\"https://gitlab.com/7Hazard/altv-capi/-/jobs/${CI_JOB_ID}/artifacts/raw/capi/BUILD/altv-capi-client-linux.zip?inline=false\\\" },
-        # { \\\"name\\\": \\\"client-linux\\\", \\\"url\\\": \\\"https://gitlab.com/7Hazard/altv-capi/-/jobs/${CI_JOB_ID}/artifacts/raw/capi/BUILD/altv-capi-client-static-linux.zip?inline=false\\\" },
         - "curl --header \"Content-Type: application/json\" --header \"PRIVATE-TOKEN: ${CI_GITLAB_API_PRIVATE_KEY}\" 
         --data \"{ \\\"name\\\": \\\"${CI_COMMIT_REF_SLUG}-${CI_PIPELINE_IID}\\\", \\\"tag_name\\\": \\\"${CI_COMMIT_REF_SLUG}-${CI_PIPELINE_IID}\\\", \\\"ref\\\": \\\"${CI_COMMIT_REF_SLUG}\\\", \\\"description\\\": \\\"Build ${CI_COMMIT_REF_SLUG}-${CI_PIPELINE_IID}\\\", \\\"assets\\\": { \\\"links\\\": [
-            { \\\"name\\\": \\\"server-win32\\\", \\\"url\\\": \\\"https://gitlab.com/7Hazard/altv-capi/-/jobs/${CI_JOB_ID}/artifacts/raw/build/altv-jvm-module-win32.zip?inline=false\\\" },
-            { \\\"name\\\": \\\"server-linux\\\", \\\"url\\\": \\\"https://gitlab.com/7Hazard/altv-capi/-/jobs/${CI_JOB_ID}/artifacts/raw/build/altv-jvm-module-linux.zip?inline=false\\\" },
+            { \\\"name\\\": \\\"altv-jvm-module-win32\\\", \\\"url\\\": \\\"https://gitlab.com/7Hazard/altv-jvm-module/-/jobs/${CI_JOB_ID}/artifacts/raw/build/altv-jvm-module-win32.zip?inline=false\\\" },
+            { \\\"name\\\": \\\"altv-jvm-module-linux\\\", \\\"url\\\": \\\"https://gitlab.com/7Hazard/altv-jvm-module/-/jobs/${CI_JOB_ID}/artifacts/raw/build/altv-jvm-module-linux.zip?inline=false\\\" },
         ]} }\"
         --request POST https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/releases"
     
