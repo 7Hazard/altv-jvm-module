@@ -8,8 +8,6 @@ build:win32:
         - docker
     image: 7hazard/node-clang-win32-cross
 
-    before_script:
-        - "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/"
     script:
         - "chmod -R 777 ./"
         - "./gradlew build buildModuleWin32"
@@ -31,8 +29,6 @@ build:linux:
         - docker
     image: 7hazard/node-clang-7
 
-    before_script:
-        - "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/"
     script:
         - "chmod -R 777 ./"
         - "./gradlew build buildModule"
@@ -63,11 +59,11 @@ publish:
         
         ## WIN32
         # client packaging
-        - "cd build/win32 && zip -r ../altv-jvm-module-win32.zip altv-jvm-module"
+        - "cd build/win32 && zip -r ../altv-jvm-module-win32.zip altv-jvm-module && cd ../../"
 
         ## LINUX
         # server packaging
-        - "cd build/linux && zip -r ../altv-jvm-module-linux.zip altv-jvm-module"
+        - "cd build/linux && zip -r ../altv-jvm-module-linux.zip altv-jvm-module && cd ../../"
         
         ## PUBLISH
         # - "echo TESTING ENV VARS: $CI_TEST_VAL '|' $CI_TEST_VAL_MASKED '|' ${CI_TEST_VAL} '|' ${CI_TEST_VAL_MASKED}"
