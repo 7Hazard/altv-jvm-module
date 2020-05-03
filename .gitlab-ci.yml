@@ -8,6 +8,8 @@ build:win32:
         - docker
     image: 7hazard/node-clang-win32-cross
 
+    before_script:
+        - ". /etc/environment"
     script:
         - "chmod -R 777 ./"
         - "./gradlew build buildModuleWin32"
@@ -29,6 +31,8 @@ build:linux:
         - docker
     image: 7hazard/node-clang-7
 
+    before_script:
+        - ". /etc/environment"
     script:
         - "chmod -R 777 ./"
         - "./gradlew build buildModule"
