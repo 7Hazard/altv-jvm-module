@@ -10,7 +10,7 @@ build:win32:
 
     script:
         - "chmod -R 777 ./"
-        - "./gradlew build buildModuleWin32"
+        - "./gradlew build buildModuleWin32Cross"
 
     artifacts:
         paths:
