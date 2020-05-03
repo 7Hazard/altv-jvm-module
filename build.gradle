@@ -107,11 +107,22 @@ if(System.env['JITPACK'] == null)
 			commandLine "cmd", "/c", "build.bat", version // windows
 		else
 			commandLine "./build.sh", version // linux/mac
-
-		//store the output instead of printing to the console
-		standardOutput = out
 	}
 	buildModule.dependsOn getCAPI
+
+	task buildModuleWin32Cross(type: Exec) {
+		standardOutput = out
+		workingDir "module"
+
+		def version = "${System.env['CI_PIPELINE_IID']}-${System.env['CI_COMMIT_REF_SLUG']}"
+		
+		commandLine "./build-win32.sh", version // linux/mac
+
+		downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/altv-server.lib", "build/altv-capi/altv-server.lib")
+
+
+	}
+	buildModuleWin32Cross.dependsOn getCAPI
 
 	task buildModuleDebug(type: Exec) {
 		standardOutput = out
@@ -130,9 +141,6 @@ if(System.env['JITPACK'] == null)
 				commandLine "./build-debug.sh", version // linux/mac
 			}
 		}
-
-		//store the output instead of printing to the console
-		standardOutput = out
 	}
 	buildModuleDebug.dependsOn getCAPI
 }
@@ -145,6 +153,15 @@ task copyToOutput(type: Copy) {
 	outputs.upToDateWhen { false }
 }
 jar.finalizedBy copyToOutput
+
+task copyToOutputWin32Cross(type: Copy) {
+	// from jar.destinationDir
+	from "build/libs/altv-jvm-module.jar"
+	into "build/win32/altv-jvm-module"
+
+	outputs.upToDateWhen { false }
+}
+buildModuleWin32Cross.finalizedBy copyToOutputWin32Cross
 
 ///
 /// Publishing

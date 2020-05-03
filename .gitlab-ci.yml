@@ -10,7 +10,7 @@ build:win32:
 
     script:
         - "chmod -R 777 ./"
-        - "./gradlew build"
+        - "./gradlew build buildModuleWin32"
 
     artifacts:
         paths:
@@ -31,7 +31,7 @@ build:linux:
 
     script:
         - "chmod -R 777 ./"
-        - "./gradlew build"
+        - "./gradlew build buildModule"
 
     artifacts:
         paths:
