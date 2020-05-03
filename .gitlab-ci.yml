@@ -8,6 +8,8 @@ build:win32:
         - docker
     image: 7hazard/node-clang-win32-cross
 
+    before_script:
+        - "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/"
     script:
         - "chmod -R 777 ./"
         - "./gradlew build buildModuleWin32Cross"
