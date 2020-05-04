@@ -75,7 +75,7 @@ publish:
         - "curl --header \"Content-Type: application/json\" --header \"PRIVATE-TOKEN: ${CI_GITLAB_API_PRIVATE_KEY}\" 
         --data \"{ \\\"name\\\": \\\"${CI_COMMIT_REF_SLUG}-${CI_PIPELINE_IID}\\\", \\\"tag_name\\\": \\\"${CI_COMMIT_REF_SLUG}-${CI_PIPELINE_IID}\\\", \\\"ref\\\": \\\"${CI_COMMIT_REF_SLUG}\\\", \\\"description\\\": \\\"Build ${CI_COMMIT_REF_SLUG}-${CI_PIPELINE_IID}\\\", \\\"assets\\\": { \\\"links\\\": [
             { \\\"name\\\": \\\"altv-jvm-module-win32\\\", \\\"url\\\": \\\"https://gitlab.com/7Hazard/altv-jvm-module/-/jobs/${CI_JOB_ID}/artifacts/raw/build/altv-jvm-module-win32.zip?inline=false\\\" },
-            { \\\"name\\\": \\\"altv-jvm-module-linux\\\", \\\"url\\\": \\\"https://gitlab.com/7Hazard/altv-jvm-module/-/jobs/${CI_JOB_ID}/artifacts/raw/build/altv-jvm-module-linux.zip?inline=false\\\" },
+            { \\\"name\\\": \\\"altv-jvm-module-linux\\\", \\\"url\\\": \\\"https://gitlab.com/7Hazard/altv-jvm-module/-/jobs/${CI_JOB_ID}/artifacts/raw/build/altv-jvm-module-linux.zip?inline=false\\\" }
         ]} }\"
         --request POST https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/releases"
     
