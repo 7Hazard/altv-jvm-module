@@ -1,0 +1,77 @@
+# This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java#publishing-using-gradle
+
+name: Continuous Integration and Delivery
+
+on:
+  push:
+    branches:
+      - release
+      - rc
+      - dev
+  pull_request:
+    branches:
+      - release
+      - rc
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v1
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+    
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v1.4.2
+      # with:
+      #   # Set always-auth in npmrc
+      #   always-auth: # optional, default is false
+      #   # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
+      #   node-version: # optional, default is 10.x
+      #   # Optional registry to set up for auth. Will set the registry in a project level .npmrc and .yarnrc file, and set up auth to read in from env.NODE_AUTH_TOKEN
+      #   registry-url: # optional
+      #   # Optional scope for authenticating against scoped registries
+      #   scope: # optional
+      #   # Deprecated. Use node-version instead. Will not be supported after October 1, 2019
+      #   version: # optional
+            
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
+
+    - name: Build JAR, linux & win32 module
+      run: gradle build buildModule buildModuleWin32Cross
+
+    # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
+    # the publishing section of your build.gradle
+    # - name: Publish to GitHub Packages
+    #   run: gradle publish
+    #   env:
+    #     USERNAME: ${{ github.actor }}
+    #     TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload linux
+      uses: actions/upload-artifact@v2
+      with:
+        # Artifact name
+        name: altv-jvm-module-linux
+        # A file, directory or wildcard pattern that describes what to upload
+        path: build/linux/altv-jvm-module
+
+    - name: Upload win32
+      uses: actions/upload-artifact@v2
+      with:
+        # Artifact name
+        name: altv-jvm-module-win32
+        # A file, directory or wildcard pattern that describes what to upload
+        path: build/win32/altv-jvm-module
