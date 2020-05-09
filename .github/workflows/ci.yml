@@ -1,0 +1,191 @@
+# This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java#publishing-using-gradle
+
+name: Continuous Integration and Delivery
+
+on:
+  push:
+    branches:
+      - release
+      - rc
+      - dev
+  pull_request:
+    branches:
+      - release
+      - rc
+      - dev
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: rlespinasse/github-slug-action@2.0.0
+    - uses: actions/checkout@v2
+      
+    - run: |
+        sudo chmod 777 /
+        sudo chmod 777 /usr/bin
+      
+    - name: Cache windows build files
+      id: cache-win
+      uses: actions/cache@v1
+      with:
+        path: /WINDOWS
+        key: /WINDOWS
+
+      # can't cache individual files
+#     - name: Cache clang-cl
+#       id: cache-clang-cl
+#       uses: actions/cache@v1
+#       with:
+#         path: /usr/bin/*clang-cl /usr/bin/*lld-link
+#         key: clang-cl-1
+          
+    - name: Get windows build files
+      if: steps.cache-win.outputs.cache-hit != 'true'
+      working-directory: /
+      run: |
+        sudo bash -c "curl -sLc cookies.txt 'https://docs.google.com/uc?export=download&id='$fileid | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1/p' > confirm.txt"
+        sudo curl -sLb cookies.txt -o $filename 'https://docs.google.com/uc?export=download&id='$fileid'&confirm='$(<confirm.txt)
+        sudo tar -xvzf $filename -C . 1>/dev/null
+        sudo rm -f confirm.txt cookies.txt $filename
+      env:
+        fileid: 1ZC-J5ttwrpKxnoWTrLNiTR7gqq9q1oGo
+        filename: WINDOWS.tar.gz
+      
+    - name: Cache gradle
+      id: cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+    
+    - name: Install clang-cl & lld-link
+#       if: steps.cache-clang-cl.outputs.cache-hit != 'true'
+      run: |
+        sudo apt install -y clang-tools-9
+        sudo cp /usr/bin/clang-cl-9 /usr/bin/clang-cl
+        sudo cp /usr/bin/lld-link-9 /usr/bin/lld-link
+    
+    - name: Install ninja-build tool
+      uses: seanmiddleditch/gha-setup-ninja@v1
+      
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v1.4.2
+      # with:
+      #   # Set always-auth in npmrc
+      #   always-auth: # optional, default is false
+      #   # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
+      #   node-version: # optional, default is 10.x
+      #   # Optional registry to set up for auth. Will set the registry in a project level .npmrc and .yarnrc file, and set up auth to read in from env.NODE_AUTH_TOKEN
+      #   registry-url: # optional
+      #   # Optional scope for authenticating against scoped registries
+      #   scope: # optional
+      #   # Deprecated. Use node-version instead. Will not be supported after October 1, 2019
+      #   version: # optional
+            
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
+      
+    - name: Build JAR, linux and win32 module # quicker
+      run: gradle build buildModule buildModuleWin32Cross
+      
+#     - name: Build JAR
+#       run: gradle build
+
+#     - name: Build linux module
+#       run: gradle buildModule
+
+#     - name: Build win32 module
+#       run: gradle buildModuleWin32Cross
+
+    # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
+    # the publishing section of your build.gradle
+    # - name: Publish to GitHub Packages
+    #   run: gradle publish
+    #   env:
+    #     USERNAME: ${{ github.actor }}
+    #     TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#     - name: Linux artifacts
+#       uses: actions/upload-artifact@v2
+#       with:
+#         # Artifact name
+#         name: altv-jvm-module-linux
+#         # A file, directory or wildcard pattern that describes what to upload
+#         path: build/linux/altv-jvm-module
+
+#     - name: Win32 artifacts
+#       uses: actions/upload-artifact@v2
+#       with:
+#         # Artifact name
+#         name: altv-jvm-module-win32
+#         # A file, directory or wildcard pattern that describes what to upload
+#         path: build/win32/altv-jvm-module
+
+#     - name: Package distributions
+#       if: github.ref == "master" || github.ref == "rc" || github.ref == "dev"
+#       run: |
+#         cd build/linux && zip -r ../altv-jvm-module-linux.zip altv-jvm-module && cd ../../
+#         cd build/win32 && zip -r ../altv-jvm-module-win32.zip altv-jvm-module && cd ../../
+        
+    - name: Package win32
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
+      uses: papeloto/action-zip@v1
+      with:
+        files: build/win32/altv-jvm-module
+        dest: altv-jvm-module-win32.zip
+    
+    - name: Package linux
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
+      uses: papeloto/action-zip@v1
+      with:
+        files: build/linux/altv-jvm-module
+        dest: altv-jvm-module-linux.zip
+
+    - name: Create Release
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.GITHUB_REF_SLUG }}-${{ github.run_number }}
+        release_name: Release ${{ env.GITHUB_REF_SLUG }}-${{ github.run_number }}
+        draft: ${{ github.ref == 'refs/heads/dev' }}
+        prerelease: ${{ github.ref != 'refs/heads/master' }}
+
+    - name: Upload Win32 build
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
+      id: upload-win32-build
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: altv-jvm-module-win32.zip
+        asset_name: altv-jvm-module-win32.zip
+        asset_content_type: application/zip
+
+    - name: Upload Linux build
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
+      id: upload-linux-build
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: altv-jvm-module-linux.zip
+        asset_name: altv-jvm-module-linux.zip
+        asset_content_type: application/zip
