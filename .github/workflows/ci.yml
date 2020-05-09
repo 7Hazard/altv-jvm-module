@@ -141,21 +141,21 @@ jobs:
 #         cd build/win32 && zip -r ../altv-jvm-module-win32.zip altv-jvm-module && cd ../../
         
     - name: Package win32
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
+      if: github.ref == 'refs/heads/release' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
       uses: papeloto/action-zip@v1
       with:
         files: build/win32/altv-jvm-module
         dest: altv-jvm-module-win32.zip
     
     - name: Package linux
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
+      if: github.ref == 'refs/heads/release' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
       uses: papeloto/action-zip@v1
       with:
         files: build/linux/altv-jvm-module
         dest: altv-jvm-module-linux.zip
 
     - name: Create Release
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
+      if: github.ref == 'refs/heads/release' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
       id: create_release
       uses: actions/create-release@v1
       env:
@@ -164,10 +164,10 @@ jobs:
         tag_name: ${{ env.GITHUB_REF_SLUG }}-${{ github.run_number }}
         release_name: Release ${{ env.GITHUB_REF_SLUG }}-${{ github.run_number }}
         draft: ${{ github.ref == 'refs/heads/dev' }}
-        prerelease: ${{ github.ref != 'refs/heads/master' }}
+        prerelease: ${{ github.ref != 'refs/heads/release' }}
 
     - name: Upload Win32 build
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
+      if: github.ref == 'refs/heads/release' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
       id: upload-win32-build
       uses: actions/upload-release-asset@v1
       env:
@@ -179,7 +179,7 @@ jobs:
         asset_content_type: application/zip
 
     - name: Upload Linux build
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
+      if: github.ref == 'refs/heads/release' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
       id: upload-linux-build
       uses: actions/upload-release-asset@v1
       env:
