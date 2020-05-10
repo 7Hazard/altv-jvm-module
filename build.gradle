@@ -148,20 +148,19 @@ if(System.env['JITPACK'] == null)
 task copyToOutput(type: Copy) {
 	// from jar.destinationDir
 	from "build/libs/altv-jvm-module.jar"
-	into "build/$platform/altv-jvm-module"
+	into "build/$platform/altv-jvm-module/"
 
 	outputs.upToDateWhen { false }
 }
 jar.finalizedBy copyToOutput
 
 task copyToOutputWin32Cross(type: Copy) {
-	// from jar.destinationDir
-	from "build/libs/altv-jvm-module.jar"
-	into "build/win32/altv-jvm-module"
+        from "build/libs/altv-jvm-module.jar"
+	into "build/win32/altv-jvm-module/"
 
-	outputs.upToDateWhen { false }
+	outputs.upToDateWhen { false } 
 }
-buildModuleWin32Cross.finalizedBy copyToOutputWin32Cross
+buildModuleWin32Cross.dependsOn copyToOutputWin32Cross
 
 ///
 /// Publishing
