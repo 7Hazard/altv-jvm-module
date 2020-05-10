@@ -9,6 +9,7 @@ on:
       - release
       - rc
       - dev
+      - ci
   pull_request:
     branches:
       - release
@@ -109,7 +110,7 @@ jobs:
 
 #     - name: Build win32 module
 #       run: gradle buildModuleWin32Cross
-
+      
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
     # - name: Publish to GitHub Packages
@@ -124,7 +125,7 @@ jobs:
 #         # Artifact name
 #         name: altv-jvm-module-linux
 #         # A file, directory or wildcard pattern that describes what to upload
-#         path: build/linux/altv-jvm-module
+#         path: build/linux
 
 #     - name: Win32 artifacts
 #       uses: actions/upload-artifact@v2
@@ -132,7 +133,7 @@ jobs:
 #         # Artifact name
 #         name: altv-jvm-module-win32
 #         # A file, directory or wildcard pattern that describes what to upload
-#         path: build/win32/altv-jvm-module
+#         path: build/win32
 
 #     - name: Package distributions
 #       if: github.ref == "master" || github.ref == "rc" || github.ref == "dev"
@@ -144,14 +145,14 @@ jobs:
       if: github.ref == 'refs/heads/release' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
       uses: papeloto/action-zip@v1
       with:
-        files: build/win32/altv-jvm-module
+        files: build/win32
         dest: altv-jvm-module-win32.zip
     
     - name: Package linux
       if: github.ref == 'refs/heads/release' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/dev'
       uses: papeloto/action-zip@v1
       with:
-        files: build/linux/altv-jvm-module
+        files: build/linux
         dest: altv-jvm-module-linux.zip
 
     - name: Create Release
