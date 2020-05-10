@@ -143,24 +143,24 @@ if(System.env['JITPACK'] == null)
 		}
 	}
 	buildModuleDebug.dependsOn getCAPI
+	
+	task copyToOutput(type: Copy) {
+		// from jar.destinationDir
+		from "build/libs/altv-jvm-module.jar"
+		into "build/$platform/altv-jvm-module/"
+
+		outputs.upToDateWhen { false }
+	}
+	jar.finalizedBy copyToOutput
+
+	task copyToOutputWin32Cross(type: Copy) {
+		from "build/libs/altv-jvm-module.jar"
+		into "build/win32/altv-jvm-module/"
+
+		outputs.upToDateWhen { false } 
+	}
+	buildModuleWin32Cross.dependsOn copyToOutputWin32Cross
 }
-
-task copyToOutput(type: Copy) {
-	// from jar.destinationDir
-	from "build/libs/altv-jvm-module.jar"
-	into "build/$platform/altv-jvm-module/"
-
-	outputs.upToDateWhen { false }
-}
-jar.finalizedBy copyToOutput
-
-task copyToOutputWin32Cross(type: Copy) {
-        from "build/libs/altv-jvm-module.jar"
-	into "build/win32/altv-jvm-module/"
-
-	outputs.upToDateWhen { false } 
-}
-buildModuleWin32Cross.dependsOn copyToOutputWin32Cross
 
 ///
 /// Publishing
