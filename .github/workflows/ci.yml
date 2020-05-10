@@ -163,7 +163,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ env.GITHUB_REF_SLUG }}-${{ github.run_number }}
-        release_name: Release ${{ env.GITHUB_REF_SLUG }}-${{ github.run_number }}
+        release_name: ${{ env.GITHUB_REF_SLUG }}-${{ github.run_number }}
         draft: ${{ github.ref == 'refs/heads/dev' }}
         prerelease: ${{ github.ref != 'refs/heads/release' }}
 
