@@ -29,14 +29,6 @@ public class Plugins {
             // Get plugin config
             String jarfilename = name+".jar", mainclass = "";
 
-            // try {
-            //     var cfglines = Files.readAllLines(new File("modules/altv-jvm-module/plugins/"+name+"/plugin.cfg").toPath());
-            //     jarfilename = cfglines.get(0);
-            //     mainclass = cfglines.get(1);
-            // } catch (Exception e) {
-            //     Log.error("[JVM] Could not read 'plugin.cfg' of '"+name+"'\n\t"+e.getCause());
-            // }
-
             File jarfile = new File("modules/altv-jvm-module/plugins/"+name+"/"+jarfilename);
             if(!jarfile.isFile()) {
                 Log.error("Could not open jar file 'plugins/"+jarfilename+"'");
@@ -46,7 +38,7 @@ public class Plugins {
             try {
                 JarFile jar = new JarFile(jarfile);
                 mainclass = jar.getManifest().getMainAttributes().getValue("Main-Class");
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Log.error("Could not get Main-Class of 'plugins/"+jarfilename+"'");
                 continue;
             }
@@ -59,7 +51,7 @@ public class Plugins {
                 Class classToLoad = Class.forName(mainclass, true, child);
                 Method method = classToLoad.getDeclaredMethod("main");
                 Object result = method.invoke(null);
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Log.error("[JVM] Exception while loading plugin '"+name+"'"
                     +"\n\t Message: "+e.getLocalizedMessage()
                     +"\n\t Cause: "+e.getCause()

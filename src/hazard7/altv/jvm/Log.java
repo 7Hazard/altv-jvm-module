@@ -28,6 +28,12 @@ public final class Log
         CAPI.func.alt_ICore_LogInfo(CAPI.core, sw.ptr());
     }
 
+    public static void warning(String msg)
+    {
+        var sw = new AltStringView(msg);
+        CAPI.func.alt_ICore_LogWarning(CAPI.core, sw.ptr());
+    }
+
     public static void error(String msg)
     {
         var sw = new AltStringView(msg);

@@ -31,28 +31,30 @@ public class CAPI
         ALT_CEVENT_TYPE_META_CHANGE(8),
         ALT_CEVENT_TYPE_SYNCED_META_CHANGE(9),
         ALT_CEVENT_TYPE_STREAM_SYNCED_META_CHANGE(10),
-        ALT_CEVENT_TYPE_PLAYER_DAMAGE(11),
-        ALT_CEVENT_TYPE_PLAYER_DEATH(12),
-        ALT_CEVENT_TYPE_FIRE_EVENT(13),
-        ALT_CEVENT_TYPE_EXPLOSION_EVENT(14),
-        ALT_CEVENT_TYPE_WEAPON_DAMAGE_EVENT(15),
-        ALT_CEVENT_TYPE_VEHICLE_DESTROY(16),
-        ALT_CEVENT_TYPE_CHECKPOINT_EVENT(17),
-        ALT_CEVENT_TYPE_COLSHAPE_EVENT(18),
-        ALT_CEVENT_TYPE_PLAYER_ENTER_VEHICLE(19),
-        ALT_CEVENT_TYPE_PLAYER_LEAVE_VEHICLE(20),
-        ALT_CEVENT_TYPE_PLAYER_CHANGE_VEHICLE_SEAT(21),
-        ALT_CEVENT_TYPE_REMOVE_ENTITY_EVENT(22),
-        ALT_CEVENT_TYPE_DATA_NODE_RECEIVED_EVENT(23),
-        ALT_CEVENT_TYPE_CONSOLE_COMMAND_EVENT(24),
-        ALT_CEVENT_TYPE_CONNECTION_COMPLETE(25),
-        ALT_CEVENT_TYPE_DISCONNECT_EVENT(26),
-        ALT_CEVENT_TYPE_WEB_VIEW_EVENT(27),
-        ALT_CEVENT_TYPE_KEYBOARD_EVENT(28),
-        ALT_CEVENT_TYPE_GAME_ENTITY_CREATE(29),
-        ALT_CEVENT_TYPE_GAME_ENTITY_DESTROY(30),
-        ALT_CEVENT_TYPE_ALL(31),
-        ALT_CEVENT_TYPE_SIZE(32);
+        ALT_CEVENT_TYPE_GLOBAL_META_CHANGE(11),
+        ALT_CEVENT_TYPE_GLOBAL_SYNCED_META_CHANGE(12),
+        ALT_CEVENT_TYPE_PLAYER_DAMAGE(13),
+        ALT_CEVENT_TYPE_PLAYER_DEATH(14),
+        ALT_CEVENT_TYPE_FIRE_EVENT(15),
+        ALT_CEVENT_TYPE_EXPLOSION_EVENT(16),
+        ALT_CEVENT_TYPE_WEAPON_DAMAGE_EVENT(17),
+        ALT_CEVENT_TYPE_VEHICLE_DESTROY(18),
+        ALT_CEVENT_TYPE_CHECKPOINT_EVENT(19),
+        ALT_CEVENT_TYPE_COLSHAPE_EVENT(20),
+        ALT_CEVENT_TYPE_PLAYER_ENTER_VEHICLE(21),
+        ALT_CEVENT_TYPE_PLAYER_LEAVE_VEHICLE(22),
+        ALT_CEVENT_TYPE_PLAYER_CHANGE_VEHICLE_SEAT(23),
+        ALT_CEVENT_TYPE_REMOVE_ENTITY_EVENT(24),
+        ALT_CEVENT_TYPE_DATA_NODE_RECEIVED_EVENT(25),
+        ALT_CEVENT_TYPE_CONSOLE_COMMAND_EVENT(26),
+        ALT_CEVENT_TYPE_CONNECTION_COMPLETE(27),
+        ALT_CEVENT_TYPE_DISCONNECT_EVENT(28),
+        ALT_CEVENT_TYPE_WEB_VIEW_EVENT(29),
+        ALT_CEVENT_TYPE_KEYBOARD_EVENT(30),
+        ALT_CEVENT_TYPE_GAME_ENTITY_CREATE(31),
+        ALT_CEVENT_TYPE_GAME_ENTITY_DESTROY(32),
+        ALT_CEVENT_TYPE_ALL(33),
+        ALT_CEVENT_TYPE_SIZE(34);
 
         alt_CEvent_Type(int value) {
             this.value = value;
@@ -339,6 +341,7 @@ public class CAPI
 
     public static class alt_CClientScriptEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer target = inner(new alt_RefBase_RefStore_IPlayer());
@@ -362,6 +365,7 @@ public class CAPI
 
     public static class alt_CColShapeEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IColShape target = inner(new alt_RefBase_RefStore_IColShape());
@@ -385,6 +389,7 @@ public class CAPI
 
     public static class alt_CConsoleCommandEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_StringView name = inner(new alt_StringView());
@@ -407,6 +412,7 @@ public class CAPI
 
     public static class alt_CDataNodeReceivedEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_String name = inner(new alt_String());
@@ -429,6 +435,7 @@ public class CAPI
 
     public static class alt_CEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         
@@ -449,6 +456,7 @@ public class CAPI
 
     public static class alt_CExplosionEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer source = inner(new alt_RefBase_RefStore_IPlayer());
@@ -471,8 +479,57 @@ public class CAPI
         }
     }
 
+    public static class alt_CGlobalMetaDataChangeEvent extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
+        public final alt_String key = inner(new alt_String());
+        public final alt_RefBase_RefStore_constIMValue val = inner(new alt_RefBase_RefStore_constIMValue());
+        public final alt_RefBase_RefStore_constIMValue oldVal = inner(new alt_RefBase_RefStore_constIMValue());
+        
+        public alt_CGlobalMetaDataChangeEvent()
+        {
+            super(runtime);
+        }
+        public alt_CGlobalMetaDataChangeEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_CGlobalMetaDataChangeEvent(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_CGlobalSyncedMetaDataChangeEvent extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
+        public final alt_String key = inner(new alt_String());
+        public final alt_RefBase_RefStore_constIMValue val = inner(new alt_RefBase_RefStore_constIMValue());
+        public final alt_RefBase_RefStore_constIMValue oldVal = inner(new alt_RefBase_RefStore_constIMValue());
+        
+        public alt_CGlobalSyncedMetaDataChangeEvent()
+        {
+            super(runtime);
+        }
+        public alt_CGlobalSyncedMetaDataChangeEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_CGlobalSyncedMetaDataChangeEvent(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
     public static class alt_CPlayerChangeVehicleSeatEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IVehicle target = inner(new alt_RefBase_RefStore_IVehicle());
@@ -497,6 +554,7 @@ public class CAPI
 
     public static class alt_CPlayerConnectEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer target = inner(new alt_RefBase_RefStore_IPlayer());
@@ -519,6 +577,7 @@ public class CAPI
 
     public static class alt_CPlayerDamageEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer target = inner(new alt_RefBase_RefStore_IPlayer());
@@ -543,6 +602,7 @@ public class CAPI
 
     public static class alt_CPlayerDeathEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer target = inner(new alt_RefBase_RefStore_IPlayer());
@@ -566,6 +626,7 @@ public class CAPI
 
     public static class alt_CPlayerDisconnectEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer target = inner(new alt_RefBase_RefStore_IPlayer());
@@ -588,6 +649,7 @@ public class CAPI
 
     public static class alt_CPlayerEnterVehicleEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IVehicle target = inner(new alt_RefBase_RefStore_IVehicle());
@@ -611,6 +673,7 @@ public class CAPI
 
     public static class alt_CPlayerLeaveVehicleEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IVehicle target = inner(new alt_RefBase_RefStore_IVehicle());
@@ -632,8 +695,28 @@ public class CAPI
         }
     }
 
+    public static class alt_CRefCountable extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_CRefCountable()
+        {
+            super(runtime);
+        }
+        public alt_CRefCountable(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_CRefCountable(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
     public static class alt_CRemoveEntityEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IEntity target = inner(new alt_RefBase_RefStore_IEntity());
@@ -655,6 +738,7 @@ public class CAPI
 
     public static class alt_CResourceErrorEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer resource = new jnr.ffi.Struct.Pointer();
@@ -676,6 +760,7 @@ public class CAPI
 
     public static class alt_CResourceStartEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer resource = new jnr.ffi.Struct.Pointer();
@@ -697,6 +782,7 @@ public class CAPI
 
     public static class alt_CResourceStopEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer resource = new jnr.ffi.Struct.Pointer();
@@ -718,6 +804,7 @@ public class CAPI
 
     public static class alt_CServerScriptEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_String name = inner(new alt_String());
@@ -738,13 +825,40 @@ public class CAPI
         }
     }
 
-    public static class alt_CSyncedMetaDataChangeEvent extends jnr.ffi.Struct
+    public static class alt_CStreamSyncedMetaDataChangeEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IEntity target = inner(new alt_RefBase_RefStore_IEntity());
         public final alt_String key = inner(new alt_String());
-        public final alt_RefBase_RefStore_IMValue val = inner(new alt_RefBase_RefStore_IMValue());
+        public final alt_RefBase_RefStore_constIMValue val = inner(new alt_RefBase_RefStore_constIMValue());
+        public final alt_RefBase_RefStore_constIMValue oldVal = inner(new alt_RefBase_RefStore_constIMValue());
+        
+        public alt_CStreamSyncedMetaDataChangeEvent()
+        {
+            super(runtime);
+        }
+        public alt_CStreamSyncedMetaDataChangeEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_CStreamSyncedMetaDataChangeEvent(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_CSyncedMetaDataChangeEvent extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
+        public final alt_RefBase_RefStore_IEntity target = inner(new alt_RefBase_RefStore_IEntity());
+        public final alt_String key = inner(new alt_String());
+        public final alt_RefBase_RefStore_constIMValue val = inner(new alt_RefBase_RefStore_constIMValue());
+        public final alt_RefBase_RefStore_constIMValue oldVal = inner(new alt_RefBase_RefStore_constIMValue());
         
         public alt_CSyncedMetaDataChangeEvent()
         {
@@ -763,6 +877,7 @@ public class CAPI
 
     public static class alt_CWeaponDamageEvent extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer source = inner(new alt_RefBase_RefStore_IPlayer());
@@ -808,8 +923,275 @@ public class CAPI
         }
     }
 
+    public static class alt_IBaseObject extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IBaseObject()
+        {
+            super(runtime);
+        }
+        public alt_IBaseObject(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IBaseObject(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IBlip extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IBlip()
+        {
+            super(runtime);
+        }
+        public alt_IBlip(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IBlip(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_ICheckpoint extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_ICheckpoint()
+        {
+            super(runtime);
+        }
+        public alt_ICheckpoint(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_ICheckpoint(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IColShape extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IColShape()
+        {
+            super(runtime);
+        }
+        public alt_IColShape(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IColShape(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_ICore extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_ICore()
+        {
+            super(runtime);
+        }
+        public alt_ICore(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_ICore(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IEntity extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IEntity()
+        {
+            super(runtime);
+        }
+        public alt_IEntity(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IEntity(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValue extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValue()
+        {
+            super(runtime);
+        }
+        public alt_IMValue(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValue(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueBaseObject extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueBaseObject()
+        {
+            super(runtime);
+        }
+        public alt_IMValueBaseObject(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueBaseObject(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueBool extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueBool()
+        {
+            super(runtime);
+        }
+        public alt_IMValueBool(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueBool(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueByteArray extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueByteArray()
+        {
+            super(runtime);
+        }
+        public alt_IMValueByteArray(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueByteArray(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueDict extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueDict()
+        {
+            super(runtime);
+        }
+        public alt_IMValueDict(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueDict(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueDict_Iterator extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueDict_Iterator()
+        {
+            super(runtime);
+        }
+        public alt_IMValueDict_Iterator(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueDict_Iterator(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueDouble extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueDouble()
+        {
+            super(runtime);
+        }
+        public alt_IMValueDouble(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueDouble(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueFunction extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueFunction()
+        {
+            super(runtime);
+        }
+        public alt_IMValueFunction(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueFunction(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
     public static class alt_IMValueFunction_Impl extends jnr.ffi.Struct
     {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
         public final jnr.ffi.Struct.u_int64_t refCount = new jnr.ffi.Struct.u_int64_t();
         
         public alt_IMValueFunction_Impl()
@@ -822,6 +1204,234 @@ public class CAPI
             this.useMemory(pointer);
         }
         public alt_IMValueFunction_Impl(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueInt extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueInt()
+        {
+            super(runtime);
+        }
+        public alt_IMValueInt(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueInt(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueList extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueList()
+        {
+            super(runtime);
+        }
+        public alt_IMValueList(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueList(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueNil extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueNil()
+        {
+            super(runtime);
+        }
+        public alt_IMValueNil(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueNil(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueNone extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueNone()
+        {
+            super(runtime);
+        }
+        public alt_IMValueNone(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueNone(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueRGBA extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueRGBA()
+        {
+            super(runtime);
+        }
+        public alt_IMValueRGBA(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueRGBA(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueString extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueString()
+        {
+            super(runtime);
+        }
+        public alt_IMValueString(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueString(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueUInt extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueUInt()
+        {
+            super(runtime);
+        }
+        public alt_IMValueUInt(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueUInt(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IMValueVector3 extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IMValueVector3()
+        {
+            super(runtime);
+        }
+        public alt_IMValueVector3(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IMValueVector3(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IPackage extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IPackage()
+        {
+            super(runtime);
+        }
+        public alt_IPackage(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IPackage(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IPackage_File extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IPackage_File()
+        {
+            super(runtime);
+        }
+        public alt_IPackage_File(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IPackage_File(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IPlayer extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IPlayer()
+        {
+            super(runtime);
+        }
+        public alt_IPlayer(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IPlayer(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IResource extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IResource()
+        {
+            super(runtime);
+        }
+        public alt_IResource(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IResource(jnr.ffi.Runtime runtime)
         {
             super(runtime);
         }
@@ -844,6 +1454,120 @@ public class CAPI
             this.useMemory(pointer);
         }
         public alt_IResource_CreationInfo(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IResource_Impl extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IResource_Impl()
+        {
+            super(runtime);
+        }
+        public alt_IResource_Impl(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IResource_Impl(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IScriptRuntime extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IScriptRuntime()
+        {
+            super(runtime);
+        }
+        public alt_IScriptRuntime(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IScriptRuntime(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IVehicle extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IVehicle()
+        {
+            super(runtime);
+        }
+        public alt_IVehicle(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IVehicle(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IVoiceChannel extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IVoiceChannel()
+        {
+            super(runtime);
+        }
+        public alt_IVoiceChannel(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IVoiceChannel(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IWeakRef extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IWeakRef()
+        {
+            super(runtime);
+        }
+        public alt_IWeakRef(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IWeakRef(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_IWorldObject extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        
+        public alt_IWorldObject()
+        {
+            super(runtime);
+        }
+        public alt_IWorldObject(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_IWorldObject(jnr.ffi.Runtime runtime)
         {
             super(runtime);
         }
@@ -991,25 +1715,6 @@ public class CAPI
         }
     }
 
-    public static class alt_RefBase_RefStore_IMValue extends jnr.ffi.Struct
-    {
-        public final jnr.ffi.Struct.Pointer ptr = new jnr.ffi.Struct.Pointer();
-        
-        public alt_RefBase_RefStore_IMValue()
-        {
-            super(runtime);
-        }
-        public alt_RefBase_RefStore_IMValue(jnr.ffi.Pointer pointer)
-        {
-            super(runtime);
-            this.useMemory(pointer);
-        }
-        public alt_RefBase_RefStore_IMValue(jnr.ffi.Runtime runtime)
-        {
-            super(runtime);
-        }
-    }
-
     public static class alt_RefBase_RefStore_IPlayer extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.Pointer ptr = new jnr.ffi.Struct.Pointer();
@@ -1119,25 +1824,6 @@ public class CAPI
             this.useMemory(pointer);
         }
         public alt_RefStore_IEntity(jnr.ffi.Runtime runtime)
-        {
-            super(runtime);
-        }
-    }
-
-    public static class alt_RefStore_IMValue extends jnr.ffi.Struct
-    {
-        public final jnr.ffi.Struct.Pointer ptr = new jnr.ffi.Struct.Pointer();
-        
-        public alt_RefStore_IMValue()
-        {
-            super(runtime);
-        }
-        public alt_RefStore_IMValue(jnr.ffi.Pointer pointer)
-        {
-            super(runtime);
-            this.useMemory(pointer);
-        }
-        public alt_RefStore_IMValue(jnr.ffi.Runtime runtime)
         {
             super(runtime);
         }
@@ -1585,8 +2271,6 @@ public class CAPI
 
         void alt_CClientScriptEvent_Assign_CClientScriptEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        void alt_CClientScriptEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CClientScriptEvent_Assign_constCClientScriptEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CClientScriptEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1602,19 +2286,19 @@ public class CAPI
          */
         void alt_CClientScriptEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CClientScriptEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CClientScriptEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _name, jnr.ffi.Pointer _args, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CClientScriptEvent_Free()
          */
-        void alt_CClientScriptEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CClientScriptEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
 
-        void alt_CClientScriptEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _name, jnr.ffi.Pointer _args, jnr.ffi.Pointer returnValue);
+        void alt_CClientScriptEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CClientScriptEvent_Free()
          */
-        void alt_CClientScriptEvent_Create_3_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
+        void alt_CClientScriptEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CClientScriptEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -1622,13 +2306,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CClientScriptEvent_Free()
          */
         void alt_CClientScriptEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CClientScriptEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CClientScriptEvent_Free()
-         */
-        void alt_CClientScriptEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CClientScriptEvent_Free()
@@ -1661,8 +2338,6 @@ public class CAPI
 
         void alt_CColShapeEvent_Assign_CColShapeEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        void alt_CColShapeEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CColShapeEvent_Assign_constCColShapeEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CColShapeEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1678,19 +2353,19 @@ public class CAPI
          */
         void alt_CColShapeEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CColShapeEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CColShapeEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _entity, boolean _state, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CColShapeEvent_Free()
          */
-        void alt_CColShapeEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CColShapeEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _entity, boolean _state);
 
-        void alt_CColShapeEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _entity, boolean _state, jnr.ffi.Pointer returnValue);
+        void alt_CColShapeEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CColShapeEvent_Free()
          */
-        void alt_CColShapeEvent_Create_3_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _entity, boolean _state);
+        void alt_CColShapeEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CColShapeEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -1698,13 +2373,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CColShapeEvent_Free()
          */
         void alt_CColShapeEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CColShapeEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CColShapeEvent_Free()
-         */
-        void alt_CColShapeEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CColShapeEvent_Free()
@@ -1737,8 +2405,6 @@ public class CAPI
 
         void alt_CConsoleCommandEvent_Assign_CConsoleCommandEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        void alt_CConsoleCommandEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CConsoleCommandEvent_Assign_constCConsoleCommandEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CConsoleCommandEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1754,19 +2420,19 @@ public class CAPI
          */
         void alt_CConsoleCommandEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CConsoleCommandEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CConsoleCommandEvent_Create_2(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CConsoleCommandEvent_Free()
          */
-        void alt_CConsoleCommandEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CConsoleCommandEvent_Create_2_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
 
-        void alt_CConsoleCommandEvent_Create_3(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args, jnr.ffi.Pointer returnValue);
+        void alt_CConsoleCommandEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CConsoleCommandEvent_Free()
          */
-        void alt_CConsoleCommandEvent_Create_3_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
+        void alt_CConsoleCommandEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CConsoleCommandEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -1774,13 +2440,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CConsoleCommandEvent_Free()
          */
         void alt_CConsoleCommandEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CConsoleCommandEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CConsoleCommandEvent_Free()
-         */
-        void alt_CConsoleCommandEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CConsoleCommandEvent_Free()
@@ -1806,8 +2465,6 @@ public class CAPI
 
         void alt_CDataNodeReceivedEvent_Assign_CDataNodeReceivedEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        void alt_CDataNodeReceivedEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CDataNodeReceivedEvent_Assign_constCDataNodeReceivedEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CDataNodeReceivedEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -1823,19 +2480,19 @@ public class CAPI
          */
         void alt_CDataNodeReceivedEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CDataNodeReceivedEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CDataNodeReceivedEvent_Create_2(jnr.ffi.Pointer _name, jnr.ffi.Pointer _logJson, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_Free()
          */
-        void alt_CDataNodeReceivedEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CDataNodeReceivedEvent_Create_2_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _logJson);
 
-        void alt_CDataNodeReceivedEvent_Create_3(jnr.ffi.Pointer _name, jnr.ffi.Pointer _logJson, jnr.ffi.Pointer returnValue);
+        void alt_CDataNodeReceivedEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_Free()
          */
-        void alt_CDataNodeReceivedEvent_Create_3_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _logJson);
+        void alt_CDataNodeReceivedEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CDataNodeReceivedEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -1843,13 +2500,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_Free()
          */
         void alt_CDataNodeReceivedEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CDataNodeReceivedEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_Free()
-         */
-        void alt_CDataNodeReceivedEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_Free()
@@ -1878,8 +2528,6 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CDataNodeReceivedEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CEvent_Cancel(jnr.ffi.Pointer _instance);
@@ -1892,13 +2540,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CEvent_Free()
          */
         void alt_CEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CEvent_Free()
-         */
-        void alt_CEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CEvent_Free()
@@ -1920,6 +2561,10 @@ public class CAPI
         jnr.ffi.Pointer alt_CEvent_to_alt_CDataNodeReceivedEvent(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_CEvent_to_alt_CExplosionEvent(jnr.ffi.Pointer from);
+
+        jnr.ffi.Pointer alt_CEvent_to_alt_CGlobalMetaDataChangeEvent(jnr.ffi.Pointer from);
+
+        jnr.ffi.Pointer alt_CEvent_to_alt_CGlobalSyncedMetaDataChangeEvent(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_CEvent_to_alt_CPlayerChangeVehicleSeatEvent(jnr.ffi.Pointer from);
 
@@ -1945,11 +2590,11 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CEvent_to_alt_CServerScriptEvent(jnr.ffi.Pointer from);
 
+        jnr.ffi.Pointer alt_CEvent_to_alt_CStreamSyncedMetaDataChangeEvent(jnr.ffi.Pointer from);
+
         jnr.ffi.Pointer alt_CEvent_to_alt_CSyncedMetaDataChangeEvent(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_CEvent_to_alt_CWeaponDamageEvent(jnr.ffi.Pointer from);
-
-        void alt_CExplosionEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CExplosionEvent_Assign_CExplosionEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -1968,19 +2613,19 @@ public class CAPI
          */
         void alt_CExplosionEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CExplosionEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CExplosionEvent_Create_2(jnr.ffi.Pointer _source, alt_CExplosionEvent_ExplosionType _explosionType, jnr.ffi.Pointer _position, @jnr.ffi.types.u_int32_t int _explosionFX, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CExplosionEvent_Free()
          */
-        void alt_CExplosionEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CExplosionEvent_Create_2_Heap(jnr.ffi.Pointer _source, alt_CExplosionEvent_ExplosionType _explosionType, jnr.ffi.Pointer _position, @jnr.ffi.types.u_int32_t int _explosionFX);
 
-        void alt_CExplosionEvent_Create_3(jnr.ffi.Pointer _source, alt_CExplosionEvent_ExplosionType _explosionType, jnr.ffi.Pointer _position, @jnr.ffi.types.u_int32_t int _explosionFX, jnr.ffi.Pointer returnValue);
+        void alt_CExplosionEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CExplosionEvent_Free()
          */
-        void alt_CExplosionEvent_Create_3_Heap(jnr.ffi.Pointer _source, alt_CExplosionEvent_ExplosionType _explosionType, jnr.ffi.Pointer _position, @jnr.ffi.types.u_int32_t int _explosionFX);
+        void alt_CExplosionEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CExplosionEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -1988,13 +2633,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CExplosionEvent_Free()
          */
         void alt_CExplosionEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CExplosionEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CExplosionEvent_Free()
-         */
-        void alt_CExplosionEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CExplosionEvent_Free()
@@ -2027,7 +2665,149 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CExplosionEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CPlayerChangeVehicleSeatEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+        void alt_CGlobalMetaDataChangeEvent_Assign_CGlobalMetaDataChangeEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CGlobalMetaDataChangeEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CGlobalMetaDataChangeEvent_Assign_constCGlobalMetaDataChangeEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CGlobalMetaDataChangeEvent_Cancel(jnr.ffi.Pointer _instance);
+
+        void alt_CGlobalMetaDataChangeEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
+
+        void alt_CGlobalMetaDataChangeEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_Free()
+         */
+        void alt_CGlobalMetaDataChangeEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_CGlobalMetaDataChangeEvent_Create_2(jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_Free()
+         */
+        void alt_CGlobalMetaDataChangeEvent_Create_2_Heap(jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
+
+        void alt_CGlobalMetaDataChangeEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_Free()
+         */
+        void alt_CGlobalMetaDataChangeEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_CGlobalMetaDataChangeEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_Free()
+         */
+        void alt_CGlobalMetaDataChangeEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_Free()
+         */
+        void alt_CGlobalMetaDataChangeEvent_Create_Heap(alt_CEvent_Type _type);
+
+        void alt_CGlobalMetaDataChangeEvent_Free(jnr.ffi.Pointer ptr);
+
+        void alt_CGlobalMetaDataChangeEvent_GetKey(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_StringView_Free()
+         */
+        void alt_CGlobalMetaDataChangeEvent_GetKey_Heap(jnr.ffi.Pointer _instance);
+
+        void alt_CGlobalMetaDataChangeEvent_GetOldVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         */
+        void alt_CGlobalMetaDataChangeEvent_GetOldVal_Heap(jnr.ffi.Pointer _instance);
+
+        alt_CEvent_Type alt_CGlobalMetaDataChangeEvent_GetType(jnr.ffi.Pointer _instance);
+
+        void alt_CGlobalMetaDataChangeEvent_GetVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         */
+        void alt_CGlobalMetaDataChangeEvent_GetVal_Heap(jnr.ffi.Pointer _instance);
+
+        boolean alt_CGlobalMetaDataChangeEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_CGlobalMetaDataChangeEvent_to_alt_CEvent(jnr.ffi.Pointer from);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_Assign_CGlobalSyncedMetaDataChangeEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_Assign_constCGlobalSyncedMetaDataChangeEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_Cancel(jnr.ffi.Pointer _instance);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_Free()
+         */
+        void alt_CGlobalSyncedMetaDataChangeEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_Create_2(jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_Free()
+         */
+        void alt_CGlobalSyncedMetaDataChangeEvent_Create_2_Heap(jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_Free()
+         */
+        void alt_CGlobalSyncedMetaDataChangeEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_Free()
+         */
+        void alt_CGlobalSyncedMetaDataChangeEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_Free()
+         */
+        void alt_CGlobalSyncedMetaDataChangeEvent_Create_Heap(alt_CEvent_Type _type);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_Free(jnr.ffi.Pointer ptr);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_GetKey(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_StringView_Free()
+         */
+        void alt_CGlobalSyncedMetaDataChangeEvent_GetKey_Heap(jnr.ffi.Pointer _instance);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_GetOldVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         */
+        void alt_CGlobalSyncedMetaDataChangeEvent_GetOldVal_Heap(jnr.ffi.Pointer _instance);
+
+        alt_CEvent_Type alt_CGlobalSyncedMetaDataChangeEvent_GetType(jnr.ffi.Pointer _instance);
+
+        void alt_CGlobalSyncedMetaDataChangeEvent_GetVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         */
+        void alt_CGlobalSyncedMetaDataChangeEvent_GetVal_Heap(jnr.ffi.Pointer _instance);
+
+        boolean alt_CGlobalSyncedMetaDataChangeEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_CGlobalSyncedMetaDataChangeEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
         void alt_CPlayerChangeVehicleSeatEvent_Assign_CPlayerChangeVehicleSeatEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -2046,19 +2826,19 @@ public class CAPI
          */
         void alt_CPlayerChangeVehicleSeatEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CPlayerChangeVehicleSeatEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerChangeVehicleSeatEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _oldSeat, @jnr.ffi.types.u_int8_t byte _newSeat, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_Free()
          */
-        void alt_CPlayerChangeVehicleSeatEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CPlayerChangeVehicleSeatEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _oldSeat, @jnr.ffi.types.u_int8_t byte _newSeat);
 
-        void alt_CPlayerChangeVehicleSeatEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _oldSeat, @jnr.ffi.types.u_int8_t byte _newSeat, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerChangeVehicleSeatEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_Free()
          */
-        void alt_CPlayerChangeVehicleSeatEvent_Create_3_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _oldSeat, @jnr.ffi.types.u_int8_t byte _newSeat);
+        void alt_CPlayerChangeVehicleSeatEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerChangeVehicleSeatEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2066,13 +2846,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_Free()
          */
         void alt_CPlayerChangeVehicleSeatEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CPlayerChangeVehicleSeatEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_Free()
-         */
-        void alt_CPlayerChangeVehicleSeatEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_Free()
@@ -2105,8 +2878,6 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CPlayerConnectEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CPlayerConnectEvent_Assign_CPlayerConnectEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CPlayerConnectEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -2126,19 +2897,19 @@ public class CAPI
          */
         void alt_CPlayerConnectEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CPlayerConnectEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerConnectEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerConnectEvent_Free()
          */
-        void alt_CPlayerConnectEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CPlayerConnectEvent_Create_2_Heap(jnr.ffi.Pointer _target);
 
-        void alt_CPlayerConnectEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerConnectEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerConnectEvent_Free()
          */
-        void alt_CPlayerConnectEvent_Create_3_Heap(jnr.ffi.Pointer _target);
+        void alt_CPlayerConnectEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerConnectEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2146,13 +2917,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CPlayerConnectEvent_Free()
          */
         void alt_CPlayerConnectEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CPlayerConnectEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CPlayerConnectEvent_Free()
-         */
-        void alt_CPlayerConnectEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerConnectEvent_Free()
@@ -2181,8 +2945,6 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CPlayerConnectEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CPlayerDamageEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CPlayerDamageEvent_Assign_CPlayerDamageEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDamageEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -2200,19 +2962,19 @@ public class CAPI
          */
         void alt_CPlayerDamageEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CPlayerDamageEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerDamageEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _attacker, @jnr.ffi.types.u_int16_t short _damage, @jnr.ffi.types.u_int32_t int _weapon, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerDamageEvent_Free()
          */
-        void alt_CPlayerDamageEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CPlayerDamageEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _attacker, @jnr.ffi.types.u_int16_t short _damage, @jnr.ffi.types.u_int32_t int _weapon);
 
-        void alt_CPlayerDamageEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _attacker, @jnr.ffi.types.u_int16_t short _damage, @jnr.ffi.types.u_int32_t int _weapon, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerDamageEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerDamageEvent_Free()
          */
-        void alt_CPlayerDamageEvent_Create_3_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _attacker, @jnr.ffi.types.u_int16_t short _damage, @jnr.ffi.types.u_int32_t int _weapon);
+        void alt_CPlayerDamageEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDamageEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2220,13 +2982,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CPlayerDamageEvent_Free()
          */
         void alt_CPlayerDamageEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CPlayerDamageEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CPlayerDamageEvent_Free()
-         */
-        void alt_CPlayerDamageEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerDamageEvent_Free()
@@ -2259,8 +3014,6 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CPlayerDamageEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CPlayerDeathEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CPlayerDeathEvent_Assign_CPlayerDeathEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDeathEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -2278,19 +3031,19 @@ public class CAPI
          */
         void alt_CPlayerDeathEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CPlayerDeathEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerDeathEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _killer, @jnr.ffi.types.u_int32_t int _weapon, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerDeathEvent_Free()
          */
-        void alt_CPlayerDeathEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CPlayerDeathEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _killer, @jnr.ffi.types.u_int32_t int _weapon);
 
-        void alt_CPlayerDeathEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _killer, @jnr.ffi.types.u_int32_t int _weapon, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerDeathEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerDeathEvent_Free()
          */
-        void alt_CPlayerDeathEvent_Create_3_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _killer, @jnr.ffi.types.u_int32_t int _weapon);
+        void alt_CPlayerDeathEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDeathEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2298,13 +3051,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CPlayerDeathEvent_Free()
          */
         void alt_CPlayerDeathEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CPlayerDeathEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CPlayerDeathEvent_Free()
-         */
-        void alt_CPlayerDeathEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerDeathEvent_Free()
@@ -2335,8 +3081,6 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CPlayerDeathEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CPlayerDisconnectEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CPlayerDisconnectEvent_Assign_CPlayerDisconnectEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDisconnectEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -2354,19 +3098,19 @@ public class CAPI
          */
         void alt_CPlayerDisconnectEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CPlayerDisconnectEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerDisconnectEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _reason, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_Free()
          */
-        void alt_CPlayerDisconnectEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CPlayerDisconnectEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _reason);
 
-        void alt_CPlayerDisconnectEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _reason, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerDisconnectEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_Free()
          */
-        void alt_CPlayerDisconnectEvent_Create_3_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _reason);
+        void alt_CPlayerDisconnectEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDisconnectEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2374,13 +3118,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_Free()
          */
         void alt_CPlayerDisconnectEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CPlayerDisconnectEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_Free()
-         */
-        void alt_CPlayerDisconnectEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_Free()
@@ -2409,8 +3146,6 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CPlayerDisconnectEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CPlayerEnterVehicleEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CPlayerEnterVehicleEvent_Assign_CPlayerEnterVehicleEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CPlayerEnterVehicleEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -2428,19 +3163,19 @@ public class CAPI
          */
         void alt_CPlayerEnterVehicleEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CPlayerEnterVehicleEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerEnterVehicleEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_Free()
          */
-        void alt_CPlayerEnterVehicleEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CPlayerEnterVehicleEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat);
 
-        void alt_CPlayerEnterVehicleEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerEnterVehicleEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_Free()
          */
-        void alt_CPlayerEnterVehicleEvent_Create_3_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat);
+        void alt_CPlayerEnterVehicleEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerEnterVehicleEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2448,13 +3183,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_Free()
          */
         void alt_CPlayerEnterVehicleEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CPlayerEnterVehicleEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_Free()
-         */
-        void alt_CPlayerEnterVehicleEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_Free()
@@ -2485,8 +3213,6 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CPlayerLeaveVehicleEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CPlayerLeaveVehicleEvent_Assign_CPlayerLeaveVehicleEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CPlayerLeaveVehicleEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -2504,19 +3230,19 @@ public class CAPI
          */
         void alt_CPlayerLeaveVehicleEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CPlayerLeaveVehicleEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerLeaveVehicleEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_Free()
          */
-        void alt_CPlayerLeaveVehicleEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CPlayerLeaveVehicleEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat);
 
-        void alt_CPlayerLeaveVehicleEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat, jnr.ffi.Pointer returnValue);
+        void alt_CPlayerLeaveVehicleEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_Free()
          */
-        void alt_CPlayerLeaveVehicleEvent_Create_3_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat);
+        void alt_CPlayerLeaveVehicleEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerLeaveVehicleEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2524,13 +3250,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_Free()
          */
         void alt_CPlayerLeaveVehicleEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CPlayerLeaveVehicleEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_Free()
-         */
-        void alt_CPlayerLeaveVehicleEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_Free()
@@ -2619,8 +3338,6 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CRefCountable_to_alt_IWorldObject(jnr.ffi.Pointer from);
 
-        void alt_CRemoveEntityEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CRemoveEntityEvent_Assign_CRemoveEntityEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CRemoveEntityEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -2638,19 +3355,19 @@ public class CAPI
          */
         void alt_CRemoveEntityEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CRemoveEntityEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CRemoveEntityEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CRemoveEntityEvent_Free()
          */
-        void alt_CRemoveEntityEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CRemoveEntityEvent_Create_2_Heap(jnr.ffi.Pointer _target);
 
-        void alt_CRemoveEntityEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer returnValue);
+        void alt_CRemoveEntityEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CRemoveEntityEvent_Free()
          */
-        void alt_CRemoveEntityEvent_Create_3_Heap(jnr.ffi.Pointer _target);
+        void alt_CRemoveEntityEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CRemoveEntityEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2658,13 +3375,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CRemoveEntityEvent_Free()
          */
         void alt_CRemoveEntityEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CRemoveEntityEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CRemoveEntityEvent_Free()
-         */
-        void alt_CRemoveEntityEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CRemoveEntityEvent_Free()
@@ -2686,7 +3396,7 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CRemoveEntityEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CResourceErrorEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+        void alt_CResourceErrorEvent_Assign_CResourceErrorEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CResourceErrorEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -2703,19 +3413,19 @@ public class CAPI
          */
         void alt_CResourceErrorEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CResourceErrorEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CResourceErrorEvent_Create_2(jnr.ffi.Pointer _resource, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CResourceErrorEvent_Free()
          */
-        void alt_CResourceErrorEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CResourceErrorEvent_Create_2_Heap(jnr.ffi.Pointer _resource);
 
-        void alt_CResourceErrorEvent_Create_3(jnr.ffi.Pointer _resource, jnr.ffi.Pointer returnValue);
+        void alt_CResourceErrorEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CResourceErrorEvent_Free()
          */
-        void alt_CResourceErrorEvent_Create_3_Heap(jnr.ffi.Pointer _resource);
+        void alt_CResourceErrorEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CResourceErrorEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2739,7 +3449,7 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CResourceErrorEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CResourceStartEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+        void alt_CResourceStartEvent_Assign_CResourceStartEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CResourceStartEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -2756,19 +3466,19 @@ public class CAPI
          */
         void alt_CResourceStartEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CResourceStartEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CResourceStartEvent_Create_2(jnr.ffi.Pointer _resource, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CResourceStartEvent_Free()
          */
-        void alt_CResourceStartEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CResourceStartEvent_Create_2_Heap(jnr.ffi.Pointer _resource);
 
-        void alt_CResourceStartEvent_Create_3(jnr.ffi.Pointer _resource, jnr.ffi.Pointer returnValue);
+        void alt_CResourceStartEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CResourceStartEvent_Free()
          */
-        void alt_CResourceStartEvent_Create_3_Heap(jnr.ffi.Pointer _resource);
+        void alt_CResourceStartEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CResourceStartEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2792,7 +3502,7 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CResourceStartEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CResourceStopEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+        void alt_CResourceStopEvent_Assign_CResourceStopEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CResourceStopEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -2809,19 +3519,19 @@ public class CAPI
          */
         void alt_CResourceStopEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CResourceStopEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CResourceStopEvent_Create_2(jnr.ffi.Pointer _resource, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CResourceStopEvent_Free()
          */
-        void alt_CResourceStopEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CResourceStopEvent_Create_2_Heap(jnr.ffi.Pointer _resource);
 
-        void alt_CResourceStopEvent_Create_3(jnr.ffi.Pointer _resource, jnr.ffi.Pointer returnValue);
+        void alt_CResourceStopEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CResourceStopEvent_Free()
          */
-        void alt_CResourceStopEvent_Create_3_Heap(jnr.ffi.Pointer _resource);
+        void alt_CResourceStopEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CResourceStopEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2845,8 +3555,6 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CResourceStopEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CServerScriptEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
         void alt_CServerScriptEvent_Assign_CServerScriptEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CServerScriptEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -2864,19 +3572,19 @@ public class CAPI
          */
         void alt_CServerScriptEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CServerScriptEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CServerScriptEvent_Create_2(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CServerScriptEvent_Free()
          */
-        void alt_CServerScriptEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CServerScriptEvent_Create_2_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
 
-        void alt_CServerScriptEvent_Create_3(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args, jnr.ffi.Pointer returnValue);
+        void alt_CServerScriptEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CServerScriptEvent_Free()
          */
-        void alt_CServerScriptEvent_Create_3_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
+        void alt_CServerScriptEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CServerScriptEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2884,13 +3592,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CServerScriptEvent_Free()
          */
         void alt_CServerScriptEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CServerScriptEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CServerScriptEvent_Free()
-         */
-        void alt_CServerScriptEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CServerScriptEvent_Free()
@@ -2914,7 +3615,84 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CServerScriptEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
-        void alt_CSyncedMetaDataChangeEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+        void alt_CStreamSyncedMetaDataChangeEvent_Assign_CStreamSyncedMetaDataChangeEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_Assign_constCStreamSyncedMetaDataChangeEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_Cancel(jnr.ffi.Pointer _instance);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_Free()
+         */
+        void alt_CStreamSyncedMetaDataChangeEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_Free()
+         */
+        void alt_CStreamSyncedMetaDataChangeEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_Free()
+         */
+        void alt_CStreamSyncedMetaDataChangeEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_Free()
+         */
+        void alt_CStreamSyncedMetaDataChangeEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_Free()
+         */
+        void alt_CStreamSyncedMetaDataChangeEvent_Create_Heap(alt_CEvent_Type _type);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_Free(jnr.ffi.Pointer ptr);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_GetKey(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_StringView_Free()
+         */
+        void alt_CStreamSyncedMetaDataChangeEvent_GetKey_Heap(jnr.ffi.Pointer _instance);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_GetOldVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         */
+        void alt_CStreamSyncedMetaDataChangeEvent_GetOldVal_Heap(jnr.ffi.Pointer _instance);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         */
+        void alt_CStreamSyncedMetaDataChangeEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+
+        alt_CEvent_Type alt_CStreamSyncedMetaDataChangeEvent_GetType(jnr.ffi.Pointer _instance);
+
+        void alt_CStreamSyncedMetaDataChangeEvent_GetVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         */
+        void alt_CStreamSyncedMetaDataChangeEvent_GetVal_Heap(jnr.ffi.Pointer _instance);
+
+        boolean alt_CStreamSyncedMetaDataChangeEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_CStreamSyncedMetaDataChangeEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
         void alt_CSyncedMetaDataChangeEvent_Assign_CSyncedMetaDataChangeEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -2933,19 +3711,19 @@ public class CAPI
          */
         void alt_CSyncedMetaDataChangeEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CSyncedMetaDataChangeEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CSyncedMetaDataChangeEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CSyncedMetaDataChangeEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
 
-        void alt_CSyncedMetaDataChangeEvent_Create_3(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer returnValue);
+        void alt_CSyncedMetaDataChangeEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_Create_3_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val);
+        void alt_CSyncedMetaDataChangeEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CSyncedMetaDataChangeEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -2953,13 +3731,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_Free()
          */
         void alt_CSyncedMetaDataChangeEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CSyncedMetaDataChangeEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_Free()
-         */
-        void alt_CSyncedMetaDataChangeEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_Free()
@@ -2975,6 +3746,13 @@ public class CAPI
          */
         void alt_CSyncedMetaDataChangeEvent_GetKey_Heap(jnr.ffi.Pointer _instance);
 
+        void alt_CSyncedMetaDataChangeEvent_GetOldVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         */
+        void alt_CSyncedMetaDataChangeEvent_GetOldVal_Heap(jnr.ffi.Pointer _instance);
+
         void alt_CSyncedMetaDataChangeEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
@@ -2987,15 +3765,13 @@ public class CAPI
         void alt_CSyncedMetaDataChangeEvent_GetVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
          */
         void alt_CSyncedMetaDataChangeEvent_GetVal_Heap(jnr.ffi.Pointer _instance);
 
         boolean alt_CSyncedMetaDataChangeEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_to_alt_CEvent(jnr.ffi.Pointer from);
-
-        void alt_CWeaponDamageEvent_Assign_CEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CWeaponDamageEvent_Assign_CWeaponDamageEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -3014,19 +3790,19 @@ public class CAPI
          */
         void alt_CWeaponDamageEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_CWeaponDamageEvent_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+        void alt_CWeaponDamageEvent_Create_2(jnr.ffi.Pointer _source, jnr.ffi.Pointer _target, @jnr.ffi.types.u_int32_t int _weaponHash, @jnr.ffi.types.u_int16_t short _damageValue, jnr.ffi.Pointer _shotOffset, alt_CWeaponDamageEvent_BodyPart _bodyPart, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CWeaponDamageEvent_Free()
          */
-        void alt_CWeaponDamageEvent_Create_2_Heap(jnr.ffi.Pointer _p0);
+        void alt_CWeaponDamageEvent_Create_2_Heap(jnr.ffi.Pointer _source, jnr.ffi.Pointer _target, @jnr.ffi.types.u_int32_t int _weaponHash, @jnr.ffi.types.u_int16_t short _damageValue, jnr.ffi.Pointer _shotOffset, alt_CWeaponDamageEvent_BodyPart _bodyPart);
 
-        void alt_CWeaponDamageEvent_Create_3(jnr.ffi.Pointer _source, jnr.ffi.Pointer _target, @jnr.ffi.types.u_int32_t int _weaponHash, @jnr.ffi.types.u_int16_t short _damageValue, jnr.ffi.Pointer _shotOffset, alt_CWeaponDamageEvent_BodyPart _bodyPart, jnr.ffi.Pointer returnValue);
+        void alt_CWeaponDamageEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_CWeaponDamageEvent_Free()
          */
-        void alt_CWeaponDamageEvent_Create_3_Heap(jnr.ffi.Pointer _source, jnr.ffi.Pointer _target, @jnr.ffi.types.u_int32_t int _weaponHash, @jnr.ffi.types.u_int16_t short _damageValue, jnr.ffi.Pointer _shotOffset, alt_CWeaponDamageEvent_BodyPart _bodyPart);
+        void alt_CWeaponDamageEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CWeaponDamageEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
@@ -3034,13 +3810,6 @@ public class CAPI
          * Return ptr must be manually freed with alt_CWeaponDamageEvent_Free()
          */
         void alt_CWeaponDamageEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_CWeaponDamageEvent_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_CWeaponDamageEvent_Free()
-         */
-        void alt_CWeaponDamageEvent_Create_5_Heap(jnr.ffi.Pointer _p0);
 
         /**
          * Return ptr must be manually freed with alt_CWeaponDamageEvent_Free()
@@ -3509,6 +4278,10 @@ public class CAPI
          */
         void alt_ICore_CreateVoiceChannel_Heap(jnr.ffi.Pointer _instance, boolean spatial, float maxDistance);
 
+        void alt_ICore_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        void alt_ICore_DeleteSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
         void alt_ICore_DestroyBaseObject(jnr.ffi.Pointer _instance, jnr.ffi.Pointer handle);
 
         boolean alt_ICore_FileExists(jnr.ffi.Pointer _instance, jnr.ffi.Pointer path);
@@ -3533,6 +4306,13 @@ public class CAPI
          * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
          */
         void alt_ICore_GetEntityByID_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int16_t short id);
+
+        void alt_ICore_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         */
+        void alt_ICore_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int32_t int alt_ICore_GetNetTime(jnr.ffi.Pointer _instance);
 
@@ -3559,12 +4339,23 @@ public class CAPI
          */
         void alt_ICore_GetRootDirectory_Heap(jnr.ffi.Pointer _instance);
 
+        void alt_ICore_GetSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         */
+        void alt_ICore_GetSyncedMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
         void alt_ICore_GetVehicles(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
          * Return ptr must be manually freed with alt_Array_RefBase_RefStore_IVehicle_Free()
          */
         void alt_ICore_GetVehicles_Heap(jnr.ffi.Pointer _instance);
+
+        boolean alt_ICore_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+
+        boolean alt_ICore_HasSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int32_t int alt_ICore_Hash(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
 
@@ -3585,6 +4376,10 @@ public class CAPI
         jnr.ffi.Pointer alt_ICore_RestartResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
 
         void alt_ICore_SetInstance(jnr.ffi.Pointer server);
+
+        void alt_ICore_SetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer val);
+
+        void alt_ICore_SetSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer val);
 
         jnr.ffi.Pointer alt_ICore_StartResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
 
@@ -5547,71 +6342,6 @@ public class CAPI
 
         jnr.ffi.Pointer alt_RefBase_RefStore_IEntity_to_alt_RefStore_IEntity(jnr.ffi.Pointer from);
 
-        void alt_RefBase_RefStore_IMValue_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
-
-        void alt_RefBase_RefStore_IMValue_Assign_constRefBase_RefStore_IMValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
-
-        void alt_RefBase_RefStore_IMValue_Create(jnr.ffi.Pointer returnValue);
-
-        void alt_RefBase_RefStore_IMValue_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
-         */
-        void alt_RefBase_RefStore_IMValue_Create_1_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_RefBase_RefStore_IMValue_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
-         */
-        void alt_RefBase_RefStore_IMValue_Create_2_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_RefBase_RefStore_IMValue_Create_3(jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
-         */
-        void alt_RefBase_RefStore_IMValue_Create_3_Heap();
-
-        void alt_RefBase_RefStore_IMValue_Create_4(jnr.ffi.Pointer _ptr, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
-         */
-        void alt_RefBase_RefStore_IMValue_Create_4_Heap(jnr.ffi.Pointer _ptr);
-
-        void alt_RefBase_RefStore_IMValue_Create_5(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
-         */
-        void alt_RefBase_RefStore_IMValue_Create_5_Heap(jnr.ffi.Pointer other);
-
-        void alt_RefBase_RefStore_IMValue_Create_6(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
-         */
-        void alt_RefBase_RefStore_IMValue_Create_6_Heap(jnr.ffi.Pointer other);
-
-        /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
-         */
-        void alt_RefBase_RefStore_IMValue_Create_Heap();
-
-        void alt_RefBase_RefStore_IMValue_Free(jnr.ffi.Pointer ptr);
-
-        void alt_RefBase_RefStore_IMValue_Free_1(jnr.ffi.Pointer _instance);
-
-        jnr.ffi.Pointer alt_RefBase_RefStore_IMValue_Get(jnr.ffi.Pointer _instance);
-
-        boolean alt_RefBase_RefStore_IMValue_IsEmpty(jnr.ffi.Pointer _instance);
-
-        boolean alt_RefBase_RefStore_IMValue_To__Bool(jnr.ffi.Pointer _instance);
-
-        jnr.ffi.Pointer alt_RefBase_RefStore_IMValue_to_alt_RefStore_IMValue(jnr.ffi.Pointer from);
-
         void alt_RefBase_RefStore_IPlayer_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
 
         void alt_RefBase_RefStore_IPlayer_Assign_constRefBase_RefStore_IPlayerRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
@@ -5885,37 +6615,6 @@ public class CAPI
         jnr.ffi.Pointer alt_RefStore_IEntity_Get(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefStore_IEntity_to_alt_RefBase_RefStore_IEntity(jnr.ffi.Pointer from);
-
-        void alt_RefStore_IMValue_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
-
-        void alt_RefStore_IMValue_Create(jnr.ffi.Pointer returnValue);
-
-        void alt_RefStore_IMValue_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_RefStore_IMValue_Free()
-         */
-        void alt_RefStore_IMValue_Create_1_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_RefStore_IMValue_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_RefStore_IMValue_Free()
-         */
-        void alt_RefStore_IMValue_Create_2_Heap(jnr.ffi.Pointer _p0);
-
-        /**
-         * Return ptr must be manually freed with alt_RefStore_IMValue_Free()
-         */
-        void alt_RefStore_IMValue_Create_Heap();
-
-        void alt_RefStore_IMValue_Free(jnr.ffi.Pointer ptr);
-
-        void alt_RefStore_IMValue_Free_1(jnr.ffi.Pointer _instance);
-
-        jnr.ffi.Pointer alt_RefStore_IMValue_Get(jnr.ffi.Pointer _instance);
-
-        jnr.ffi.Pointer alt_RefStore_IMValue_to_alt_RefBase_RefStore_IMValue(jnr.ffi.Pointer from);
 
         void alt_RefStore_IPlayer_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
 
