@@ -8,10 +8,11 @@ public class CAPIExtra
     static CAPIExtraFunctions Load()
     {
         var lib = jnr.ffi.LibraryLoader.create(CAPIExtraFunctions.class);
-        if(Platform.getNativePlatform().getOS() == OS.WINDOWS)
-            return lib.load("altv-server.exe");
-        else
-            return lib.load("altv-server");
+        // if(Platform.getNativePlatform().getOS() == OS.WINDOWS)
+        //     return lib.load("altv-server.exe");
+        // else
+        //     return lib.load("altv-server");
+        return lib.load("altv-capi-server");
     }
 
     public static final CAPIExtraFunctions func = Load();

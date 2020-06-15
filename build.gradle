@@ -11,6 +11,7 @@ buildscript {
 plugins {
 	id "java"
 	id "maven"
+    id "de.undercouch.download" version "4.0.4"
 }
 
 repositories {
@@ -63,30 +64,23 @@ jar {
 	// from javadoc.destinationDir
 }
 
-def downloadFile(url, dest)
-{
-	def f = new File(dest)
-	if (!f.exists()) {
-			new URL(url).withInputStream{ i -> f.withOutputStream{ it << i }}
-	}
+task getCAPI(type: Download) {
+	src 'http://github.com/7Hazard/altv-capi/releases/latest/download/altv-capi-server-win32.zip'
+	dest buildDir
+	overwrite false
 }
-
-task getCAPI(type: Copy) {
-	mkdir "build/altv-capi/server"
-
-	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/server/altv-capi.json", "build/altv-capi/altv-capi-server.json")
-	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/altv-capi-server.h", "build/altv-capi/altv-capi-server.h")
-	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/altv-capi-predefines.h", "build/altv-capi/altv-capi-predefines.h")
-	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/altv-capi-extra.h", "build/altv-capi/altv-capi-extra.h")
-	downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/capi/server/altv-capi.h", "build/altv-capi/server/altv-capi.h")
-	
-	if(OperatingSystem.current().isWindows())
-	{
-		downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/altv-server.lib", "build/altv-capi/altv-server.lib")
-	}
+task dlCAPIJson(type: Download) {
+	src 'http://github.com/7Hazard/altv-capi/releases/latest/download/altv-capi-server.json'
+	dest buildDir
+	overwrite false
 }
-// prep.dependsOn getCAPI
-jar.dependsOn getCAPI
+task unzipCAPI(type: Copy) {
+  from zipTree("build/altv-capi-server-win32.zip")
+  into buildDir
+}
+getCAPI.finalizedBy dlCAPIJson
+getCAPI.finalizedBy unzipCAPI
+jar.dependsOn dlCAPIJson
 
 if(System.env['JITPACK'] == null)
 {
@@ -117,10 +111,6 @@ if(System.env['JITPACK'] == null)
 		def version = "${System.env['CI_PIPELINE_IID']}-${System.env['CI_COMMIT_REF_SLUG']}"
 		
 		commandLine "./build-win32.sh", version // linux/mac
-
-		downloadFile("https://cdn.altv.mp/server/hazard-dev1/x64_win32/altv-server.lib", "build/altv-capi/altv-server.lib")
-
-
 	}
 	buildModuleWin32Cross.dependsOn getCAPI
 

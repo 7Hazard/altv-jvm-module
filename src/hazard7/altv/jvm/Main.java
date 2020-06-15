@@ -1,6 +1,5 @@
 package hazard7.altv.jvm;
 
-import hazard7.altv.jvm.CAPI;
 import jnr.ffi.Pointer;
 import jnr.ffi.types.uintptr_t;
 

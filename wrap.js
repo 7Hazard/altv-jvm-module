@@ -248,7 +248,7 @@ function getJavaParams(params, funcname)
 console.log("Wrapping CAPI to Java")
 
 // Read the capi.json
-let capiinfo = JSON.parse(fs.readFileSync(__dirname + "/build/altv-capi/altv-capi-server.json"))
+let capiinfo = JSON.parse(fs.readFileSync(__dirname + "/build/altv-capi-server.json"))
 
 let javatypes = []
 let javafuncs = []
@@ -344,10 +344,11 @@ public class CAPI
     static CAPIFunctions Load()
     {
         var lib = jnr.ffi.LibraryLoader.create(CAPIFunctions.class);
-        if(Platform.getNativePlatform().getOS() == OS.WINDOWS)
-            return lib.load("altv-server.exe");
-        else
-            return lib.load("altv-server");
+        // if(Platform.getNativePlatform().getOS() == OS.WINDOWS)
+        //     return lib.load("altv-server.exe");
+        // else
+        //     return lib.load("altv-server");
+        return lib.load("altv-capi-server");
     }
 
     public static final CAPIFunctions func = Load();

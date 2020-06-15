@@ -34,7 +34,7 @@ public:
         options[3].optionString = "-XX:+ShowMessageBoxOnError";
         options[4].optionString = "-XX:ErrorFile=logs/jvm/fatal-error.log";
         //options[5].optionString = "-verbose:jni";
-
+        
         vm_args.version = JNI_VERSION_1_6;
         vm_args.ignoreUnrecognized = JNI_TRUE;
 

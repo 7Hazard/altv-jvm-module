@@ -36,11 +36,11 @@ target_compile_definitions(altv-jvm-module PRIVATE
     ALT_SERVER_API
     JVM_MODULE_DLL
     JVM_MODULE_VERSION="${JVM_MODULE_VERSION}"
-    CAPI_DLL
+    # CAPI_DLL
 )
 target_include_directories(altv-jvm-module PRIVATE
     src
-    ${PROJECT_SOURCE_DIR}/../build/altv-capi
+    ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM}/include
     ${JNI_INCLUDE_DIRS}
 )
 target_link_libraries(altv-jvm-module PRIVATE
@@ -60,7 +60,10 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
 
     target_link_libraries(altv-jvm-module PRIVATE
-        ${PROJECT_SOURCE_DIR}/../build/altv-capi/altv-server.lib
+        ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM}/lib/altv-capi-server.lib
+    )
+    add_custom_command(TARGET altv-jvm-module POST_BUILD # POST BUILD COMMANDS
+        COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM}/bin/altv-capi-server.dll ${PROJECT_SOURCE_DIR}/../build/${JVM_MODULE_PLATFORM}/altv-jvm-module/altv-capi-server.dll
     )
 else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++17 -fms-extensions -fdelayed-template-parsing -fexceptions")

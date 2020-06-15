@@ -8,10 +8,11 @@ public class CAPI
     static CAPIFunctions Load()
     {
         var lib = jnr.ffi.LibraryLoader.create(CAPIFunctions.class);
-        if(Platform.getNativePlatform().getOS() == OS.WINDOWS)
-            return lib.load("altv-server.exe");
-        else
-            return lib.load("altv-server");
+        // if(Platform.getNativePlatform().getOS() == OS.WINDOWS)
+        //     return lib.load("altv-server.exe");
+        // else
+        //     return lib.load("altv-server");
+        return lib.load("altv-capi-server");
     }
 
     public static final CAPIFunctions func = Load();
@@ -276,6 +277,42 @@ public class CAPI
         private final int value;
     }
 
+    public static enum alt_config_Node_Type implements jnr.ffi.util.EnumMapper.IntegerEnum
+    {
+        ALT_CONFIG_NODE_TYPE_NONE(0),
+        ALT_CONFIG_NODE_TYPE_SCALAR(1),
+        ALT_CONFIG_NODE_TYPE_LIST(2),
+        ALT_CONFIG_NODE_TYPE_DICT(3);
+
+        alt_config_Node_Type(int value) {
+            this.value = value;
+        }
+
+        public int intValue() {
+            return value;
+        }
+        private final int value;
+    }
+
+    public static enum alt_config_Parser_Token_Type implements jnr.ffi.util.EnumMapper.IntegerEnum
+    {
+        ALT_CONFIG_PARSER_TOKEN_TYPE_ARRAY_START(0),
+        ALT_CONFIG_PARSER_TOKEN_TYPE_ARRAY_END(1),
+        ALT_CONFIG_PARSER_TOKEN_TYPE_DICT_START(2),
+        ALT_CONFIG_PARSER_TOKEN_TYPE_DICT_END(3),
+        ALT_CONFIG_PARSER_TOKEN_TYPE_KEY(4),
+        ALT_CONFIG_PARSER_TOKEN_TYPE_SCALAR(5);
+
+        alt_config_Parser_Token_Type(int value) {
+            this.value = value;
+        }
+
+        public int intValue() {
+            return value;
+        }
+        private final int value;
+    }
+
     public static class alt_Array_RefBase_RefStore_constIMValue extends jnr.ffi.Struct
     {
         public final jnr.ffi.Struct.Pointer data = new jnr.ffi.Struct.Pointer();
@@ -341,7 +378,7 @@ public class CAPI
 
     public static class alt_CClientScriptEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer target = inner(new alt_RefBase_RefStore_IPlayer());
@@ -365,7 +402,7 @@ public class CAPI
 
     public static class alt_CColShapeEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IColShape target = inner(new alt_RefBase_RefStore_IColShape());
@@ -389,7 +426,7 @@ public class CAPI
 
     public static class alt_CConsoleCommandEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_StringView name = inner(new alt_StringView());
@@ -412,7 +449,7 @@ public class CAPI
 
     public static class alt_CDataNodeReceivedEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_String name = inner(new alt_String());
@@ -435,7 +472,7 @@ public class CAPI
 
     public static class alt_CEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         
@@ -456,7 +493,7 @@ public class CAPI
 
     public static class alt_CExplosionEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer source = inner(new alt_RefBase_RefStore_IPlayer());
@@ -481,7 +518,7 @@ public class CAPI
 
     public static class alt_CGlobalMetaDataChangeEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_String key = inner(new alt_String());
@@ -505,7 +542,7 @@ public class CAPI
 
     public static class alt_CGlobalSyncedMetaDataChangeEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_String key = inner(new alt_String());
@@ -529,7 +566,7 @@ public class CAPI
 
     public static class alt_CPlayerChangeVehicleSeatEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IVehicle target = inner(new alt_RefBase_RefStore_IVehicle());
@@ -554,7 +591,7 @@ public class CAPI
 
     public static class alt_CPlayerConnectEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer target = inner(new alt_RefBase_RefStore_IPlayer());
@@ -577,7 +614,7 @@ public class CAPI
 
     public static class alt_CPlayerDamageEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer target = inner(new alt_RefBase_RefStore_IPlayer());
@@ -602,7 +639,7 @@ public class CAPI
 
     public static class alt_CPlayerDeathEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer target = inner(new alt_RefBase_RefStore_IPlayer());
@@ -626,7 +663,7 @@ public class CAPI
 
     public static class alt_CPlayerDisconnectEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer target = inner(new alt_RefBase_RefStore_IPlayer());
@@ -649,7 +686,7 @@ public class CAPI
 
     public static class alt_CPlayerEnterVehicleEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IVehicle target = inner(new alt_RefBase_RefStore_IVehicle());
@@ -673,7 +710,7 @@ public class CAPI
 
     public static class alt_CPlayerLeaveVehicleEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IVehicle target = inner(new alt_RefBase_RefStore_IVehicle());
@@ -697,7 +734,7 @@ public class CAPI
 
     public static class alt_CRefCountable extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_CRefCountable()
         {
@@ -716,7 +753,7 @@ public class CAPI
 
     public static class alt_CRemoveEntityEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IEntity target = inner(new alt_RefBase_RefStore_IEntity());
@@ -738,7 +775,7 @@ public class CAPI
 
     public static class alt_CResourceErrorEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer resource = new jnr.ffi.Struct.Pointer();
@@ -760,7 +797,7 @@ public class CAPI
 
     public static class alt_CResourceStartEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer resource = new jnr.ffi.Struct.Pointer();
@@ -782,7 +819,7 @@ public class CAPI
 
     public static class alt_CResourceStopEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final jnr.ffi.Struct.Pointer resource = new jnr.ffi.Struct.Pointer();
@@ -804,7 +841,7 @@ public class CAPI
 
     public static class alt_CServerScriptEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_String name = inner(new alt_String());
@@ -827,7 +864,7 @@ public class CAPI
 
     public static class alt_CStreamSyncedMetaDataChangeEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IEntity target = inner(new alt_RefBase_RefStore_IEntity());
@@ -852,7 +889,7 @@ public class CAPI
 
     public static class alt_CSyncedMetaDataChangeEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IEntity target = inner(new alt_RefBase_RefStore_IEntity());
@@ -875,9 +912,31 @@ public class CAPI
         }
     }
 
+    public static class alt_CVehicleDestroyEvent extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
+        public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
+        public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
+        public final alt_RefBase_RefStore_IVehicle target = inner(new alt_RefBase_RefStore_IVehicle());
+        
+        public alt_CVehicleDestroyEvent()
+        {
+            super(runtime);
+        }
+        public alt_CVehicleDestroyEvent(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_CVehicleDestroyEvent(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
     public static class alt_CWeaponDamageEvent extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.Enum16<alt_CEvent_Type> type = new jnr.ffi.Struct.Enum16<alt_CEvent_Type>(alt_CEvent_Type.class);
         public final jnr.ffi.Struct.Boolean cancelled = new jnr.ffi.Struct.Boolean();
         public final alt_RefBase_RefStore_IPlayer source = inner(new alt_RefBase_RefStore_IPlayer());
@@ -902,30 +961,9 @@ public class CAPI
         }
     }
 
-    public static class alt_DiscordOAuth2Token extends jnr.ffi.Struct
-    {
-        public final alt_String token = inner(new alt_String());
-        public final jnr.ffi.Struct.int64_t expires = new jnr.ffi.Struct.int64_t();
-        public final alt_String scopes = inner(new alt_String());
-        
-        public alt_DiscordOAuth2Token()
-        {
-            super(runtime);
-        }
-        public alt_DiscordOAuth2Token(jnr.ffi.Pointer pointer)
-        {
-            super(runtime);
-            this.useMemory(pointer);
-        }
-        public alt_DiscordOAuth2Token(jnr.ffi.Runtime runtime)
-        {
-            super(runtime);
-        }
-    }
-
     public static class alt_IBaseObject extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IBaseObject()
         {
@@ -944,7 +982,7 @@ public class CAPI
 
     public static class alt_IBlip extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IBlip()
         {
@@ -963,7 +1001,7 @@ public class CAPI
 
     public static class alt_ICheckpoint extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_ICheckpoint()
         {
@@ -982,7 +1020,7 @@ public class CAPI
 
     public static class alt_IColShape extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IColShape()
         {
@@ -1001,7 +1039,7 @@ public class CAPI
 
     public static class alt_ICore extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_ICore()
         {
@@ -1020,7 +1058,7 @@ public class CAPI
 
     public static class alt_IEntity extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IEntity()
         {
@@ -1039,7 +1077,7 @@ public class CAPI
 
     public static class alt_IMValue extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValue()
         {
@@ -1058,7 +1096,7 @@ public class CAPI
 
     public static class alt_IMValueBaseObject extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueBaseObject()
         {
@@ -1077,7 +1115,7 @@ public class CAPI
 
     public static class alt_IMValueBool extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueBool()
         {
@@ -1096,7 +1134,7 @@ public class CAPI
 
     public static class alt_IMValueByteArray extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueByteArray()
         {
@@ -1115,7 +1153,7 @@ public class CAPI
 
     public static class alt_IMValueDict extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueDict()
         {
@@ -1134,7 +1172,7 @@ public class CAPI
 
     public static class alt_IMValueDict_Iterator extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueDict_Iterator()
         {
@@ -1153,7 +1191,7 @@ public class CAPI
 
     public static class alt_IMValueDouble extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueDouble()
         {
@@ -1172,7 +1210,7 @@ public class CAPI
 
     public static class alt_IMValueFunction extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueFunction()
         {
@@ -1191,7 +1229,7 @@ public class CAPI
 
     public static class alt_IMValueFunction_Impl extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         public final jnr.ffi.Struct.u_int64_t refCount = new jnr.ffi.Struct.u_int64_t();
         
         public alt_IMValueFunction_Impl()
@@ -1211,7 +1249,7 @@ public class CAPI
 
     public static class alt_IMValueInt extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueInt()
         {
@@ -1230,7 +1268,7 @@ public class CAPI
 
     public static class alt_IMValueList extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueList()
         {
@@ -1249,7 +1287,7 @@ public class CAPI
 
     public static class alt_IMValueNil extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueNil()
         {
@@ -1268,7 +1306,7 @@ public class CAPI
 
     public static class alt_IMValueNone extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueNone()
         {
@@ -1287,7 +1325,7 @@ public class CAPI
 
     public static class alt_IMValueRGBA extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueRGBA()
         {
@@ -1306,7 +1344,7 @@ public class CAPI
 
     public static class alt_IMValueString extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueString()
         {
@@ -1325,7 +1363,7 @@ public class CAPI
 
     public static class alt_IMValueUInt extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueUInt()
         {
@@ -1344,7 +1382,7 @@ public class CAPI
 
     public static class alt_IMValueVector3 extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IMValueVector3()
         {
@@ -1363,7 +1401,7 @@ public class CAPI
 
     public static class alt_IPackage extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IPackage()
         {
@@ -1382,7 +1420,7 @@ public class CAPI
 
     public static class alt_IPackage_File extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IPackage_File()
         {
@@ -1401,7 +1439,7 @@ public class CAPI
 
     public static class alt_IPlayer extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IPlayer()
         {
@@ -1420,7 +1458,7 @@ public class CAPI
 
     public static class alt_IResource extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IResource()
         {
@@ -1461,7 +1499,7 @@ public class CAPI
 
     public static class alt_IResource_Impl extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IResource_Impl()
         {
@@ -1480,7 +1518,7 @@ public class CAPI
 
     public static class alt_IScriptRuntime extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IScriptRuntime()
         {
@@ -1499,7 +1537,7 @@ public class CAPI
 
     public static class alt_IVehicle extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IVehicle()
         {
@@ -1518,7 +1556,7 @@ public class CAPI
 
     public static class alt_IVoiceChannel extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IVoiceChannel()
         {
@@ -1537,7 +1575,7 @@ public class CAPI
 
     public static class alt_IWeakRef extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IWeakRef()
         {
@@ -1556,7 +1594,7 @@ public class CAPI
 
     public static class alt_IWorldObject extends jnr.ffi.Struct
     {
-        public final jnr.ffi.Struct.u_int64_t vtable = new jnr.ffi.Struct.u_int64_t();
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
         
         public alt_IWorldObject()
         {
@@ -2088,60 +2126,196 @@ public class CAPI
         }
     }
 
+    public static class alt_config_Error extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
+        
+        public alt_config_Error()
+        {
+            super(runtime);
+        }
+        public alt_config_Error(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_config_Error(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_config_Node extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Enum16<alt_config_Node_Type> type = new jnr.ffi.Struct.Enum16<alt_config_Node_Type>(alt_config_Node_Type.class);
+        public final jnr.ffi.Struct.Pointer val = new jnr.ffi.Struct.Pointer();
+        
+        public alt_config_Node()
+        {
+            super(runtime);
+        }
+        public alt_config_Node(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_config_Node(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_config_Node_Value extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
+        
+        public alt_config_Node_Value()
+        {
+            super(runtime);
+        }
+        public alt_config_Node_Value(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_config_Node_Value(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_config_Node_ValueDict extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
+        
+        public alt_config_Node_ValueDict()
+        {
+            super(runtime);
+        }
+        public alt_config_Node_ValueDict(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_config_Node_ValueDict(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_config_Node_ValueList extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
+        
+        public alt_config_Node_ValueList()
+        {
+            super(runtime);
+        }
+        public alt_config_Node_ValueList(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_config_Node_ValueList(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_config_Node_ValueScalar extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Pointer vtable = new jnr.ffi.Struct.Pointer();
+        
+        public alt_config_Node_ValueScalar()
+        {
+            super(runtime);
+        }
+        public alt_config_Node_ValueScalar(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_config_Node_ValueScalar(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
+    public static class alt_config_Parser_Token extends jnr.ffi.Struct
+    {
+        public final jnr.ffi.Struct.Enum16<alt_config_Parser_Token_Type> type = new jnr.ffi.Struct.Enum16<alt_config_Parser_Token_Type>(alt_config_Parser_Token_Type.class);
+        
+        public alt_config_Parser_Token()
+        {
+            super(runtime);
+        }
+        public alt_config_Parser_Token(jnr.ffi.Pointer pointer)
+        {
+            super(runtime);
+            this.useMemory(pointer);
+        }
+        public alt_config_Parser_Token(jnr.ffi.Runtime runtime)
+        {
+            super(runtime);
+        }
+    }
+
     
 
     public static interface CAPIFunctions
     {
-        jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_Access_uint64_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_Access_uint64_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_Array_RefBase_RefStore_constIMValue_Assign_Array_RefBase_RefStore_constIMValueRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
         void alt_Array_RefBase_RefStore_constIMValue_Assign_constArray_RefBase_RefStore_constIMValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
+
+        void alt_Array_RefBase_RefStore_constIMValue_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_Array_RefBase_RefStore_constIMValue_Create(jnr.ffi.Pointer returnValue);
 
         void alt_Array_RefBase_RefStore_constIMValue_Create_1(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_Array_RefBase_RefStore_constIMValue_Create_1_Heap(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size);
+        jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_Create_1_CAPI_Heap(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size);
 
         void alt_Array_RefBase_RefStore_constIMValue_Create_2(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_Array_RefBase_RefStore_constIMValue_Create_2_Heap(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill);
+        jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_Create_2_CAPI_Heap(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill);
 
         void alt_Array_RefBase_RefStore_constIMValue_Create_3(jnr.ffi.Pointer that, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_Array_RefBase_RefStore_constIMValue_Create_3_Heap(jnr.ffi.Pointer that);
+        jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_Create_3_CAPI_Heap(jnr.ffi.Pointer that);
 
         void alt_Array_RefBase_RefStore_constIMValue_Create_4(jnr.ffi.Pointer that, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_Array_RefBase_RefStore_constIMValue_Create_4_Heap(jnr.ffi.Pointer that);
+        jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_Create_4_CAPI_Heap(jnr.ffi.Pointer that);
 
         /**
-         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_Array_RefBase_RefStore_constIMValue_Create_Heap();
-
-        void alt_Array_RefBase_RefStore_constIMValue_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_Create_CAPI_Heap();
 
         @jnr.ffi.types.u_int64_t long alt_Array_RefBase_RefStore_constIMValue_GetCapacity(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_Array_RefBase_RefStore_constIMValue_GetSize(jnr.ffi.Pointer _instance);
 
         void alt_Array_RefBase_RefStore_constIMValue_Push(jnr.ffi.Pointer _instance, jnr.ffi.Pointer el);
+
+        void alt_Array_RefBase_RefStore_constIMValue_Reserve(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long size);
 
         jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_begin(jnr.ffi.Pointer _instance);
 
@@ -2151,56 +2325,58 @@ public class CAPI
 
         jnr.ffi.Pointer alt_Array_RefBase_RefStore_constIMValue_end_1(jnr.ffi.Pointer _instance);
 
-        jnr.ffi.Pointer alt_Array_StringView_Access_uint64_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Array_StringView_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_Array_StringView_Access_uint64_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Array_StringView_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_Array_StringView_Assign_Array_StringViewRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
         void alt_Array_StringView_Assign_constArray_StringViewRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
+
+        void alt_Array_StringView_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_Array_StringView_Create(jnr.ffi.Pointer returnValue);
 
         void alt_Array_StringView_Create_1(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_StringView_Free()
+         * Return ptr must be manually freed with alt_Array_StringView_CAPI_Free()
          */
-        void alt_Array_StringView_Create_1_Heap(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size);
+        jnr.ffi.Pointer alt_Array_StringView_Create_1_CAPI_Heap(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size);
 
         void alt_Array_StringView_Create_2(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_StringView_Free()
+         * Return ptr must be manually freed with alt_Array_StringView_CAPI_Free()
          */
-        void alt_Array_StringView_Create_2_Heap(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill);
+        jnr.ffi.Pointer alt_Array_StringView_Create_2_CAPI_Heap(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill);
 
         void alt_Array_StringView_Create_3(jnr.ffi.Pointer that, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_StringView_Free()
+         * Return ptr must be manually freed with alt_Array_StringView_CAPI_Free()
          */
-        void alt_Array_StringView_Create_3_Heap(jnr.ffi.Pointer that);
+        jnr.ffi.Pointer alt_Array_StringView_Create_3_CAPI_Heap(jnr.ffi.Pointer that);
 
         void alt_Array_StringView_Create_4(jnr.ffi.Pointer that, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_StringView_Free()
+         * Return ptr must be manually freed with alt_Array_StringView_CAPI_Free()
          */
-        void alt_Array_StringView_Create_4_Heap(jnr.ffi.Pointer that);
+        jnr.ffi.Pointer alt_Array_StringView_Create_4_CAPI_Heap(jnr.ffi.Pointer that);
 
         /**
-         * Return ptr must be manually freed with alt_Array_StringView_Free()
+         * Return ptr must be manually freed with alt_Array_StringView_CAPI_Free()
          */
-        void alt_Array_StringView_Create_Heap();
-
-        void alt_Array_StringView_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_Array_StringView_Create_CAPI_Heap();
 
         @jnr.ffi.types.u_int64_t long alt_Array_StringView_GetCapacity(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_Array_StringView_GetSize(jnr.ffi.Pointer _instance);
 
         void alt_Array_StringView_Push(jnr.ffi.Pointer _instance, jnr.ffi.Pointer el);
+
+        void alt_Array_StringView_Reserve(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long size);
 
         jnr.ffi.Pointer alt_Array_StringView_begin(jnr.ffi.Pointer _instance);
 
@@ -2210,56 +2386,58 @@ public class CAPI
 
         jnr.ffi.Pointer alt_Array_StringView_end_1(jnr.ffi.Pointer _instance);
 
-        jnr.ffi.Pointer alt_Array_String_Access_uint64_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Array_String_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_Array_String_Access_uint64_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Array_String_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_Array_String_Assign_Array_StringRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
         void alt_Array_String_Assign_constArray_StringRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
+
+        void alt_Array_String_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_Array_String_Create(jnr.ffi.Pointer returnValue);
 
         void alt_Array_String_Create_1(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_String_Free()
+         * Return ptr must be manually freed with alt_Array_String_CAPI_Free()
          */
-        void alt_Array_String_Create_1_Heap(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size);
+        jnr.ffi.Pointer alt_Array_String_Create_1_CAPI_Heap(jnr.ffi.Pointer _data, @jnr.ffi.types.u_int64_t long _size);
 
         void alt_Array_String_Create_2(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_String_Free()
+         * Return ptr must be manually freed with alt_Array_String_CAPI_Free()
          */
-        void alt_Array_String_Create_2_Heap(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill);
+        jnr.ffi.Pointer alt_Array_String_Create_2_CAPI_Heap(@jnr.ffi.types.u_int64_t long _size, jnr.ffi.Pointer fill);
 
         void alt_Array_String_Create_3(jnr.ffi.Pointer that, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_String_Free()
+         * Return ptr must be manually freed with alt_Array_String_CAPI_Free()
          */
-        void alt_Array_String_Create_3_Heap(jnr.ffi.Pointer that);
+        jnr.ffi.Pointer alt_Array_String_Create_3_CAPI_Heap(jnr.ffi.Pointer that);
 
         void alt_Array_String_Create_4(jnr.ffi.Pointer that, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_String_Free()
+         * Return ptr must be manually freed with alt_Array_String_CAPI_Free()
          */
-        void alt_Array_String_Create_4_Heap(jnr.ffi.Pointer that);
+        jnr.ffi.Pointer alt_Array_String_Create_4_CAPI_Heap(jnr.ffi.Pointer that);
 
         /**
-         * Return ptr must be manually freed with alt_Array_String_Free()
+         * Return ptr must be manually freed with alt_Array_String_CAPI_Free()
          */
-        void alt_Array_String_Create_Heap();
-
-        void alt_Array_String_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_Array_String_Create_CAPI_Heap();
 
         @jnr.ffi.types.u_int64_t long alt_Array_String_GetCapacity(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_Array_String_GetSize(jnr.ffi.Pointer _instance);
 
         void alt_Array_String_Push(jnr.ffi.Pointer _instance, jnr.ffi.Pointer el);
+
+        void alt_Array_String_Reserve(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long size);
 
         jnr.ffi.Pointer alt_Array_String_begin(jnr.ffi.Pointer _instance);
 
@@ -2275,6 +2453,8 @@ public class CAPI
 
         void alt_CClientScriptEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CClientScriptEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CClientScriptEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CClientScriptEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -2282,53 +2462,51 @@ public class CAPI
         void alt_CClientScriptEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CClientScriptEvent_Free()
+         * Return ptr must be manually freed with alt_CClientScriptEvent_CAPI_Free()
          */
-        void alt_CClientScriptEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CClientScriptEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CClientScriptEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _name, jnr.ffi.Pointer _args, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CClientScriptEvent_Free()
+         * Return ptr must be manually freed with alt_CClientScriptEvent_CAPI_Free()
          */
-        void alt_CClientScriptEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
+        jnr.ffi.Pointer alt_CClientScriptEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
 
         void alt_CClientScriptEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CClientScriptEvent_Free()
+         * Return ptr must be manually freed with alt_CClientScriptEvent_CAPI_Free()
          */
-        void alt_CClientScriptEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CClientScriptEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CClientScriptEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CClientScriptEvent_Free()
+         * Return ptr must be manually freed with alt_CClientScriptEvent_CAPI_Free()
          */
-        void alt_CClientScriptEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CClientScriptEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CClientScriptEvent_Free()
+         * Return ptr must be manually freed with alt_CClientScriptEvent_CAPI_Free()
          */
-        void alt_CClientScriptEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CClientScriptEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CClientScriptEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         jnr.ffi.Pointer alt_CClientScriptEvent_GetArgs(jnr.ffi.Pointer _instance);
 
         void alt_CClientScriptEvent_GetName(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CClientScriptEvent_GetName_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CClientScriptEvent_GetName_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CClientScriptEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_CClientScriptEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CClientScriptEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CClientScriptEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -2342,6 +2520,8 @@ public class CAPI
 
         void alt_CColShapeEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CColShapeEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CColShapeEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CColShapeEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -2349,53 +2529,51 @@ public class CAPI
         void alt_CColShapeEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CColShapeEvent_Free()
+         * Return ptr must be manually freed with alt_CColShapeEvent_CAPI_Free()
          */
-        void alt_CColShapeEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CColShapeEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CColShapeEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _entity, boolean _state, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CColShapeEvent_Free()
+         * Return ptr must be manually freed with alt_CColShapeEvent_CAPI_Free()
          */
-        void alt_CColShapeEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _entity, boolean _state);
+        jnr.ffi.Pointer alt_CColShapeEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _entity, boolean _state);
 
         void alt_CColShapeEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CColShapeEvent_Free()
+         * Return ptr must be manually freed with alt_CColShapeEvent_CAPI_Free()
          */
-        void alt_CColShapeEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CColShapeEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CColShapeEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CColShapeEvent_Free()
+         * Return ptr must be manually freed with alt_CColShapeEvent_CAPI_Free()
          */
-        void alt_CColShapeEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CColShapeEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CColShapeEvent_Free()
+         * Return ptr must be manually freed with alt_CColShapeEvent_CAPI_Free()
          */
-        void alt_CColShapeEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CColShapeEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CColShapeEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CColShapeEvent_GetEntity(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_CColShapeEvent_GetEntity_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CColShapeEvent_GetEntity_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         boolean alt_CColShapeEvent_GetState(jnr.ffi.Pointer _instance);
 
         void alt_CColShapeEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_CColShapeEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CColShapeEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CColShapeEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -2409,6 +2587,8 @@ public class CAPI
 
         void alt_CConsoleCommandEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CConsoleCommandEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CConsoleCommandEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CConsoleCommandEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -2416,46 +2596,44 @@ public class CAPI
         void alt_CConsoleCommandEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CConsoleCommandEvent_Free()
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_CAPI_Free()
          */
-        void alt_CConsoleCommandEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CConsoleCommandEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CConsoleCommandEvent_Create_2(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CConsoleCommandEvent_Free()
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_CAPI_Free()
          */
-        void alt_CConsoleCommandEvent_Create_2_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
+        jnr.ffi.Pointer alt_CConsoleCommandEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
 
         void alt_CConsoleCommandEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CConsoleCommandEvent_Free()
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_CAPI_Free()
          */
-        void alt_CConsoleCommandEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CConsoleCommandEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CConsoleCommandEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CConsoleCommandEvent_Free()
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_CAPI_Free()
          */
-        void alt_CConsoleCommandEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CConsoleCommandEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CConsoleCommandEvent_Free()
+         * Return ptr must be manually freed with alt_CConsoleCommandEvent_CAPI_Free()
          */
-        void alt_CConsoleCommandEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CConsoleCommandEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CConsoleCommandEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         jnr.ffi.Pointer alt_CConsoleCommandEvent_GetArgs(jnr.ffi.Pointer _instance);
 
         void alt_CConsoleCommandEvent_GetName(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CConsoleCommandEvent_GetName_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CConsoleCommandEvent_GetName_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CConsoleCommandEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -2469,6 +2647,8 @@ public class CAPI
 
         void alt_CDataNodeReceivedEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CDataNodeReceivedEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CDataNodeReceivedEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CDataNodeReceivedEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -2476,51 +2656,49 @@ public class CAPI
         void alt_CDataNodeReceivedEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_Free()
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_CAPI_Free()
          */
-        void alt_CDataNodeReceivedEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CDataNodeReceivedEvent_Create_2(jnr.ffi.Pointer _name, jnr.ffi.Pointer _logJson, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_Free()
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_CAPI_Free()
          */
-        void alt_CDataNodeReceivedEvent_Create_2_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _logJson);
+        jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _logJson);
 
         void alt_CDataNodeReceivedEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_Free()
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_CAPI_Free()
          */
-        void alt_CDataNodeReceivedEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CDataNodeReceivedEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_Free()
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_CAPI_Free()
          */
-        void alt_CDataNodeReceivedEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_Free()
+         * Return ptr must be manually freed with alt_CDataNodeReceivedEvent_CAPI_Free()
          */
-        void alt_CDataNodeReceivedEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CDataNodeReceivedEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CDataNodeReceivedEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CDataNodeReceivedEvent_GetJson(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CDataNodeReceivedEvent_GetJson_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CDataNodeReceivedEvent_GetJson_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CDataNodeReceivedEvent_GetName(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CDataNodeReceivedEvent_GetName_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CDataNodeReceivedEvent_GetName_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CDataNodeReceivedEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -2530,6 +2708,8 @@ public class CAPI
 
         void alt_CEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -2537,16 +2717,14 @@ public class CAPI
         void alt_CEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CEvent_Free()
+         * Return ptr must be manually freed with alt_CEvent_CAPI_Free()
          */
-        void alt_CEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CEvent_Free()
+         * Return ptr must be manually freed with alt_CEvent_CAPI_Free()
          */
-        void alt_CEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         alt_CEvent_Type alt_CEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -2594,6 +2772,8 @@ public class CAPI
 
         jnr.ffi.Pointer alt_CEvent_to_alt_CSyncedMetaDataChangeEvent(jnr.ffi.Pointer from);
 
+        jnr.ffi.Pointer alt_CEvent_to_alt_CVehicleDestroyEvent(jnr.ffi.Pointer from);
+
         jnr.ffi.Pointer alt_CEvent_to_alt_CWeaponDamageEvent(jnr.ffi.Pointer from);
 
         void alt_CExplosionEvent_Assign_CExplosionEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
@@ -2602,6 +2782,8 @@ public class CAPI
 
         void alt_CExplosionEvent_Assign_constCExplosionEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CExplosionEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CExplosionEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CExplosionEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -2609,37 +2791,35 @@ public class CAPI
         void alt_CExplosionEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CExplosionEvent_Free()
+         * Return ptr must be manually freed with alt_CExplosionEvent_CAPI_Free()
          */
-        void alt_CExplosionEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CExplosionEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CExplosionEvent_Create_2(jnr.ffi.Pointer _source, alt_CExplosionEvent_ExplosionType _explosionType, jnr.ffi.Pointer _position, @jnr.ffi.types.u_int32_t int _explosionFX, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CExplosionEvent_Free()
+         * Return ptr must be manually freed with alt_CExplosionEvent_CAPI_Free()
          */
-        void alt_CExplosionEvent_Create_2_Heap(jnr.ffi.Pointer _source, alt_CExplosionEvent_ExplosionType _explosionType, jnr.ffi.Pointer _position, @jnr.ffi.types.u_int32_t int _explosionFX);
+        jnr.ffi.Pointer alt_CExplosionEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _source, alt_CExplosionEvent_ExplosionType _explosionType, jnr.ffi.Pointer _position, @jnr.ffi.types.u_int32_t int _explosionFX);
 
         void alt_CExplosionEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CExplosionEvent_Free()
+         * Return ptr must be manually freed with alt_CExplosionEvent_CAPI_Free()
          */
-        void alt_CExplosionEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CExplosionEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CExplosionEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CExplosionEvent_Free()
+         * Return ptr must be manually freed with alt_CExplosionEvent_CAPI_Free()
          */
-        void alt_CExplosionEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CExplosionEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CExplosionEvent_Free()
+         * Return ptr must be manually freed with alt_CExplosionEvent_CAPI_Free()
          */
-        void alt_CExplosionEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CExplosionEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CExplosionEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         @jnr.ffi.types.u_int32_t int alt_CExplosionEvent_GetExplosionFX(jnr.ffi.Pointer _instance);
 
@@ -2648,16 +2828,16 @@ public class CAPI
         void alt_CExplosionEvent_GetPosition(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_CExplosionEvent_GetPosition_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CExplosionEvent_GetPosition_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CExplosionEvent_GetSource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_CExplosionEvent_GetSource_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CExplosionEvent_GetSource_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CExplosionEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -2671,6 +2851,8 @@ public class CAPI
 
         void alt_CGlobalMetaDataChangeEvent_Assign_constCGlobalMetaDataChangeEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CGlobalMetaDataChangeEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CGlobalMetaDataChangeEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CGlobalMetaDataChangeEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -2678,60 +2860,58 @@ public class CAPI
         void alt_CGlobalMetaDataChangeEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CGlobalMetaDataChangeEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CGlobalMetaDataChangeEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CGlobalMetaDataChangeEvent_Create_2(jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CGlobalMetaDataChangeEvent_Create_2_Heap(jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
+        jnr.ffi.Pointer alt_CGlobalMetaDataChangeEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
 
         void alt_CGlobalMetaDataChangeEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CGlobalMetaDataChangeEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CGlobalMetaDataChangeEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CGlobalMetaDataChangeEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CGlobalMetaDataChangeEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CGlobalMetaDataChangeEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CGlobalMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CGlobalMetaDataChangeEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CGlobalMetaDataChangeEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CGlobalMetaDataChangeEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CGlobalMetaDataChangeEvent_GetKey(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CGlobalMetaDataChangeEvent_GetKey_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CGlobalMetaDataChangeEvent_GetKey_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CGlobalMetaDataChangeEvent_GetOldVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_CGlobalMetaDataChangeEvent_GetOldVal_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CGlobalMetaDataChangeEvent_GetOldVal_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CGlobalMetaDataChangeEvent_GetType(jnr.ffi.Pointer _instance);
 
         void alt_CGlobalMetaDataChangeEvent_GetVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_CGlobalMetaDataChangeEvent_GetVal_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CGlobalMetaDataChangeEvent_GetVal_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         boolean alt_CGlobalMetaDataChangeEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
@@ -2743,6 +2923,8 @@ public class CAPI
 
         void alt_CGlobalSyncedMetaDataChangeEvent_Assign_constCGlobalSyncedMetaDataChangeEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CGlobalSyncedMetaDataChangeEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CGlobalSyncedMetaDataChangeEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CGlobalSyncedMetaDataChangeEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -2750,60 +2932,58 @@ public class CAPI
         void alt_CGlobalSyncedMetaDataChangeEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CGlobalSyncedMetaDataChangeEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CGlobalSyncedMetaDataChangeEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CGlobalSyncedMetaDataChangeEvent_Create_2(jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CGlobalSyncedMetaDataChangeEvent_Create_2_Heap(jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
+        jnr.ffi.Pointer alt_CGlobalSyncedMetaDataChangeEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
 
         void alt_CGlobalSyncedMetaDataChangeEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CGlobalSyncedMetaDataChangeEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CGlobalSyncedMetaDataChangeEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CGlobalSyncedMetaDataChangeEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CGlobalSyncedMetaDataChangeEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CGlobalSyncedMetaDataChangeEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CGlobalSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CGlobalSyncedMetaDataChangeEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CGlobalSyncedMetaDataChangeEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CGlobalSyncedMetaDataChangeEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CGlobalSyncedMetaDataChangeEvent_GetKey(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CGlobalSyncedMetaDataChangeEvent_GetKey_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CGlobalSyncedMetaDataChangeEvent_GetKey_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CGlobalSyncedMetaDataChangeEvent_GetOldVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_CGlobalSyncedMetaDataChangeEvent_GetOldVal_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CGlobalSyncedMetaDataChangeEvent_GetOldVal_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CGlobalSyncedMetaDataChangeEvent_GetType(jnr.ffi.Pointer _instance);
 
         void alt_CGlobalSyncedMetaDataChangeEvent_GetVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_CGlobalSyncedMetaDataChangeEvent_GetVal_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CGlobalSyncedMetaDataChangeEvent_GetVal_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         boolean alt_CGlobalSyncedMetaDataChangeEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
@@ -2815,6 +2995,8 @@ public class CAPI
 
         void alt_CPlayerChangeVehicleSeatEvent_Assign_constCPlayerChangeVehicleSeatEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CPlayerChangeVehicleSeatEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerChangeVehicleSeatEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerChangeVehicleSeatEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -2822,37 +3004,35 @@ public class CAPI
         void alt_CPlayerChangeVehicleSeatEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_CAPI_Free()
          */
-        void alt_CPlayerChangeVehicleSeatEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerChangeVehicleSeatEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _oldSeat, @jnr.ffi.types.u_int8_t byte _newSeat, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_CAPI_Free()
          */
-        void alt_CPlayerChangeVehicleSeatEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _oldSeat, @jnr.ffi.types.u_int8_t byte _newSeat);
+        jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _oldSeat, @jnr.ffi.types.u_int8_t byte _newSeat);
 
         void alt_CPlayerChangeVehicleSeatEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_CAPI_Free()
          */
-        void alt_CPlayerChangeVehicleSeatEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerChangeVehicleSeatEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_CAPI_Free()
          */
-        void alt_CPlayerChangeVehicleSeatEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerChangeVehicleSeatEvent_CAPI_Free()
          */
-        void alt_CPlayerChangeVehicleSeatEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CPlayerChangeVehicleSeatEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         @jnr.ffi.types.u_int8_t byte alt_CPlayerChangeVehicleSeatEvent_GetNewSeat(jnr.ffi.Pointer _instance);
 
@@ -2861,16 +3041,16 @@ public class CAPI
         void alt_CPlayerChangeVehicleSeatEvent_GetPlayer(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_CPlayerChangeVehicleSeatEvent_GetPlayer_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_GetPlayer_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerChangeVehicleSeatEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_CPlayerChangeVehicleSeatEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerChangeVehicleSeatEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CPlayerChangeVehicleSeatEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -2884,6 +3064,8 @@ public class CAPI
 
         void alt_CPlayerConnectEvent_Assign_constCPlayerConnectEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CPlayerConnectEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerConnectEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerConnectEvent_Cancel_1(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _reason);
@@ -2893,51 +3075,49 @@ public class CAPI
         void alt_CPlayerConnectEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerConnectEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_CAPI_Free()
          */
-        void alt_CPlayerConnectEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerConnectEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerConnectEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerConnectEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_CAPI_Free()
          */
-        void alt_CPlayerConnectEvent_Create_2_Heap(jnr.ffi.Pointer _target);
+        jnr.ffi.Pointer alt_CPlayerConnectEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target);
 
         void alt_CPlayerConnectEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerConnectEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_CAPI_Free()
          */
-        void alt_CPlayerConnectEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerConnectEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerConnectEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerConnectEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_CAPI_Free()
          */
-        void alt_CPlayerConnectEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerConnectEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerConnectEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerConnectEvent_CAPI_Free()
          */
-        void alt_CPlayerConnectEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CPlayerConnectEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CPlayerConnectEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CPlayerConnectEvent_GetReason(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CPlayerConnectEvent_GetReason_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerConnectEvent_GetReason_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerConnectEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_CPlayerConnectEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerConnectEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CPlayerConnectEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -2951,6 +3131,8 @@ public class CAPI
 
         void alt_CPlayerDamageEvent_Assign_constCPlayerDamageEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CPlayerDamageEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerDamageEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerDamageEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -2958,53 +3140,51 @@ public class CAPI
         void alt_CPlayerDamageEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDamageEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDamageEvent_CAPI_Free()
          */
-        void alt_CPlayerDamageEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerDamageEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDamageEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _attacker, @jnr.ffi.types.u_int16_t short _damage, @jnr.ffi.types.u_int32_t int _weapon, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDamageEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDamageEvent_CAPI_Free()
          */
-        void alt_CPlayerDamageEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _attacker, @jnr.ffi.types.u_int16_t short _damage, @jnr.ffi.types.u_int32_t int _weapon);
+        jnr.ffi.Pointer alt_CPlayerDamageEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _attacker, @jnr.ffi.types.u_int16_t short _damage, @jnr.ffi.types.u_int32_t int _weapon);
 
         void alt_CPlayerDamageEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDamageEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDamageEvent_CAPI_Free()
          */
-        void alt_CPlayerDamageEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerDamageEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDamageEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDamageEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDamageEvent_CAPI_Free()
          */
-        void alt_CPlayerDamageEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerDamageEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDamageEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDamageEvent_CAPI_Free()
          */
-        void alt_CPlayerDamageEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CPlayerDamageEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CPlayerDamageEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CPlayerDamageEvent_GetAttacker(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_CPlayerDamageEvent_GetAttacker_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerDamageEvent_GetAttacker_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_CPlayerDamageEvent_GetDamage(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerDamageEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_CPlayerDamageEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerDamageEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CPlayerDamageEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -3020,6 +3200,8 @@ public class CAPI
 
         void alt_CPlayerDeathEvent_Assign_constCPlayerDeathEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CPlayerDeathEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerDeathEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerDeathEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3027,51 +3209,49 @@ public class CAPI
         void alt_CPlayerDeathEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDeathEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDeathEvent_CAPI_Free()
          */
-        void alt_CPlayerDeathEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerDeathEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDeathEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _killer, @jnr.ffi.types.u_int32_t int _weapon, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDeathEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDeathEvent_CAPI_Free()
          */
-        void alt_CPlayerDeathEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _killer, @jnr.ffi.types.u_int32_t int _weapon);
+        jnr.ffi.Pointer alt_CPlayerDeathEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _killer, @jnr.ffi.types.u_int32_t int _weapon);
 
         void alt_CPlayerDeathEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDeathEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDeathEvent_CAPI_Free()
          */
-        void alt_CPlayerDeathEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerDeathEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDeathEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDeathEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDeathEvent_CAPI_Free()
          */
-        void alt_CPlayerDeathEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerDeathEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDeathEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDeathEvent_CAPI_Free()
          */
-        void alt_CPlayerDeathEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CPlayerDeathEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CPlayerDeathEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CPlayerDeathEvent_GetKiller(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_CPlayerDeathEvent_GetKiller_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerDeathEvent_GetKiller_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerDeathEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_CPlayerDeathEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerDeathEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CPlayerDeathEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -3087,6 +3267,8 @@ public class CAPI
 
         void alt_CPlayerDisconnectEvent_Assign_constCPlayerDisconnectEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CPlayerDisconnectEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerDisconnectEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerDisconnectEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3094,51 +3276,49 @@ public class CAPI
         void alt_CPlayerDisconnectEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_CAPI_Free()
          */
-        void alt_CPlayerDisconnectEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDisconnectEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _reason, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_CAPI_Free()
          */
-        void alt_CPlayerDisconnectEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _reason);
+        jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _reason);
 
         void alt_CPlayerDisconnectEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_CAPI_Free()
          */
-        void alt_CPlayerDisconnectEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerDisconnectEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_CAPI_Free()
          */
-        void alt_CPlayerDisconnectEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerDisconnectEvent_CAPI_Free()
          */
-        void alt_CPlayerDisconnectEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CPlayerDisconnectEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CPlayerDisconnectEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CPlayerDisconnectEvent_GetReason(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CPlayerDisconnectEvent_GetReason_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerDisconnectEvent_GetReason_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerDisconnectEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_CPlayerDisconnectEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerDisconnectEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CPlayerDisconnectEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -3152,6 +3332,8 @@ public class CAPI
 
         void alt_CPlayerEnterVehicleEvent_Assign_constCPlayerEnterVehicleEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CPlayerEnterVehicleEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerEnterVehicleEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerEnterVehicleEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3159,53 +3341,51 @@ public class CAPI
         void alt_CPlayerEnterVehicleEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_CAPI_Free()
          */
-        void alt_CPlayerEnterVehicleEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerEnterVehicleEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_CAPI_Free()
          */
-        void alt_CPlayerEnterVehicleEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat);
+        jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat);
 
         void alt_CPlayerEnterVehicleEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_CAPI_Free()
          */
-        void alt_CPlayerEnterVehicleEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerEnterVehicleEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_CAPI_Free()
          */
-        void alt_CPlayerEnterVehicleEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerEnterVehicleEvent_CAPI_Free()
          */
-        void alt_CPlayerEnterVehicleEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CPlayerEnterVehicleEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CPlayerEnterVehicleEvent_GetPlayer(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_CPlayerEnterVehicleEvent_GetPlayer_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_GetPlayer_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_CPlayerEnterVehicleEvent_GetSeat(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerEnterVehicleEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_CPlayerEnterVehicleEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerEnterVehicleEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CPlayerEnterVehicleEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -3219,6 +3399,8 @@ public class CAPI
 
         void alt_CPlayerLeaveVehicleEvent_Assign_constCPlayerLeaveVehicleEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CPlayerLeaveVehicleEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CPlayerLeaveVehicleEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerLeaveVehicleEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3226,53 +3408,51 @@ public class CAPI
         void alt_CPlayerLeaveVehicleEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_CAPI_Free()
          */
-        void alt_CPlayerLeaveVehicleEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerLeaveVehicleEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_CAPI_Free()
          */
-        void alt_CPlayerLeaveVehicleEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat);
+        jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _player, @jnr.ffi.types.u_int8_t byte _seat);
 
         void alt_CPlayerLeaveVehicleEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_CAPI_Free()
          */
-        void alt_CPlayerLeaveVehicleEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CPlayerLeaveVehicleEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_CAPI_Free()
          */
-        void alt_CPlayerLeaveVehicleEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_Free()
+         * Return ptr must be manually freed with alt_CPlayerLeaveVehicleEvent_CAPI_Free()
          */
-        void alt_CPlayerLeaveVehicleEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CPlayerLeaveVehicleEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CPlayerLeaveVehicleEvent_GetPlayer(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_CPlayerLeaveVehicleEvent_GetPlayer_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_GetPlayer_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_CPlayerLeaveVehicleEvent_GetSeat(jnr.ffi.Pointer _instance);
 
         void alt_CPlayerLeaveVehicleEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_CPlayerLeaveVehicleEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CPlayerLeaveVehicleEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CPlayerLeaveVehicleEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -3344,6 +3524,8 @@ public class CAPI
 
         void alt_CRemoveEntityEvent_Assign_constCRemoveEntityEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CRemoveEntityEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CRemoveEntityEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CRemoveEntityEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3351,44 +3533,42 @@ public class CAPI
         void alt_CRemoveEntityEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CRemoveEntityEvent_Free()
+         * Return ptr must be manually freed with alt_CRemoveEntityEvent_CAPI_Free()
          */
-        void alt_CRemoveEntityEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CRemoveEntityEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CRemoveEntityEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CRemoveEntityEvent_Free()
+         * Return ptr must be manually freed with alt_CRemoveEntityEvent_CAPI_Free()
          */
-        void alt_CRemoveEntityEvent_Create_2_Heap(jnr.ffi.Pointer _target);
+        jnr.ffi.Pointer alt_CRemoveEntityEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target);
 
         void alt_CRemoveEntityEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CRemoveEntityEvent_Free()
+         * Return ptr must be manually freed with alt_CRemoveEntityEvent_CAPI_Free()
          */
-        void alt_CRemoveEntityEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CRemoveEntityEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CRemoveEntityEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CRemoveEntityEvent_Free()
+         * Return ptr must be manually freed with alt_CRemoveEntityEvent_CAPI_Free()
          */
-        void alt_CRemoveEntityEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CRemoveEntityEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CRemoveEntityEvent_Free()
+         * Return ptr must be manually freed with alt_CRemoveEntityEvent_CAPI_Free()
          */
-        void alt_CRemoveEntityEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CRemoveEntityEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CRemoveEntityEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CRemoveEntityEvent_GetEntity(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_CRemoveEntityEvent_GetEntity_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CRemoveEntityEvent_GetEntity_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CRemoveEntityEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -3402,6 +3582,8 @@ public class CAPI
 
         void alt_CResourceErrorEvent_Assign_constCResourceErrorEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CResourceErrorEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CResourceErrorEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CResourceErrorEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3409,37 +3591,35 @@ public class CAPI
         void alt_CResourceErrorEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceErrorEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceErrorEvent_CAPI_Free()
          */
-        void alt_CResourceErrorEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CResourceErrorEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CResourceErrorEvent_Create_2(jnr.ffi.Pointer _resource, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceErrorEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceErrorEvent_CAPI_Free()
          */
-        void alt_CResourceErrorEvent_Create_2_Heap(jnr.ffi.Pointer _resource);
+        jnr.ffi.Pointer alt_CResourceErrorEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _resource);
 
         void alt_CResourceErrorEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceErrorEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceErrorEvent_CAPI_Free()
          */
-        void alt_CResourceErrorEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CResourceErrorEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CResourceErrorEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceErrorEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceErrorEvent_CAPI_Free()
          */
-        void alt_CResourceErrorEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CResourceErrorEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceErrorEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceErrorEvent_CAPI_Free()
          */
-        void alt_CResourceErrorEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CResourceErrorEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CResourceErrorEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         jnr.ffi.Pointer alt_CResourceErrorEvent_GetResource(jnr.ffi.Pointer _instance);
 
@@ -3455,6 +3635,8 @@ public class CAPI
 
         void alt_CResourceStartEvent_Assign_constCResourceStartEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CResourceStartEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CResourceStartEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CResourceStartEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3462,37 +3644,35 @@ public class CAPI
         void alt_CResourceStartEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceStartEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceStartEvent_CAPI_Free()
          */
-        void alt_CResourceStartEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CResourceStartEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CResourceStartEvent_Create_2(jnr.ffi.Pointer _resource, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceStartEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceStartEvent_CAPI_Free()
          */
-        void alt_CResourceStartEvent_Create_2_Heap(jnr.ffi.Pointer _resource);
+        jnr.ffi.Pointer alt_CResourceStartEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _resource);
 
         void alt_CResourceStartEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceStartEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceStartEvent_CAPI_Free()
          */
-        void alt_CResourceStartEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CResourceStartEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CResourceStartEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceStartEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceStartEvent_CAPI_Free()
          */
-        void alt_CResourceStartEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CResourceStartEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceStartEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceStartEvent_CAPI_Free()
          */
-        void alt_CResourceStartEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CResourceStartEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CResourceStartEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         jnr.ffi.Pointer alt_CResourceStartEvent_GetResource(jnr.ffi.Pointer _instance);
 
@@ -3508,6 +3688,8 @@ public class CAPI
 
         void alt_CResourceStopEvent_Assign_constCResourceStopEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CResourceStopEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CResourceStopEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CResourceStopEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3515,37 +3697,35 @@ public class CAPI
         void alt_CResourceStopEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceStopEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceStopEvent_CAPI_Free()
          */
-        void alt_CResourceStopEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CResourceStopEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CResourceStopEvent_Create_2(jnr.ffi.Pointer _resource, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceStopEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceStopEvent_CAPI_Free()
          */
-        void alt_CResourceStopEvent_Create_2_Heap(jnr.ffi.Pointer _resource);
+        jnr.ffi.Pointer alt_CResourceStopEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _resource);
 
         void alt_CResourceStopEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceStopEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceStopEvent_CAPI_Free()
          */
-        void alt_CResourceStopEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CResourceStopEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CResourceStopEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceStopEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceStopEvent_CAPI_Free()
          */
-        void alt_CResourceStopEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CResourceStopEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CResourceStopEvent_Free()
+         * Return ptr must be manually freed with alt_CResourceStopEvent_CAPI_Free()
          */
-        void alt_CResourceStopEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CResourceStopEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CResourceStopEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         jnr.ffi.Pointer alt_CResourceStopEvent_GetResource(jnr.ffi.Pointer _instance);
 
@@ -3561,6 +3741,8 @@ public class CAPI
 
         void alt_CServerScriptEvent_Assign_constCServerScriptEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CServerScriptEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CServerScriptEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CServerScriptEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3568,46 +3750,44 @@ public class CAPI
         void alt_CServerScriptEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CServerScriptEvent_Free()
+         * Return ptr must be manually freed with alt_CServerScriptEvent_CAPI_Free()
          */
-        void alt_CServerScriptEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CServerScriptEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CServerScriptEvent_Create_2(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CServerScriptEvent_Free()
+         * Return ptr must be manually freed with alt_CServerScriptEvent_CAPI_Free()
          */
-        void alt_CServerScriptEvent_Create_2_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
+        jnr.ffi.Pointer alt_CServerScriptEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _name, jnr.ffi.Pointer _args);
 
         void alt_CServerScriptEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CServerScriptEvent_Free()
+         * Return ptr must be manually freed with alt_CServerScriptEvent_CAPI_Free()
          */
-        void alt_CServerScriptEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CServerScriptEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CServerScriptEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CServerScriptEvent_Free()
+         * Return ptr must be manually freed with alt_CServerScriptEvent_CAPI_Free()
          */
-        void alt_CServerScriptEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CServerScriptEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CServerScriptEvent_Free()
+         * Return ptr must be manually freed with alt_CServerScriptEvent_CAPI_Free()
          */
-        void alt_CServerScriptEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CServerScriptEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CServerScriptEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         jnr.ffi.Pointer alt_CServerScriptEvent_GetArgs(jnr.ffi.Pointer _instance);
 
         void alt_CServerScriptEvent_GetName(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CServerScriptEvent_GetName_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CServerScriptEvent_GetName_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CServerScriptEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -3621,6 +3801,8 @@ public class CAPI
 
         void alt_CStreamSyncedMetaDataChangeEvent_Assign_constCStreamSyncedMetaDataChangeEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CStreamSyncedMetaDataChangeEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CStreamSyncedMetaDataChangeEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CStreamSyncedMetaDataChangeEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3628,67 +3810,65 @@ public class CAPI
         void alt_CStreamSyncedMetaDataChangeEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CStreamSyncedMetaDataChangeEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CStreamSyncedMetaDataChangeEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CStreamSyncedMetaDataChangeEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CStreamSyncedMetaDataChangeEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
+        jnr.ffi.Pointer alt_CStreamSyncedMetaDataChangeEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
 
         void alt_CStreamSyncedMetaDataChangeEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CStreamSyncedMetaDataChangeEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CStreamSyncedMetaDataChangeEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CStreamSyncedMetaDataChangeEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CStreamSyncedMetaDataChangeEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CStreamSyncedMetaDataChangeEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CStreamSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CStreamSyncedMetaDataChangeEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CStreamSyncedMetaDataChangeEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CStreamSyncedMetaDataChangeEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CStreamSyncedMetaDataChangeEvent_GetKey(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CStreamSyncedMetaDataChangeEvent_GetKey_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CStreamSyncedMetaDataChangeEvent_GetKey_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CStreamSyncedMetaDataChangeEvent_GetOldVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_CStreamSyncedMetaDataChangeEvent_GetOldVal_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CStreamSyncedMetaDataChangeEvent_GetOldVal_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CStreamSyncedMetaDataChangeEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_CStreamSyncedMetaDataChangeEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CStreamSyncedMetaDataChangeEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CStreamSyncedMetaDataChangeEvent_GetType(jnr.ffi.Pointer _instance);
 
         void alt_CStreamSyncedMetaDataChangeEvent_GetVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_CStreamSyncedMetaDataChangeEvent_GetVal_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CStreamSyncedMetaDataChangeEvent_GetVal_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         boolean alt_CStreamSyncedMetaDataChangeEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
@@ -3700,6 +3880,8 @@ public class CAPI
 
         void alt_CSyncedMetaDataChangeEvent_Assign_constCSyncedMetaDataChangeEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_CSyncedMetaDataChangeEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_CSyncedMetaDataChangeEvent_Cancel(jnr.ffi.Pointer _instance);
 
         void alt_CSyncedMetaDataChangeEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
@@ -3707,77 +3889,135 @@ public class CAPI
         void alt_CSyncedMetaDataChangeEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CSyncedMetaDataChangeEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_Create_2_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
+        jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target, jnr.ffi.Pointer _key, jnr.ffi.Pointer _val, jnr.ffi.Pointer _oldVal);
 
         void alt_CSyncedMetaDataChangeEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CSyncedMetaDataChangeEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_Free()
+         * Return ptr must be manually freed with alt_CSyncedMetaDataChangeEvent_CAPI_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CSyncedMetaDataChangeEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         void alt_CSyncedMetaDataChangeEvent_GetKey(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_GetKey_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_GetKey_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CSyncedMetaDataChangeEvent_GetOldVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_GetOldVal_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_GetOldVal_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CSyncedMetaDataChangeEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CSyncedMetaDataChangeEvent_GetType(jnr.ffi.Pointer _instance);
 
         void alt_CSyncedMetaDataChangeEvent_GetVal(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_CSyncedMetaDataChangeEvent_GetVal_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_GetVal_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         boolean alt_CSyncedMetaDataChangeEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_CSyncedMetaDataChangeEvent_to_alt_CEvent(jnr.ffi.Pointer from);
+
+        void alt_CVehicleDestroyEvent_Assign_CVehicleDestroyEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CVehicleDestroyEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CVehicleDestroyEvent_Assign_constCVehicleDestroyEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CVehicleDestroyEvent_CAPI_Free(jnr.ffi.Pointer ptr);
+
+        void alt_CVehicleDestroyEvent_Cancel(jnr.ffi.Pointer _instance);
+
+        void alt_CVehicleDestroyEvent_Create(alt_CEvent_Type _type, jnr.ffi.Pointer returnValue);
+
+        void alt_CVehicleDestroyEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CVehicleDestroyEvent_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_CVehicleDestroyEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_CVehicleDestroyEvent_Create_2(jnr.ffi.Pointer _target, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CVehicleDestroyEvent_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_CVehicleDestroyEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _target);
+
+        void alt_CVehicleDestroyEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CVehicleDestroyEvent_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_CVehicleDestroyEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_CVehicleDestroyEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_CVehicleDestroyEvent_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_CVehicleDestroyEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
+
+        /**
+         * Return ptr must be manually freed with alt_CVehicleDestroyEvent_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_CVehicleDestroyEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
+
+        void alt_CVehicleDestroyEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_CVehicleDestroyEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
+
+        alt_CEvent_Type alt_CVehicleDestroyEvent_GetType(jnr.ffi.Pointer _instance);
+
+        boolean alt_CVehicleDestroyEvent_WasCancelled(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_CVehicleDestroyEvent_to_alt_CEvent(jnr.ffi.Pointer from);
 
         void alt_CWeaponDamageEvent_Assign_CWeaponDamageEventRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CWeaponDamageEvent_Assign_constCEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_CWeaponDamageEvent_Assign_constCWeaponDamageEventRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_CWeaponDamageEvent_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_CWeaponDamageEvent_Cancel(jnr.ffi.Pointer _instance);
 
@@ -3786,37 +4026,35 @@ public class CAPI
         void alt_CWeaponDamageEvent_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CWeaponDamageEvent_Free()
+         * Return ptr must be manually freed with alt_CWeaponDamageEvent_CAPI_Free()
          */
-        void alt_CWeaponDamageEvent_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CWeaponDamageEvent_Create_2(jnr.ffi.Pointer _source, jnr.ffi.Pointer _target, @jnr.ffi.types.u_int32_t int _weaponHash, @jnr.ffi.types.u_int16_t short _damageValue, jnr.ffi.Pointer _shotOffset, alt_CWeaponDamageEvent_BodyPart _bodyPart, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CWeaponDamageEvent_Free()
+         * Return ptr must be manually freed with alt_CWeaponDamageEvent_CAPI_Free()
          */
-        void alt_CWeaponDamageEvent_Create_2_Heap(jnr.ffi.Pointer _source, jnr.ffi.Pointer _target, @jnr.ffi.types.u_int32_t int _weaponHash, @jnr.ffi.types.u_int16_t short _damageValue, jnr.ffi.Pointer _shotOffset, alt_CWeaponDamageEvent_BodyPart _bodyPart);
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_Create_2_CAPI_Heap(jnr.ffi.Pointer _source, jnr.ffi.Pointer _target, @jnr.ffi.types.u_int32_t int _weaponHash, @jnr.ffi.types.u_int16_t short _damageValue, jnr.ffi.Pointer _shotOffset, alt_CWeaponDamageEvent_BodyPart _bodyPart);
 
         void alt_CWeaponDamageEvent_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CWeaponDamageEvent_Free()
+         * Return ptr must be manually freed with alt_CWeaponDamageEvent_CAPI_Free()
          */
-        void alt_CWeaponDamageEvent_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_CWeaponDamageEvent_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_CWeaponDamageEvent_Free()
+         * Return ptr must be manually freed with alt_CWeaponDamageEvent_CAPI_Free()
          */
-        void alt_CWeaponDamageEvent_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_CWeaponDamageEvent_Free()
+         * Return ptr must be manually freed with alt_CWeaponDamageEvent_CAPI_Free()
          */
-        void alt_CWeaponDamageEvent_Create_Heap(alt_CEvent_Type _type);
-
-        void alt_CWeaponDamageEvent_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_Create_CAPI_Heap(alt_CEvent_Type _type);
 
         alt_CWeaponDamageEvent_BodyPart alt_CWeaponDamageEvent_GetBodyPart(jnr.ffi.Pointer _instance);
 
@@ -3825,23 +4063,23 @@ public class CAPI
         void alt_CWeaponDamageEvent_GetShotOffset(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_CWeaponDamageEvent_GetShotOffset_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_GetShotOffset_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CWeaponDamageEvent_GetSource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_CWeaponDamageEvent_GetSource_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_GetSource_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_CWeaponDamageEvent_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_CWeaponDamageEvent_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_CWeaponDamageEvent_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_CEvent_Type alt_CWeaponDamageEvent_GetType(jnr.ffi.Pointer _instance);
 
@@ -3850,24 +4088,6 @@ public class CAPI
         boolean alt_CWeaponDamageEvent_WasCancelled(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_CWeaponDamageEvent_to_alt_CEvent(jnr.ffi.Pointer from);
-
-        void alt_DiscordOAuth2Token_Assign_DiscordOAuth2TokenRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
-
-        void alt_DiscordOAuth2Token_Create(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        void alt_DiscordOAuth2Token_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
-
-        /**
-         * Return ptr must be manually freed with alt_DiscordOAuth2Token_Free()
-         */
-        void alt_DiscordOAuth2Token_Create_1_Heap(jnr.ffi.Pointer _p0);
-
-        /**
-         * Return ptr must be manually freed with alt_DiscordOAuth2Token_Free()
-         */
-        void alt_DiscordOAuth2Token_Create_Heap(jnr.ffi.Pointer _p0);
-
-        void alt_DiscordOAuth2Token_Free(jnr.ffi.Pointer ptr);
 
         void alt_IBaseObject_AddRef(jnr.ffi.Pointer _instance);
 
@@ -3878,9 +4098,9 @@ public class CAPI
         void alt_IBaseObject_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IBaseObject_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IBaseObject_GetMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int64_t long alt_IBaseObject_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -3919,9 +4139,9 @@ public class CAPI
         void alt_IBlip_AttachedTo(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_IBlip_AttachedTo_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IBlip_AttachedTo_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IBlip_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
@@ -3932,25 +4152,25 @@ public class CAPI
         void alt_IBlip_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IBlip_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IBlip_GetMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IBlip_GetPosition(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_IBlip_GetPosition_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IBlip_GetPosition_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IBlip_GetRefCount(jnr.ffi.Pointer _instance);
 
         void alt_IBlip_GetTarget(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_IBlip_GetTarget_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IBlip_GetTarget_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_IBaseObject_Type alt_IBlip_GetType(jnr.ffi.Pointer _instance);
 
@@ -3995,9 +4215,9 @@ public class CAPI
         void alt_ICheckpoint_GetColor(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RGBA_Free()
+         * Return ptr must be manually freed with alt_RGBA_CAPI_Free()
          */
-        void alt_ICheckpoint_GetColor_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_ICheckpoint_GetColor_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_IColShape_ColShapeType alt_ICheckpoint_GetColshapeType(jnr.ffi.Pointer _instance);
 
@@ -4008,16 +4228,16 @@ public class CAPI
         void alt_ICheckpoint_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_ICheckpoint_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_ICheckpoint_GetMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_ICheckpoint_GetPosition(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_ICheckpoint_GetPosition_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_ICheckpoint_GetPosition_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         float alt_ICheckpoint_GetRadius(jnr.ffi.Pointer _instance);
 
@@ -4062,16 +4282,16 @@ public class CAPI
         void alt_IColShape_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IColShape_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IColShape_GetMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IColShape_GetPosition(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_IColShape_GetPosition_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IColShape_GetPosition_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IColShape_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -4108,175 +4328,175 @@ public class CAPI
         void alt_ICore_CreateBlip_1(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, alt_IBlip_BlipType type, jnr.ffi.Pointer attachTo, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IBlip_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IBlip_CAPI_Free()
          */
-        void alt_ICore_CreateBlip_1_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, alt_IBlip_BlipType type, jnr.ffi.Pointer attachTo);
+        jnr.ffi.Pointer alt_ICore_CreateBlip_1_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, alt_IBlip_BlipType type, jnr.ffi.Pointer attachTo);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IBlip_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IBlip_CAPI_Free()
          */
-        void alt_ICore_CreateBlip_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, alt_IBlip_BlipType type, jnr.ffi.Pointer pos);
+        jnr.ffi.Pointer alt_ICore_CreateBlip_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer target, alt_IBlip_BlipType type, jnr.ffi.Pointer pos);
 
         void alt_ICore_CreateCheckpoint(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte type, jnr.ffi.Pointer pos, float radius, float height, jnr.ffi.Pointer color, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_ICheckpoint_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_ICheckpoint_CAPI_Free()
          */
-        void alt_ICore_CreateCheckpoint_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte type, jnr.ffi.Pointer pos, float radius, float height, jnr.ffi.Pointer color);
+        jnr.ffi.Pointer alt_ICore_CreateCheckpoint_CAPI_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte type, jnr.ffi.Pointer pos, float radius, float height, jnr.ffi.Pointer color);
 
         void alt_ICore_CreateColShapeCircle(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_ICore_CreateColShapeCircle_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius);
+        jnr.ffi.Pointer alt_ICore_CreateColShapeCircle_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius);
 
         void alt_ICore_CreateColShapeCube(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, jnr.ffi.Pointer pos2, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_ICore_CreateColShapeCube_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, jnr.ffi.Pointer pos2);
+        jnr.ffi.Pointer alt_ICore_CreateColShapeCube_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, jnr.ffi.Pointer pos2);
 
         void alt_ICore_CreateColShapeCylinder(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius, float height, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_ICore_CreateColShapeCylinder_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius, float height);
+        jnr.ffi.Pointer alt_ICore_CreateColShapeCylinder_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius, float height);
 
         void alt_ICore_CreateColShapeRectangle(jnr.ffi.Pointer _instance, float x1, float y1, float x2, float y2, float z, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_ICore_CreateColShapeRectangle_Heap(jnr.ffi.Pointer _instance, float x1, float y1, float x2, float y2, float z);
+        jnr.ffi.Pointer alt_ICore_CreateColShapeRectangle_CAPI_Heap(jnr.ffi.Pointer _instance, float x1, float y1, float x2, float y2, float z);
 
         void alt_ICore_CreateColShapeSphere(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_ICore_CreateColShapeSphere_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius);
+        jnr.ffi.Pointer alt_ICore_CreateColShapeSphere_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer pos, float radius);
 
         void alt_ICore_CreateMValueBaseObject(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueBaseObject_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueBaseObject_CAPI_Free()
          */
-        void alt_ICore_CreateMValueBaseObject_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
+        jnr.ffi.Pointer alt_ICore_CreateMValueBaseObject_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
 
         void alt_ICore_CreateMValueBool(jnr.ffi.Pointer _instance, boolean val, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueBool_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueBool_CAPI_Free()
          */
-        void alt_ICore_CreateMValueBool_Heap(jnr.ffi.Pointer _instance, boolean val);
+        jnr.ffi.Pointer alt_ICore_CreateMValueBool_CAPI_Heap(jnr.ffi.Pointer _instance, boolean val);
 
         void alt_ICore_CreateMValueByteArray(jnr.ffi.Pointer _instance, jnr.ffi.Pointer data, @jnr.ffi.types.u_int64_t long size, jnr.ffi.Pointer returnValue);
 
         void alt_ICore_CreateMValueByteArray_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long size, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueByteArray_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueByteArray_CAPI_Free()
          */
-        void alt_ICore_CreateMValueByteArray_1_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long size);
+        jnr.ffi.Pointer alt_ICore_CreateMValueByteArray_1_CAPI_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long size);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueByteArray_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueByteArray_CAPI_Free()
          */
-        void alt_ICore_CreateMValueByteArray_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer data, @jnr.ffi.types.u_int64_t long size);
+        jnr.ffi.Pointer alt_ICore_CreateMValueByteArray_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer data, @jnr.ffi.types.u_int64_t long size);
 
         void alt_ICore_CreateMValueDict(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueDict_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueDict_CAPI_Free()
          */
-        void alt_ICore_CreateMValueDict_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_ICore_CreateMValueDict_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_ICore_CreateMValueDouble(jnr.ffi.Pointer _instance, double val, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueDouble_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueDouble_CAPI_Free()
          */
-        void alt_ICore_CreateMValueDouble_Heap(jnr.ffi.Pointer _instance, double val);
+        jnr.ffi.Pointer alt_ICore_CreateMValueDouble_CAPI_Heap(jnr.ffi.Pointer _instance, double val);
 
         void alt_ICore_CreateMValueFunction(jnr.ffi.Pointer _instance, jnr.ffi.Pointer impl, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueFunction_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueFunction_CAPI_Free()
          */
-        void alt_ICore_CreateMValueFunction_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer impl);
+        jnr.ffi.Pointer alt_ICore_CreateMValueFunction_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer impl);
 
         void alt_ICore_CreateMValueInt(jnr.ffi.Pointer _instance, @jnr.ffi.types.int64_t long val, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueInt_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueInt_CAPI_Free()
          */
-        void alt_ICore_CreateMValueInt_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.int64_t long val);
+        jnr.ffi.Pointer alt_ICore_CreateMValueInt_CAPI_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.int64_t long val);
 
         void alt_ICore_CreateMValueList(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long size, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueList_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueList_CAPI_Free()
          */
-        void alt_ICore_CreateMValueList_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long size);
+        jnr.ffi.Pointer alt_ICore_CreateMValueList_CAPI_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long size);
 
         void alt_ICore_CreateMValueNil(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueNil_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueNil_CAPI_Free()
          */
-        void alt_ICore_CreateMValueNil_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_ICore_CreateMValueNil_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_ICore_CreateMValueNone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueNone_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueNone_CAPI_Free()
          */
-        void alt_ICore_CreateMValueNone_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_ICore_CreateMValueNone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_ICore_CreateMValueRGBA(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueRGBA_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueRGBA_CAPI_Free()
          */
-        void alt_ICore_CreateMValueRGBA_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
+        jnr.ffi.Pointer alt_ICore_CreateMValueRGBA_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
 
         void alt_ICore_CreateMValueString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueString_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueString_CAPI_Free()
          */
-        void alt_ICore_CreateMValueString_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
+        jnr.ffi.Pointer alt_ICore_CreateMValueString_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
 
         void alt_ICore_CreateMValueUInt(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long val, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueUInt_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueUInt_CAPI_Free()
          */
-        void alt_ICore_CreateMValueUInt_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long val);
+        jnr.ffi.Pointer alt_ICore_CreateMValueUInt_CAPI_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long val);
 
         void alt_ICore_CreateMValueVector3(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueVector3_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueVector3_CAPI_Free()
          */
-        void alt_ICore_CreateMValueVector3_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
+        jnr.ffi.Pointer alt_ICore_CreateMValueVector3_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
 
         void alt_ICore_CreateVehicle(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int32_t int model, jnr.ffi.Pointer pos, jnr.ffi.Pointer rot, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_ICore_CreateVehicle_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int32_t int model, jnr.ffi.Pointer pos, jnr.ffi.Pointer rot);
+        jnr.ffi.Pointer alt_ICore_CreateVehicle_CAPI_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int32_t int model, jnr.ffi.Pointer pos, jnr.ffi.Pointer rot);
 
         void alt_ICore_CreateVoiceChannel(jnr.ffi.Pointer _instance, boolean spatial, float maxDistance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVoiceChannel_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVoiceChannel_CAPI_Free()
          */
-        void alt_ICore_CreateVoiceChannel_Heap(jnr.ffi.Pointer _instance, boolean spatial, float maxDistance);
+        jnr.ffi.Pointer alt_ICore_CreateVoiceChannel_CAPI_Heap(jnr.ffi.Pointer _instance, boolean spatial, float maxDistance);
 
         void alt_ICore_DeleteMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
@@ -4289,30 +4509,30 @@ public class CAPI
         void alt_ICore_FileRead(jnr.ffi.Pointer _instance, jnr.ffi.Pointer path, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_ICore_FileRead_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer path);
+        jnr.ffi.Pointer alt_ICore_FileRead_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer path);
 
         void alt_ICore_GetEntities(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_ICore_GetEntities_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_ICore_GetEntities_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_ICore_GetEntityByID(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int16_t short id, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_ICore_GetEntityByID_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int16_t short id);
+        jnr.ffi.Pointer alt_ICore_GetEntityByID_CAPI_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int16_t short id);
 
         void alt_ICore_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_ICore_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_ICore_GetMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int32_t int alt_ICore_GetNetTime(jnr.ffi.Pointer _instance);
 
@@ -4321,37 +4541,37 @@ public class CAPI
         void alt_ICore_GetPlayersByName(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_ICore_GetPlayersByName_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
+        jnr.ffi.Pointer alt_ICore_GetPlayersByName_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
 
         /**
-         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_ICore_GetPlayers_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_ICore_GetPlayers_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_ICore_GetResource(jnr.ffi.Pointer _instance, jnr.ffi.Pointer name);
 
         void alt_ICore_GetRootDirectory(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_ICore_GetRootDirectory_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_ICore_GetRootDirectory_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_ICore_GetSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_ICore_GetSyncedMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_ICore_GetSyncedMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_ICore_GetVehicles(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_Array_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_ICore_GetVehicles_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_ICore_GetVehicles_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         boolean alt_ICore_HasMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
@@ -4360,6 +4580,8 @@ public class CAPI
         @jnr.ffi.types.u_int32_t int alt_ICore_Hash(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
 
         jnr.ffi.Pointer alt_ICore_Instance();
+
+        boolean alt_ICore_IsDebug(jnr.ffi.Pointer _instance);
 
         void alt_ICore_LogColored(jnr.ffi.Pointer _instance, jnr.ffi.Pointer str);
 
@@ -4406,48 +4628,48 @@ public class CAPI
         void alt_IEntity_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IEntity_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IEntity_GetMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int32_t int alt_IEntity_GetModel(jnr.ffi.Pointer _instance);
 
         void alt_IEntity_GetNetworkOwner(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_IEntity_GetNetworkOwner_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IEntity_GetNetworkOwner_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IEntity_GetPosition(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_IEntity_GetPosition_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IEntity_GetPosition_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IEntity_GetRefCount(jnr.ffi.Pointer _instance);
 
         void alt_IEntity_GetRotation(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_CAPI_Free()
          */
-        void alt_IEntity_GetRotation_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IEntity_GetRotation_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IEntity_GetStreamSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IEntity_GetStreamSyncedMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IEntity_GetStreamSyncedMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IEntity_GetSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IEntity_GetSyncedMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IEntity_GetSyncedMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         alt_IBaseObject_Type alt_IEntity_GetType(jnr.ffi.Pointer _instance);
 
@@ -4487,14 +4709,14 @@ public class CAPI
 
         void alt_IMValueBaseObject_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueBaseObject_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueBaseObject_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueBaseObject_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueBaseObject_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueBaseObject_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueBaseObject_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -4509,16 +4731,16 @@ public class CAPI
         void alt_IMValueBaseObject_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueBaseObject_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueBaseObject_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IMValueBaseObject_Value(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_CAPI_Free()
          */
-        void alt_IMValueBaseObject_Value_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueBaseObject_Value_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueBaseObject_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -4528,14 +4750,14 @@ public class CAPI
 
         void alt_IMValueBool_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueBool_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueBool_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueBool_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueBool_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueBool_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueBool_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -4550,9 +4772,9 @@ public class CAPI
         void alt_IMValueBool_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueBool_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueBool_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         boolean alt_IMValueBool_Value(jnr.ffi.Pointer _instance);
 
@@ -4564,14 +4786,14 @@ public class CAPI
 
         void alt_IMValueByteArray_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueByteArray_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueByteArray_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueByteArray_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueByteArray_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueByteArray_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueByteArray_GetData(jnr.ffi.Pointer _instance);
 
@@ -4592,9 +4814,9 @@ public class CAPI
         void alt_IMValueByteArray_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueByteArray_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueByteArray_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueByteArray_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -4606,16 +4828,16 @@ public class CAPI
 
         jnr.ffi.Pointer alt_IMValueDict_Begin(jnr.ffi.Pointer _instance);
 
+        void alt_IMValueDict_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueDict_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueDict_Clone_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueDict_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IMValueDict_Delete(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
-
-        void alt_IMValueDict_Free(jnr.ffi.Pointer ptr);
 
         void alt_IMValueDict_Get(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
@@ -4628,34 +4850,34 @@ public class CAPI
         void alt_IMValueDict_Get_1(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IMValueDict_Get_1_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IMValueDict_Get_1_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueDict_Get_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IMValueDict_Get_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IMValueDict_Iterator_Assign_IMValueDict_IteratorRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_IMValueDict_Iterator_Assign_constIMValueDict_IteratorRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        void alt_IMValueDict_Iterator_Free(jnr.ffi.Pointer ptr);
+        void alt_IMValueDict_Iterator_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_IMValueDict_Iterator_GetKey(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueDict_Iterator_GetKey_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueDict_Iterator_GetKey_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IMValueDict_Iterator_GetValue(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IMValueDict_Iterator_GetValue_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueDict_Iterator_GetValue_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueDict_Next(jnr.ffi.Pointer _instance);
 
@@ -4672,9 +4894,9 @@ public class CAPI
         void alt_IMValueDict_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueDict_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueDict_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueDict_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -4684,14 +4906,14 @@ public class CAPI
 
         void alt_IMValueDouble_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueDouble_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueDouble_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueDouble_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueDouble_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueDouble_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueDouble_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -4706,9 +4928,9 @@ public class CAPI
         void alt_IMValueDouble_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueDouble_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueDouble_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         double alt_IMValueDouble_Value(jnr.ffi.Pointer _instance);
 
@@ -4720,21 +4942,21 @@ public class CAPI
 
         void alt_IMValueFunction_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueFunction_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueFunction_Call(jnr.ffi.Pointer _instance, jnr.ffi.Pointer args, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueFunction_Call_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer args);
+        jnr.ffi.Pointer alt_IMValueFunction_Call_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer args);
 
         void alt_IMValueFunction_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueFunction_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueFunction_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueFunction_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueFunction_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -4747,9 +4969,9 @@ public class CAPI
         void alt_IMValueFunction_Impl_Call(jnr.ffi.Pointer _instance, jnr.ffi.Pointer args, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueFunction_Impl_Call_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer args);
+        jnr.ffi.Pointer alt_IMValueFunction_Impl_Call_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer args);
 
         void alt_IMValueFunction_Impl_RemoveRef(jnr.ffi.Pointer _instance);
 
@@ -4762,9 +4984,9 @@ public class CAPI
         void alt_IMValueFunction_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueFunction_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueFunction_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueFunction_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -4774,14 +4996,14 @@ public class CAPI
 
         void alt_IMValueInt_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueInt_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueInt_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueInt_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueInt_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueInt_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueInt_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -4796,9 +5018,9 @@ public class CAPI
         void alt_IMValueInt_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueInt_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueInt_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.int64_t long alt_IMValueInt_Value(jnr.ffi.Pointer _instance);
 
@@ -4810,14 +5032,14 @@ public class CAPI
 
         void alt_IMValueList_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueList_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueList_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueList_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueList_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueList_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IMValueList_Get(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long i, jnr.ffi.Pointer returnValue);
 
@@ -4830,14 +5052,14 @@ public class CAPI
         void alt_IMValueList_Get_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long i, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IMValueList_Get_1_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long i);
+        jnr.ffi.Pointer alt_IMValueList_Get_1_CAPI_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long i);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueList_Get_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long i);
+        jnr.ffi.Pointer alt_IMValueList_Get_CAPI_Heap(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long i);
 
         void alt_IMValueList_Push(jnr.ffi.Pointer _instance, jnr.ffi.Pointer val);
 
@@ -4856,9 +5078,9 @@ public class CAPI
         void alt_IMValueList_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueList_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueList_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueList_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -4868,14 +5090,14 @@ public class CAPI
 
         void alt_IMValueNil_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueNil_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueNil_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueNil_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueNil_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueNil_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueNil_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -4890,9 +5112,9 @@ public class CAPI
         void alt_IMValueNil_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueNil_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueNil_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueNil_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -4902,14 +5124,14 @@ public class CAPI
 
         void alt_IMValueNone_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueNone_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueNone_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueNone_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueNone_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueNone_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueNone_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -4924,9 +5146,9 @@ public class CAPI
         void alt_IMValueNone_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueNone_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueNone_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueNone_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -4936,14 +5158,14 @@ public class CAPI
 
         void alt_IMValueRGBA_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueRGBA_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueRGBA_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueRGBA_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueRGBA_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueRGBA_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueRGBA_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -4958,16 +5180,16 @@ public class CAPI
         void alt_IMValueRGBA_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueRGBA_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueRGBA_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IMValueRGBA_Value(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RGBA_Free()
+         * Return ptr must be manually freed with alt_RGBA_CAPI_Free()
          */
-        void alt_IMValueRGBA_Value_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueRGBA_Value_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueRGBA_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -4977,14 +5199,14 @@ public class CAPI
 
         void alt_IMValueString_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueString_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueString_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueString_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueString_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueString_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueString_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -4999,16 +5221,16 @@ public class CAPI
         void alt_IMValueString_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueString_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueString_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IMValueString_Value(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_IMValueString_Value_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueString_Value_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueString_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -5018,14 +5240,14 @@ public class CAPI
 
         void alt_IMValueUInt_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueUInt_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueUInt_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueUInt_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueUInt_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueUInt_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueUInt_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -5040,9 +5262,9 @@ public class CAPI
         void alt_IMValueUInt_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueUInt_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueUInt_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueUInt_Value(jnr.ffi.Pointer _instance);
 
@@ -5054,14 +5276,14 @@ public class CAPI
 
         void alt_IMValueVector3_AddWeakRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer ref);
 
+        void alt_IMValueVector3_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IMValueVector3_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValueVector3_Clone_Heap(jnr.ffi.Pointer _instance);
-
-        void alt_IMValueVector3_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_IMValueVector3_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValueVector3_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -5076,16 +5298,16 @@ public class CAPI
         void alt_IMValueVector3_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValueVector3_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueVector3_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IMValueVector3_Value(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_IMValueVector3_Value_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValueVector3_Value_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValueVector3_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -5098,9 +5320,9 @@ public class CAPI
         void alt_IMValue_Clone(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValue_CAPI_Free()
          */
-        void alt_IMValue_Clone_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValue_Clone_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IMValue_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -5115,9 +5337,9 @@ public class CAPI
         void alt_IMValue_ToString(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IMValue_ToString_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IMValue_ToString_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IMValue_to_alt_CRefCountable(jnr.ffi.Pointer from);
 
@@ -5149,15 +5371,15 @@ public class CAPI
 
         jnr.ffi.Pointer alt_IMValue_to_alt_IMValueVector3(jnr.ffi.Pointer from);
 
+        void alt_IPackage_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IPackage_CloseFile(jnr.ffi.Pointer _instance, jnr.ffi.Pointer file);
 
         boolean alt_IPackage_FileExists(jnr.ffi.Pointer _instance, jnr.ffi.Pointer path);
 
         void alt_IPackage_File_Assign_constIPackage_FileRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        void alt_IPackage_File_Free(jnr.ffi.Pointer ptr);
-
-        void alt_IPackage_Free(jnr.ffi.Pointer ptr);
+        void alt_IPackage_File_CAPI_Free(jnr.ffi.Pointer ptr);
 
         @jnr.ffi.types.u_int64_t long alt_IPackage_GetFileSize(jnr.ffi.Pointer _instance, jnr.ffi.Pointer file);
 
@@ -5190,9 +5412,9 @@ public class CAPI
         void alt_IPlayer_GetAimPos(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_IPlayer_GetAimPos_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetAimPos_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IPlayer_GetAmmo(jnr.ffi.Pointer _instance);
 
@@ -5201,18 +5423,18 @@ public class CAPI
         void alt_IPlayer_GetAuthToken(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_IPlayer_GetAuthToken_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetAuthToken_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IPlayer_GetCurrentWeapon(jnr.ffi.Pointer _instance);
 
         void alt_IPlayer_GetCurrentWeaponComponents(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Array_unsignedint_Free()
+         * Return ptr must be manually freed with alt_Array_unsignedint_CAPI_Free()
          */
-        void alt_IPlayer_GetCurrentWeaponComponents_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetCurrentWeaponComponents_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IPlayer_GetCurrentWeaponTintIndex(jnr.ffi.Pointer _instance);
 
@@ -5221,23 +5443,23 @@ public class CAPI
         void alt_IPlayer_GetEntityAimOffset(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_IPlayer_GetEntityAimOffset_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetEntityAimOffset_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IPlayer_GetEntityAimingAt(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_IPlayer_GetEntityAimingAt_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetEntityAimingAt_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IPlayer_GetHeadRotation(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_CAPI_Free()
          */
-        void alt_IPlayer_GetHeadRotation_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetHeadRotation_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IPlayer_GetHealth(jnr.ffi.Pointer _instance);
 
@@ -5250,9 +5472,9 @@ public class CAPI
         void alt_IPlayer_GetIP(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_IPlayer_GetIP_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetIP_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IPlayer_GetMaxArmour(jnr.ffi.Pointer _instance);
 
@@ -5261,9 +5483,9 @@ public class CAPI
         void alt_IPlayer_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IPlayer_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IPlayer_GetMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int32_t int alt_IPlayer_GetModel(jnr.ffi.Pointer _instance);
 
@@ -5272,34 +5494,34 @@ public class CAPI
         void alt_IPlayer_GetName(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_IPlayer_GetName_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetName_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IPlayer_GetNetworkOwner(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_IPlayer_GetNetworkOwner_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetNetworkOwner_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IPlayer_GetPing(jnr.ffi.Pointer _instance);
 
         void alt_IPlayer_GetPosition(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_IPlayer_GetPosition_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetPosition_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IPlayer_GetRefCount(jnr.ffi.Pointer _instance);
 
         void alt_IPlayer_GetRotation(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_CAPI_Free()
          */
-        void alt_IPlayer_GetRotation_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetRotation_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IPlayer_GetSeat(jnr.ffi.Pointer _instance);
 
@@ -5308,25 +5530,25 @@ public class CAPI
         void alt_IPlayer_GetStreamSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IPlayer_GetStreamSyncedMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IPlayer_GetStreamSyncedMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IPlayer_GetSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IPlayer_GetSyncedMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IPlayer_GetSyncedMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         alt_IBaseObject_Type alt_IPlayer_GetType(jnr.ffi.Pointer _instance);
 
         void alt_IPlayer_GetVehicle(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_IPlayer_GetVehicle_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IPlayer_GetVehicle_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IPlayer_GetWeapon(jnr.ffi.Pointer _instance);
 
@@ -5412,66 +5634,80 @@ public class CAPI
 
         void alt_IResource_CreationInfo_Assign_IResource_CreationInfoRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_IResource_CreationInfo_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_IResource_CreationInfo_Create(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         void alt_IResource_CreationInfo_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_IResource_CreationInfo_Free()
+         * Return ptr must be manually freed with alt_IResource_CreationInfo_CAPI_Free()
          */
-        void alt_IResource_CreationInfo_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_IResource_CreationInfo_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_IResource_CreationInfo_Free()
+         * Return ptr must be manually freed with alt_IResource_CreationInfo_CAPI_Free()
          */
-        void alt_IResource_CreationInfo_Create_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_IResource_CreationInfo_Create_CAPI_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_IResource_CreationInfo_Free(jnr.ffi.Pointer ptr);
+        void alt_IResource_GetDependants(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with constArray_StringView_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_IResource_GetDependants_CAPI_Heap(jnr.ffi.Pointer _instance);
+
+        void alt_IResource_GetDependencies(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with constArray_StringView_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_IResource_GetDependencies_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IResource_GetExports(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueDict_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IMValueDict_CAPI_Free()
          */
-        void alt_IResource_GetExports_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IResource_GetExports_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IResource_GetImpl(jnr.ffi.Pointer _instance);
 
         void alt_IResource_GetMain(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_IResource_GetMain_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IResource_GetMain_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IResource_GetName(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_IResource_GetName_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IResource_GetName_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IResource_GetPackage(jnr.ffi.Pointer _instance);
 
         void alt_IResource_GetPath(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_IResource_GetPath_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IResource_GetPath_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_IResource_GetRuntime(jnr.ffi.Pointer _instance);
 
         void alt_IResource_GetType(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_IResource_GetType_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IResource_GetType_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IResource_Impl_Assign_constIResource_ImplRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        void alt_IResource_Impl_Free(jnr.ffi.Pointer ptr);
+        void alt_IResource_Impl_CAPI_Free(jnr.ffi.Pointer ptr);
 
         boolean alt_IResource_Impl_MakeClient(jnr.ffi.Pointer _instance, jnr.ffi.Pointer info, jnr.ffi.Pointer files);
 
@@ -5493,11 +5729,11 @@ public class CAPI
 
         void alt_IScriptRuntime_Assign_constIScriptRuntimeRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_IScriptRuntime_CAPI_Free(jnr.ffi.Pointer ptr);
+
         jnr.ffi.Pointer alt_IScriptRuntime_CreateImpl(jnr.ffi.Pointer _instance, jnr.ffi.Pointer resource);
 
         void alt_IScriptRuntime_DestroyImpl(jnr.ffi.Pointer _instance, jnr.ffi.Pointer impl);
-
-        void alt_IScriptRuntime_Free(jnr.ffi.Pointer ptr);
 
         void alt_IScriptRuntime_OnDispose(jnr.ffi.Pointer _instance);
 
@@ -5520,9 +5756,9 @@ public class CAPI
         void alt_IVehicle_GetAppearanceDataBase64(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IVehicle_GetAppearanceDataBase64_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetAppearanceDataBase64_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         float alt_IVehicle_GetArmoredWindowHealth(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte windowId);
 
@@ -5539,9 +5775,9 @@ public class CAPI
         void alt_IVehicle_GetDamageDataBase64(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IVehicle_GetDamageDataBase64_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetDamageDataBase64_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetDashboardColor(jnr.ffi.Pointer _instance);
 
@@ -5554,27 +5790,27 @@ public class CAPI
         void alt_IVehicle_GetDriver(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_IVehicle_GetDriver_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetDriver_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.int32_t int alt_IVehicle_GetEngineHealth(jnr.ffi.Pointer _instance);
 
         void alt_IVehicle_GetGameStateBase64(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IVehicle_GetGameStateBase64_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetGameStateBase64_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetHeadlightColor(jnr.ffi.Pointer _instance);
 
         void alt_IVehicle_GetHealthDataBase64(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IVehicle_GetHealthDataBase64_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetHealthDataBase64_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int16_t short alt_IVehicle_GetID(jnr.ffi.Pointer _instance);
 
@@ -5589,9 +5825,9 @@ public class CAPI
         void alt_IVehicle_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IVehicle_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IVehicle_GetMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetMod(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte category);
 
@@ -5608,25 +5844,25 @@ public class CAPI
         void alt_IVehicle_GetNeonColor(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RGBA_Free()
+         * Return ptr must be manually freed with alt_RGBA_CAPI_Free()
          */
-        void alt_IVehicle_GetNeonColor_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetNeonColor_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IVehicle_GetNetworkOwner(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_IVehicle_GetNetworkOwner_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetNetworkOwner_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IVehicle_GetNumberplateIndex(jnr.ffi.Pointer _instance);
 
         void alt_IVehicle_GetNumberplateText(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_IVehicle_GetNumberplateText_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetNumberplateText_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetPartBulletHoles(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int8_t byte partId);
 
@@ -5639,18 +5875,18 @@ public class CAPI
         void alt_IVehicle_GetPosition(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_IVehicle_GetPosition_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetPosition_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetPrimaryColor(jnr.ffi.Pointer _instance);
 
         void alt_IVehicle_GetPrimaryColorRGB(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RGBA_Free()
+         * Return ptr must be manually freed with alt_RGBA_CAPI_Free()
          */
-        void alt_IVehicle_GetPrimaryColorRGB_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetPrimaryColorRGB_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int32_t int alt_IVehicle_GetRadioStationIndex(jnr.ffi.Pointer _instance);
 
@@ -5665,48 +5901,48 @@ public class CAPI
         void alt_IVehicle_GetRotation(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_RotationLayout_CAPI_Free()
          */
-        void alt_IVehicle_GetRotation_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetRotation_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         void alt_IVehicle_GetScriptDataBase64(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_IVehicle_GetScriptDataBase64_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetScriptDataBase64_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetSecondaryColor(jnr.ffi.Pointer _instance);
 
         void alt_IVehicle_GetSecondaryColorRGB(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RGBA_Free()
+         * Return ptr must be manually freed with alt_RGBA_CAPI_Free()
          */
-        void alt_IVehicle_GetSecondaryColorRGB_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetSecondaryColorRGB_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int8_t byte alt_IVehicle_GetSpecialDarkness(jnr.ffi.Pointer _instance);
 
         void alt_IVehicle_GetStreamSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IVehicle_GetStreamSyncedMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IVehicle_GetStreamSyncedMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IVehicle_GetSyncedMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IVehicle_GetSyncedMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IVehicle_GetSyncedMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IVehicle_GetTireSmokeColor(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RGBA_Free()
+         * Return ptr must be manually freed with alt_RGBA_CAPI_Free()
          */
-        void alt_IVehicle_GetTireSmokeColor_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IVehicle_GetTireSmokeColor_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         alt_IBaseObject_Type alt_IVehicle_GetType(jnr.ffi.Pointer _instance);
 
@@ -5733,6 +5969,8 @@ public class CAPI
         boolean alt_IVehicle_IsDaylightOn(jnr.ffi.Pointer _instance);
 
         boolean alt_IVehicle_IsDestroyed(jnr.ffi.Pointer _instance);
+
+        boolean alt_IVehicle_IsDestroyed_1(jnr.ffi.Pointer _instance);
 
         boolean alt_IVehicle_IsEngineOn(jnr.ffi.Pointer _instance);
 
@@ -5921,9 +6159,9 @@ public class CAPI
         void alt_IVoiceChannel_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IVoiceChannel_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IVoiceChannel_GetMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         @jnr.ffi.types.u_int64_t long alt_IVoiceChannel_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -5957,7 +6195,7 @@ public class CAPI
 
         void alt_IWeakRef_Assign_constIWeakRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
-        void alt_IWeakRef_Free(jnr.ffi.Pointer ptr);
+        void alt_IWeakRef_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_IWeakRef_OnDestroy(jnr.ffi.Pointer _instance);
 
@@ -5972,16 +6210,16 @@ public class CAPI
         void alt_IWorldObject_GetMetaData(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_IWorldObject_GetMetaData_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
+        jnr.ffi.Pointer alt_IWorldObject_GetMetaData_CAPI_Heap(jnr.ffi.Pointer _instance, jnr.ffi.Pointer key);
 
         void alt_IWorldObject_GetPosition(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_IWorldObject_GetPosition_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_IWorldObject_GetPosition_CAPI_Heap(jnr.ffi.Pointer _instance);
 
         @jnr.ffi.types.u_int64_t long alt_IWorldObject_GetRefCount(jnr.ffi.Pointer _instance);
 
@@ -6015,194 +6253,201 @@ public class CAPI
 
         jnr.ffi.Pointer alt_IWorldObject_to_alt_IVehicle(jnr.ffi.Pointer from);
 
+        void alt_KeyState_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_KeyState_Create(boolean down, boolean toggled, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_KeyState_Free()
+         * Return ptr must be manually freed with alt_KeyState_CAPI_Free()
          */
-        void alt_KeyState_Create_Heap(boolean down, boolean toggled);
-
-        void alt_KeyState_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_KeyState_Create_CAPI_Heap(boolean down, boolean toggled);
 
         boolean alt_KeyState_IsDown(jnr.ffi.Pointer _instance);
 
         boolean alt_KeyState_IsToggled(jnr.ffi.Pointer _instance);
 
-        jnr.ffi.Pointer alt_PointLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_PointLayout_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_PointLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_PointLayout_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_PointLayout_Assign_PointLayoutRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_PointLayout_Assign_constPointLayoutRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_PointLayout_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_PointLayout_Create(jnr.ffi.Pointer returnValue);
 
         void alt_PointLayout_Create_1(float _x, float _y, float _z, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointLayout_Free()
+         * Return ptr must be manually freed with alt_PointLayout_CAPI_Free()
          */
-        void alt_PointLayout_Create_1_Heap(float _x, float _y, float _z);
+        jnr.ffi.Pointer alt_PointLayout_Create_1_CAPI_Heap(float _x, float _y, float _z);
 
         void alt_PointLayout_Create_2(jnr.ffi.Pointer elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointLayout_Free()
+         * Return ptr must be manually freed with alt_PointLayout_CAPI_Free()
          */
-        void alt_PointLayout_Create_2_Heap(jnr.ffi.Pointer elements);
+        jnr.ffi.Pointer alt_PointLayout_Create_2_CAPI_Heap(jnr.ffi.Pointer elements);
 
         void alt_PointLayout_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointLayout_Free()
+         * Return ptr must be manually freed with alt_PointLayout_CAPI_Free()
          */
-        void alt_PointLayout_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_PointLayout_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_PointLayout_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointLayout_Free()
+         * Return ptr must be manually freed with alt_PointLayout_CAPI_Free()
          */
-        void alt_PointLayout_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_PointLayout_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_PointLayout_Free()
+         * Return ptr must be manually freed with alt_PointLayout_CAPI_Free()
          */
-        void alt_PointLayout_Create_Heap();
-
-        void alt_PointLayout_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_PointLayout_Create_CAPI_Heap();
 
         jnr.ffi.Pointer alt_PointLayout_to_alt_PointPaddedLayout(jnr.ffi.Pointer from);
 
         jnr.ffi.Pointer alt_PointLayout_to_alt_Vector_float_3_PointLayout(jnr.ffi.Pointer from);
 
-        jnr.ffi.Pointer alt_PointPaddedLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_PointPaddedLayout_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_PointPaddedLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_PointPaddedLayout_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_PointPaddedLayout_Assign_PointLayoutRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_PointPaddedLayout_Assign_constPointLayoutRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_PointPaddedLayout_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_PointPaddedLayout_Create(jnr.ffi.Pointer returnValue);
 
         void alt_PointPaddedLayout_Create_1(float _x, float _y, float _z, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_PointPaddedLayout_CAPI_Free()
          */
-        void alt_PointPaddedLayout_Create_1_Heap(float _x, float _y, float _z);
+        jnr.ffi.Pointer alt_PointPaddedLayout_Create_1_CAPI_Heap(float _x, float _y, float _z);
 
         void alt_PointPaddedLayout_Create_2(jnr.ffi.Pointer elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_PointPaddedLayout_CAPI_Free()
          */
-        void alt_PointPaddedLayout_Create_2_Heap(jnr.ffi.Pointer elements);
+        jnr.ffi.Pointer alt_PointPaddedLayout_Create_2_CAPI_Heap(jnr.ffi.Pointer elements);
 
         void alt_PointPaddedLayout_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_PointPaddedLayout_CAPI_Free()
          */
-        void alt_PointPaddedLayout_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_PointPaddedLayout_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_PointPaddedLayout_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_PointPaddedLayout_CAPI_Free()
          */
-        void alt_PointPaddedLayout_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_PointPaddedLayout_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_PointPaddedLayout_Create_5(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_PointPaddedLayout_CAPI_Free()
          */
-        void alt_PointPaddedLayout_Create_5_Heap();
+        jnr.ffi.Pointer alt_PointPaddedLayout_Create_5_CAPI_Heap();
 
         void alt_PointPaddedLayout_Create_6(float x, float y, float z, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_PointPaddedLayout_CAPI_Free()
          */
-        void alt_PointPaddedLayout_Create_6_Heap(float x, float y, float z);
+        jnr.ffi.Pointer alt_PointPaddedLayout_Create_6_CAPI_Heap(float x, float y, float z);
 
         void alt_PointPaddedLayout_Create_7(jnr.ffi.Pointer elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_PointPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_PointPaddedLayout_CAPI_Free()
          */
-        void alt_PointPaddedLayout_Create_7_Heap(jnr.ffi.Pointer elements);
+        jnr.ffi.Pointer alt_PointPaddedLayout_Create_7_CAPI_Heap(jnr.ffi.Pointer elements);
 
         /**
-         * Return ptr must be manually freed with alt_PointPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_PointPaddedLayout_CAPI_Free()
          */
-        void alt_PointPaddedLayout_Create_Heap();
-
-        void alt_PointPaddedLayout_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_PointPaddedLayout_Create_CAPI_Heap();
 
         jnr.ffi.Pointer alt_PointPaddedLayout_to_alt_PointLayout(jnr.ffi.Pointer from);
+
+        void alt_RGBA_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_RGBA_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RGBA_Create_1(@jnr.ffi.types.u_int8_t byte _r, @jnr.ffi.types.u_int8_t byte _g, @jnr.ffi.types.u_int8_t byte _b, @jnr.ffi.types.u_int8_t byte _a, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RGBA_Free()
+         * Return ptr must be manually freed with alt_RGBA_CAPI_Free()
          */
-        void alt_RGBA_Create_1_Heap(@jnr.ffi.types.u_int8_t byte _r, @jnr.ffi.types.u_int8_t byte _g, @jnr.ffi.types.u_int8_t byte _b, @jnr.ffi.types.u_int8_t byte _a);
+        jnr.ffi.Pointer alt_RGBA_Create_1_CAPI_Heap(@jnr.ffi.types.u_int8_t byte _r, @jnr.ffi.types.u_int8_t byte _g, @jnr.ffi.types.u_int8_t byte _b, @jnr.ffi.types.u_int8_t byte _a);
 
         /**
-         * Return ptr must be manually freed with alt_RGBA_Free()
+         * Return ptr must be manually freed with alt_RGBA_CAPI_Free()
          */
-        void alt_RGBA_Create_Heap();
-
-        void alt_RGBA_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_RGBA_Create_CAPI_Heap();
 
         void alt_RefBase_RefStore_IBaseObject_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
 
         void alt_RefBase_RefStore_IBaseObject_Assign_constRefBase_RefStore_IBaseObjectRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
+
+        void alt_RefBase_RefStore_IBaseObject_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_RefBase_RefStore_IBaseObject_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefBase_RefStore_IBaseObject_Create_1(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IBaseObject_Create_1_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_IBaseObject_Create_1_CAPI_Heap();
 
         void alt_RefBase_RefStore_IBaseObject_Create_2(jnr.ffi.Pointer _ptr, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IBaseObject_Create_2_Heap(jnr.ffi.Pointer _ptr);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IBaseObject_Create_2_CAPI_Heap(jnr.ffi.Pointer _ptr);
 
         void alt_RefBase_RefStore_IBaseObject_Create_3(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IBaseObject_Create_3_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IBaseObject_Create_3_CAPI_Heap(jnr.ffi.Pointer other);
 
         void alt_RefBase_RefStore_IBaseObject_Create_4(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IBaseObject_Create_4_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IBaseObject_Create_4_CAPI_Heap(jnr.ffi.Pointer other);
+
+        void alt_RefBase_RefStore_IBaseObject_Create_5(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IBaseObject_Create_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_IBaseObject_Create_5_CAPI_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_RefBase_RefStore_IBaseObject_Free(jnr.ffi.Pointer ptr);
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IBaseObject_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_RefBase_RefStore_IBaseObject_Create_CAPI_Heap();
 
-        void alt_RefBase_RefStore_IBaseObject_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefBase_RefStore_IBaseObject_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefBase_RefStore_IBaseObject_Get(jnr.ffi.Pointer _instance);
 
@@ -6216,58 +6461,65 @@ public class CAPI
 
         void alt_RefBase_RefStore_IColShape_Assign_constRefBase_RefStore_IColShapeRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
+        void alt_RefBase_RefStore_IColShape_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefBase_RefStore_IColShape_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefBase_RefStore_IColShape_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IColShape_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IColShape_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefBase_RefStore_IColShape_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IColShape_Create_2_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IColShape_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefBase_RefStore_IColShape_Create_3(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IColShape_Create_3_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_IColShape_Create_3_CAPI_Heap();
 
         void alt_RefBase_RefStore_IColShape_Create_4(jnr.ffi.Pointer _ptr, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IColShape_Create_4_Heap(jnr.ffi.Pointer _ptr);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IColShape_Create_4_CAPI_Heap(jnr.ffi.Pointer _ptr);
 
         void alt_RefBase_RefStore_IColShape_Create_5(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IColShape_Create_5_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IColShape_Create_5_CAPI_Heap(jnr.ffi.Pointer other);
 
         void alt_RefBase_RefStore_IColShape_Create_6(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IColShape_Create_6_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IColShape_Create_6_CAPI_Heap(jnr.ffi.Pointer other);
+
+        void alt_RefBase_RefStore_IColShape_Create_7(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IColShape_Create_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_IColShape_Create_7_CAPI_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_RefBase_RefStore_IColShape_Free(jnr.ffi.Pointer ptr);
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IColShape_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_RefBase_RefStore_IColShape_Create_CAPI_Heap();
 
-        void alt_RefBase_RefStore_IColShape_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefBase_RefStore_IColShape_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefBase_RefStore_IColShape_Get(jnr.ffi.Pointer _instance);
 
@@ -6281,58 +6533,65 @@ public class CAPI
 
         void alt_RefBase_RefStore_IEntity_Assign_constRefBase_RefStore_IEntityRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
+        void alt_RefBase_RefStore_IEntity_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefBase_RefStore_IEntity_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefBase_RefStore_IEntity_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IEntity_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IEntity_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefBase_RefStore_IEntity_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IEntity_Create_2_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IEntity_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefBase_RefStore_IEntity_Create_3(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IEntity_Create_3_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_IEntity_Create_3_CAPI_Heap();
 
         void alt_RefBase_RefStore_IEntity_Create_4(jnr.ffi.Pointer _ptr, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IEntity_Create_4_Heap(jnr.ffi.Pointer _ptr);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IEntity_Create_4_CAPI_Heap(jnr.ffi.Pointer _ptr);
 
         void alt_RefBase_RefStore_IEntity_Create_5(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IEntity_Create_5_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IEntity_Create_5_CAPI_Heap(jnr.ffi.Pointer other);
 
         void alt_RefBase_RefStore_IEntity_Create_6(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IEntity_Create_6_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IEntity_Create_6_CAPI_Heap(jnr.ffi.Pointer other);
+
+        void alt_RefBase_RefStore_IEntity_Create_7(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IEntity_Create_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_IEntity_Create_7_CAPI_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_RefBase_RefStore_IEntity_Free(jnr.ffi.Pointer ptr);
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IEntity_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_RefBase_RefStore_IEntity_Create_CAPI_Heap();
 
-        void alt_RefBase_RefStore_IEntity_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefBase_RefStore_IEntity_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefBase_RefStore_IEntity_Get(jnr.ffi.Pointer _instance);
 
@@ -6346,58 +6605,65 @@ public class CAPI
 
         void alt_RefBase_RefStore_IPlayer_Assign_constRefBase_RefStore_IPlayerRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
+        void alt_RefBase_RefStore_IPlayer_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefBase_RefStore_IPlayer_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefBase_RefStore_IPlayer_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IPlayer_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IPlayer_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefBase_RefStore_IPlayer_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IPlayer_Create_2_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IPlayer_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefBase_RefStore_IPlayer_Create_3(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IPlayer_Create_3_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_IPlayer_Create_3_CAPI_Heap();
 
         void alt_RefBase_RefStore_IPlayer_Create_4(jnr.ffi.Pointer _ptr, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IPlayer_Create_4_Heap(jnr.ffi.Pointer _ptr);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IPlayer_Create_4_CAPI_Heap(jnr.ffi.Pointer _ptr);
 
         void alt_RefBase_RefStore_IPlayer_Create_5(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IPlayer_Create_5_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IPlayer_Create_5_CAPI_Heap(jnr.ffi.Pointer other);
 
         void alt_RefBase_RefStore_IPlayer_Create_6(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IPlayer_Create_6_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IPlayer_Create_6_CAPI_Heap(jnr.ffi.Pointer other);
+
+        void alt_RefBase_RefStore_IPlayer_Create_7(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IPlayer_Create_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_IPlayer_Create_7_CAPI_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_RefBase_RefStore_IPlayer_Free(jnr.ffi.Pointer ptr);
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IPlayer_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_RefBase_RefStore_IPlayer_Create_CAPI_Heap();
 
-        void alt_RefBase_RefStore_IPlayer_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefBase_RefStore_IPlayer_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefBase_RefStore_IPlayer_Get(jnr.ffi.Pointer _instance);
 
@@ -6411,58 +6677,65 @@ public class CAPI
 
         void alt_RefBase_RefStore_IVehicle_Assign_constRefBase_RefStore_IVehicleRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
+        void alt_RefBase_RefStore_IVehicle_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefBase_RefStore_IVehicle_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefBase_RefStore_IVehicle_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IVehicle_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IVehicle_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefBase_RefStore_IVehicle_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IVehicle_Create_2_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IVehicle_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefBase_RefStore_IVehicle_Create_3(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IVehicle_Create_3_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_IVehicle_Create_3_CAPI_Heap();
 
         void alt_RefBase_RefStore_IVehicle_Create_4(jnr.ffi.Pointer _ptr, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IVehicle_Create_4_Heap(jnr.ffi.Pointer _ptr);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IVehicle_Create_4_CAPI_Heap(jnr.ffi.Pointer _ptr);
 
         void alt_RefBase_RefStore_IVehicle_Create_5(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IVehicle_Create_5_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IVehicle_Create_5_CAPI_Heap(jnr.ffi.Pointer other);
 
         void alt_RefBase_RefStore_IVehicle_Create_6(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IVehicle_Create_6_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_IVehicle_Create_6_CAPI_Heap(jnr.ffi.Pointer other);
+
+        void alt_RefBase_RefStore_IVehicle_Create_7(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_RefBase_RefStore_IVehicle_Create_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_IVehicle_Create_7_CAPI_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_RefBase_RefStore_IVehicle_Free(jnr.ffi.Pointer ptr);
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_IVehicle_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_RefBase_RefStore_IVehicle_Create_CAPI_Heap();
 
-        void alt_RefBase_RefStore_IVehicle_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefBase_RefStore_IVehicle_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefBase_RefStore_IVehicle_Get(jnr.ffi.Pointer _instance);
 
@@ -6476,58 +6749,65 @@ public class CAPI
 
         void alt_RefBase_RefStore_constIMValue_Assign_constRefBase_RefStore_constIMValueRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
+        void alt_RefBase_RefStore_constIMValue_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefBase_RefStore_constIMValue_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefBase_RefStore_constIMValue_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_RefBase_RefStore_constIMValue_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefBase_RefStore_constIMValue_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefBase_RefStore_constIMValue_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_RefBase_RefStore_constIMValue_Create_2_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefBase_RefStore_constIMValue_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefBase_RefStore_constIMValue_Create_3(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_RefBase_RefStore_constIMValue_Create_3_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_constIMValue_Create_3_CAPI_Heap();
 
         void alt_RefBase_RefStore_constIMValue_Create_4(jnr.ffi.Pointer _ptr, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_RefBase_RefStore_constIMValue_Create_4_Heap(jnr.ffi.Pointer _ptr);
+        jnr.ffi.Pointer alt_RefBase_RefStore_constIMValue_Create_4_CAPI_Heap(jnr.ffi.Pointer _ptr);
 
         void alt_RefBase_RefStore_constIMValue_Create_5(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_RefBase_RefStore_constIMValue_Create_5_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_constIMValue_Create_5_CAPI_Heap(jnr.ffi.Pointer other);
 
         void alt_RefBase_RefStore_constIMValue_Create_6(jnr.ffi.Pointer other, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_RefBase_RefStore_constIMValue_Create_6_Heap(jnr.ffi.Pointer other);
+        jnr.ffi.Pointer alt_RefBase_RefStore_constIMValue_Create_6_CAPI_Heap(jnr.ffi.Pointer other);
+
+        void alt_RefBase_RefStore_constIMValue_Create_7(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_RefBase_RefStore_constIMValue_Create_Heap();
+        jnr.ffi.Pointer alt_RefBase_RefStore_constIMValue_Create_7_CAPI_Heap(jnr.ffi.Pointer _p0);
 
-        void alt_RefBase_RefStore_constIMValue_Free(jnr.ffi.Pointer ptr);
+        /**
+         * Return ptr must be manually freed with alt_RefBase_RefStore_constIMValue_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_RefBase_RefStore_constIMValue_Create_CAPI_Heap();
 
-        void alt_RefBase_RefStore_constIMValue_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefBase_RefStore_constIMValue_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefBase_RefStore_constIMValue_Get(jnr.ffi.Pointer _instance);
 
@@ -6539,16 +6819,16 @@ public class CAPI
 
         void alt_RefStore_IBaseObject_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
 
+        void alt_RefStore_IBaseObject_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefStore_IBaseObject_Create(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IBaseObject_Free()
+         * Return ptr must be manually freed with alt_RefStore_IBaseObject_CAPI_Free()
          */
-        void alt_RefStore_IBaseObject_Create_Heap();
+        jnr.ffi.Pointer alt_RefStore_IBaseObject_Create_CAPI_Heap();
 
-        void alt_RefStore_IBaseObject_Free(jnr.ffi.Pointer ptr);
-
-        void alt_RefStore_IBaseObject_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefStore_IBaseObject_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefStore_IBaseObject_Get(jnr.ffi.Pointer _instance);
 
@@ -6556,30 +6836,30 @@ public class CAPI
 
         void alt_RefStore_IColShape_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
 
+        void alt_RefStore_IColShape_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefStore_IColShape_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefStore_IColShape_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefStore_IColShape_CAPI_Free()
          */
-        void alt_RefStore_IColShape_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefStore_IColShape_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefStore_IColShape_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefStore_IColShape_CAPI_Free()
          */
-        void alt_RefStore_IColShape_Create_2_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefStore_IColShape_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IColShape_Free()
+         * Return ptr must be manually freed with alt_RefStore_IColShape_CAPI_Free()
          */
-        void alt_RefStore_IColShape_Create_Heap();
+        jnr.ffi.Pointer alt_RefStore_IColShape_Create_CAPI_Heap();
 
-        void alt_RefStore_IColShape_Free(jnr.ffi.Pointer ptr);
-
-        void alt_RefStore_IColShape_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefStore_IColShape_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefStore_IColShape_Get(jnr.ffi.Pointer _instance);
 
@@ -6587,30 +6867,30 @@ public class CAPI
 
         void alt_RefStore_IEntity_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
 
+        void alt_RefStore_IEntity_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefStore_IEntity_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefStore_IEntity_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefStore_IEntity_CAPI_Free()
          */
-        void alt_RefStore_IEntity_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefStore_IEntity_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefStore_IEntity_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefStore_IEntity_CAPI_Free()
          */
-        void alt_RefStore_IEntity_Create_2_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefStore_IEntity_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IEntity_Free()
+         * Return ptr must be manually freed with alt_RefStore_IEntity_CAPI_Free()
          */
-        void alt_RefStore_IEntity_Create_Heap();
+        jnr.ffi.Pointer alt_RefStore_IEntity_Create_CAPI_Heap();
 
-        void alt_RefStore_IEntity_Free(jnr.ffi.Pointer ptr);
-
-        void alt_RefStore_IEntity_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefStore_IEntity_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefStore_IEntity_Get(jnr.ffi.Pointer _instance);
 
@@ -6618,30 +6898,30 @@ public class CAPI
 
         void alt_RefStore_IPlayer_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
 
+        void alt_RefStore_IPlayer_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefStore_IPlayer_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefStore_IPlayer_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_RefStore_IPlayer_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefStore_IPlayer_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefStore_IPlayer_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_RefStore_IPlayer_Create_2_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefStore_IPlayer_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IPlayer_Free()
+         * Return ptr must be manually freed with alt_RefStore_IPlayer_CAPI_Free()
          */
-        void alt_RefStore_IPlayer_Create_Heap();
+        jnr.ffi.Pointer alt_RefStore_IPlayer_Create_CAPI_Heap();
 
-        void alt_RefStore_IPlayer_Free(jnr.ffi.Pointer ptr);
-
-        void alt_RefStore_IPlayer_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefStore_IPlayer_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefStore_IPlayer_Get(jnr.ffi.Pointer _instance);
 
@@ -6649,30 +6929,30 @@ public class CAPI
 
         void alt_RefStore_IVehicle_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
 
+        void alt_RefStore_IVehicle_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefStore_IVehicle_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefStore_IVehicle_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_RefStore_IVehicle_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefStore_IVehicle_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefStore_IVehicle_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_RefStore_IVehicle_Create_2_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefStore_IVehicle_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_IVehicle_Free()
+         * Return ptr must be manually freed with alt_RefStore_IVehicle_CAPI_Free()
          */
-        void alt_RefStore_IVehicle_Create_Heap();
+        jnr.ffi.Pointer alt_RefStore_IVehicle_Create_CAPI_Heap();
 
-        void alt_RefStore_IVehicle_Free(jnr.ffi.Pointer ptr);
-
-        void alt_RefStore_IVehicle_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefStore_IVehicle_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefStore_IVehicle_Get(jnr.ffi.Pointer _instance);
 
@@ -6680,151 +6960,153 @@ public class CAPI
 
         void alt_RefStore_constIMValue_Assign(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _ptr);
 
+        void alt_RefStore_constIMValue_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_RefStore_constIMValue_Create(jnr.ffi.Pointer returnValue);
 
         void alt_RefStore_constIMValue_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_RefStore_constIMValue_Create_1_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefStore_constIMValue_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RefStore_constIMValue_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_RefStore_constIMValue_Create_2_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RefStore_constIMValue_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_RefStore_constIMValue_Free()
+         * Return ptr must be manually freed with alt_RefStore_constIMValue_CAPI_Free()
          */
-        void alt_RefStore_constIMValue_Create_Heap();
+        jnr.ffi.Pointer alt_RefStore_constIMValue_Create_CAPI_Heap();
 
-        void alt_RefStore_constIMValue_Free(jnr.ffi.Pointer ptr);
-
-        void alt_RefStore_constIMValue_Free_1(jnr.ffi.Pointer _instance);
+        void alt_RefStore_constIMValue_Free(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefStore_constIMValue_Get(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RefStore_constIMValue_to_alt_RefBase_RefStore_constIMValue(jnr.ffi.Pointer from);
 
-        jnr.ffi.Pointer alt_RotationLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_RotationLayout_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_RotationLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_RotationLayout_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+
+        void alt_RotationLayout_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_RotationLayout_Create(float _roll, float _pitch, float _yaw, jnr.ffi.Pointer returnValue);
 
         void alt_RotationLayout_Create_1(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationLayout_Free()
+         * Return ptr must be manually freed with alt_RotationLayout_CAPI_Free()
          */
-        void alt_RotationLayout_Create_1_Heap();
+        jnr.ffi.Pointer alt_RotationLayout_Create_1_CAPI_Heap();
 
         void alt_RotationLayout_Create_2(jnr.ffi.Pointer elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationLayout_Free()
+         * Return ptr must be manually freed with alt_RotationLayout_CAPI_Free()
          */
-        void alt_RotationLayout_Create_2_Heap(jnr.ffi.Pointer elements);
+        jnr.ffi.Pointer alt_RotationLayout_Create_2_CAPI_Heap(jnr.ffi.Pointer elements);
 
         void alt_RotationLayout_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationLayout_Free()
+         * Return ptr must be manually freed with alt_RotationLayout_CAPI_Free()
          */
-        void alt_RotationLayout_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RotationLayout_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RotationLayout_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationLayout_Free()
+         * Return ptr must be manually freed with alt_RotationLayout_CAPI_Free()
          */
-        void alt_RotationLayout_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RotationLayout_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_RotationLayout_Free()
+         * Return ptr must be manually freed with alt_RotationLayout_CAPI_Free()
          */
-        void alt_RotationLayout_Create_Heap(float _roll, float _pitch, float _yaw);
-
-        void alt_RotationLayout_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_RotationLayout_Create_CAPI_Heap(float _roll, float _pitch, float _yaw);
 
         void alt_RotationLayout_Normalize(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RotationLayout_to_alt_RotationPaddedLayout(jnr.ffi.Pointer from);
 
-        jnr.ffi.Pointer alt_RotationPaddedLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_RotationPaddedLayout_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_RotationPaddedLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_RotationPaddedLayout_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+
+        void alt_RotationPaddedLayout_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_RotationPaddedLayout_Create(float _roll, float _pitch, float _yaw, jnr.ffi.Pointer returnValue);
 
         void alt_RotationPaddedLayout_Create_1(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_CAPI_Free()
          */
-        void alt_RotationPaddedLayout_Create_1_Heap();
+        jnr.ffi.Pointer alt_RotationPaddedLayout_Create_1_CAPI_Heap();
 
         void alt_RotationPaddedLayout_Create_2(jnr.ffi.Pointer elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_CAPI_Free()
          */
-        void alt_RotationPaddedLayout_Create_2_Heap(jnr.ffi.Pointer elements);
+        jnr.ffi.Pointer alt_RotationPaddedLayout_Create_2_CAPI_Heap(jnr.ffi.Pointer elements);
 
         void alt_RotationPaddedLayout_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_CAPI_Free()
          */
-        void alt_RotationPaddedLayout_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RotationPaddedLayout_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RotationPaddedLayout_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_CAPI_Free()
          */
-        void alt_RotationPaddedLayout_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_RotationPaddedLayout_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_RotationPaddedLayout_Create_5(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_CAPI_Free()
          */
-        void alt_RotationPaddedLayout_Create_5_Heap();
+        jnr.ffi.Pointer alt_RotationPaddedLayout_Create_5_CAPI_Heap();
 
         void alt_RotationPaddedLayout_Create_6(float roll, float pitch, float yaw, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_CAPI_Free()
          */
-        void alt_RotationPaddedLayout_Create_6_Heap(float roll, float pitch, float yaw);
+        jnr.ffi.Pointer alt_RotationPaddedLayout_Create_6_CAPI_Heap(float roll, float pitch, float yaw);
 
         void alt_RotationPaddedLayout_Create_7(jnr.ffi.Pointer elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_RotationPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_CAPI_Free()
          */
-        void alt_RotationPaddedLayout_Create_7_Heap(jnr.ffi.Pointer elements);
+        jnr.ffi.Pointer alt_RotationPaddedLayout_Create_7_CAPI_Heap(jnr.ffi.Pointer elements);
 
         /**
-         * Return ptr must be manually freed with alt_RotationPaddedLayout_Free()
+         * Return ptr must be manually freed with alt_RotationPaddedLayout_CAPI_Free()
          */
-        void alt_RotationPaddedLayout_Create_Heap(float _roll, float _pitch, float _yaw);
-
-        void alt_RotationPaddedLayout_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_RotationPaddedLayout_Create_CAPI_Heap(float _roll, float _pitch, float _yaw);
 
         void alt_RotationPaddedLayout_Normalize(jnr.ffi.Pointer _instance);
 
         jnr.ffi.Pointer alt_RotationPaddedLayout_to_alt_RotationLayout(jnr.ffi.Pointer from);
 
-        @jnr.ffi.types.int8_t byte alt_StringView_Access_uint64_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        @jnr.ffi.types.int8_t byte alt_StringView_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_StringView_Assign_StringViewRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_StringView_Assign_constStringViewRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_StringView_CAPI_Free(jnr.ffi.Pointer ptr);
 
         @jnr.ffi.annotations.Encoding("UTF-8") String alt_StringView_CStr(jnr.ffi.Pointer _instance);
 
@@ -6833,46 +7115,44 @@ public class CAPI
         void alt_StringView_Create_1(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_StringView_Create_1_Heap();
+        jnr.ffi.Pointer alt_StringView_Create_1_CAPI_Heap();
 
         void alt_StringView_Create_2(@jnr.ffi.annotations.Encoding("UTF-8") String _str, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_StringView_Create_2_Heap(@jnr.ffi.annotations.Encoding("UTF-8") String _str);
+        jnr.ffi.Pointer alt_StringView_Create_2_CAPI_Heap(@jnr.ffi.annotations.Encoding("UTF-8") String _str);
 
         void alt_StringView_Create_4(jnr.ffi.Pointer _str, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_StringView_Create_4_Heap(jnr.ffi.Pointer _str);
+        jnr.ffi.Pointer alt_StringView_Create_4_CAPI_Heap(jnr.ffi.Pointer _str);
 
         void alt_StringView_Create_6(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_StringView_Create_6_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_StringView_Create_6_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_StringView_Create_7(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_StringView_Create_7_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_StringView_Create_7_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_StringView_Free()
+         * Return ptr must be manually freed with alt_StringView_CAPI_Free()
          */
-        void alt_StringView_Create_Heap(@jnr.ffi.annotations.Encoding("UTF-8") String _data, @jnr.ffi.types.u_int64_t long _size);
+        jnr.ffi.Pointer alt_StringView_Create_CAPI_Heap(@jnr.ffi.annotations.Encoding("UTF-8") String _data, @jnr.ffi.types.u_int64_t long _size);
 
         boolean alt_StringView_Equals_StringView(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
-
-        void alt_StringView_Free(jnr.ffi.Pointer ptr);
 
         @jnr.ffi.annotations.Encoding("UTF-8") String alt_StringView_GetData(jnr.ffi.Pointer _instance);
 
@@ -6885,17 +7165,19 @@ public class CAPI
         void alt_StringView_To_String(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_StringView_To_String_Heap(jnr.ffi.Pointer _instance);
+        jnr.ffi.Pointer alt_StringView_To_String_CAPI_Heap(jnr.ffi.Pointer _instance);
 
-        @jnr.ffi.annotations.Encoding("UTF-8") String alt_String_Access_uint64_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        @jnr.ffi.annotations.Encoding("UTF-8") String alt_String_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        @jnr.ffi.types.int8_t byte alt_String_Access_uint64_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        @jnr.ffi.types.int8_t byte alt_String_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_String_Assign_StringRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
 
         void alt_String_Assign_constStringRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
+
+        void alt_String_CAPI_Free(jnr.ffi.Pointer ptr);
 
         @jnr.ffi.annotations.Encoding("UTF-8") String alt_String_CStr(jnr.ffi.Pointer _instance);
 
@@ -6904,46 +7186,44 @@ public class CAPI
         void alt_String_Create_1(@jnr.ffi.annotations.Encoding("UTF-8") String _data, @jnr.ffi.types.u_int64_t long size, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_String_Create_1_Heap(@jnr.ffi.annotations.Encoding("UTF-8") String _data, @jnr.ffi.types.u_int64_t long size);
+        jnr.ffi.Pointer alt_String_Create_1_CAPI_Heap(@jnr.ffi.annotations.Encoding("UTF-8") String _data, @jnr.ffi.types.u_int64_t long size);
 
         void alt_String_Create_2(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_String_Create_2_Heap();
+        jnr.ffi.Pointer alt_String_Create_2_CAPI_Heap();
 
         void alt_String_Create_3(@jnr.ffi.annotations.Encoding("UTF-8") String _str, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_String_Create_3_Heap(@jnr.ffi.annotations.Encoding("UTF-8") String _str);
+        jnr.ffi.Pointer alt_String_Create_3_CAPI_Heap(@jnr.ffi.annotations.Encoding("UTF-8") String _str);
 
         void alt_String_Create_5(jnr.ffi.Pointer that, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_String_Create_5_Heap(jnr.ffi.Pointer that);
+        jnr.ffi.Pointer alt_String_Create_5_CAPI_Heap(jnr.ffi.Pointer that);
 
         void alt_String_Create_6(jnr.ffi.Pointer that, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_String_Create_6_Heap(jnr.ffi.Pointer that);
+        jnr.ffi.Pointer alt_String_Create_6_CAPI_Heap(jnr.ffi.Pointer that);
 
         /**
-         * Return ptr must be manually freed with alt_String_Free()
+         * Return ptr must be manually freed with alt_String_CAPI_Free()
          */
-        void alt_String_Create_Heap(@jnr.ffi.types.u_int64_t long _size, @jnr.ffi.types.int8_t byte fill);
+        jnr.ffi.Pointer alt_String_Create_CAPI_Heap(@jnr.ffi.types.u_int64_t long _size, @jnr.ffi.types.int8_t byte fill);
 
         boolean alt_String_Equals_String(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
-
-        void alt_String_Free(jnr.ffi.Pointer ptr);
 
         @jnr.ffi.annotations.Encoding("UTF-8") String alt_String_GetData(jnr.ffi.Pointer _instance);
 
@@ -6957,103 +7237,103 @@ public class CAPI
 
         void alt_String_Resize(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long new_size);
 
-        jnr.ffi.Pointer alt_VectorLayout_float_3_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_VectorLayout_float_3_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_VectorLayout_float_3_Assign_VectorLayout_float_3RefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_VectorLayout_float_3_Assign_constVectorLayout_float_3Ref(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_VectorLayout_float_3_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_VectorLayout_float_3_Create(jnr.ffi.Pointer returnValue);
 
         void alt_VectorLayout_float_3_Create_1(jnr.ffi.Pointer _elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_VectorLayout_float_3_Create_1_Heap(jnr.ffi.Pointer _elements);
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Create_1_CAPI_Heap(jnr.ffi.Pointer _elements);
 
         void alt_VectorLayout_float_3_Create_2(jnr.ffi.Pointer el, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_VectorLayout_float_3_Create_2_Heap(jnr.ffi.Pointer el);
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Create_2_CAPI_Heap(jnr.ffi.Pointer el);
 
         void alt_VectorLayout_float_3_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_VectorLayout_float_3_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_VectorLayout_float_3_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_VectorLayout_float_3_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_VectorLayout_float_3_Create_Heap();
-
-        void alt_VectorLayout_float_3_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_VectorLayout_float_3_Create_CAPI_Heap();
 
         jnr.ffi.Pointer alt_VectorLayout_float_3_to_alt_Vector_float_3_VectorLayout_float_3(jnr.ffi.Pointer from);
 
-        jnr.ffi.Pointer alt_VectorLayout_float_4_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_VectorLayout_float_4_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_VectorLayout_float_4_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_VectorLayout_float_4_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_VectorLayout_float_4_Assign_VectorLayout_float_4RefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
         void alt_VectorLayout_float_4_Assign_constVectorLayout_float_4Ref(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_VectorLayout_float_4_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_VectorLayout_float_4_Create(jnr.ffi.Pointer returnValue);
 
         void alt_VectorLayout_float_4_Create_1(jnr.ffi.Pointer _elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_VectorLayout_float_4_Create_1_Heap(jnr.ffi.Pointer _elements);
+        jnr.ffi.Pointer alt_VectorLayout_float_4_Create_1_CAPI_Heap(jnr.ffi.Pointer _elements);
 
         void alt_VectorLayout_float_4_Create_2(jnr.ffi.Pointer el, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_VectorLayout_float_4_Create_2_Heap(jnr.ffi.Pointer el);
+        jnr.ffi.Pointer alt_VectorLayout_float_4_Create_2_CAPI_Heap(jnr.ffi.Pointer el);
 
         void alt_VectorLayout_float_4_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_VectorLayout_float_4_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_VectorLayout_float_4_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_VectorLayout_float_4_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_VectorLayout_float_4_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_VectorLayout_float_4_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_VectorLayout_float_4_Create_Heap();
-
-        void alt_VectorLayout_float_4_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_VectorLayout_float_4_Create_CAPI_Heap();
 
         jnr.ffi.Pointer alt_VectorLayout_float_4_to_alt_Vector_float_4_VectorLayout_float_4(jnr.ffi.Pointer from);
 
-        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_Vector_float_3_PointLayout_Assign_PointLayoutRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -7063,77 +7343,77 @@ public class CAPI
 
         void alt_Vector_float_3_PointLayout_Assign_constVector_float_3_PointLayoutRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_Vector_float_3_PointLayout_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_Vector_float_3_PointLayout_Create(jnr.ffi.Pointer returnValue);
 
         void alt_Vector_float_3_PointLayout_Create_1(float _x, float _y, float _z, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_Vector_float_3_PointLayout_Create_1_Heap(float _x, float _y, float _z);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_1_CAPI_Heap(float _x, float _y, float _z);
 
         void alt_Vector_float_3_PointLayout_Create_2(jnr.ffi.Pointer elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_Vector_float_3_PointLayout_Create_2_Heap(jnr.ffi.Pointer elements);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_2_CAPI_Heap(jnr.ffi.Pointer elements);
 
         void alt_Vector_float_3_PointLayout_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_Vector_float_3_PointLayout_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_Vector_float_3_PointLayout_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_Vector_float_3_PointLayout_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_Vector_float_3_PointLayout_Create_5(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_Vector_float_3_PointLayout_Create_5_Heap();
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_5_CAPI_Heap();
 
         void alt_Vector_float_3_PointLayout_Create_6(jnr.ffi.Pointer _elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_Vector_float_3_PointLayout_Create_6_Heap(jnr.ffi.Pointer _elements);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_6_CAPI_Heap(jnr.ffi.Pointer _elements);
 
         void alt_Vector_float_3_PointLayout_Create_7(jnr.ffi.Pointer layout, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_Vector_float_3_PointLayout_Create_7_Heap(jnr.ffi.Pointer layout);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_7_CAPI_Heap(jnr.ffi.Pointer layout);
 
         void alt_Vector_float_3_PointLayout_Create_8(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_Vector_float_3_PointLayout_Create_8_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_8_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_Vector_float_3_PointLayout_Create_9(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_Vector_float_3_PointLayout_Create_9_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_9_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_PointLayout_CAPI_Free()
          */
-        void alt_Vector_float_3_PointLayout_Create_Heap();
-
-        void alt_Vector_float_3_PointLayout_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_Vector_float_3_PointLayout_Create_CAPI_Heap();
 
         float alt_Vector_float_3_PointLayout_Length(jnr.ffi.Pointer _instance);
 
@@ -7141,9 +7421,9 @@ public class CAPI
 
         jnr.ffi.Pointer alt_Vector_float_3_PointLayout_to_alt_PointLayout(jnr.ffi.Pointer from);
 
-        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_Vector_float_3_VectorLayout_float_3_Assign_VectorLayout_float_3RefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -7153,77 +7433,77 @@ public class CAPI
 
         void alt_Vector_float_3_VectorLayout_float_3_Assign_constVector_float_3_VectorLayout_float_3Ref(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_Vector_float_3_VectorLayout_float_3_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_Vector_float_3_VectorLayout_float_3_Create(jnr.ffi.Pointer returnValue);
 
         void alt_Vector_float_3_VectorLayout_float_3_Create_1(jnr.ffi.Pointer _elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_Vector_float_3_VectorLayout_float_3_Create_1_Heap(jnr.ffi.Pointer _elements);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_1_CAPI_Heap(jnr.ffi.Pointer _elements);
 
         void alt_Vector_float_3_VectorLayout_float_3_Create_2(jnr.ffi.Pointer el, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_Vector_float_3_VectorLayout_float_3_Create_2_Heap(jnr.ffi.Pointer el);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_2_CAPI_Heap(jnr.ffi.Pointer el);
 
         void alt_Vector_float_3_VectorLayout_float_3_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_Vector_float_3_VectorLayout_float_3_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_Vector_float_3_VectorLayout_float_3_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_Vector_float_3_VectorLayout_float_3_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_Vector_float_3_VectorLayout_float_3_Create_5(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_Vector_float_3_VectorLayout_float_3_Create_5_Heap();
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_5_CAPI_Heap();
 
         void alt_Vector_float_3_VectorLayout_float_3_Create_6(jnr.ffi.Pointer _elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_Vector_float_3_VectorLayout_float_3_Create_6_Heap(jnr.ffi.Pointer _elements);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_6_CAPI_Heap(jnr.ffi.Pointer _elements);
 
         void alt_Vector_float_3_VectorLayout_float_3_Create_7(jnr.ffi.Pointer layout, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_Vector_float_3_VectorLayout_float_3_Create_7_Heap(jnr.ffi.Pointer layout);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_7_CAPI_Heap(jnr.ffi.Pointer layout);
 
         void alt_Vector_float_3_VectorLayout_float_3_Create_8(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_Vector_float_3_VectorLayout_float_3_Create_8_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_8_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_Vector_float_3_VectorLayout_float_3_Create_9(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_Vector_float_3_VectorLayout_float_3_Create_9_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_9_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_Free()
+         * Return ptr must be manually freed with alt_Vector_float_3_VectorLayout_float_3_CAPI_Free()
          */
-        void alt_Vector_float_3_VectorLayout_float_3_Create_Heap();
-
-        void alt_Vector_float_3_VectorLayout_float_3_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_Create_CAPI_Heap();
 
         float alt_Vector_float_3_VectorLayout_float_3_Length(jnr.ffi.Pointer _instance);
 
@@ -7231,9 +7511,9 @@ public class CAPI
 
         jnr.ffi.Pointer alt_Vector_float_3_VectorLayout_float_3_to_alt_VectorLayout_float_3(jnr.ffi.Pointer from);
 
-        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
         void alt_Vector_float_4_VectorLayout_float_4_Assign_VectorLayout_float_4RefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
@@ -7243,77 +7523,77 @@ public class CAPI
 
         void alt_Vector_float_4_VectorLayout_float_4_Assign_constVector_float_4_VectorLayout_float_4Ref(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
 
+        void alt_Vector_float_4_VectorLayout_float_4_CAPI_Free(jnr.ffi.Pointer ptr);
+
         void alt_Vector_float_4_VectorLayout_float_4_Create(jnr.ffi.Pointer returnValue);
 
         void alt_Vector_float_4_VectorLayout_float_4_Create_1(jnr.ffi.Pointer _elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_Vector_float_4_VectorLayout_float_4_Create_1_Heap(jnr.ffi.Pointer _elements);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_1_CAPI_Heap(jnr.ffi.Pointer _elements);
 
         void alt_Vector_float_4_VectorLayout_float_4_Create_2(jnr.ffi.Pointer el, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_Vector_float_4_VectorLayout_float_4_Create_2_Heap(jnr.ffi.Pointer el);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_2_CAPI_Heap(jnr.ffi.Pointer el);
 
         void alt_Vector_float_4_VectorLayout_float_4_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_Vector_float_4_VectorLayout_float_4_Create_3_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_Vector_float_4_VectorLayout_float_4_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_Vector_float_4_VectorLayout_float_4_Create_4_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_Vector_float_4_VectorLayout_float_4_Create_5(jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_Vector_float_4_VectorLayout_float_4_Create_5_Heap();
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_5_CAPI_Heap();
 
         void alt_Vector_float_4_VectorLayout_float_4_Create_6(jnr.ffi.Pointer _elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_Vector_float_4_VectorLayout_float_4_Create_6_Heap(jnr.ffi.Pointer _elements);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_6_CAPI_Heap(jnr.ffi.Pointer _elements);
 
         void alt_Vector_float_4_VectorLayout_float_4_Create_7(jnr.ffi.Pointer layout, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_Vector_float_4_VectorLayout_float_4_Create_7_Heap(jnr.ffi.Pointer layout);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_7_CAPI_Heap(jnr.ffi.Pointer layout);
 
         void alt_Vector_float_4_VectorLayout_float_4_Create_8(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_Vector_float_4_VectorLayout_float_4_Create_8_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_8_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         void alt_Vector_float_4_VectorLayout_float_4_Create_9(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_Vector_float_4_VectorLayout_float_4_Create_9_Heap(jnr.ffi.Pointer _p0);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_9_CAPI_Heap(jnr.ffi.Pointer _p0);
 
         /**
-         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_Free()
+         * Return ptr must be manually freed with alt_Vector_float_4_VectorLayout_float_4_CAPI_Free()
          */
-        void alt_Vector_float_4_VectorLayout_float_4_Create_Heap();
-
-        void alt_Vector_float_4_VectorLayout_float_4_Free(jnr.ffi.Pointer ptr);
+        jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_Create_CAPI_Heap();
 
         float alt_Vector_float_4_VectorLayout_float_4_Length(jnr.ffi.Pointer _instance);
 
@@ -7321,46 +7601,197 @@ public class CAPI
 
         jnr.ffi.Pointer alt_Vector_float_4_VectorLayout_float_4_to_alt_VectorLayout_float_4(jnr.ffi.Pointer from);
 
-        jnr.ffi.Pointer alt_ViewMatrixLayout_Access_size_t(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_ViewMatrixLayout_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
 
-        jnr.ffi.Pointer alt_ViewMatrixLayout_Access_size_t_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+        jnr.ffi.Pointer alt_ViewMatrixLayout_Access_unsignedlonglong_1(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long key);
+
+        void alt_ViewMatrixLayout_CAPI_Free(jnr.ffi.Pointer ptr);
 
         void alt_ViewMatrixLayout_Create(jnr.ffi.Pointer returnValue);
 
         void alt_ViewMatrixLayout_Create_1(jnr.ffi.Pointer _rows, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_ViewMatrixLayout_Free()
+         * Return ptr must be manually freed with alt_ViewMatrixLayout_CAPI_Free()
          */
-        void alt_ViewMatrixLayout_Create_1_Heap(jnr.ffi.Pointer _rows);
+        jnr.ffi.Pointer alt_ViewMatrixLayout_Create_1_CAPI_Heap(jnr.ffi.Pointer _rows);
 
         void alt_ViewMatrixLayout_Create_2(jnr.ffi.Pointer row, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_ViewMatrixLayout_Free()
+         * Return ptr must be manually freed with alt_ViewMatrixLayout_CAPI_Free()
          */
-        void alt_ViewMatrixLayout_Create_2_Heap(jnr.ffi.Pointer row);
+        jnr.ffi.Pointer alt_ViewMatrixLayout_Create_2_CAPI_Heap(jnr.ffi.Pointer row);
 
         void alt_ViewMatrixLayout_Create_3(jnr.ffi.Pointer elements, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_ViewMatrixLayout_Free()
+         * Return ptr must be manually freed with alt_ViewMatrixLayout_CAPI_Free()
          */
-        void alt_ViewMatrixLayout_Create_3_Heap(jnr.ffi.Pointer elements);
+        jnr.ffi.Pointer alt_ViewMatrixLayout_Create_3_CAPI_Heap(jnr.ffi.Pointer elements);
 
         void alt_ViewMatrixLayout_Create_4(jnr.ffi.Pointer _right, jnr.ffi.Pointer _up, jnr.ffi.Pointer _forward, jnr.ffi.Pointer _pos, jnr.ffi.Pointer returnValue);
 
         /**
-         * Return ptr must be manually freed with alt_ViewMatrixLayout_Free()
+         * Return ptr must be manually freed with alt_ViewMatrixLayout_CAPI_Free()
          */
-        void alt_ViewMatrixLayout_Create_4_Heap(jnr.ffi.Pointer _right, jnr.ffi.Pointer _up, jnr.ffi.Pointer _forward, jnr.ffi.Pointer _pos);
+        jnr.ffi.Pointer alt_ViewMatrixLayout_Create_4_CAPI_Heap(jnr.ffi.Pointer _right, jnr.ffi.Pointer _up, jnr.ffi.Pointer _forward, jnr.ffi.Pointer _pos);
 
         /**
-         * Return ptr must be manually freed with alt_ViewMatrixLayout_Free()
+         * Return ptr must be manually freed with alt_ViewMatrixLayout_CAPI_Free()
          */
-        void alt_ViewMatrixLayout_Create_Heap();
+        jnr.ffi.Pointer alt_ViewMatrixLayout_Create_CAPI_Heap();
 
-        void alt_ViewMatrixLayout_Free(jnr.ffi.Pointer ptr);
+        void alt_config_Emitter_CAPI_Free(jnr.ffi.Pointer ptr);
+
+        void alt_config_Error_Assign_config_ErrorRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_config_Error_Assign_constconfig_ErrorRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_config_Error_CAPI_Free(jnr.ffi.Pointer ptr);
+
+        void alt_config_Error_Create_1(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Error_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Error_Create_1_CAPI_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_config_Error_Create_2(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Error_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Error_Create_2_CAPI_Heap(jnr.ffi.Pointer _p0);
+
+        @jnr.ffi.types.u_int64_t long alt_config_Error_column(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.types.u_int64_t long alt_config_Error_line(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.types.u_int64_t long alt_config_Error_position(jnr.ffi.Pointer _instance);
+
+        @jnr.ffi.annotations.Encoding("UTF-8") String alt_config_Error_what(jnr.ffi.Pointer _instance);
+
+        jnr.ffi.Pointer alt_config_Node_Access_charPtr(jnr.ffi.Pointer _instance, @jnr.ffi.annotations.Encoding("UTF-8") String key);
+
+        jnr.ffi.Pointer alt_config_Node_Access_unsignedlonglong(jnr.ffi.Pointer _instance, @jnr.ffi.types.u_int64_t long idx);
+
+        void alt_config_Node_Assign_constconfig_NodeRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer that);
+
+        void alt_config_Node_CAPI_Free(jnr.ffi.Pointer ptr);
+
+        void alt_config_Node_Create(jnr.ffi.Pointer returnValue);
+
+        void alt_config_Node_Create_1(boolean _val, jnr.ffi.Pointer returnValue);
+
+        void alt_config_Node_Create_11(jnr.ffi.Pointer that, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Node_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Node_Create_11_CAPI_Heap(jnr.ffi.Pointer that);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Node_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Node_Create_1_CAPI_Heap(boolean _val);
+
+        void alt_config_Node_Create_2(double _val, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Node_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Node_Create_2_CAPI_Heap(double _val);
+
+        void alt_config_Node_Create_3(@jnr.ffi.types.int32_t int val, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Node_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Node_Create_3_CAPI_Heap(@jnr.ffi.types.int32_t int val);
+
+        void alt_config_Node_Create_4(@jnr.ffi.types.u_int32_t int val, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Node_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Node_Create_4_CAPI_Heap(@jnr.ffi.types.u_int32_t int val);
+
+        void alt_config_Node_Create_5(@jnr.ffi.types.int64_t long val, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Node_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Node_Create_5_CAPI_Heap(@jnr.ffi.types.int64_t long val);
+
+        void alt_config_Node_Create_6(@jnr.ffi.types.u_int64_t long val, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Node_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Node_Create_6_CAPI_Heap(@jnr.ffi.types.u_int64_t long val);
+
+        void alt_config_Node_Create_8(@jnr.ffi.annotations.Encoding("UTF-8") String val, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Node_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Node_Create_8_CAPI_Heap(@jnr.ffi.annotations.Encoding("UTF-8") String val);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Node_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Node_Create_CAPI_Heap();
+
+        boolean alt_config_Node_IsDict(jnr.ffi.Pointer _instance);
+
+        boolean alt_config_Node_IsList(jnr.ffi.Pointer _instance);
+
+        boolean alt_config_Node_IsNone(jnr.ffi.Pointer _instance);
+
+        boolean alt_config_Node_IsScalar(jnr.ffi.Pointer _instance);
+
+        boolean alt_config_Node_ToBool(jnr.ffi.Pointer _instance);
+
+        boolean alt_config_Node_ToBool_1(jnr.ffi.Pointer _instance, boolean def);
+
+        double alt_config_Node_ToNumber(jnr.ffi.Pointer _instance);
+
+        double alt_config_Node_ToNumber_1(jnr.ffi.Pointer _instance, double def);
+
+        boolean alt_config_Node_To__Bool(jnr.ffi.Pointer _instance);
+
+        void alt_config_Parser_Assign_config_ParserRefRef(jnr.ffi.Pointer _instance, jnr.ffi.Pointer _p0);
+
+        void alt_config_Parser_CAPI_Free(jnr.ffi.Pointer ptr);
+
+        void alt_config_Parser_Create_2(@jnr.ffi.annotations.Encoding("UTF-8") String data, @jnr.ffi.types.u_int64_t long size, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Parser_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Parser_Create_2_CAPI_Heap(@jnr.ffi.annotations.Encoding("UTF-8") String data, @jnr.ffi.types.u_int64_t long size);
+
+        void alt_config_Parser_Create_3(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Parser_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Parser_Create_3_CAPI_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_config_Parser_Create_4(jnr.ffi.Pointer _p0, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Parser_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Parser_Create_4_CAPI_Heap(jnr.ffi.Pointer _p0);
+
+        void alt_config_Parser_Parse(jnr.ffi.Pointer _instance, jnr.ffi.Pointer returnValue);
+
+        /**
+         * Return ptr must be manually freed with alt_config_Node_CAPI_Free()
+         */
+        jnr.ffi.Pointer alt_config_Parser_Parse_CAPI_Heap(jnr.ffi.Pointer _instance);
 
     }
 }
