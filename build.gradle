@@ -64,8 +64,13 @@ jar {
 	// from javadoc.destinationDir
 }
 
-task getCAPI(type: Download) {
+task getCAPI_win32(type: Download) {
 	src 'http://github.com/7Hazard/altv-capi/releases/latest/download/altv-capi-server-win32.zip'
+	dest buildDir
+	overwrite false
+}
+task getCAPI_linux(type: Download) {
+	src 'http://github.com/7Hazard/altv-capi/releases/latest/download/altv-capi-server-linux.zip'
 	dest buildDir
 	overwrite false
 }
@@ -74,12 +79,18 @@ task dlCAPIJson(type: Download) {
 	dest buildDir
 	overwrite false
 }
-task unzipCAPI(type: Copy) {
+task unzipCAPI_win32(type: Copy) {
   from zipTree("build/altv-capi-server-win32.zip")
   into buildDir
 }
-getCAPI.finalizedBy dlCAPIJson
-getCAPI.finalizedBy unzipCAPI
+task unzipCAPI_linux(type: Copy) {
+  from zipTree("build/altv-capi-server-linux.zip")
+  into buildDir
+}
+getCAPI_win32.finalizedBy unzipCAPI_win32
+getCAPI_linux.finalizedBy unzipCAPI_linux
+getCAPI_win32.finalizedBy dlCAPIJson
+getCAPI_linux.finalizedBy dlCAPIJson
 jar.dependsOn dlCAPIJson
 
 if(System.env['JITPACK'] == null)
@@ -87,7 +98,7 @@ if(System.env['JITPACK'] == null)
 	task wrap(type: Exec) {
 		standardOutput = out
 		commandLine "node", "wrap"
-		dependsOn "getCAPI"
+		dependsOn "dlCAPIJson"
 	}
 	compileJava.dependsOn wrap
 
@@ -101,8 +112,9 @@ if(System.env['JITPACK'] == null)
 			commandLine "cmd", "/c", "build.bat", version // windows
 		else
 			commandLine "./build.sh", version // linux/mac
+		
+		dependsOn "getCAPI_$platform"
 	}
-	buildModule.dependsOn getCAPI
 
 	task buildModuleWin32Cross(type: Exec) {
 		standardOutput = out
@@ -112,7 +124,7 @@ if(System.env['JITPACK'] == null)
 		
 		commandLine "./build-win32.sh", version // linux/mac
 	}
-	buildModuleWin32Cross.dependsOn getCAPI
+	buildModuleWin32Cross.dependsOn getCAPI_win32
 
 	task buildModuleDebug(type: Exec) {
 		standardOutput = out
@@ -125,14 +137,14 @@ if(System.env['JITPACK'] == null)
 		else
 		{
 			doFirst {
-				throw new GradleException("DEBUG MODULE BUILD ONLY SUPPORTED ON NON-WINDOWS")
+				throw new GradleException("DEBUG MODULE BUILD ONLY SUPPORTED ON WINDOWS")
 			}
 			doLast {
 				commandLine "./build-debug.sh", version // linux/mac
 			}
 		}
 	}
-	buildModuleDebug.dependsOn getCAPI
+	buildModuleDebug.dependsOn getCAPI_win32
 	
 	task copyToOutput(type: Copy) {
 		// from jar.destinationDir
