@@ -17,7 +17,7 @@ public class AltStringView
      */
     public AltStringView(String str)
     {
-        var buf = Memory.allocateDirect(CAPI.runtime, str.length());
+        var buf = Memory.allocateDirect(CAPI.runtime, str.length()+1); // keep +1 or else crash
         buf.putString(0, str, str.length(), StringUtil.UTF8);
         sw.data.set(buf);
         sw.size.set(str.length());
