@@ -14,6 +14,11 @@ endif()
 
 set(JVM_MODULE_VERSION "debug" CACHE BOOL "Module Version")
 
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-debug)
+else()
+    set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM})
+endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(JVM_MODULE_PLATFORM "win32")
@@ -40,7 +45,7 @@ target_compile_definitions(altv-jvm-module PRIVATE
 )
 target_include_directories(altv-jvm-module PRIVATE
     src
-    ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM}/include
+    ${CAPI_LOCATION}/include
     ${JNI_INCLUDE_DIRS}
 )
 target_link_libraries(altv-jvm-module PRIVATE
@@ -63,7 +68,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
         ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM}/lib/altv-capi-server.lib
     )
     add_custom_command(TARGET altv-jvm-module POST_BUILD # POST BUILD COMMANDS
-        COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM}/bin/altv-capi-server.dll ${PROJECT_SOURCE_DIR}/../build/${JVM_MODULE_PLATFORM}/altv-jvm-module/altv-capi-server.dll
+        COMMAND ${CMAKE_COMMAND} -E copy ${CAPI_LOCATION}/bin/altv-capi-server.dll ${PROJECT_SOURCE_DIR}/../build/${JVM_MODULE_PLATFORM}/altv-jvm-module/altv-capi-server.dll
     )
 else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++17 -fms-extensions -fdelayed-template-parsing -fexceptions")

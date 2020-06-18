@@ -144,7 +144,7 @@ if(System.env['JITPACK'] == null)
 			}
 		}
 	}
-	buildModuleDebug.dependsOn getCAPI_win32
+	// buildModuleDebug.dependsOn getCAPI_win32
 	
 	task copyToOutput(type: Copy) {
 		// from jar.destinationDir
