@@ -76,5 +76,11 @@ inline void loge(alt_ICore* core, const std::string& str)
     alt_ICore_LogError(core, &sw);
 }
 
+template<std::size_t N>
+inline bool FileExists(alt_ICore* core, const char (&str)[N])
+{
+    alt_StringView sw{(char*)str, N+1};
+    return alt_ICore_FileExists(core, &sw);
+}
 
 }

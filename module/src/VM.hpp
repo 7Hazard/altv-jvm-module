@@ -2,6 +2,7 @@
 
 #include <jni.h>
 #include <string>
+#include <filesystem>
 #include "Util.hpp"
 
 class VM
@@ -16,6 +17,13 @@ public:
 
     static bool Start(alt_ICore* core)
     {
+        // Checks
+        // if(!util::FileExists(core, "modules/altv-jvm-module/" JVM_JAR_NAME))
+        // {
+        //     util::loge(core, "[JVM] Could not find file 'modules/altv-jvm-module/" JVM_JAR_NAME "'");
+        //     return false;
+        // }
+
         util::logi(core, "[JVM] Starting Java VM (Module Version '" JVM_MODULE_VERSION "')");
 
         JNIEnv *env; /* pointer to native method interface */

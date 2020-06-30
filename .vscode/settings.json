@@ -7,6 +7,8 @@
         "**/.factorypath": true
     },
     "files.associations": {
-        "cstddef": "cpp"
+        "*.cpp": "cpp",
+        "cstddef": "cpp",
+        "filesystem": "cpp"
     }
 }

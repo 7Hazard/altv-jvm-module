@@ -12,7 +12,7 @@ else()
 endif()
 # message(FATAL_ERROR "Location: ${JAVA_JVM_LIBRARY}")
 
-set(JVM_MODULE_VERSION "debug" CACHE BOOL "Module Version")
+set(JVM_MODULE_VERSION "none" CACHE BOOL "Module Version")
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-debug)

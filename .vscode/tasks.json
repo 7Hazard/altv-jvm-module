@@ -19,7 +19,7 @@
         {
             "label": "Build Debug (Gradle)",
             "type": "shell",
-            "command": "./gradlew build buildModuleDebug",
+            "command": "./gradlew build buildModule -Pdebug",
             "group": {
                 "kind": "build",
                 "isDefault": true
