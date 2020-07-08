@@ -41,6 +41,8 @@ target_compile_definitions(altv-jvm-module PRIVATE
     ALT_SERVER_API
     JVM_MODULE_DLL
     JVM_MODULE_VERSION="${JVM_MODULE_VERSION}"
+    _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+    _CRT_SECURE_NO_WARNINGS
     # CAPI_DLL
 )
 target_include_directories(altv-jvm-module PRIVATE
@@ -49,7 +51,7 @@ target_include_directories(altv-jvm-module PRIVATE
     ${JNI_INCLUDE_DIRS}
 )
 target_link_libraries(altv-jvm-module PRIVATE
-    ${JAVA_JVM_LIBRARY}
+    # ${JAVA_JVM_LIBRARY}
 )
 set_target_properties(altv-jvm-module PROPERTIES
     # ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/altv-jvm-module/lib
@@ -59,8 +61,7 @@ set_target_properties(altv-jvm-module PROPERTIES
 
 # Platform specific stuff
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    set(CMAKE_CXX_STANDARD 17)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /std:c++latest /permissive- -Wno-writable-strings -Wno-missing-declarations")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
 
