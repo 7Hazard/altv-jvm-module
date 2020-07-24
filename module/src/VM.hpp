@@ -16,11 +16,22 @@ public:
     HMODULE jvmlib = nullptr;
     void LoadLib()
     {
-        jvmlib = LoadLibrary(L"jvm");
+        std::string javahome = std::getenv("JAVA_HOME");
+        if(!javahome.empty())
+        {
+            auto path = javahome + "/bin/server/jvm.dll";
+            jvmlib = LoadLibraryA(path.c_str());
+        }
+        
+        if(!jvmlib) {
+            // Try loading from PATH or anywhere else the system looks
+            jvmlib = LoadLibraryA("jvm.dll");
+        }
+
         if(!jvmlib)
         {
-            util::loge("[JVM] Could not load jvm.dll");
-        }
+            util::loge("[JVM] Could not load jvm.dll - JAVA_HOME environment variable was not specified or pointed to an invalid Java installation");
+        }        
     }
 
     jint (JNICALL *CreateJavaVM)(JavaVM **pvm, void **penv, void *args) = nullptr;
