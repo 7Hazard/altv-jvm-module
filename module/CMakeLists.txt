@@ -12,20 +12,19 @@ else()
 endif()
 # message(FATAL_ERROR "Location: ${JAVA_JVM_LIBRARY}")
 
-set(JVM_MODULE_VERSION "none" CACHE BOOL "Module Version")
-
-if(CMAKE_BUILD_TYPE MATCHES Debug)
-    set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-debug)
-else()
-    set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM})
-endif()
-
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(JVM_MODULE_PLATFORM "win32")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(JVM_MODULE_PLATFORM "linux")
 else()
     message(FATAL_ERROR "UNSUPPORTED PLATFORM")
+endif()
+set(JVM_MODULE_VERSION "none" CACHE BOOL "Module Version")
+
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-debug)
+else()
+    set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM})
 endif()
 
 add_definitions(
