@@ -19,8 +19,16 @@ public:
         std::string javahome = std::getenv("JAVA_HOME");
         if(!javahome.empty())
         {
-            auto path = javahome + "/bin/server/jvm.dll";
-            jvmlib = LoadLibraryA(path.c_str());
+            bool found = false;
+            std::string path;
+            if(std::filesystem::exists(path = javahome + "/bin/server/jvm.dll")) found = true;
+            else if(std::filesystem::exists(path = javahome + "/jre/bin/server/jvm.dll")) found = true;
+
+            if(found)
+            {
+                util::logi("[JVM] Loading from env var JAVA_HOME ("+path+")");
+                jvmlib = LoadLibraryA(path.c_str());
+            }
         }
         
         if(!jvmlib) {
@@ -78,18 +86,17 @@ public:
         // memset(&vm_args, 0, sizeof(vm_args));
 
         // Options
-        JavaVMOption options[5];
-        // memset(&options, 0, sizeof(options));
-        vm_args.nOptions = 5;
-        vm_args.options = options;
         // OBS: SYNTAX MISTAKES CAN CAUSE INSTA-CRASH
-        options[0].optionString = "-Djava.class.path=modules/altv-jvm-module;" JAR_RELATIVE_PATH;
-        options[1].optionString = "-Djava.library.path=modules/altv-jvm-module";
-        options[2].optionString = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005";
-        options[3].optionString = "-XX:+ShowMessageBoxOnError";
-        options[4].optionString = "-XX:ErrorFile=logs/jvm/fatal-error.log";
-        //options[5].optionString = "-verbose:jni";
-        
+        std::initializer_list<JavaVMOption> options = {
+            JavaVMOption{"-Djava.class.path=modules/altv-jvm-module;" JAR_RELATIVE_PATH, nullptr},
+            JavaVMOption{"-Djava.library.path=modules/altv-jvm-module", nullptr},
+            JavaVMOption{"-XX:+ShowMessageBoxOnError", nullptr},
+            JavaVMOption{"-XX:ErrorFile=logs/jvm/fatal-error.log", nullptr},
+            JavaVMOption{"-XX:+AllowUserSignalHandlers", nullptr},
+            JavaVMOption{"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005", nullptr},
+        };
+        vm_args.nOptions = options.size();
+        vm_args.options = (JavaVMOption*)options.begin();
         vm_args.version = JNI_VERSION_1_6;
         vm_args.ignoreUnrecognized = JNI_TRUE;
 
@@ -100,12 +107,12 @@ public:
             return false;
         }
         
-        vmres = jvm->AttachCurrentThread((void**)&env, nullptr);
-        if(vmres < 0)
-        {
-            util::loge("[JVM] Could not Attach JVM to thread\n\t\t Error code: "+std::to_string(vmres));
-            return false;
-        }
+        // vmres = jvm->AttachCurrentThread((void**)&env, nullptr);
+        // if(vmres < 0)
+        // {
+        //     util::loge("[JVM] Could not Attach JVM to thread\n\t\t Error code: "+std::to_string(vmres));
+        //     return false;
+        // }
 
         // std::string vmver = "[JVM] Started Java VM version " + std::to_string(env->GetVersion());
         // util::logi(vmver);
