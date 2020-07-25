@@ -3,6 +3,7 @@
 #include <jni.h>
 #include <string>
 #include <filesystem>
+#include <vector>
 #include "Util.hpp"
 
 #define JAR_NAME "altv-jvm-module.jar"
