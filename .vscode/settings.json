@@ -58,6 +58,8 @@
         "xstddef": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp",
-        "xmemory0": "cpp"
+        "xmemory0": "cpp",
+        "iostream": "cpp",
+        "thread": "cpp"
     }
 }

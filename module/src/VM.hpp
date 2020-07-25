@@ -87,18 +87,21 @@ public:
 
         // Options
         // OBS: SYNTAX MISTAKES CAN CAUSE INSTA-CRASH
-        std::initializer_list<JavaVMOption> options = {
-            JavaVMOption{"-Djava.class.path=modules/altv-jvm-module;" JAR_RELATIVE_PATH, nullptr},
-            JavaVMOption{"-Djava.library.path=modules/altv-jvm-module", nullptr},
-            JavaVMOption{"-XX:+ShowMessageBoxOnError", nullptr},
-            JavaVMOption{"-XX:ErrorFile=logs/jvm/fatal-error.log", nullptr},
-            JavaVMOption{"-XX:+AllowUserSignalHandlers", nullptr},
-            JavaVMOption{"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005", nullptr},
+        std::vector<JavaVMOption> options = {
+            {"-Djava.class.path=modules/altv-jvm-module;" JAR_RELATIVE_PATH, nullptr},
+            {"-Djava.library.path=modules/altv-jvm-module", nullptr},
+            {"-XX:+ShowMessageBoxOnError", nullptr},
+            {"-XX:ErrorFile=logs/jvm/fatal-error.log", nullptr},
+            {"-XX:+AllowUserSignalHandlers", nullptr},
+            // {"-verbose:class,gc,jni", nullptr},
         };
+        if(true) options.push_back({"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005", nullptr});
+        if(false) options.push_back({"-Djava.compiler=NONE", nullptr});
+        
         vm_args.nOptions = options.size();
-        vm_args.options = (JavaVMOption*)options.begin();
-        vm_args.version = JNI_VERSION_1_6;
-        vm_args.ignoreUnrecognized = JNI_TRUE;
+        vm_args.options = options.data();
+        vm_args.version = JNI_VERSION_10;
+        vm_args.ignoreUnrecognized = false;
 
         jint vmres = CreateJavaVM(&jvm, (void**)&env, &vm_args);
         if(vmres < 0)
@@ -106,16 +109,6 @@ public:
             util::loge("[JVM] Could not start JVM\n\t\t Error code: "+std::to_string(vmres));
             return false;
         }
-        
-        // vmres = jvm->AttachCurrentThread((void**)&env, nullptr);
-        // if(vmres < 0)
-        // {
-        //     util::loge("[JVM] Could not Attach JVM to thread\n\t\t Error code: "+std::to_string(vmres));
-        //     return false;
-        // }
-
-        // std::string vmver = "[JVM] Started Java VM version " + std::to_string(env->GetVersion());
-        // util::logi(vmver);
         
         jclass cls = env->FindClass(JAR_MAIN_CLASS);
         if(cls == nullptr)

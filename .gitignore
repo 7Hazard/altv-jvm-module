@@ -21,6 +21,8 @@ bin/
 
 capi/**
 /src/alt/v/jvm/CAPI.java
-/module/BUILD-LINUX/
 
 src/hazard7/altv/jvm/CAPI.java
+
+/module/BUILD-*
+

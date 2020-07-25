@@ -50,9 +50,10 @@ target_include_directories(altv-jvm-module PRIVATE
     ${JNI_INCLUDE_DIRS}
 )
 target_link_libraries(altv-jvm-module PRIVATE
-    # ${JAVA_JVM_LIBRARY}
+    ${JAVA_JVM_LIBRARY}
 )
 set_target_properties(altv-jvm-module PROPERTIES
+    CXX_STANDARD 17
     # ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/altv-jvm-module/lib
     LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build/${JVM_MODULE_PLATFORM}/altv-jvm-module
     RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build/${JVM_MODULE_PLATFORM}/altv-jvm-module
@@ -60,9 +61,9 @@ set_target_properties(altv-jvm-module PROPERTIES
 
 # Platform specific stuff
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /std:c++latest /permissive- -Wno-writable-strings -Wno-missing-declarations")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /permissive- -Wno-writable-strings -Wno-missing-declarations /RTC1")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
+    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /MD")
 
     target_link_libraries(altv-jvm-module PRIVATE
         ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM}/lib/altv-capi-server.lib
