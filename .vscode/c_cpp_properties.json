@@ -21,6 +21,27 @@
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "msvc-x64"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/src/**",
+                "C:\\Program Files\\RedHat\\java-11-openjdk-11.0.4-1\\include",
+                "${workspaceFolder}/build/altv-capi-server-win32/include",
+                "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/include/win32"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "JVM_MODULE_VERSION=\"\"",
+                "JVM_JAR_NAME=\"\""
+            ],
+            "windowsSdkVersion": "10.0.17134.0",
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/VC/Tools/MSVC/14.15.26726/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "msvc-x64"
         }
     ],
     "version": 4

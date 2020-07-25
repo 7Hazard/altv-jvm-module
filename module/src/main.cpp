@@ -12,10 +12,12 @@ alt_ICore* core = nullptr;
 #include "Util.hpp"
 #include "VM.hpp"
 
+VM* vm = nullptr;
+
 CAPI_EXPORT bool altMain(alt_ICore* c)
 {
     core = c;
-    auto vm = new VM();
+    vm = new VM();
 
     if(!vm->Start())
     {
@@ -23,6 +25,10 @@ CAPI_EXPORT bool altMain(alt_ICore* c)
         delete vm;
         return false;
     }
+
+    std::atexit([]{
+        delete vm;
+    });
 
     return true;
 }

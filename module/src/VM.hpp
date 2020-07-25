@@ -9,11 +9,27 @@
 #define JAR_RELATIVE_PATH "modules/altv-jvm-module/" JAR_NAME
 #define JAR_MAIN_CLASS "hazard7/altv/jvm/Main"
 
+#ifdef _WIN32
+#include <Windows.h>
+    using Library = HMODULE;
+    constexpr auto OpenLibrary = LoadLibraryA;
+    constexpr auto GetLibraryFunction = GetProcAddress;
+#else
+#include <dlfcn.h>
+    using Library = void*;
+    Library OpenLibrary(const char* name)
+    {
+        return dlopen(name, RTLD_LAZY);
+    }
+    constexpr auto GetLibraryFunction = dlsym;
+#endif
+
 class VM
 {
+
 public:
 
-    HMODULE jvmlib = nullptr;
+    Library jvmlib = nullptr;
     void LoadLib()
     {
         std::string javahome = std::getenv("JAVA_HOME");
@@ -27,13 +43,13 @@ public:
             if(found)
             {
                 util::logi("[JVM] Loading from env var JAVA_HOME ("+path+")");
-                jvmlib = LoadLibraryA(path.c_str());
+                jvmlib = OpenLibrary(path.c_str());
             }
         }
         
         if(!jvmlib) {
             // Try loading from PATH or anywhere else the system looks
-            jvmlib = LoadLibraryA("jvm.dll");
+            jvmlib = OpenLibrary("jvm.dll");
         }
 
         if(!jvmlib)
@@ -47,7 +63,7 @@ public:
     uint8_t failedFuncs = 0;
     void* LoadFunc(const std::string& name)
     {
-        auto addr = (void*)GetProcAddress(jvmlib, name.c_str());
+        auto addr = (void*)GetLibraryFunction(jvmlib, name.c_str());
         if(!addr)
         {
             util::loge("Could not load " + name + " from jvm.dll");
@@ -141,7 +157,7 @@ public:
         return true;
     }
 
-    void Dispose()
+    ~VM()
     {
         jvm->DestroyJavaVM();
     }
