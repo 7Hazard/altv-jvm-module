@@ -9,32 +9,6 @@ namespace util
 {
 
 
-// inline auto AbsolutePath(std::string relativePath)
-// {
-//     return std::filesystem::absolute(relativePath).string();
-// }
-
-// // Adds shared library path
-// inline bool AddPath(std::string path)
-// {
-// #ifdef _WIN32
-//     AddDllDirectoryA(path.c_str());
-// #else
-//     static_assert(false, "NOT IMPLEMENTED");
-// #endif
-// }
-
-// inline std::string GetEnvironmentVariable(std::string name)
-// {
-// #ifdef _WIN32
-//     char buf[1024];
-//     GetEnvironmentVariableA(name.c_str(), buf, sizeof(buf));
-//     return buf;
-// #else
-//     static_assert(false, "NOT IMPLEMENTED");
-// #endif
-// }
-
 inline auto GetTimestamp()
 {
     time_t rawtime;

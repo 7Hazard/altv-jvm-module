@@ -13,8 +13,8 @@
 #ifdef _WIN32
 #include <Windows.h>
     using Library = HMODULE;
-    constexpr auto OpenLibrary = LoadLibraryA;
-    constexpr auto GetLibraryFunction = GetProcAddress;
+    auto OpenLibrary = LoadLibraryA;
+    auto GetLibraryFunction = GetProcAddress;
 #else
 #include <dlfcn.h>
     using Library = void*;
@@ -27,7 +27,6 @@
 
 class VM
 {
-
 public:
 
     Library jvmlib = nullptr;

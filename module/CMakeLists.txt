@@ -50,7 +50,7 @@ target_include_directories(altv-jvm-module PRIVATE
     ${JNI_INCLUDE_DIRS}
 )
 target_link_libraries(altv-jvm-module PRIVATE
-    ${JAVA_JVM_LIBRARY}
+    # ${JAVA_JVM_LIBRARY}
 )
 set_target_properties(altv-jvm-module PROPERTIES
     CXX_STANDARD 17
