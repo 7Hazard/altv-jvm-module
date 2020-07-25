@@ -12,20 +12,19 @@ else()
 endif()
 # message(FATAL_ERROR "Location: ${JAVA_JVM_LIBRARY}")
 
-set(JVM_MODULE_VERSION "debug" CACHE BOOL "Module Version")
-
-if(CMAKE_BUILD_TYPE MATCHES Debug)
-    set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-debug)
-else()
-    set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM})
-endif()
-
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(JVM_MODULE_PLATFORM "win32")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(JVM_MODULE_PLATFORM "linux")
 else()
     message(FATAL_ERROR "UNSUPPORTED PLATFORM")
+endif()
+set(JVM_MODULE_VERSION "none" CACHE BOOL "Module Version")
+
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-debug)
+else()
+    set(CAPI_LOCATION ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM})
 endif()
 
 add_definitions(
@@ -41,6 +40,8 @@ target_compile_definitions(altv-jvm-module PRIVATE
     ALT_SERVER_API
     JVM_MODULE_DLL
     JVM_MODULE_VERSION="${JVM_MODULE_VERSION}"
+    _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+    _CRT_SECURE_NO_WARNINGS
     # CAPI_DLL
 )
 target_include_directories(altv-jvm-module PRIVATE
@@ -52,6 +53,7 @@ target_link_libraries(altv-jvm-module PRIVATE
     ${JAVA_JVM_LIBRARY}
 )
 set_target_properties(altv-jvm-module PROPERTIES
+    CXX_STANDARD 17
     # ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/altv-jvm-module/lib
     LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build/${JVM_MODULE_PLATFORM}/altv-jvm-module
     RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build/${JVM_MODULE_PLATFORM}/altv-jvm-module
@@ -59,10 +61,9 @@ set_target_properties(altv-jvm-module PROPERTIES
 
 # Platform specific stuff
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    set(CMAKE_CXX_STANDARD 17)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /permissive- -Wno-writable-strings -Wno-missing-declarations /RTC1")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
+    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /MD")
 
     target_link_libraries(altv-jvm-module PRIVATE
         ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM}/lib/altv-capi-server.lib

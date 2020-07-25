@@ -51,30 +51,36 @@ inline auto GetTimestamp()
 }
 
 template<std::size_t N>
-inline void logi(alt_ICore* core, const char (&str)[N])
+inline void logi(const char (&str)[N])
 {
     alt_StringView sw{(char*)str, N+1};
     alt_ICore_LogInfo(core, &sw);
 }
 
-inline void logi(alt_ICore* core, const std::string& str)
+inline void logi(const std::string& str)
 {
-    alt_StringView sw {(char*)str.c_str(), str.length()+1};
+    alt_StringView sw {(char*)str.data(), str.length()+1};
     alt_ICore_LogInfo(core, &sw);
 }
 
 template<std::size_t N>
-inline void loge(alt_ICore* core, const char (&str)[N])
+inline void loge(const char (&str)[N])
 {
     alt_StringView sw{(char*)str, N+1};
     alt_ICore_LogError(core, &sw);
 }
 
-inline void loge(alt_ICore* core, const std::string& str)
+inline void loge(const std::string& str)
 {
-    alt_StringView sw {(char*)str.c_str(), str.length()+1};
+    alt_StringView sw {(char*)str.data(), str.length()+1};
     alt_ICore_LogError(core, &sw);
 }
 
+template<std::size_t N>
+inline bool FileExists(const char (&str)[N])
+{
+    alt_StringView sw{(char*)str, N+1};
+    return alt_ICore_FileExists(core, &sw);
+}
 
 }

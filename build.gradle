@@ -45,6 +45,12 @@ else if(OperatingSystem.current().isLinux()) {
 	platform = "linux"
 }
 
+def branch = "internal"
+def buildnum = "0"
+if(project.hasProperty('branch')) branch = project.getProperty("branch")
+if(project.hasProperty('buildnum')) buildnum = project.getProperty("buildnum")
+def version = "${branch}-${buildnum}"
+
 tasks.withType(JavaCompile) {
   options.compilerArgs << "-Xlint:all" << "-Xlint:-rawtypes" << "-Werror"
 }
@@ -91,14 +97,23 @@ getCAPI_win32.finalizedBy unzipCAPI_win32
 getCAPI_linux.finalizedBy unzipCAPI_linux
 getCAPI_win32.finalizedBy dlCAPIJson
 getCAPI_linux.finalizedBy dlCAPIJson
-jar.dependsOn dlCAPIJson
+if(!project.hasProperty('debug'))
+	jar.dependsOn dlCAPIJson
 
 if(System.env['JITPACK'] == null)
 {
 	task wrap(type: Exec) {
 		standardOutput = out
-		commandLine "node", "wrap"
-		dependsOn "dlCAPIJson"
+		
+		if(project.hasProperty('debug'))
+		{
+			commandLine "node", "wrap", "debug"
+		}
+		else
+		{
+			commandLine "node", "wrap"
+			dependsOn "dlCAPIJson"
+		}
 	}
 	compileJava.dependsOn wrap
 
@@ -106,45 +121,32 @@ if(System.env['JITPACK'] == null)
 		standardOutput = out
 		workingDir "module"
 
-		def version = "${System.env['CI_PIPELINE_IID']}-${System.env['CI_COMMIT_REF_SLUG']}"
-		
-		if(OperatingSystem.current().isWindows())
-			commandLine "cmd", "/c", "build.bat", version // windows
-		else
-			commandLine "./build.sh", version // linux/mac
-		
-		dependsOn "getCAPI_$platform"
+		if(project.hasProperty('debug'))
+		{
+			doFirst {
+				assert OperatingSystem.current().isWindows()
+				assert file("build/altv-capi-server-debug").exists()
+			}
+			
+			commandLine "cmd", "/c", "build-debug.bat", version // windows
+		}
+		else {
+			if(OperatingSystem.current().isWindows())
+				commandLine "cmd", "/c", "build.bat", version // windows
+			else
+				commandLine "./build.sh", version // linux/mac
+			
+			dependsOn "getCAPI_$platform"
+		}
 	}
 
 	task buildModuleWin32Cross(type: Exec) {
 		standardOutput = out
 		workingDir "module"
-
-		def version = "${System.env['CI_PIPELINE_IID']}-${System.env['CI_COMMIT_REF_SLUG']}"
 		
 		commandLine "./build-win32.sh", version // linux/mac
 	}
 	buildModuleWin32Cross.dependsOn getCAPI_win32
-
-	task buildModuleDebug(type: Exec) {
-		standardOutput = out
-		workingDir "module"
-
-		def version = "${System.env['CI_PIPELINE_IID']}-${System.env['CI_COMMIT_REF_SLUG']}"
-		
-		if(OperatingSystem.current().isWindows())
-			commandLine "cmd", "/c", "build-debug.bat", version // windows
-		else
-		{
-			doFirst {
-				throw new GradleException("DEBUG MODULE BUILD ONLY SUPPORTED ON WINDOWS")
-			}
-			doLast {
-				commandLine "./build-debug.sh", version // linux/mac
-			}
-		}
-	}
-	// buildModuleDebug.dependsOn getCAPI_win32
 	
 	task copyToOutput(type: Copy) {
 		// from jar.destinationDir

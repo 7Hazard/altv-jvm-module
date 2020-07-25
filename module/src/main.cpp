@@ -1,6 +1,6 @@
-#define JVM_JAR_NAME "altv-jvm-module.jar"
 
 #include "altv-capi-server.h"
+alt_ICore* core = nullptr;
 
 #ifdef _WIN32
 #include <windows.h>
@@ -12,11 +12,15 @@
 #include "Util.hpp"
 #include "VM.hpp"
 
-CAPI_EXPORT bool altMain(alt_ICore* core)
+CAPI_EXPORT bool altMain(alt_ICore* c)
 {
-    if(!VM::Start(core))
+    core = c;
+    auto vm = new VM();
+
+    if(!vm->Start())
     {
-        util::loge(core, "[JVM] Could not start VM");
+        util::loge("[JVM] Could not start VM");
+        delete vm;
         return false;
     }
 

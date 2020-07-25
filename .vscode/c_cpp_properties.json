@@ -4,7 +4,9 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/src/**",
-                "C:\\Program Files\\RedHat\\java-11-openjdk-11.0.4-1\\include"
+                "C:\\Program Files\\RedHat\\java-11-openjdk-11.0.4-1\\include",
+                "${workspaceFolder}/build/altv-capi-server-win32/include",
+                "C:/Program Files/RedHat/java-11-openjdk-11.0.4-1/include/win32"
             ],
             "defines": [
                 "_DEBUG",

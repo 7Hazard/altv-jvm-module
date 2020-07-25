@@ -11,5 +11,5 @@ cd /d %curdir%
 set CFLAGS=-m64
 set CXXFLAGS=-m64
 
-cmake . -B"BUILD-WIN32-DEBUG" -DCMAKE_BUILD_TYPE=Debug -GNinja -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_LINKER="C:/Program Files/LLVM/bin/lld-link.exe"
+cmake . -B"BUILD-WIN32-DEBUG" -DJVM_MODULE_VERSION=%1 -DCMAKE_BUILD_TYPE=Debug -GNinja -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_LINKER="C:/Program Files/LLVM/bin/lld-link.exe"
 cmake --build "BUILD-WIN32-DEBUG" --config Debug
