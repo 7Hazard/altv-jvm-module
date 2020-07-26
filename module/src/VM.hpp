@@ -10,11 +10,15 @@
 #define JAR_RELATIVE_PATH "modules/altv-jvm-module/" JAR_NAME
 #define JAR_MAIN_CLASS "hazard7/altv/jvm/Main"
 
+std::string JavaHomePath = std::getenv("JAVA_HOME");
 #ifdef _WIN32
 #include <Windows.h>
     using Library = HMODULE;
     auto OpenLibrary = LoadLibraryA;
     auto GetLibraryFunction = GetProcAddress;
+    std::string JVMLibraryName = "jvm.dll";
+    std::string JVMJDKPath = JavaHomePath + "/bin/server/" + JVMLibraryName;
+    std::string JVMJREPath = JavaHomePath + "/jre/bin/server/" + JVMLibraryName;
 #else
 #include <dlfcn.h>
     using Library = void*;
@@ -23,6 +27,9 @@
         return dlopen(name, RTLD_LAZY);
     }
     constexpr auto GetLibraryFunction = dlsym;
+    std::string JVMLibraryName = "libjvm.so";
+    std::string JVMJDKPath = JavaHomePath + "/lib/server/" + JVMLibraryName;
+    std::string JVMJREPath = JavaHomePath + "/jre/lib/server/" + JVMLibraryName;
 #endif
 
 class VM
@@ -30,32 +37,37 @@ class VM
 public:
 
     Library jvmlib = nullptr;
-    void LoadLib()
+    bool LoadLib()
     {
-        std::string javahome = std::getenv("JAVA_HOME");
-        if(!javahome.empty())
+        std::string path;
+        if(!JavaHomePath.empty())
         {
             bool found = false;
-            std::string path;
-            if(std::filesystem::exists(path = javahome + "/bin/server/jvm.dll")) found = true;
-            else if(std::filesystem::exists(path = javahome + "/jre/bin/server/jvm.dll")) found = true;
+            if(std::filesystem::exists(path = JVMJDKPath)) found = true;
+            else if(std::filesystem::exists(path = JVMJREPath)) found = true;
 
             if(found)
             {
-                util::logi("[JVM] Loading from env var JAVA_HOME ("+path+")");
                 jvmlib = OpenLibrary(path.c_str());
             }
         }
         
         if(!jvmlib) {
             // Try loading from PATH or anywhere else the system looks
-            jvmlib = OpenLibrary("jvm.dll");
+            jvmlib = OpenLibrary(JVMLibraryName.c_str());
+        } else {
+            util::logi("[JVM] Loaded JVM from JAVA_HOME ("+path+")");
+            return true;
         }
 
         if(!jvmlib)
         {
             util::loge("[JVM] Could not load jvm.dll - JAVA_HOME environment variable was not specified or pointed to an invalid Java installation");
-        }        
+            return false;
+        } else {
+            util::logi("[JVM] Loaded JVM from PATH (or local relative)");
+            return true;
+        }
     }
 
     jint (JNICALL *CreateJavaVM)(JavaVM **pvm, void **penv, void *args) = nullptr;
@@ -73,7 +85,6 @@ public:
     }
 
     JavaVM* jvm = nullptr;
-
     bool Start()
     {
         // Checks
@@ -84,8 +95,7 @@ public:
         }
 
         // Dynamic load jvm
-        LoadLib();
-        if(jvmlib == nullptr) return false;
+        if(!LoadLib()) return false;
 
         // dynamic load jni funcs
         CreateJavaVM = (decltype(CreateJavaVM))LoadFunc("JNI_CreateJavaVM");

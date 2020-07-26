@@ -8,7 +8,6 @@
 namespace util
 {
 
-
 inline auto GetTimestamp()
 {
     time_t rawtime;
