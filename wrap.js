@@ -49,7 +49,7 @@ function getJavaType(type, callbackName = "unnamedCallback"+javacallbacks.length
 `
     public interface ${callbackName}
     {
-        @jnr.ffi.annotations.Delegate public ${getJavaType(type.returns)} callback(${getJavaParams(type.params, callbackName)});
+        @jnr.ffi.annotations.Delegate public ${getJavaType(type.returns)} callback(${getJavaCallbackParams(type.params, callbackName)});
     }
 `
             javacallbacks.push(interface)
@@ -235,6 +235,17 @@ function getJavaParams(params, funcname)
     let jparams = []
     for (const param of params) {
         let jparam = `${getJavaType(param.type, funcname+"_"+param.name+"_Callback")} ${param.name}`
+        jparams.push(jparam)
+    }
+    return jparams.join(", ")
+}
+
+function getJavaCallbackParams(params, callbackName)
+{
+    if(params == undefined || params == null) return ""
+    let jparams = []
+    for (const [i, param] of params.entries()) {
+        let jparam = `${getJavaType(param, callbackName)} p${i+1}`
         jparams.push(jparam)
     }
     return jparams.join(", ")
