@@ -66,7 +66,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /MD")
 
     target_link_libraries(altv-jvm-module PRIVATE
-        ${PROJECT_SOURCE_DIR}/../build/altv-capi-server-${JVM_MODULE_PLATFORM}/lib/altv-capi-server.lib
+        ${CAPI_LOCATION}/lib/altv-capi-server.lib
     )
     add_custom_command(TARGET altv-jvm-module POST_BUILD # POST BUILD COMMANDS
         COMMAND ${CMAKE_COMMAND} -E copy ${CAPI_LOCATION}/bin/altv-capi-server.dll ${PROJECT_SOURCE_DIR}/../build/${JVM_MODULE_PLATFORM}/altv-jvm-module/altv-capi-server.dll
