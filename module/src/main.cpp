@@ -33,6 +33,8 @@ CAPI_EXPORT bool altMain(alt_ICore* c)
     return true;
 }
 
-#ifdef _DEBUG
-CAPI_SKIP_VERSION_CHECK;
-#endif
+// #ifdef _DEBUG
+// CAPI_SKIP_VERSION_CHECK;
+// #endif
+
+CAPI_EXPORT_SDK_VERSION;
