@@ -1,32 +1,25 @@
 
 #include "altv-capi-server.h"
-alt_ICore* core = nullptr;
-
-#ifdef _WIN32
-#include <windows.h>
-
-#else
-
-#endif
+alt_ICore *core = nullptr;
 
 #include "Util.hpp"
 #include "VM.hpp"
 
-VM* vm = nullptr;
+VM *vm = nullptr;
 
-CAPI_EXPORT bool altMain(alt_ICore* c)
+CAPI_EXPORT bool altMain(alt_ICore *c)
 {
     core = c;
     vm = new VM();
 
-    if(!vm->Start())
+    if (!vm->Start())
     {
         util::loge("[JVM] Could not start VM");
         delete vm;
         return false;
     }
 
-    std::atexit([]{
+    std::atexit([] {
         delete vm;
     });
 
