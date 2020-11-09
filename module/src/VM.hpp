@@ -10,9 +10,14 @@
 #define JAR_RELATIVE_PATH "modules/altv-jvm-module/" JAR_NAME
 #define JAR_MAIN_CLASS "hazard7/altv/jvm/Main"
 
-std::string JavaHomePath = std::getenv("JAVA_HOME");
 #ifdef _WIN32
 #include <Windows.h>
+std::string JavaHomePath = []() {
+    char buf[1024];
+    GetEnvironmentVariableA("JAVA_HOME", buf, 1024);
+    std::string ret = buf;
+    return ret;
+}();
 using Library = HMODULE;
 auto OpenLibrary = LoadLibraryA;
 auto GetLibraryFunction = GetProcAddress;
@@ -21,6 +26,7 @@ std::string JVMJDKPath = JavaHomePath + "/bin/server/" + JVMLibraryName;
 std::string JVMJREPath = JavaHomePath + "/jre/bin/server/" + JVMLibraryName;
 #else
 #include <dlfcn.h>
+std::string JavaHomePath = std::getenv("JAVA_HOME");
 using Library = void *;
 Library OpenLibrary(const char *name)
 {
@@ -74,6 +80,8 @@ public:
             util::logi("[JVM] Loaded JVM from PATH (or local relative)");
             return true;
         }
+
+        return true;
     }
 
     jint(JNICALL *CreateJavaVM)(JavaVM **pvm, void **penv, void *args) = nullptr;
