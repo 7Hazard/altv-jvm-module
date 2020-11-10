@@ -3,9 +3,12 @@
 #include <filesystem>
 #include <time.h>
 #include <string>
-#include "altv-capi-server.h"
-#include "Windows.h"
 #include <functional>
+#include "altv-capi-server.h"
+
+#ifdef _WIN32
+#include "Windows.h"
+#endif
 
 extern alt_ICore *core;
 
