@@ -4,6 +4,10 @@
 #include <time.h>
 #include <string>
 #include "altv-capi-server.h"
+#include "Windows.h"
+#include <functional>
+
+extern alt_ICore *core;
 
 namespace util
 {
@@ -54,6 +58,39 @@ namespace util
     {
         alt_StringView sw{(char *)str, N + 1};
         return alt_ICore_FileExists(core, &sw);
+    }
+
+    inline void Try(std::function<void()> _try, std::function<void()> _catch = []{}) {
+#ifdef _WIN32
+        __try {
+            _try();
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            _catch();
+        }
+#else // TODO, PROPERLY IMPLEMENT
+        try {
+            _try();
+        } catch(...) {
+            _catch();
+        }
+#endif
+    }
+
+    template <typename T>
+    inline T Try(std::function<T()> _try, std::function<T()> _catch) {
+#ifdef _WIN32
+        __try {
+            return _try();
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            return _catch();
+        }
+#else // TODO, PROPERLY IMPLEMENT
+        try {
+            return _try();
+        } catch(...) {
+            return _catch();
+        }
+#endif
     }
 
 } // namespace util

@@ -1,10 +1,9 @@
 
-#include "altv-capi-server.h"
-alt_ICore *core = nullptr;
 
 #include "Util.hpp"
 #include "VM.hpp"
 
+alt_ICore *core = nullptr;
 VM *vm = nullptr;
 
 CAPI_EXPORT bool altMain(alt_ICore *c)

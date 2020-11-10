@@ -35,6 +35,7 @@ add_definitions(
 # Server
 add_library(altv-jvm-module SHARED
     src/main.cpp
+    src/VM.cpp
 )
 target_compile_definitions(altv-jvm-module PRIVATE
     ALT_SERVER_API

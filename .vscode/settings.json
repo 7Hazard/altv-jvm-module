@@ -60,6 +60,15 @@
         "xutility": "cpp",
         "xmemory0": "cpp",
         "iostream": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "xtree": "cpp",
+        "fstream": "cpp",
+        "iterator": "cpp",
+        "regex": "cpp",
+        "set": "cpp",
+        "sstream": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "xhash": "cpp"
     }
 }
