@@ -76,7 +76,7 @@ jobs:
         sudo cp /usr/bin/lld-link-9 /usr/bin/lld-link
     
     - name: Install ninja-build tool
-      uses: seanmiddleditch/gha-setup-ninja@v1
+      uses: seanmiddleditch/gha-setup-ninja@v3
       
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
