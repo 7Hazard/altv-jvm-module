@@ -4,7 +4,7 @@ alt:V Java Virtual Machine module that runs a Java VM and exposes a Java API for
 alt:V Server API.  
 
 To use use this library as a dependency via JitPack:  
-https://jitpack.io/#com.gitlab.7Hazard/altv-jvm-module
+https://jitpack.io/#7Hazard/altv-jvm-module
 
 You can download the module files in
 [Releases](https://gitlab.com/7Hazard/altv-jvm-module/-/releases).  
