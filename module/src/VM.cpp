@@ -220,6 +220,7 @@ bool LoadLib()
 
     if (!path.empty())
     {
+        util::logi("[JVM] Loading JVM from '" + path + "'");
         jvmlib = OpenLibrary(path.c_str());
     }
     else if (!JavaHomePath.empty())
