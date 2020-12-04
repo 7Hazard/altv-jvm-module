@@ -15,6 +15,7 @@ on:
       - release
       - rc
       - dev
+  workflow_dispatch:
 
 defaults:
   run:
